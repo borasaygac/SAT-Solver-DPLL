@@ -1,11 +1,11 @@
 # Compiler and flags
 CXX = g++
 
-CLANG := clang++
-UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Darwin)
-	CXX := $(CLANG)
-endif
+# CLANG := clang++
+# UNAME_S := $(shell uname -s)
+# ifeq ($(UNAME_S),Darwin)
+# 	CXX := $(CLANG)
+# endif
 
 CXXFLAGS = -std=c++11 -Wall
 
