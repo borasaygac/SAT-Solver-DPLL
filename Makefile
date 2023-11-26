@@ -1,36 +1,26 @@
 # Compiler and flags
 CXX = g++
-
-# CLANG := clang++
-# UNAME_S := $(shell uname -s)
-# ifeq ($(UNAME_S),Darwin)
-# 	CXX := $(CLANG)
-# endif
-
 CXXFLAGS = -std=c++11 -Wall
 
 # Directories
 SRCDIR = src
-BINDIR = bin
+BINDIR = .
 
 # Source files
 SOURCES = $(wildcard $(SRCDIR)/main.cpp)
-EXECUTABLES = $(patsubst $(SRCDIR)/%.cpp,$(BINDIR)/%,$(SOURCES))
+EXECUTABLE = ./main
 
-# Default target
-all: $(EXECUTABLES)
+# Build target
+all: $(EXECUTABLE)
 
-# Rule to create executables
-$(BINDIR)/%: $(SRCDIR)/%.cpp | $(BINDIR)
-	$(CXX) $(CXXFLAGS) $< -o $@
-
-$(BINDIR):
-	mkdir -p $(BINDIR)
+# Rule to create executable
+$(EXECUTABLE): $(SOURCES)
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
 .PHONY: clean
 
 clean:
-	rm -rf $(BINDIR)
+	rm -f $(EXECUTABLE)
 
-run: $(EXECUTABLES)
-	./$(BINDIR)/main $(arg)
+run: $(EXECUTABLE)
+	$(EXECUTABLE) $(arg)
