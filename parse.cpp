@@ -8,13 +8,13 @@ struct Clause {
     std::vector<int> literals;
 };
 
-struct CNFFormula {
+struct CNF {
     std::vector<Clause> clauses;
 };
 
-CNFFormula parseDIMACS(const std::string& filename) {
+CNF parseDIMACS(const std::string& filename) {
     std::ifstream file(filename);
-    CNFFormula formula;
+    CNF formula;
     std::string line;
 
     if (file.is_open()) {
@@ -41,11 +41,12 @@ CNFFormula parseDIMACS(const std::string& filename) {
     return formula;
 }
 
-int main() {
-    // Replace "your_file_path.dimacs" with your DIMACS file path
-    CNFFormula parsedFormula = parseDIMACS("DIMACS/test1.cnf");
+int main(int argc, char* argv[]) {
 
-    // Access parsed data
+    std::string filename = "DIMACS/test" + std::to_string(std::stoi(argv[1])) + ".cnf";
+
+    CNF parsedFormula = parseDIMACS(filename);
+
     for (const auto& clause : parsedFormula.clauses) {
         std::cout << "Clause: ";
         for (const auto& literal : clause.literals) {
