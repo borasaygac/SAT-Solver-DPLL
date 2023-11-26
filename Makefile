@@ -1,5 +1,12 @@
 # Compiler and flags
 CXX = g++
+
+CLANG := clang++
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+	CXX := $(CLANG)
+endif
+
 CXXFLAGS = -std=c++11 -Wall
 
 # Directories
@@ -7,7 +14,7 @@ SRCDIR = src
 BINDIR = bin
 
 # Source files
-SOURCES = $(wildcard $(SRCDIR)/parse.cpp)
+SOURCES = $(wildcard $(SRCDIR)/main.cpp)
 EXECUTABLES = $(patsubst $(SRCDIR)/%.cpp,$(BINDIR)/%,$(SOURCES))
 
 # Default target
@@ -26,4 +33,4 @@ clean:
 	rm -rf $(BINDIR)
 
 run: $(EXECUTABLES)
-	./$(BINDIR)/parse $(arg)
+	./$(BINDIR)/main $(arg)
