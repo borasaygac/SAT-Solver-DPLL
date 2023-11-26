@@ -4,32 +4,26 @@
 #include <sstream>
 #include <string>
 
-struct Clause {
-    std::vector<int> literals;
-};
+#include "include/cnf.hpp"
 
-struct CNF {
-    std::vector<Clause> clauses;
-};
-
-CNF parseDIMACS(const std::string& filename) {
+std::vector<std::vector<int>> parseDIMACS(const std::string& filename) {
     std::ifstream file(filename);
-    CNF formula;
+    std::vector<std::vector<int>> f;
     std::string line;
 
     if (file.is_open()) {
         while (std::getline(file, line)) {
-            if (line.empty() || line[0] == 'c' || line[0] == 'p') {
+            if (line[0] == 'c' || line[0] == 'p') {
                 continue; // Skip comments and problem specification lines
             } else {
                 std::istringstream iss(line);
-                Clause clause;
+                std::vector<int> clause;
                 int literal;
                 while (iss >> literal && literal != 0) {
-                    clause.literals.push_back(literal);
+                    clause.push_back(literal);
                 }
-                if (!clause.literals.empty()) {
-                    formula.clauses.push_back(clause);
+                if (!clause.empty()) {
+                    f.push_back(clause);
                 }
             }
         }
@@ -38,18 +32,18 @@ CNF parseDIMACS(const std::string& filename) {
         std::cerr << "Unable to open file: " << filename << std::endl;
     }
 
-    return formula;
+    return f;
 }
 
 int main(int argc, char* argv[]) {
 
     std::string filename = "DIMACS/test" + std::to_string(std::stoi(argv[1])) + ".cnf";
 
-    CNF parsedFormula = parseDIMACS(filename);
-
-    for (const auto& clause : parsedFormula.clauses) {
+    cnf = parseDIMACS(filename);
+    
+    for (const auto& clause : cnf) {
         std::cout << "Clause: ";
-        for (const auto& literal : clause.literals) {
+        for (const auto& literal : clause) {
             std::cout << literal << " ";
         }
         std::cout << std::endl;
