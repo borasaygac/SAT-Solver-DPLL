@@ -29,7 +29,7 @@ std::vector<std::vector<int>> parseDIMACS(const std::string& filename) {
         }
         file.close();
     } else {
-        std::cerr << "Unable to open file: " << filename << std::endl;
+       printf("Unable to open file");
     }
 
     return f;
