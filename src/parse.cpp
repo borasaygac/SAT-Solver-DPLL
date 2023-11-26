@@ -4,7 +4,7 @@
 #include <sstream>
 #include <string>
 
-#include "include/cnf.hpp"
+#include "../include/cnf.hpp"
 
 std::vector<std::vector<int>> parseDIMACS(const std::string& filename) {
     std::ifstream file(filename);
