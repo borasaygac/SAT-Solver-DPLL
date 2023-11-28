@@ -45,11 +45,9 @@ Choose variable i to be set to true or false.
 
     unit_queue.clear() // gained unit clauses bear no value
 
-    b = assig_stack.pop() // branching variable
+    b = assig_stack.peek() // branching variable
 
     b.val = !b.val //start DPLL with negated assignment of var
-
-    assig_stack.push(Assig(b, b.val, b.forced))
 
     resume with UP
 
