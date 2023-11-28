@@ -3,16 +3,15 @@
 Global vars: # vars (n), # clauses (m), _Variable_ and _Clause_ data structure, unit_queue Queue<int>, assig_stack Stack<int>.
 
 _Clause_: Representation of a clause
-    
 - [SAT_by (int)] 
 - [list of literals ([int])] 
 - [number of active literals (int), initially: len(literals)]
 
 _Variable_: Representation of a variable
-    - val (true, false, free)
-    - pos_occ: the list of clauses the variable occurs positively in ([int])
-    - neg_occ: -||- ([int])
-    - forced: Was the assigned val a reslut of branching (forced == false) or UP (forced == true)
+- [val (true, false, free)] 
+- [pos_occ: the list of clauses the variable occurs positively in ([int])] 
+- [neg_occ: -||- ([int])] 
+- [forced: Was the assigned val a reslut of branching (forced == false) or UP (forced == true)]
 
 (Personal) Suggestion: Keep two arrays, one of type _Clause_, one of type _Variable_. For both arrays, the index represent the respective clause / variable, i.e. given the first clause of the DIMACS file, its clause has index 0. Variables are already represented as integers by DIMACS. Size of arrays will be set through header of DIMACS file / Global variables m, n.
 
