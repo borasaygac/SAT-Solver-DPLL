@@ -27,31 +27,31 @@ Choose variable i to be set to true or false.
 
 **2. Backtracking**
     
-        We want to backtrack up until our last branching variable
+    We want to backtrack up until our last branching variable
+
+    while assig_stack.peek().forced: // assig is result of UP
+        var = assig_stack.pop()
+        var.val = free
+
+        for every clause C in var.pos_occ:
+            if clause.SAT_by == var:
+                reset clause.SAT_by
+
+        for every clause C in var.neg_occ:
+            increment active
     
-        while assig_stack.peek().forced: // assig is result of UP
-            var = assig_stack.pop()
-            var.val = free
+    if assig_stack.isEmpty():
+        return UNSAT; // we backtracked to the beginning of our assignment procedure
 
-            for every clause C in var.pos_occ:
-                if clause.SAT_by == var:
-                    reset clause.SAT_by
+    unit_queue.clear() // gained unit clauses bear no value
 
-            for every clause C in var.neg_occ:
-                increment active
-        
-        if assig_stack.isEmpty():
-            return UNSAT; // we backtracked to the beginning of our assignment procedure
+    b = assig_stack.pop() // branching variable
 
-        unit_queue.clear() // gained unit clauses bear no value
+    b.val = !b.val //start DPLL with negated assignment of var
 
-        b = assig_stack.pop() // branching variable
+    assig_stack.push(Assig(b, b.val, b.forced))
 
-        b.val = !b.val //start DPLL with negated assignment of var
-
-        assig_stack.push(Assig(b, b.val, b.forced))
-
-        resume with UP
+    resume with UP
 
 ## Getting started
 
