@@ -3,9 +3,10 @@
 Global vars: # vars (n), # clauses (m), _Variable_ and _Clause_ data structure, unit_queue Queue<int>, assig_stack Stack<int>.
 
 _Clause_: Representation of a clause
-        - SAT_by (int)
-        - list of literals ([int])
-        - number of active literals (int), initially: len(literals).
+    
+- [SAT_by (int)] 
+- [list of literals ([int])] 
+- [number of active literals (int), initially: len(literals)]
 
 _Variable_: Representation of a variable
     - val (true, false, free)
