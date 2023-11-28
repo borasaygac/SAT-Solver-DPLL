@@ -37,7 +37,7 @@ std::vector<std::vector<int>> parseDIMACS(const std::string& filename) {
 
 int main(int argc, char* argv[]) {
 
-    std::string filename = "src/DIMACS/test" + std::to_string(std::stoi(argv[1])) + ".cnf";
+    std::string filename = "DIMACS/test" + std::to_string(std::stoi(argv[1])) + ".cnf";
 
     cnf = parseDIMACS(filename);
     

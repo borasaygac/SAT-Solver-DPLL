@@ -8,7 +8,7 @@ BINDIR = .
 
 # Source files
 SOURCES = $(wildcard $(SRCDIR)/main.cpp)
-EXECUTABLE = ./main
+EXECUTABLE = main
 
 # Build target
 all: $(EXECUTABLE)
