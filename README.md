@@ -52,10 +52,11 @@ Choose variable i to be set to true or false.
     resume with UP
 
 ## Getting started
-
+Makefile extension VS Code
+GCC compiler
 Run ```
-make run arg=...
-```
+make run arg=...```
+
 on root directory.
 
 ## Add your files
