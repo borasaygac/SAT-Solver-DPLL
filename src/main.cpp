@@ -23,20 +23,21 @@ void parseDIMACS(const std::string &filename) {
     numOfClauses = std::stoi(tokens[3]);
 
     // parse rest
-    variables.resize(numOfVars+1); // vars in DIMACS are 1-indexed
-    for(int i = 0; i < numOfVars+1;i++){
-        Variable v;
-        variables[i] = v;
+    variables.resize(numOfVars + 1); // vars in DIMACS are 1-indexed
+    for (int i = 0; i < numOfVars + 1; i++) {
+      Variable v;
+      variables[i] = v;
     }
     Clause dummy;
     cnf.push_back(dummy);
-    int count = 1;                   // what clause are we processing?
+    int count = 1; // what clause are we processing?
     while (std::getline(file, line)) {
       std::istringstream iss(line);
       Clause clause;
       int literal;
       while (iss >> literal && literal != 0) {
-        (literal > 0) ? variables[std::abs(literal)].pos.push_back(count) : variables[std::abs(literal)].neg.push_back(count);
+        (literal > 0) ? variables[std::abs(literal)].pos.push_back(count)
+                      : variables[std::abs(literal)].neg.push_back(count);
         clause.literals.push_back(literal);
       }
       if (!clause.literals.empty()) {
@@ -67,9 +68,9 @@ int main(int argc, char *argv[]) {
     std::cout << std::endl;
   }
 
-  for (int i = 0; i < numOfVars+1;++i) {
+  for (int i = 0; i < numOfVars + 1; ++i) {
     std::cout << i << " pos clause: ";
-    for (const auto &literal : variables[i].neg) {
+    for (const auto &literal : variables[i].pos) {
       std::cout << literal << " ";
     }
     std::cout << std::endl;
