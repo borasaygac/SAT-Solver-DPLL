@@ -1,6 +1,25 @@
-#include <vector>
+#include <string>
 #include <unordered_map>
+#include <vector>
 
-std::vector<std::vector<int>> cnf;
+int numOfVars;
+int numOfClauses;
 
-bool dpll(std::vector<std::vector<int>> cnf, std::unordered_map<int, bool>& assignment);
+struct Variable {
+  bool *val = nullptr;
+  std::vector<int> pos;
+  std::vector<int> neg;
+  bool forced;
+};
+
+struct Clause {
+  int satLiteral;
+  std::vector<int> literals;
+  int active;
+};
+
+std::vector<Clause> cnf;
+std::vector<Variable> variables;
+
+bool dpll(std::vector<std::vector<int>> cnf,
+          std::unordered_map<int, bool> &assignment);
