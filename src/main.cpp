@@ -6,6 +6,11 @@
 
 #include "../include/cnf.hpp"
 
+int numOfVars;
+int numOfClauses;
+std::vector<Clause> cnf;
+std::vector<Variable> variables;
+
 void parseDIMACS(const std::string &filename) {
   std::ifstream file(filename);
   std::string line;
@@ -77,6 +82,6 @@ int main(int argc, char *argv[]) {
   }
 
   dpll(cnf, variables);
-
+  std::cout << *(variables[1].val);
   return 0;
 }

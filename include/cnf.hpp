@@ -1,16 +1,17 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-
-int numOfVars; // n = num of vars
-int numOfClauses; //
+#ifndef MYHEADER_HPP
+#define MYHEADER_HPP
+extern int numOfVars;    // n = num of vars
+extern int numOfClauses; //
 
 struct Variable {
-  bool *val = nullptr;
+  bool *val;
   std::vector<int> pos_occ;
   std::vector<int> neg_occ;
   bool forced;
-  //int bd; // branching depth
+  // int bd; // branching depth
 };
 
 struct Clause {
@@ -19,7 +20,8 @@ struct Clause {
   int active;
 };
 
-std::vector<Clause> cnf; // F = List of clauses
-std::vector<Variable> variables; // V = list of vars
+extern std::vector<Clause> cnf;         // F = List of clauses
+extern std::vector<Variable> variables; // V = list of vars
 
-bool dpll(std::vector<Clause>& cnf, std::vector<Variable>& variables);
+bool dpll(std::vector<Clause> &cnf, std::vector<Variable> &variables);
+#endif
