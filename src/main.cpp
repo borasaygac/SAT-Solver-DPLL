@@ -36,8 +36,8 @@ void parseDIMACS(const std::string &filename) {
       Clause clause;
       int literal;
       while (iss >> literal && literal != 0) {
-        (literal > 0) ? variables[std::abs(literal)].pos.push_back(count)
-                      : variables[std::abs(literal)].neg.push_back(count);
+        (literal > 0) ? variables[std::abs(literal)].pos_occ.push_back(count)
+                      : variables[std::abs(literal)].neg_occ.push_back(count);
         clause.literals.push_back(literal);
       }
       if (!clause.literals.empty()) {
@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
 
   for (int i = 0; i < numOfVars + 1; ++i) {
     std::cout << i << " pos clause: ";
-    for (const auto &literal : variables[i].pos) {
+    for (const auto &literal : variables[i].pos_occ) {
       std::cout << literal << " ";
     }
     std::cout << std::endl;
