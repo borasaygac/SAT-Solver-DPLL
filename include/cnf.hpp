@@ -22,4 +22,4 @@ struct Clause {
 std::vector<Clause> cnf; // F = List of clauses
 std::vector<Variable> variables; // V = list of vars
 
-bool dpll(std::vector<Clause> &cnf, std::vector<Variable> &variables);
+bool dpll(std::vector<Clause>& cnf, std::vector<Variable>& variables);

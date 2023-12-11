@@ -7,7 +7,7 @@ SRCDIR = src
 BINDIR = .
 
 # Source files
-SOURCES = $(wildcard $(SRCDIR)/main.cpp)
+SOURCES = $(wildcard $(SRCDIR)/main.cpp) $(wildcard $(SRCDIR)/dpll.cpp) 
 EXECUTABLE = main
 
 # Build target
@@ -22,5 +22,5 @@ $(EXECUTABLE): $(SOURCES)
 clean:
 	rm -f $(EXECUTABLE)
 
-run: $(EXECUTABLE)
+run: $(EXECUTABLE) 
 	$(EXECUTABLE) $(arg)
