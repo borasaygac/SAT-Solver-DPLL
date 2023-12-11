@@ -22,5 +22,4 @@ struct Clause {
 std::vector<Clause> cnf; // F = List of clauses
 std::vector<Variable> variables; // V = list of vars
 
-bool dpll(std::vector<std::vector<int>> cnf,
-          std::unordered_map<int, bool> &assignment);
+bool dpll(std::vector<Clause> &cnf, std::vector<Variable> &variables);
