@@ -1,9 +1,10 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall
+CXXFLAGS = -std=c++11 -Wall -g
 
 # Directories
 SRCDIR = src
+INCDIR = include
 BINDIR = .
 
 # Source files
@@ -15,12 +16,12 @@ all: $(EXECUTABLE)
 
 # Rule to create executable
 $(EXECUTABLE): $(SOURCES)
-	$(CXX) $(CXXFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) -o $@ $^ 
 
 .PHONY: clean
 
 clean:
-	rm -f $(EXECUTABLE)
+	del main.exe
 
 run: $(EXECUTABLE) 
 	$(EXECUTABLE) $(arg)
