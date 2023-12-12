@@ -9,13 +9,13 @@ bool dpll(std::vector<Clause> &cnf, std::vector<Variable> &variables) {
   int count = 1;
   *(variables[1].val) = true;
 
-  for (int i = 0; i < variables[count].pos_occ.size(); i++) {
+  for (int i = 0, size = variables[count].pos_occ.size(); i < size; i++) {
     if (cnf[variables[count].pos_occ[i]].satLiteral != 0) {
       cnf[variables[count].pos_occ[i]].satLiteral = 1;
     }
   }
 
-  for (int i = 0; i < variables[count].neg_occ.size(); i++) {
+  for (int i = 0, size = variables[count].neg_occ.size(); i < size; i++) {
     // check if clause fullfilled
     if (cnf[variables[count].neg_occ[i]].satLiteral == 0) {
       cnf[variables[count].neg_occ[i]].active--;
