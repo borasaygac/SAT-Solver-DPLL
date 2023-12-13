@@ -59,8 +59,10 @@ void parseDIMACS(const std::string &filename) {
 
 int main(int argc, char *argv[]) {
 
-  std::string filename =
-      "DIMACS/test" + std::to_string(std::stoi(argv[1])) + ".cnf";
+  std::string filename = "C:/Users/boras/Desktop/inputs/test/sat/xor.cnf";
+      //"DIMACS/test" + std::to_string(std::stoi(argv[1])) + ".cnf";
+
+  
 
   parseDIMACS(filename);
   std::cout << "Params: vars " << numOfVars << " and clauses " << numOfClauses
