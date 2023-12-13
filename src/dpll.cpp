@@ -9,11 +9,8 @@ bool dpll(std::vector<Clause> &cnf, std::vector<Variable> &variables) {
   // While loop
   int count = 1;
   std::queue<int> q;
-  while(count != numOfVars){
-    if(*(variables[count].val) == true || *(variables[count].val) == false){
-      continue;
-    }
     *(variables[count].val) = true;
+    std::cout << "Current Var Val:" << *variables[count].val;
     
     //positive occurances
     for (int i = 0, size = variables[count].pos_occ.size(); i < size; i++) {
@@ -32,6 +29,7 @@ bool dpll(std::vector<Clause> &cnf, std::vector<Variable> &variables) {
         for (int vars: cnf[variables[count].neg_occ[i]].literals){
           if(vars == 0){
             q.push(vars);
+            std::cout << "Current queue Elem:" << q.front();
           } 
         }
       }
@@ -40,8 +38,6 @@ bool dpll(std::vector<Clause> &cnf, std::vector<Variable> &variables) {
       if (cnf[variables[count].neg_occ[i]].active == 0) {
       }
     }
-    count++;
-  }
   std::cout << "P";
   return true;
 }

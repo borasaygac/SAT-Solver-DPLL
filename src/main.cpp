@@ -59,7 +59,7 @@ void parseDIMACS(const std::string &filename) {
 
 int main(int argc, char *argv[]) {
 
-  std::string filename = "C:/Users/boras/Desktop/inputs/test/sat/xor.cnf";
+  std::string filename = "inputs/test/sat/xor.cnf";
       //"DIMACS/test" + std::to_string(std::stoi(argv[1])) + ".cnf";
 
   

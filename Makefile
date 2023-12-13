@@ -9,6 +9,7 @@ BINDIR = .
 
 # Source files
 SOURCES = $(wildcard $(SRCDIR)/main.cpp) $(wildcard $(SRCDIR)/dpll.cpp) 
+OBJ = $(SRC:.cpp=.o)
 EXECUTABLE = main
 
 # Build target
@@ -16,7 +17,10 @@ all: $(EXECUTABLE)
 
 # Rule to create executable
 $(EXECUTABLE): $(SOURCES)
-	$(CXX) $(CXXFLAGS) -o $@ $^ 
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $@ $^
+	
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 .PHONY: clean
 
@@ -25,3 +29,6 @@ clean:
 
 run: $(EXECUTABLE) 
 	$(EXECUTABLE) $(arg)
+
+run2: $(EXECUTABLE) 
+	$(EXECUTABLE) 
