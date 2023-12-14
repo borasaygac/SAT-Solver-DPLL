@@ -39,6 +39,7 @@ void parseDIMACS(const std::string &filename) {
     while (std::getline(file, line)) {
       std::istringstream iss(line);
       Clause clause;
+      clause.satLiteral = 0; // testing to see if we get undefined behaviour.
       int literal;
       while (iss >> literal && literal != 0) {
         (literal > 0) ? variables[std::abs(literal)].pos_occ.push_back(count)
@@ -59,8 +60,7 @@ void parseDIMACS(const std::string &filename) {
 
 int main(int argc, char *argv[]) {
 
-  std::string filename = "inputs/test/sat/xor.cnf";
-      //"DIMACS/test" + std::to_string(std::stoi(argv[1])) + ".cnf";
+  std::string filename = "DIMACS/test" + std::to_string(std::stoi(argv[1])) + ".cnf";
 
   
 
