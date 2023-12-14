@@ -53,8 +53,8 @@ bool dpll(std::vector<Clause> &cnf, std::vector<Variable> &variables) {
             // enqueue a
             std::cout << "in the for loop 3" << '\n';
             std::cout << "var to be added= "
-                      << cnf[variables[curVal].neg_occ[i]].literals[j] << '\n';
-            q.push(cnf[variables[curVal].neg_occ[i]].literals[j]);
+                      << cnf[variables[varToCheck].neg_occ[i]].literals[j] << '\n';
+            q.push(cnf[variables[varToCheck].neg_occ[i]].literals[j]);
             std::cout << "queue front= " << q.front() << '\n';
           }
         }
