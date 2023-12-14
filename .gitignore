@@ -1,4 +1,4 @@
-.cnf
+*.cnf
 *.exe
 node_modules
 package-lock.json

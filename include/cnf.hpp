@@ -15,7 +15,7 @@ struct Variable {
 };
 
 struct Clause {
-  int satLiteral;
+  int satLiteral = 0;
   std::vector<int> literals;
   int active;
 };
