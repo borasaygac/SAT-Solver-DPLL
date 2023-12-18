@@ -18,14 +18,25 @@ void parseDIMACS(const std::string &filename) {
   if (file.is_open()) {
     // parse head of DIMACS
     std::getline(file, line);
+
+    // skip comment lines
+    while (line[0] == 'c') {
+      //The line below shows the skipped comments.
+      //std::cout << "Comment: " << line << std::endl;
+      std::getline(file, line);
+    }
+
     std::istringstream iss(line);
     std::string token;
     std::vector<std::string> tokens;
+
     while (iss >> token) {
       tokens.push_back(token);
     }
     numOfVars = std::stoi(tokens[2]);
     numOfClauses = std::stoi(tokens[3]);
+    std::cout << "Number of Variables: " << numOfVars << std::endl;
+    std::cout << "Number of Clauses: " << numOfClauses << std::endl;
 
     // parse rest
     variables.resize(numOfVars + 1); // vars in DIMACS are 1-indexed
@@ -57,11 +68,27 @@ void parseDIMACS(const std::string &filename) {
   }
 }
 
+bool checkAllClauses(std::vector<Clause> &cnf) {
+  int count = 0;
+  for (Clause clause : cnf) {
+    if (clause.satLiteral != 0) {
+      count++;
+    }
+  }
+  if (count == numOfClauses) {
+    std::cout << "All clauses satisfied " << count << " = " << numOfClauses
+              << "\n";
+    return true;
+  }
+  std::cout << " Not all clauses satisfied. Number of satisfied clauses is "
+            << count << " != " << numOfClauses << "\n";
+  return false;
+}
+
 int main(int argc, char *argv[]) {
 
-  std::string filename = "DIMACS/test" + std::to_string(std::stoi(argv[1])) + ".cnf";
-
-  
+  std::string filename =
+      "DIMACS/test" + std::to_string(std::stoi(argv[1])) + ".cnf";
 
   parseDIMACS(filename);
   std::cout << "Params: vars " << numOfVars << " and clauses " << numOfClauses
@@ -84,5 +111,6 @@ int main(int argc, char *argv[]) {
 
   dpll(cnf, variables);
   std::cout << *(variables[1].val);
+  checkAllClauses(cnf);
   return 0;
 }
