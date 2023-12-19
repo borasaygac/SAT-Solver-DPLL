@@ -32,36 +32,43 @@ bool dpll(int curVar) {
 
     for (int i = 0, size = variables[curVar].neg_occ.size(); i < size; i++) {
       std::cout << "in for loop 1" << '\n';
-      // decrement active literals
-      cnf[variables[curVar].neg_occ[i]].active--;
-      std::cout << "active lit. no decremented to "
-                << cnf[variables[curVar].neg_occ[i]].active << '\n';
-      // if active lit. == 1
-      if (cnf[variables[curVar].neg_occ[i]].active == 1) {
-        std::cout << "active lit. == 1 " << '\n';
-        // find unique free lit
+        // decrement active literals
+        cnf[variables[curVar].neg_occ[i]].active--;
+        std::cout << "active lit. no decremented to "
+                  << cnf[variables[curVar].neg_occ[i]].active << '\n';
 
-        int clauseWidth = cnf[variables[curVar].neg_occ[i]].literals.size();
-        for (int j = 0; j < clauseWidth; j++) {
-          std::cout << "in for loop 2" << '\n';
-          int varToCheck = cnf[variables[curVar].neg_occ[i]].literals[j];
-          std::cout << "vartocheck= " << varToCheck << '\n';
-          if (variables[std::abs(varToCheck)].val == Values::FREE) {
-            // enqueue a
-            std::cout << "in the for loop 3" << '\n';
-            std::cout << "var to be added= " << varToCheck << '\n';
-            unitQueue.push(varToCheck);
-            while (!unitQueue.empty()) {
-              int current = unitQueue.front();
-              std::cout << "current queue elm= " << current << "\n";
-              unitQueue.pop();
-              variables[current].forced = true;
-              cnf[variables[std::abs(current)].neg_occ[i]].satLiteral = std::abs(current);
-              (current > 0) ? variables[std::abs(current)].val = Values::TRUE
-                            : variables[std::abs(current)].val = Values::FALSE;
-              std::cout << "Value of var after setting= "
-                        << variables[std::abs(current)].val << "\n";
-              dpll(std::abs(current));
+      if (cnf[variables[curVar].neg_occ[i]].satLiteral == 0) {
+        // if active lit. == 1
+        if (cnf[variables[curVar].neg_occ[i]].active == 1) {
+          std::cout << "active lit. == 1 " << '\n';
+          // find unique free lit
+
+          int clauseWidth = cnf[variables[curVar].neg_occ[i]].literals.size();
+          for (int j = 0; j < clauseWidth; j++) {
+            std::cout << "in for loop 2" << '\n';
+            int varToCheck = cnf[variables[curVar].neg_occ[i]].literals[j];
+            std::cout << "vartocheck= " << varToCheck << '\n';
+            if (variables[std::abs(varToCheck)].val == Values::FREE) {
+              // enqueue a
+
+              std::cout << "in the for loop 3" << '\n';
+              std::cout << "var to be added= " << varToCheck << '\n';
+              unitQueue.push(varToCheck);
+              while (!unitQueue.empty()) {
+                int current = unitQueue.front();
+                std::cout << "current queue elm= " << current << "\n";
+                unitQueue.pop();
+                variables[current].forced = true;
+                cnf[variables[std::abs(current)].neg_occ[i]].satLiteral =
+                    std::abs(current);
+                (current > 0)
+                    ? variables[std::abs(current)].val = Values::TRUE
+                    : variables[std::abs(current)].val = Values::FALSE;
+                std::cout << "Value of var after setting= "
+                          << variables[std::abs(current)].val << "\n"
+                          << " and the number of clause " << variables[curVar].neg_occ[i] << "\n";
+                dpll(std::abs(current));
+              }
             }
           }
         }

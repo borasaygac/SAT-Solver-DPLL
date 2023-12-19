@@ -74,8 +74,9 @@ void parseDIMACS(const std::string &filename) {
 
 bool checkAllClauses(std::vector<Clause> &cnf) {
   int count = 0;
-  for (Clause clause : cnf) {
-    if (clause.satLiteral != 0) {
+  for (int i = 1; i <= numOfClauses; i++) {
+    if (cnf[i].satLiteral != 0) {
+      std::cout << "clause " << i << "is checked" << "\n",
       count++;
     }
   }
@@ -83,10 +84,12 @@ bool checkAllClauses(std::vector<Clause> &cnf) {
     std::cout << "All clauses satisfied " << count << " = " << numOfClauses
               << "\n";
     return true;
-  }
-  std::cout << " Not all clauses satisfied. Number of satisfied clauses is "
+  } else { 
+      std::cout << " Not all clauses satisfied. Number of satisfied clauses is "
             << count << " != " << numOfClauses << "\n";
-  return false;
+    return false;
+  }
+
 }
 
 int main(int argc, char *argv[]) {
