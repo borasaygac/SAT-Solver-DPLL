@@ -12,8 +12,11 @@ bool dpll(int curVar) {
 
   while (variables[curVar].val == Values::FREE || curVar == 3) {
 
-    variables[curVar].val = Values::TRUE;
-    std::cout << "Current Var :" << curVar << " and current value " << variables[curVar].val << '\n';
+    if (curVar != 3) {
+      variables[curVar].val = Values::TRUE;
+    }
+    std::cout << "Current Var :" << curVar << " and current value "
+              << variables[curVar].val << '\n';
 
     // for positive occurances
 
@@ -53,6 +56,7 @@ bool dpll(int curVar) {
               std::cout << "current queue elm= " << current << "\n";
               unitQueue.pop();
               variables[current].forced = true;
+              cnf[variables[std::abs(current)].neg_occ[i]].satLiteral = std::abs(current);
               (current > 0) ? variables[std::abs(current)].val = Values::TRUE
                             : variables[std::abs(current)].val = Values::FALSE;
               std::cout << "Value of var after setting= "
