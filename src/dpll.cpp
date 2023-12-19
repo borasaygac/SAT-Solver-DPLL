@@ -10,10 +10,10 @@ bool dpll(int curVar) {
   std::queue<int> unitQueue;
   int varSize = variables.size();
 
-  while (variables[curVar].val == Values::FREE || curVar == 3) {
+  while (variables[curVar].val == Assign::FREE || curVar == 3) {
 
     if (curVar != 3) {
-      variables[curVar].val = Values::TRUE;
+      variables[curVar].val = Assign::TRUE;
     }
     std::cout << "Current Var :" << curVar << " and current value "
               << variables[curVar].val << '\n';
@@ -48,7 +48,7 @@ bool dpll(int curVar) {
             std::cout << "in for loop 2" << '\n';
             int varToCheck = cnf[variables[curVar].neg_occ[i]].literals[j];
             std::cout << "vartocheck= " << varToCheck << '\n';
-            if (variables[std::abs(varToCheck)].val == Values::FREE) {
+            if (variables[std::abs(varToCheck)].val == Assign::FREE) {
               // enqueue a
 
               std::cout << "in the for loop 3" << '\n';
@@ -62,8 +62,8 @@ bool dpll(int curVar) {
                 cnf[variables[std::abs(current)].neg_occ[i]].satLiteral =
                     std::abs(current);
                 (current > 0)
-                    ? variables[std::abs(current)].val = Values::TRUE
-                    : variables[std::abs(current)].val = Values::FALSE;
+                    ? variables[std::abs(current)].val = Assign::TRUE
+                    : variables[std::abs(current)].val = Assign::FALSE;
                 std::cout << "Value of var after setting= "
                           << variables[std::abs(current)].val << "\n"
                           << " and the number of clause " << variables[curVar].neg_occ[i] << "\n";
