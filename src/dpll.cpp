@@ -59,7 +59,7 @@ bool dpll(int curVar) {
                 std::cout << "current queue elm= " << current << "\n";
                 unitQueue.pop();
                 variables[current].forced = true;
-                cnf[variables[std::abs(current)].neg_occ[i]].satLiteral =
+                cnf[variables[curVar].neg_occ[i]].satLiteral =
                     std::abs(current);
                 (current > 0)
                     ? variables[std::abs(current)].val = Assign::TRUE
