@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <queue>
 
 #include "../include/cnf.hpp"
 
@@ -10,6 +11,9 @@ int numOfVars;
 int numOfClauses;
 std::vector<Clause> cnf;
 std::vector<Variable> variables;
+std::queue<int> unitQueue;
+State state;
+int CurVar = 1;
 
 void parseDIMACS(const std::string &filename) {
   std::ifstream file(filename);
@@ -109,8 +113,7 @@ int main(int argc, char *argv[]) {
     std::cout << std::endl;
   }
 
-  dpll(cnf, variables);
-  std::cout << *(variables[1].val);
+  dpll();
   checkAllClauses(cnf);
   return 0;
 }

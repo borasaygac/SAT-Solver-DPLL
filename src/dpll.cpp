@@ -5,22 +5,15 @@
 #include <iostream>
 #include <queue>
 
-bool dpll(std::vector<Clause> &cnf, std::vector<Variable> &variables) {
+bool dpll(int curVar) {
   // While loop
-  std::queue<int> q;
+  std::queue<int> unitQueue;
   int varSize = variables.size();
-  int curVar;
-  if (q.empty()) {
-    curVar = 1;
-  } else {
-    curVar = q.front();
-    q.pop();
-  }
 
-  while (variables[curVar].val != nullptr) {
+  while (variables[curVar].val == Values::FREE || curVar == 3) {
 
-    *(variables[curVar].val) = true;
-    std::cout << "Current Var Val:" << *variables[curVar].val << '\n';
+    variables[curVar].val = Values::TRUE;
+    std::cout << "Current Var :" << curVar << " and current value " << variables[curVar].val << '\n';
 
     // for positive occurances
 
@@ -49,13 +42,23 @@ bool dpll(std::vector<Clause> &cnf, std::vector<Variable> &variables) {
         for (int j = 0; j < clauseWidth; j++) {
           std::cout << "in for loop 2" << '\n';
           int varToCheck = cnf[variables[curVar].neg_occ[i]].literals[j];
-          if (variables[varToCheck].val == nullptr) {
+          std::cout << "vartocheck= " << varToCheck << '\n';
+          if (variables[std::abs(varToCheck)].val == Values::FREE) {
             // enqueue a
             std::cout << "in the for loop 3" << '\n';
-            std::cout << "var to be added= "
-                      << varToCheck << '\n';
-            q.push(varToCheck);
-            std::cout << "queue front= " << q.front() << '\n';
+            std::cout << "var to be added= " << varToCheck << '\n';
+            unitQueue.push(varToCheck);
+            while (!unitQueue.empty()) {
+              int current = unitQueue.front();
+              std::cout << "current queue elm= " << current << "\n";
+              unitQueue.pop();
+              variables[current].forced = true;
+              (current > 0) ? variables[std::abs(current)].val = Values::TRUE
+                            : variables[std::abs(current)].val = Values::FALSE;
+              std::cout << "Value of var after setting= "
+                        << variables[std::abs(current)].val << "\n";
+              dpll(std::abs(current));
+            }
           }
         }
       }
@@ -65,7 +68,8 @@ bool dpll(std::vector<Clause> &cnf, std::vector<Variable> &variables) {
         // report conflict
       }
     }
-    std::cout << "queue size= " << q.size() << '\n';
+
+    std::cout << "queue size= " << unitQueue.size() << '\n';
     curVar++;
   }
   return true;

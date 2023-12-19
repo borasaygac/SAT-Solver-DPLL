@@ -8,7 +8,7 @@ INCDIR = include
 BINDIR = .
 
 # Source files
-SOURCES = $(wildcard $(SRCDIR)/main.cpp) $(wildcard $(SRCDIR)/dpll.cpp) 
+SOURCES = $(wildcard $(SRCDIR)/main.cpp) $(wildcard $(SRCDIR)/dpll.cpp) $(wildcard $(SRCDIR)/up.cpp)  
 OBJ = $(SRC:.cpp=.o)
 EXECUTABLE = main
 
