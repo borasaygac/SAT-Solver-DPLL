@@ -1,9 +1,9 @@
 #include <fstream>
 #include <iostream>
+#include <queue>
 #include <sstream>
 #include <string>
 #include <vector>
-#include <queue>
 
 #include "../include/cnf.hpp"
 
@@ -25,8 +25,8 @@ void parseDIMACS(const std::string &filename) {
 
     // skip comment lines
     while (line[0] == 'c') {
-      //The line below shows the skipped comments.
-      //std::cout << "Comment: " << line << std::endl;
+      // The line below shows the skipped comments.
+      // std::cout << "Comment: " << line << std::endl;
       std::getline(file, line);
     }
 
@@ -72,24 +72,32 @@ void parseDIMACS(const std::string &filename) {
   }
 }
 
-bool checkAllClauses(std::vector<Clause> &cnf) {
+bool checkAllClauses() {
   int count = 0;
   for (int i = 1; i <= numOfClauses; i++) {
     if (cnf[i].satLiteral != 0) {
-      std::cout << "clause " << i << "is checked" << "\n",
+
       count++;
     }
   }
   if (count == numOfClauses) {
-    std::cout << "All clauses satisfied " << count << " = " << numOfClauses
+    std::cout << "All clauses satisfied!"
               << "\n";
-    return true;
-  } else { 
-      std::cout << " Not all clauses satisfied. Number of satisfied clauses is "
-            << count << " != " << numOfClauses << "\n";
-    return false;
-  }
+    std::cout << "Model: ";
+    
 
+  } else {
+    std::cout << " Not all clauses satisfied. Number of satisfied clauses is "
+              << count << " != " << numOfClauses << "\n";
+  }std::cout << "[";
+  for (int i = 1; i < numOfVars; i++) {
+    int val = variables[i].val == 0 ? -i : i;
+    std::cout << val << ", ";
+  }
+  int val = variables[numOfVars].val == 0 ? -numOfVars : numOfVars;
+  std::cout << val;
+  std::cout << "]";
+  return false;
 }
 
 int main(int argc, char *argv[]) {
@@ -117,6 +125,6 @@ int main(int argc, char *argv[]) {
   }
 
   dpll();
-  checkAllClauses(cnf);
+  checkAllClauses();
   return 0;
 }
