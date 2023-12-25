@@ -26,8 +26,8 @@ struct Clause {
   int satLiteral = 0;
   std::vector<int> literals;
   int active;
-  int w1;
-  int w2;
+  int w1 = 0;
+  int w2 = 1;
 };
 
 // Queue where unit clauses found in DPLL will be added to.
