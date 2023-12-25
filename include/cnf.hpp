@@ -8,14 +8,14 @@
 extern int numOfVars;    // n = num of vars
 extern int numOfClauses; //
 
-enum Values {
+enum Assign {
   FALSE,
   TRUE,
   FREE,
 };
 
 struct Variable {
-  Values val = Values::FREE;
+  Assign val = FREE;
   std::vector<int> pos_occ;
   std::vector<int> neg_occ;
   bool forced;
