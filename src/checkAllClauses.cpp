@@ -18,7 +18,7 @@ bool checkAllClauses() {
     std::cout << "Model: ";
 
   } else {
-    std::cout << " Not all clauses satisfied. Number of satisfied clauses is "
+    std::cout << "Not all clauses satisfied. Number of satisfied clauses is "
               << count << " != " << numOfClauses << "\n";
   }
   std::cout << "[";

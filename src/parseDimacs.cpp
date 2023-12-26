@@ -4,6 +4,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <stdio.h>
 
 #include "../include/cnf2.hpp"
 
@@ -52,10 +53,9 @@ void parseDIMACS2(const std::string &filename) {
                       : variables[std::abs(literal)].neg_occ.push_back(count);
         clause.literals.push_back(literal);
         }
-        clause.w1 = &clause.literals[0]; // Assign the first and second watcher to the first and second literal in clause.
-        clause.w2 = &clause.literals[1];
         cnf.push_back(clause);
       }
+    
     count++;
     file.close();
   } else {
