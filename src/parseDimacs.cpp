@@ -53,6 +53,7 @@ void parseDIMACS2(const std::string &filename) {
                       : variables[std::abs(literal)].neg_occ.push_back(count);
         clause.literals.push_back(literal);
         }
+        clause.active = clause.literals.size();
         cnf.push_back(clause);
       }
     

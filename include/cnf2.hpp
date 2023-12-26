@@ -19,6 +19,7 @@ struct Variable {
   std::vector<int> pos_occ;
   std::vector<int> neg_occ;
   bool forced;
+  std::vector<int> watched_occ;
   // int bd; // branching depth
 };
 
