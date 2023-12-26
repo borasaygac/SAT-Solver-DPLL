@@ -9,7 +9,7 @@ BINDIR = .
 
 # Source files
 SOURCES = $(wildcard $(SRCDIR)/main.cpp) $(wildcard $(SRCDIR)/dpll.cpp) $(wildcard $(SRCDIR)/checkAllClauses.cpp)   
-SOURCES2 = $(wildcard $(SRCDIR)/main2.cpp) $(wildcard $(SRCDIR)/dpll.cpp) $(wildcard $(SRCDIR)/checkAllClauses.cpp) $(wildcard $(SRCDIR)/parseDimacs.cpp) 
+SOURCES2 = $(wildcard $(SRCDIR)/main2.cpp) $(wildcard $(SRCDIR)/cnf2.cpp) $(wildcard $(SRCDIR)/dpll.cpp) $(wildcard $(SRCDIR)/checkAllClauses.cpp) $(wildcard $(SRCDIR)/parseDimacs.cpp) 
 
 OBJ = $(SRC:.cpp=.o)
 EXECUTABLE = main
