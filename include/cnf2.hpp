@@ -26,8 +26,8 @@ struct Clause {
   int satLiteral = 0;
   std::vector<int> literals;
   int active;
-  int w1 = 0;
-  int w2 = 1;
+  int* w1;
+  int* w2;
 };
 
 // Queue where unit clauses found in DPLL will be added to.
@@ -56,6 +56,9 @@ bool dpll(int curVar = CurVar);
 
 // Check all Clauses for whether they are satisfied 
 bool checkAllClauses();
+
+// Parse Dimacs function call
+void parseDIMACS2(const std::string &filename);
 
 void unitProp();
 #endif
