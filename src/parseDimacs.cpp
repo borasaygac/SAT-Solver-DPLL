@@ -1,3 +1,4 @@
+#include <cmath>
 #include <fstream>
 #include <iostream>
 #include <queue>
@@ -5,7 +6,6 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
-
 
 #include "../include/cnf2.hpp"
 
@@ -53,10 +53,14 @@ void parseDIMACS2(const std::string &filename) {
         (literal > 0) ? variables[std::abs(literal)].pos_occ.push_back(count)
                       : variables[std::abs(literal)].neg_occ.push_back(count);
 
-        if (variables[std::abs(literal)].pos_occ.size() > 0 &&
-            variables[std::abs(literal)].pos_occ.size() > 0)
-          variables[std::abs(literal)].pure = false;
-          
+        int sign = std::copysign(1, literal);
+
+        if (variables[std::abs(literal)].polarity == UNDEF)
+          variables[std::abs(literal)].polarity = Polarity(sign);
+        else {
+          if (sign * variables[std::abs(literal)].polarity < 0)
+            variables[std::abs(literal)].polarity = MIX;
+        }
         clause.literals.push_back(literal);
       }
       clause.active = clause.literals.size();

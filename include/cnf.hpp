@@ -15,12 +15,18 @@ enum Assign {
   FREE,
 };
 
+enum Polarity {
+  NEG,
+  POS,
+  MIX
+};
+
 struct Variable {
   Assign val = FREE;
   std::vector<int> pos_occ;
   std::vector<int> neg_occ;
   bool forced;
-  bool pure = true;
+  Polarity polarity;
 };
 
 struct Clause {

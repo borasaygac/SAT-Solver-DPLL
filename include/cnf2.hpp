@@ -15,13 +15,15 @@ enum Assign {
   FREE,
 };
 
+enum Polarity { NEG = -1, POS = 1, MIX = 0, UNDEF = 2 };
+
 struct Variable {
   Assign val = FREE;
   std::vector<int> pos_occ;
   std::vector<int> neg_occ;
   bool forced;
   std::vector<int> watched_occ;
-  bool pure = true;
+  Polarity polarity = UNDEF;
   // int bd; // branching depth
 };
 

@@ -18,12 +18,12 @@ bool dpll(int curVar) {
       std::cout << "Current Var :" << curVar << " and current value "
                 << variables[curVar].val << '\n';
 
-      //IDEA:
-
-      // if (variables[curVar].pure)
-      //   variables[curVar].val = ...
-
-      // for positive occurances
+      //Emlinate pure literals
+      if (variables[curVar].polarity == POS)
+        variables[curVar].val = TRUE;
+      
+      if (variables[curVar].polarity == NEG)
+        variables[curVar].val = FALSE;
 
       for (int i = 0, size = variables[curVar].pos_occ.size(); i < size; i++) {
         if (cnf[variables[curVar].pos_occ[i]].satLiteral == 0) {
