@@ -1,8 +1,9 @@
+#include <queue>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include <queue>
-#include <stack>
+
 #ifndef MYHEADER_HPP
 #define MYHEADER_HPP
 extern int numOfVars;    // n = num of vars
@@ -19,7 +20,7 @@ struct Variable {
   std::vector<int> pos_occ;
   std::vector<int> neg_occ;
   bool forced;
-  // int bd; // branching depth
+  bool pure = true;
 };
 
 struct Clause {
@@ -37,8 +38,8 @@ extern std::queue<int> unitQueue;
 extern int CurVar;
 
 enum class State {
-    DEFAULT,
-    BACKTRACK,
+  DEFAULT,
+  BACKTRACK,
 };
 
 extern State state;
@@ -54,7 +55,7 @@ extern std::stack<int> assig;
 // DPLL Algorithm Function Call
 bool dpll(int curVar = CurVar);
 
-// Check all Clauses for whether they are satisfied 
+// Check all Clauses for whether they are satisfied
 bool checkAllClauses();
 
 void unitProp();

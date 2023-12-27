@@ -1,8 +1,9 @@
+#include <queue>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include <queue>
-#include <stack>
+
 #ifndef MYHEADER_HPP
 #define MYHEADER_HPP
 extern int numOfVars;    // n = num of vars
@@ -20,6 +21,7 @@ struct Variable {
   std::vector<int> neg_occ;
   bool forced;
   std::vector<int> watched_occ;
+  bool pure = true;
   // int bd; // branching depth
 };
 
@@ -27,7 +29,7 @@ struct Clause {
   int satLiteral = 0;
   std::vector<int> literals;
   int active;
-  int *w1 = nullptr;  // to not initialize without an address
+  int *w1 = nullptr; // to not initialize without an address
   int *w2 = nullptr;
 };
 
@@ -38,8 +40,8 @@ extern std::queue<int> unitQueue;
 extern int CurVar;
 
 enum class State {
-    DEFAULT,
-    BACKTRACK,
+  DEFAULT,
+  BACKTRACK,
 };
 
 extern State state;
@@ -55,7 +57,7 @@ extern std::stack<int> assig;
 // DPLL Algorithm Function Call
 bool dpll(int curVar = CurVar);
 
-// Check all Clauses for whether they are satisfied 
+// Check all Clauses for whether they are satisfied
 bool checkAllClauses();
 
 // Parse Dimacs function call

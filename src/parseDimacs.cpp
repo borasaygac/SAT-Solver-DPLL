@@ -2,9 +2,10 @@
 #include <iostream>
 #include <queue>
 #include <sstream>
+#include <stdio.h>
 #include <string>
 #include <vector>
-#include <stdio.h>
+
 
 #include "../include/cnf2.hpp"
 
@@ -51,12 +52,17 @@ void parseDIMACS2(const std::string &filename) {
       while (iss >> literal && literal != 0) {
         (literal > 0) ? variables[std::abs(literal)].pos_occ.push_back(count)
                       : variables[std::abs(literal)].neg_occ.push_back(count);
+
+        if (variables[std::abs(literal)].pos_occ.size() > 0 &&
+            variables[std::abs(literal)].pos_occ.size() > 0)
+          variables[std::abs(literal)].pure = false;
+          
         clause.literals.push_back(literal);
-        }
-        clause.active = clause.literals.size();
-        cnf.push_back(clause);
       }
-    
+      clause.active = clause.literals.size();
+      cnf.push_back(clause);
+    }
+
     count++;
     file.close();
   } else {
