@@ -10,7 +10,7 @@ bool watcheddpll(int curVar) {
   std::queue<int> unitQueue;
   int varSize = variables.size();
 
-  while (variables[curVar].val == Assign::FREE){
+  while (variables[curVar].val == FREE){
 
     
     std::cout << "Current Var :" << curVar << " and current value "

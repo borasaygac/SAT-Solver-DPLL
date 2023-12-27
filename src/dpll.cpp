@@ -11,9 +11,9 @@ bool dpll(int curVar) {
   int varSize = variables.size();
 
   while (true) {
-    if (variables[curVar].val == Assign::FREE) {
+    if (variables[curVar].val == FREE) {
       if (curVar != 3) {
-        variables[curVar].val = Assign::TRUE;
+        variables[curVar].val = TRUE;
       }
       std::cout << "Current Var :" << curVar << " and current value "
                 << variables[curVar].val << '\n';
@@ -53,7 +53,7 @@ bool dpll(int curVar) {
               std::cout << "in for loop 2" << '\n';
               int varToCheck = cnf[variables[curVar].neg_occ[i]].literals[j];
               std::cout << "vartocheck= " << varToCheck << '\n';
-              if (variables[std::abs(varToCheck)].val == Assign::FREE) {
+              if (variables[std::abs(varToCheck)].val == FREE) {
                 // enqueue a
 
                 std::cout << "in the for loop 3" << '\n';
@@ -67,8 +67,8 @@ bool dpll(int curVar) {
                   cnf[variables[curVar].neg_occ[i]].satLiteral =
                       std::abs(current);
                   (current > 0)
-                      ? variables[std::abs(current)].val = Assign::TRUE
-                      : variables[std::abs(current)].val = Assign::FALSE;
+                      ? variables[std::abs(current)].val = TRUE
+                      : variables[std::abs(current)].val = FALSE;
                   std::cout << "Value of var after setting= "
                             << variables[std::abs(current)].val << "\n"
                             << " and the number of clause "
