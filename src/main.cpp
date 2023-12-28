@@ -62,36 +62,35 @@ void parseDIMACS(const std::string &filename) {
       }
       if (!clause.literals.empty()) {
         clause.active = clause.literals.size();
-        variables[std::abs(clause.literals[clause.w2])].val == FREE; 
-        while (clause.w2 < clause.literals.size()) {
-          if ((variables[std::abs(clause.literals[clause.w2])].val == TRUE &&
-               clause.literals[clause.w2] > 0) ||
-              (variables[std::abs(clause.literals[clause.w2])].val == FALSE &&
-               clause.literals[clause.w2] < 0))
-            break;
-          if (variables[std::abs(clause.literals[clause.w2])].val == FREE) {
-            clause.literals[clause.w2] > 0
-                ? variables[std::abs(clause.literals[clause.w2])].val = TRUE
-                : variables[std::abs(clause.literals[clause.w2])].val = FALSE;
-            break;
-          }
-          clause.w2++;
-        }
-        while (clause.w1 < clause.literals.size()) {
-          if (((variables[std::abs(clause.literals[clause.w1])].val == TRUE &&
-                clause.literals[clause.w1] > 0) ||
-               (variables[std::abs(clause.literals[clause.w1])].val == FALSE &&
-                clause.literals[clause.w1] < 0)) &&
-              clause.w1 != clause.w2)
-            break;
-          if (variables[std::abs(clause.literals[clause.w1])].val == FREE) {
-            clause.literals[clause.w1] > 0
-                ? variables[std::abs(clause.literals[clause.w1])].val = TRUE
-                : variables[std::abs(clause.literals[clause.w1])].val = FALSE;
-            break;
-          }
-          clause.w1++;
-        }
+        // while (clause.w2 < clause.literals.size()) {
+        //   if ((variables[std::abs(clause.literals[clause.w2])].val == TRUE &&
+        //        clause.literals[clause.w2] > 0) ||
+        //       (variables[std::abs(clause.literals[clause.w2])].val == FALSE &&
+        //        clause.literals[clause.w2] < 0))
+        //     break;
+        //   if (variables[std::abs(clause.literals[clause.w2])].val == FREE) {
+        //     clause.literals[clause.w2] > 0
+        //         ? variables[std::abs(clause.literals[clause.w2])].val = TRUE
+        //         : variables[std::abs(clause.literals[clause.w2])].val = FALSE;
+        //     break;
+        //   }
+        //   clause.w2++;
+        // }
+        // while (clause.w1 < clause.literals.size()) {
+        //   if (((variables[std::abs(clause.literals[clause.w1])].val == TRUE &&
+        //         clause.literals[clause.w1] > 0) ||
+        //        (variables[std::abs(clause.literals[clause.w1])].val == FALSE &&
+        //         clause.literals[clause.w1] < 0)) &&
+        //       clause.w1 != clause.w2)
+        //     break;
+        //   if (variables[std::abs(clause.literals[clause.w1])].val == FREE) {
+        //     clause.literals[clause.w1] > 0
+        //         ? variables[std::abs(clause.literals[clause.w1])].val = TRUE
+        //         : variables[std::abs(clause.literals[clause.w1])].val = FALSE;
+        //     break;
+        //   }
+        //   clause.w1++;
+        // }
         cnf.push_back(clause);
       }
       count++;

@@ -52,13 +52,10 @@ extern std::vector<Variable> variables;
 // Stack of variables with assigned values
 extern std::stack<int> assig;
 
-// DPLL Algorithm Function Call
 bool dpll(int curVar = CurVar);
 
-// Check all Clauses for whether they are satisfied 
 bool checkAllClauses();
 
-// Parse Dimacs function call
 void parseDIMACS2(const std::string &filename);
 
 void unitProp();
