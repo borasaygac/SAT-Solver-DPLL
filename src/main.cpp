@@ -110,7 +110,7 @@ int main(int argc, char* argv[]) {
         std::cout << i << "th Clause: " << cnf[i].w1 << " " << cnf[i].w2 << "\n";
     }
 
-    // dpll();
-    // checkAllClauses();
+    dpll();
+    checkAllClauses();
     return 0;
 }
