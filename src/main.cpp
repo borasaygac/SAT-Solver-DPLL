@@ -9,10 +9,11 @@
 
 int numOfVars;
 int numOfClauses;
+int numOfUnassigned;
 std::vector<Clause> cnf;
 std::vector<Variable> variables;
 std::queue<int> unitQueue;
-int CurVar = 1;
+int curVar = 1;
 Heuristics heuristic = INC;
 
 void parseDIMACS(const std::string& filename) {
@@ -39,9 +40,10 @@ void parseDIMACS(const std::string& filename) {
         }
         numOfVars = std::stoi(tokens[2]);
         numOfClauses = std::stoi(tokens[3]);
+        numOfUnassigned = numOfVars;
         std::cout << "Number of Variables: " << numOfVars << std::endl;
         std::cout << "Number of Clauses: " << numOfClauses << std::endl;
-
+        
         // parse rest
         variables.resize(numOfVars + 1);  // vars in DIMACS are 1-indexed
         for (int i = 0; i < numOfVars + 1; i++) {

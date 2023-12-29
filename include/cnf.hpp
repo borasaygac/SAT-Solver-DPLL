@@ -6,8 +6,12 @@
 
 #ifndef MYHEADER_HPP
 #define MYHEADER_HPP
-extern int numOfVars;     // n = num of vars
-extern int numOfClauses;  //
+
+extern int numOfVars;
+extern int numOfClauses;
+// num of not yet assigned variables;
+// return true if equal to 0.
+extern int numOfUnassigned;
 
 enum Heuristics { INC, DLIS, DLCS, MOM, JW };
 
@@ -22,8 +26,14 @@ struct Variable {
     std::vector<int> pos_watched;  // All clauses where var appears as pos watched literal
     std::vector<int> neg_watched;  // All clauses where var appears as neg watched literal
     bool forced;
-    int pos_occ; // number of clauses var appears as pos literal
-    int neg_occ; // number of clauses var appears as neg literal
+    int pos_occ;  // number of clauses var appears as pos literal
+    int neg_occ;  // number of clauses var appears as neg literal
+
+   public:
+    void setValue(Assig _assig) {
+      val = _assig;
+      numOfUnassigned--;
+    }
 };
 
 struct Clause {
@@ -35,31 +45,32 @@ struct Clause {
 
 extern Heuristics heuristic;
 
-// Default indexing value for DPLL if queue is empty
-extern int CurVar;
+// the currently processed variable
+extern int curVar;
 
-// List of clauses (1-indexed)
+// list of clauses (1-indexed)
 extern std::vector<Clause> cnf;
 
-// List of variables (1-indexed)
+// list of variables (1-indexed)
 extern std::vector<Variable> variables;
 
-// Queue where unit clauses found in DPLL will be added to.
+// queue storing unit literals
 extern std::queue<int> unitQueue;
 
-// Stack of variables with assigned values
+// stack of variables with assigned values
 extern std::stack<int> assig;
 
-// DPLL Algorithm Function Call
-bool dpll(int curVar = CurVar);
+bool dpll();
 
-// Check all Clauses for whether they are satisfied
 bool checkAllClauses();
 
 // evaluates the literal under its current assignment
 bool evaluateLiteral(int literal);
 
 int chooseLit();
+
+// updates the clauses after a new assignment is made
+void updateClauses(int literal);
 
 void unitProp();
 #endif

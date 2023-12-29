@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-#include "../include/cnf2.hpp"
+#include "../include/cnf.hpp"
 
 void parseDIMACS2(const std::string &filename) {
     std::ifstream file(filename);
