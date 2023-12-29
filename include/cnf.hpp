@@ -1,33 +1,35 @@
+#include <queue>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include <queue>
-#include <stack>
+
 #ifndef MYHEADER_HPP
 #define MYHEADER_HPP
-extern int numOfVars;    // n = num of vars
-extern int numOfClauses; //
+extern int numOfVars;     // n = num of vars
+extern int numOfClauses;  //
 
-enum Assign {
-  FALSE,
-  TRUE,
-  FREE,
+enum Heuristics { DLIS, DLCS, MOM, JW };
+
+enum Assig {
+    FALSE,
+    TRUE,
+    FREE,
 };
 
 struct Variable {
-  Assign val = FREE;
-  std::vector<int> pos_occ;
-  std::vector<int> neg_occ;
-  bool forced;
-  // int bd; // branching depth
+    Assig val = FREE;
+    std::vector<int> pos_watched;
+    std::vector<int> neg_watched;
+    bool forced;
+    int pos_occ;
+    int neg_occ;
 };
 
 struct Clause {
-  int satLiteral = 0;
-  std::vector<int> literals;
-  int active;
-  int w1 = 0;
-  int w2 = 1;
+    std::vector<int> literals;
+    int w1 = 0;
+    int w2 = 1;
 };
 
 // Queue where unit clauses found in DPLL will be added to.
@@ -35,13 +37,6 @@ extern std::queue<int> unitQueue;
 
 // Default indexing value for DPLL if queue is empty
 extern int CurVar;
-
-enum class State {
-    DEFAULT,
-    BACKTRACK,
-};
-
-extern State state;
 
 // List of clauses (1-indexed)
 extern std::vector<Clause> cnf;
@@ -54,7 +49,7 @@ extern std::stack<int> assig;
 // DPLL Algorithm Function Call
 bool dpll(int curVar = CurVar);
 
-// Check all Clauses for whether they are satisfied 
+// Check all Clauses for whether they are satisfied
 bool checkAllClauses();
 
 void unitProp();

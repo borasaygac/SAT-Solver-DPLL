@@ -50,8 +50,6 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp"
-    }
-{
-        "editor.formatOnSave": true
-    }
+    },
+    "clang-format.style": "{ BasedOnStyle: Google, IndentWidth: 4, TabWidth: 4, UseTab: Never, ColumnLimit: 120 }"
 }

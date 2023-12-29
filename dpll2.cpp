@@ -6,7 +6,8 @@
 // #include <sstream>
 // #include <string>
 
-// bool dpll2(std::vector<std::vector<int>> cnf, std::unordered_map<int, bool>& assignment) {
+// bool dpll2(std::vector<std::vector<int>> cnf, std::unordered_map<int, bool>&
+// assignment) {
 //     bool satisfied = true;
 
 //     // Unit propagation
@@ -18,7 +19,8 @@
 //             clause = cnf.erase(clause);
 //             assignment[std::abs(literal)] = (literal > 0);
 //             for (auto clause : cnf) {
-//                 clause.erase(std::remove(clause.begin(), clause.end(), -literal),
+//                 clause.erase(std::remove(clause.begin(), clause.end(),
+//                 -literal),
 //                                       clause.end());
 //             }
 //         } else {
@@ -33,10 +35,11 @@
 //         for (int literal : clause) {
 //             int var = std::abs(literal);
 //             if (pureLiterals.find(var) == pureLiterals.end()) {
-//                 // Check if the opposite of the literal exists in other clauses
-//                 bool oppositeFound = false;
-//                 for (const auto& otherClause : cnf) {
-//                     if (std::find(otherClause.begin(), otherClause.end(), -literal) != otherClause.end()) {
+//                 // Check if the opposite of the literal exists in other
+//                 clauses bool oppositeFound = false; for (const auto&
+//                 otherClause : cnf) {
+//                     if (std::find(otherClause.begin(), otherClause.end(),
+//                     -literal) != otherClause.end()) {
 //                         oppositeFound = true;
 //                         break;
 //                     }
@@ -44,7 +47,8 @@
 
 //                 if (!oppositeFound) {
 //                     pureLiterals.insert(var);
-//                     assignment[var] = (literal > 0); // Assign the pure literal
+//                     assignment[var] = (literal > 0); // Assign the pure
+//                     literal
 //                 }
 //             }
 //         }
@@ -54,19 +58,20 @@
 //     cnf.erase(std::remove_if(cnf.begin(), cnf.end(),
 //         [&pureLiterals](const std::vector<int> clause) {
 //             for (int literal : clause) {
-//                 if (pureLiterals.find(std::abs(literal)) != pureLiterals.end()) {
+//                 if (pureLiterals.find(std::abs(literal)) !=
+//                 pureLiterals.end()) {
 //                     return true; // Remove clauses with pure literals
 //                 }
 //             }
 //             return false;
 //         }), cnf.end());
 
-
 //     // Check for satisfied clauses
 //     for (const auto& clause : cnf) {
 //         bool clauseSatisfied = false;
 //         for (int literal : clause) {
-//             if (assignment.count(std::abs(literal)) && (assignment[std::abs(literal)] == (literal > 0))) {
+//             if (assignment.count(std::abs(literal)) &&
+//             (assignment[std::abs(literal)] == (literal > 0))) {
 //                 clauseSatisfied = true;
 //                 break;
 //             }
