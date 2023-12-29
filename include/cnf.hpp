@@ -22,17 +22,21 @@ enum Assig {
 };
 
 struct Variable {
+   private:
     Assig val = FREE;
+
+   public:
     std::vector<int> pos_watched;  // All clauses where var appears as pos watched literal
     std::vector<int> neg_watched;  // All clauses where var appears as neg watched literal
     bool forced;
     int pos_occ;  // number of clauses var appears as pos literal
     int neg_occ;  // number of clauses var appears as neg literal
-
-   public:
     void setValue(Assig _assig) {
-      val = _assig;
-      numOfUnassigned--;
+        val = _assig;
+        _assig != FREE ? numOfUnassigned-- : numOfUnassigned++;
+    }
+    Assig getValue() {
+      return val;
     }
 };
 

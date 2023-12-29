@@ -10,12 +10,12 @@ bool dpll() {
         if (!unitQueue.empty()) {
             unitPropagate();
         } else {
-            while (variables[curVar].val != FREE) curVar++;
+            while (variables[curVar].getValue() != FREE) curVar++;
             variables[curVar].setValue(TRUE);
             updateCNF(curVar);
         }
 
-        std::cout << "Current Var :" << curVar << " and current value " << variables[curVar].val << '\n';
+        std::cout << "Current Var :" << curVar << " and current value " << variables[curVar].getValue() << '\n';
 
         std::cout << "queue size= " << unitQueue.size() << '\n';
     }
@@ -32,7 +32,7 @@ void unitPropagate() {
         variables[unitLiteral].forced = true;
         (unitLiteral > 0) ? variables[std::abs(unitLiteral)].setValue(TRUE)
                           : variables[std::abs(unitLiteral)].setValue(FALSE);
-        std::cout << "UP variable " << std::abs(unitLiteral) << " set to " << variables[std::abs(unitLiteral)].val
+        std::cout << "UP variable " << std::abs(unitLiteral) << " set to " << variables[std::abs(unitLiteral)].getValue()
                   << "\n";
 
         updateCNF(std::abs(unitLiteral));
@@ -79,11 +79,11 @@ void updateCNF(int assertedVar) {
 }
 
 bool evaluateLiteral(int literal) {
-    if (variables[std::abs(literal)].val == FREE) return true;
+    if (variables[std::abs(literal)].getValue() == FREE) return true;
 
-    if (variables[std::abs(literal)].val == TRUE && literal > 0) return true;
+    if (variables[std::abs(literal)].getValue() == TRUE && literal > 0) return true;
 
-    if (variables[std::abs(literal)].val == FALSE && literal < 0) return true;
+    if (variables[std::abs(literal)].getValue() == FALSE && literal < 0) return true;
 
     return false;
 }
