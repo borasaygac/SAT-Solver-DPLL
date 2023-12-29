@@ -56,20 +56,20 @@ bool dpll(int curVar) {
             variables[current].forced = true;
             (current > 0) ? variables[std::abs(current)].val = Assig::TRUE
                           : variables[std::abs(current)].val = Assig::FALSE;
-            std::cout << "UP variable " << std::abs(current) << " set to "<< variables[std::abs(current)].val << "\n";
+            std::cout << "UP variable " << std::abs(current) << " set to " << variables[std::abs(current)].val << "\n";
             dpll(std::abs(current));
             // [1,2,-3] w1 = 2, UP 3 => 3.val = true;
         }
+        curVar++;
+        std::cout << "queue size= " << unitQueue.size() << '\n';
     }
 
-    std::cout << "queue size= " << unitQueue.size() << '\n';
-    curVar++;
+    
 
     return true;
 }
 
 bool evaluateLiteral(int literal) {
-    
     if (variables[std::abs(literal)].val == FREE) return true;
 
     if (variables[std::abs(literal)].val == TRUE && literal > 0) return true;

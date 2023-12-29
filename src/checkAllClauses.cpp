@@ -17,16 +17,22 @@ bool checkAllClauses() {
         std::cout << "Model: ";
 
     } else {
-        std::cout
-            << "Not all clauses satisfied. Number of satisfied clauses is "
-            << count << " != " << numOfClauses << "\n";
+        std::cout << "Not all clauses satisfied. Number of satisfied clauses is " << count << " != " << numOfClauses
+                  << "\n";
     }
     std::cout << "[";
     for (int i = 1; i < numOfVars; i++) {
-        int val = variables[i].val != Assig::FREE ? -i : i;
+        int val;
+        if (variables[i].val == FREE) val = 1000;
+        if (variables[i].val == TRUE) val = i;
+        if (variables[i].val == FALSE) val = -i;
+
         std::cout << val << ", ";
     }
-    int val = variables[numOfVars].val == 0 ? -numOfVars : numOfVars;
+    int val;
+    if (variables[numOfVars].val == FREE) val = 1000;
+    if (variables[numOfVars].val == TRUE) val = numOfVars;
+    if (variables[numOfVars].val == FALSE) val = -numOfVars;
     std::cout << val;
     std::cout << "]";
     return false;
