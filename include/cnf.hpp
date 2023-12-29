@@ -70,7 +70,7 @@ bool evaluateLiteral(int literal);
 int chooseLit();
 
 // updates the clauses after a new assignment is made
-void updateClauses(int literal);
+void updateCNF(int literal);
 
-void unitProp();
+void unitPropagate();
 #endif

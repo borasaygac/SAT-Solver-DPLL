@@ -8,23 +8,11 @@
 bool dpll() {
     while (numOfUnassigned > 0) {
         if (!unitQueue.empty()) {
-            int unitLiteral;
-            while (!unitQueue.empty()) {
-                unitLiteral = unitQueue.front();
-                std::cout << "current queue elm= " << unitLiteral << "\n";
-                unitQueue.pop();
-                variables[unitLiteral].forced = true;
-                (unitLiteral > 0) ? variables[std::abs(unitLiteral)].setValue(TRUE)
-                                  : variables[std::abs(unitLiteral)].setValue(FALSE);
-                std::cout << "UP variable " << std::abs(unitLiteral) << " set to "
-                          << variables[std::abs(unitLiteral)].val << "\n";
-
-                updateClauses(std::abs(unitLiteral));
-            }
+            unitPropagate();
         } else {
             while (variables[curVar].val != FREE) curVar++;
             variables[curVar].setValue(TRUE);
-            updateClauses(curVar);
+            updateCNF(curVar);
         }
 
         std::cout << "Current Var :" << curVar << " and current value " << variables[curVar].val << '\n';
@@ -35,7 +23,23 @@ bool dpll() {
     return true;
 }
 
-void updateClauses(int assertedVar) {
+void unitPropagate() {
+    int unitLiteral;
+    while (!unitQueue.empty()) {
+        unitLiteral = unitQueue.front();
+        std::cout << "current queue elm= " << unitLiteral << "\n";
+        unitQueue.pop();
+        variables[unitLiteral].forced = true;
+        (unitLiteral > 0) ? variables[std::abs(unitLiteral)].setValue(TRUE)
+                          : variables[std::abs(unitLiteral)].setValue(FALSE);
+        std::cout << "UP variable " << std::abs(unitLiteral) << " set to " << variables[std::abs(unitLiteral)].val
+                  << "\n";
+
+        updateCNF(std::abs(unitLiteral));
+    }
+}
+
+void updateCNF(int assertedVar) {
     // watched literals have to point to unassigned or to true evaluating variables
 
     std::cout << "UPDATING FOR " << assertedVar << "!\n";
