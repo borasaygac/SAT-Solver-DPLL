@@ -31,6 +31,7 @@ void unitPropagate() {
     }
 }
 
+
 void updateCNF(int assertedVar) {
     // watched literals have to point to unassigned or to true evaluating variables
 
@@ -44,7 +45,7 @@ void updateCNF(int assertedVar) {
 
         int *pointerToMove = std::abs(clause.literals[clause.w1]) == assertedVar ? &clause.w1 : &clause.w2;
 
-        int otherPointer = clause.w1 + clause.w2 - *(pointerToMove);
+        int otherPointer = clause.w1 + clause.w2 - *pointerToMove;
 
         for (int i = 0; i < clause.literals.size(); i++) {
             // assign as the new pointer a literal that evaluates to true and is not the other watched literal
