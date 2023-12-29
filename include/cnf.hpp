@@ -59,5 +59,7 @@ bool checkAllClauses();
 // evaluates the literal under its current assignment
 bool evaluateLiteral(int literal);
 
+int chooseLit();
+
 void unitProp();
 #endif
