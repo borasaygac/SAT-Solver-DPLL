@@ -56,5 +56,8 @@ bool dpll(int curVar = CurVar);
 // Check all Clauses for whether they are satisfied
 bool checkAllClauses();
 
+// evaluates the literal under its current assignment
+bool evaluateLiteral(int literal);
+
 void unitProp();
 #endif

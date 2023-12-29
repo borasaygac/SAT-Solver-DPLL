@@ -48,7 +48,6 @@ bool dpll(int curVar) {
                 }
             }
         }
-        // for negative occurances
 
         while (!unitQueue.empty()) {
             int current = unitQueue.front();
@@ -70,6 +69,7 @@ bool dpll(int curVar) {
 }
 
 bool evaluateLiteral(int literal) {
+    
     if (variables[std::abs(literal)].val == FREE) return true;
 
     if (variables[std::abs(literal)].val == TRUE && literal > 0) return true;
