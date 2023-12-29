@@ -13,46 +13,35 @@ bool dpll(int curVar) {
         variables[curVar].val = Assig::TRUE;
 
         std::cout << "Current Var :" << curVar << " and current value " << variables[curVar].val << '\n';
+        
+        for (int i = 0, size = variables[curVar].neg_watched.size(); i < size; i++) {
+            
+            Clause clause = cnf[variables[curVar].neg_watched[i]];
 
-        // for positive occurances
+            int *pointerToMove = -clause.literals[clause.w1] == curVar ? &clause.w1 : &clause.w2;
 
-        for (int i = 0; i < variables[curVar].pos_watched.size(); i++) {
-            if (cnf[variables[curVar].pos_watched[i]].satLiteral == 0) {
-                cnf[variables[curVar].pos_watched[i]].satLiteral = curVar;
-                std::cout << "Clause " << variables[curVar].pos_watched[i] << " satisfied by " << curVar << '\n';
+            int otherPointer = clause.w1 + clause.w2 - *(pointerToMove);
+
+            for (int i = 0; i < clause.literals.size(); i++) {
+                // assign as the new pointer a literal that evaluates to true and
+                // is
+                // not the other watched literal
+                if (evaluateLiteral(clause.literals[i]) && i != otherPointer) {
+                    *(pointerToMove) = i;
+                    break;
+                }
+
+                // Search for a distinct new pointer unsuccessful, try UP on
+                // otherPointer else backtrack
+                if (i + 1 == size) {
+                    if (evaluateLiteral(clause.literals[otherPointer]))
+                        unitQueue.push(clause.literals[otherPointer]);
+                    else
+                        // backtrack()
+                        ;
+                }
             }
         }
-        // for (int i = 0, size = variables[curVar].neg_occ.size(); i < size;
-        // i++) {
-        //   Clause clause = cnf[variables[curVar].neg_occ[i]];
-
-        //   int *pointerToMove =
-        //       -clause.literals[clause.w1] == curVar ? &clause.w1 :
-        //       &clause.w2;
-
-        //   int otherPointer = clause.w1 + clause.w2 - *(pointerToMove);
-
-        //   for (int i = 0; i < clause.literals.size(); i++) {
-
-        //     // assign as the new pointer a literal that evaluates to true and
-        //     is
-        //     // not the other watched literal
-        //     if (evaluateLiteral(clause.literals[i]) && i != otherPointer) {
-        //       *(pointerToMove) = i;
-        //       break;
-        //     }
-
-        //     // Search for a distinct new pointer unsuccessful, try UP on
-        //     // otherPointer else backtrack
-        //     if (i + 1 == size) {
-        //       if (evaluateLiteral(clause.literals[otherPointer]))
-        //         unitQueue.push(clause.literals[otherPointer]);
-        //       else
-        //         // backtrack()
-        //         ;
-        //     }
-        //   }
-        // }
         // for negative occurances
 
         for (int i = 0; i < variables[curVar].neg_watched.size(); i++) {

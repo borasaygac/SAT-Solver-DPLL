@@ -30,6 +30,7 @@ struct Clause {
     std::vector<int> literals;
     int w1 = 0;
     int w2 = 1;
+    int satLiteral = 0;
 };
 
 extern Heuristics heuristic;
