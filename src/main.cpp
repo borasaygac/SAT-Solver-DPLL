@@ -13,6 +13,7 @@ std::vector<Clause> cnf;
 std::vector<Variable> variables;
 std::queue<int> unitQueue;
 int CurVar = 1;
+Heuristics heuristic = INC;
 
 void parseDIMACS(const std::string& filename) {
     std::ifstream file(filename);
@@ -48,9 +49,9 @@ void parseDIMACS(const std::string& filename) {
             variables[i] = v;
         }
         Clause dummy;
-        cnf.push_back(dummy);               // push dummy clause on cnf[0] to ensure 1-index.
-        int count = 1;                      // what clause are we processing?
-        while (std::getline(file, line)) {  // Fill pos and neg_occ for clauses
+        cnf.push_back(dummy);  // push dummy clause on cnf[0] to ensure 1-index.
+        int count = 1;         // what clause are we processing?
+        while (std::getline(file, line)) {
             std::istringstream iss(line);
             Clause clause;
             int literal;
@@ -66,8 +67,7 @@ void parseDIMACS(const std::string& filename) {
                 // if unit clause, push to unit queue
                 if (clause.literals.size() == 1) unitQueue.push(clause.literals[0]);
 
-                // else link the init watched literals to their respective entry
-                // in variables
+                // else link the init watched literals to their respective entry in variables
                 else {
                     clause.literals[0] > 0 ? variables[std::abs(clause.literals[0])].pos_watched.push_back(count)
                                            : variables[std::abs(clause.literals[0])].neg_watched.push_back(count);
@@ -89,6 +89,8 @@ void parseDIMACS(const std::string& filename) {
 int main(int argc, char* argv[]) {
     std::string filename = "DIMACS/test" + std::to_string(std::stoi(argv[1])) + ".cnf";
 
+    if (argc > 2) heuristic = Heuristics(atoi(argv[2]));
+
     parseDIMACS(filename);
     std::cout << "Params: vars " << numOfVars << " and clauses " << numOfClauses << "\n";
     for (const auto& clause : cnf) {
@@ -108,7 +110,7 @@ int main(int argc, char* argv[]) {
         std::cout << i << "th Clause: " << cnf[i].w1 << " " << cnf[i].w2 << "\n";
     }
 
-    dpll();
-    checkAllClauses();
+    // dpll();
+    // checkAllClauses();
     return 0;
 }

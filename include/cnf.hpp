@@ -9,7 +9,7 @@
 extern int numOfVars;     // n = num of vars
 extern int numOfClauses;  //
 
-enum Heuristics { DLIS, DLCS, MOM, JW };
+enum Heuristics { INC, DLIS, DLCS, MOM, JW };
 
 enum Assig {
     FALSE,
@@ -32,8 +32,7 @@ struct Clause {
     int w2 = 1;
 };
 
-// Queue where unit clauses found in DPLL will be added to.
-extern std::queue<int> unitQueue;
+extern Heuristics heuristic;
 
 // Default indexing value for DPLL if queue is empty
 extern int CurVar;
@@ -43,6 +42,10 @@ extern std::vector<Clause> cnf;
 
 // List of variables (1-indexed)
 extern std::vector<Variable> variables;
+
+// Queue where unit clauses found in DPLL will be added to.
+extern std::queue<int> unitQueue;
+
 // Stack of variables with assigned values
 extern std::stack<int> assig;
 
