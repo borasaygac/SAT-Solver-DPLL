@@ -28,7 +28,7 @@ bool dpll(int curVar) {
                 // assign as the new pointer a literal that evaluates to true and
                 // is
                 // not the other watched literal
-                if (evaluateLiteral(clause.literals[i]) && i != otherPointer) {
+                if (evaluateLiteral(clause.literals[i], true) && i != otherPointer) {
                     *(pointerToMove) = i;
                     clause.literals[*pointerToMove] > 0
                         ? variables[std::abs(clause.literals[*pointerToMove])].pos_watched.push_back(clauseIndex)
@@ -40,7 +40,7 @@ bool dpll(int curVar) {
                 // Search for a distinct new pointer unsuccessful, try UP on
                 // otherPointer else backtrack
                 if (i + 1 == size) {
-                    if (evaluateLiteral(clause.literals[otherPointer]))
+                    if (evaluateLiteral(clause.literals[otherPointer], true))
                         unitQueue.push(clause.literals[otherPointer]);
                     else
                         // backtrack()
@@ -68,9 +68,9 @@ bool dpll(int curVar) {
     return true;
 }
 
-bool evaluateLiteral(int literal) {
+bool evaluateLiteral(int literal, bool dpll) {
     
-    if (variables[std::abs(literal)].val == FREE) return true;
+    if (variables[std::abs(literal)].val == FREE && dpll) return true;
 
     if (variables[std::abs(literal)].val == TRUE && literal > 0) return true;
 

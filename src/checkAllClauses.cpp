@@ -7,7 +7,7 @@
 bool checkAllClauses() {
     int count = 0;
     for (int i = 1; i <= numOfClauses; i++) {
-        if (cnf[i].satLiteral != 0) {
+        if (evaluateLiteral(cnf[i].literals[cnf[i].w1], false) || evaluateLiteral(cnf[i].literals[cnf[i].w2], false)) {
             count++;
         }
     }
