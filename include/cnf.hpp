@@ -19,11 +19,11 @@ enum Assig {
 
 struct Variable {
     Assig val = FREE;
-    std::vector<int> pos_watched;
-    std::vector<int> neg_watched;
+    std::vector<int> pos_watched;  // All clauses where var appears as pos watched literal
+    std::vector<int> neg_watched;  // All clauses where var appears as neg watched literal
     bool forced;
-    int pos_occ;
-    int neg_occ;
+    int pos_occ; // number of clauses var appears as pos literal
+    int neg_occ; // number of clauses var appears as neg literal
 };
 
 struct Clause {
