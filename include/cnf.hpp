@@ -64,14 +64,16 @@ extern std::queue<int> unitQueue;
 // stack of variables with assigned values
 extern std::stack<int> assig;
 
+void parseDIMACS(std::string filename);
+
 bool dpll();
 
-bool checkAllClauses();
+bool printModel();
 
 // evaluates the literal under its current assignment
 bool evaluateLiteral(int literal);
 
-int chooseLit();
+void chooseLiteral();
 
 // updates the clauses after a new assignment is made
 void updateCNF(int literal);

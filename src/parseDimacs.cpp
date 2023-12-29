@@ -9,7 +9,7 @@
 
 #include "../include/cnf.hpp"
 
-void parseDIMACS2(const std::string &filename) {
+void parseDIMACS(std::string filename) {
     std::ifstream file(filename);
     std::string line;
 
@@ -33,6 +33,7 @@ void parseDIMACS2(const std::string &filename) {
         }
         numOfVars = std::stoi(tokens[2]);
         numOfClauses = std::stoi(tokens[3]);
+        numOfUnassigned = numOfVars;
         std::cout << "Number of Variables: " << numOfVars << std::endl;
         std::cout << "Number of Clauses: " << numOfClauses << std::endl;
 
@@ -43,22 +44,37 @@ void parseDIMACS2(const std::string &filename) {
             variables[i] = v;
         }
         Clause dummy;
-        cnf.push_back(dummy);               // push dummy clause on cnf[0] to ensure 1-index.
-        int count = 1;                      // what clause are we processing?
-        while (std::getline(file, line)) {  // Fill pos and neg_occ for clauses
+        cnf.push_back(dummy);  // push dummy clause on cnf[0] to ensure 1-index.
+        int count = 1;         // what clause are we processing?
+        while (std::getline(file, line)) {
             std::istringstream iss(line);
             Clause clause;
             int literal;
             while (iss >> literal && literal != 0) {
-                (literal > 0) ? variables[std::abs(literal)].pos_watched.push_back(count)
-                              : variables[std::abs(literal)].neg_watched.push_back(count);
+                // not precise if the literal appears multiple times in the
+                // clause (unlikely)
+                (literal > 0) ? variables[std::abs(literal)].pos_occ++ : variables[std::abs(literal)].neg_occ++;
+
                 clause.literals.push_back(literal);
             }
-            clause.active = clause.literals.size();
-            cnf.push_back(clause);
-        }
 
-        count++;
+            if (!clause.literals.empty()) {
+                // if unit clause, push to unit queue
+                if (clause.literals.size() == 1) unitQueue.push(clause.literals[0]);
+
+                // else link the init watched literals to their respective entry in variables
+                else {
+                    clause.literals[0] > 0 ? variables[std::abs(clause.literals[0])].pos_watched.push_back(count)
+                                           : variables[std::abs(clause.literals[0])].neg_watched.push_back(count);
+
+                    clause.literals[1] > 0 ? variables[std::abs(clause.literals[1])].pos_watched.push_back(count)
+                                           : variables[std::abs(clause.literals[1])].neg_watched.push_back(count);
+                }
+
+                cnf.push_back(clause);
+            }
+            count++;
+        }
         file.close();
     } else {
         printf("Unable to open file");

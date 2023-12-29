@@ -8,21 +8,16 @@ INCDIR = include
 BINDIR = .
 
 # Source files
-SOURCES = $(wildcard $(SRCDIR)/main.cpp) $(wildcard $(SRCDIR)/dpll.cpp) $(wildcard $(SRCDIR)/checkAllClauses.cpp) $(wildcard $(SRCDIR)/chooseLit.cpp)   
-SOURCES2 = $(wildcard $(SRCDIR)/main2.cpp) $(wildcard $(SRCDIR)/cnf2.cpp) $(wildcard $(SRCDIR)/dpll.cpp) $(wildcard $(SRCDIR)/checkAllClauses.cpp) $(wildcard $(SRCDIR)/parseDimacs.cpp) 
-
+SOURCES = $(wildcard $(SRCDIR)/*.cpp)
+SELECTED_SOURCES =  $(wildcard $(SRCDIR)/main.cpp) $(wildcard $(SRCDIR)/dpll.cpp) $(wildcard $(SRCDIR)/printModel.cpp) $(wildcard $(SRCDIR)/chooseLiteral.cpp) $(wildcard $(SRCDIR)/parseDIMACS.cpp)
 OBJ = $(SRC:.cpp=.o)
 EXECUTABLE = main
-EXECUTABLE2 = main2
 
 # Build target
 all: $(EXECUTABLE)
 
 # Rule to create executable
 $(EXECUTABLE): $(SOURCES)
-	$(CXX) $(CXXFLAGS) $(OBJ) -o $@ $^
-
-$(EXECUTABLE2) : $(SOURCES2)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $@ $^
 	
 %.o: %.cpp

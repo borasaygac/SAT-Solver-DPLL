@@ -4,7 +4,7 @@
 
 #include "../include/cnf.hpp"
 
-bool checkAllClauses() {
+bool printModel() {
     int count = 0;
     for (int i = 1; i <= numOfClauses; i++) {
         if (evaluateLiteral(cnf[i].literals[cnf[i].w1]) || evaluateLiteral(cnf[i].literals[cnf[i].w2])) {

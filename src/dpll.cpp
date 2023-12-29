@@ -6,14 +6,11 @@
 #include "../include/cnf.hpp"
 
 bool dpll() {
+    // TODO: We should implement the more optimised appproach of checking the satisfaction of every clause
     while (numOfUnassigned > 0) {
-        if (!unitQueue.empty()) {
-            unitPropagate();
-        } else {
-            while (variables[curVar].getValue() != FREE) curVar++;
-            variables[curVar].setValue(TRUE);
-            updateCNF(curVar);
-        }
+        unitPropagate();
+
+        chooseLiteral();
 
         std::cout << "Current Var :" << curVar << " and current value " << variables[curVar].getValue() << '\n';
 
@@ -32,8 +29,8 @@ void unitPropagate() {
         variables[unitLiteral].forced = true;
         (unitLiteral > 0) ? variables[std::abs(unitLiteral)].setValue(TRUE)
                           : variables[std::abs(unitLiteral)].setValue(FALSE);
-        std::cout << "UP variable " << std::abs(unitLiteral) << " set to " << variables[std::abs(unitLiteral)].getValue()
-                  << "\n";
+        std::cout << "UP variable " << std::abs(unitLiteral) << " set to "
+                  << variables[std::abs(unitLiteral)].getValue() << "\n";
 
         updateCNF(std::abs(unitLiteral));
     }
