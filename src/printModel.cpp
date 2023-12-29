@@ -1,7 +1,3 @@
-#include <iostream>
-#include <string>
-#include <vector>
-
 #include "../include/cnf.hpp"
 
 bool printModel() {

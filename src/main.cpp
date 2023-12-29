@@ -1,10 +1,3 @@
-#include <fstream>
-#include <iostream>
-#include <queue>
-#include <sstream>
-#include <string>
-#include <vector>
-
 #include "../include/cnf.hpp"
 
 int numOfVars;

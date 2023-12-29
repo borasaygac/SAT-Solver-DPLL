@@ -1,8 +1,3 @@
-#include <iostream>
-#include <queue>
-#include <string>
-#include <vector>
-
 #include "../include/cnf.hpp"
 
 bool dpll() {

@@ -1,12 +1,3 @@
-#include <stdio.h>
-
-#include <fstream>
-#include <iostream>
-#include <queue>
-#include <sstream>
-#include <string>
-#include <vector>
-
 #include "../include/cnf.hpp"
 
 void parseDIMACS(std::string filename) {
