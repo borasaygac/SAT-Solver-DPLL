@@ -7,7 +7,7 @@
 bool checkAllClauses() {
     int count = 0;
     for (int i = 1; i <= numOfClauses; i++) {
-        if (evaluateLiteral(cnf[i].literals[cnf[i].w1], false) || evaluateLiteral(cnf[i].literals[cnf[i].w2], false)) {
+        if (evaluateLiteral(cnf[i].literals[cnf[i].w1]) || evaluateLiteral(cnf[i].literals[cnf[i].w2])) {
             count++;
         }
     }
@@ -23,7 +23,7 @@ bool checkAllClauses() {
     }
     std::cout << "[";
     for (int i = 1; i < numOfVars; i++) {
-        int val = variables[i].val == 0 ? -i : i;
+        int val = variables[i].val != Assig::FREE ? -i : i;
         std::cout << val << ", ";
     }
     int val = variables[numOfVars].val == 0 ? -numOfVars : numOfVars;
