@@ -57,8 +57,6 @@ bool dpll(int curVar) {
             (current > 0) ? variables[std::abs(current)].val = Assig::TRUE
                           : variables[std::abs(current)].val = Assig::FALSE;
             std::cout << "UP variable " << std::abs(current) << " set to " << variables[std::abs(current)].val << "\n";
-            dpll(std::abs(current));
-            // [1,2,-3] w1 = 2, UP 3 => 3.val = true;
         }
         curVar++;
         std::cout << "queue size= " << unitQueue.size() << '\n';
