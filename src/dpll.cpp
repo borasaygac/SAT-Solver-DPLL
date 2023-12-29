@@ -17,7 +17,8 @@ bool dpll(int curVar) {
         // watched literals have to point to unassigned or to true evaluating variables
         for (int i = 0, size = variables[curVar].neg_watched.size(); i < size; i++) {
             // TODO
-            Clause clause = cnf[variables[curVar].neg_watched[i]];
+            int clauseIndex = variables[curVar].neg_watched[i];
+            Clause clause = cnf[clauseIndex];
 
             int *pointerToMove = -clause.literals[clause.w1] == curVar ? &clause.w1 : &clause.w2;
 
@@ -29,6 +30,10 @@ bool dpll(int curVar) {
                 // not the other watched literal
                 if (evaluateLiteral(clause.literals[i]) && i != otherPointer) {
                     *(pointerToMove) = i;
+                    clause.literals[*pointerToMove] > 0
+                        ? variables[std::abs(clause.literals[*pointerToMove])].pos_watched.push_back(clauseIndex)
+                        : variables[std::abs(clause.literals[*pointerToMove])].neg_watched.push_back(clauseIndex);
+
                     break;
                 }
 
@@ -50,12 +55,11 @@ bool dpll(int curVar) {
             std::cout << "current queue elm= " << current << "\n";
             unitQueue.pop();
             variables[current].forced = true;
-            cnf[variables[curVar].neg_watched[i]].satLiteral = std::abs(current);
             (current > 0) ? variables[std::abs(current)].val = Assig::TRUE
                           : variables[std::abs(current)].val = Assig::FALSE;
-            std::cout << "Value of var after setting= " << variables[std::abs(current)].val << "\n"
-                      << " and the number of clause " << variables[curVar].neg_watched[i] << "\n";
+            std::cout << "UP variable " << std::abs(current) << " set to "<< variables[std::abs(current)].val << "\n";
             dpll(std::abs(current));
+            // [1,2,-3] w1 = 2, UP 3 => 3.val = true;
         }
     }
 
