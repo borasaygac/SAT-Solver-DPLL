@@ -51,8 +51,6 @@ void updateWatchedLiterals(int assertedVar) {
         // TODO: We need to make reference?
         Clause *clause = &cnf[clauseIndex];
         clause->sat = true;
-        printf("foobar clause %i \n", clause->sat);
-        printf("foobar cnf %i \n", cnf[clauseIndex].sat);
 
         int *pointerToMove = std::abs(clause->literals[clause->w1]) == assertedVar ? &clause->w1 : &clause->w2;
 
