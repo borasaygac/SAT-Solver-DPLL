@@ -8,6 +8,8 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <set>
+
 
 #ifndef MYHEADER_HPP
 #define MYHEADER_HPP
@@ -31,8 +33,8 @@ struct Variable {
     Assig val = FREE;
 
    public:
-    std::vector<int> pos_watched;  // All clauses where var appears as pos watched literal
-    std::vector<int> neg_watched;  // All clauses where var appears as neg watched literal
+    std::set<int> pos_watched;  // All clauses where var appears as pos watched literal
+    std::set<int> neg_watched;  // All clauses where var appears as neg watched literal
     bool forced = false;
     int pos_occ;  // number of clauses var appears as pos literal
     int neg_occ;  // number of clauses var appears as neg literal

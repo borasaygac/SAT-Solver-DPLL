@@ -55,11 +55,11 @@ void parseDIMACS(std::string filename) {
 
                 // else link the init watched literals to their respective entry in variables
                 else {
-                    clause.literals[0] > 0 ? variables[std::abs(clause.literals[0])].pos_watched.push_back(count)
-                                           : variables[std::abs(clause.literals[0])].neg_watched.push_back(count);
+                    clause.literals[0] > 0 ? variables[std::abs(clause.literals[0])].pos_watched.insert(count)
+                                           : variables[std::abs(clause.literals[0])].neg_watched.insert(count);
 
-                    clause.literals[1] > 0 ? variables[std::abs(clause.literals[1])].pos_watched.push_back(count)
-                                           : variables[std::abs(clause.literals[1])].neg_watched.push_back(count);
+                    clause.literals[1] > 0 ? variables[std::abs(clause.literals[1])].pos_watched.insert(count)
+                                           : variables[std::abs(clause.literals[1])].neg_watched.insert(count);
                 }
 
                 cnf.push_back(clause);

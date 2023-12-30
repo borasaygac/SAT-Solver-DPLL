@@ -36,7 +36,7 @@ void updateWatchedLiterals(int assertedVar) {
     // watched literals have to point to unassigned or to true evaluating variables
 
     std::cout << "UPDATING FOR " << assertedVar << "!\n";
-    std::vector<int> watched;
+    std::set<int> watched;
     if (variables[assertedVar].getValue() == TRUE) {
         watched = variables[assertedVar].neg_watched;
     }
@@ -45,14 +45,11 @@ void updateWatchedLiterals(int assertedVar) {
         watched = variables[assertedVar].pos_watched;
     }
 
-    for (int i = 0, size = watched.size(); i < size; i++) {
-        int clauseIndex = watched[i];
-
+    std::set<int>::iterator clauseIndex;
+    for (clauseIndex = watched.begin(); clauseIndex != watched.end(); ++clauseIndex) {
         // TODO: We need to make reference?
-        Clause *clause = &cnf[clauseIndex];
+        Clause *clause = &cnf[*clauseIndex];
         clause->sat = true;
-        printf("foobar clause %i \n", clause->sat);
-        printf("foobar cnf %i \n", cnf[clauseIndex].sat);
 
         int *pointerToMove = std::abs(clause->literals[clause->w1]) == assertedVar ? &clause->w1 : &clause->w2;
 
@@ -63,19 +60,23 @@ void updateWatchedLiterals(int assertedVar) {
             if (evaluateLiteral(clause->literals[i]) && i != otherPointer) {
                 *(pointerToMove) = i;
                 // TODO: Remove watched link from Variable => Set data structure
+
+                watched.erase(clauseIndex);
+
                 clause->literals[*pointerToMove] > 0
-                    ? variables[std::abs(clause->literals[*pointerToMove])].pos_watched.push_back(clauseIndex)
-                    : variables[std::abs(clause->literals[*pointerToMove])].neg_watched.push_back(clauseIndex);
+                    ? variables[std::abs(clause->literals[*pointerToMove])].pos_watched.insert(*clauseIndex)
+                    : variables[std::abs(clause->literals[*pointerToMove])].neg_watched.insert(*clauseIndex);
 
                 break;
             }
 
             // Search for a distinct new pointer unsuccessful, try UP on otherPointer else backtrack
-            if (i + 1 == size) {
+            if (i + 1 == clause->literals.size()) {
                 if (evaluateLiteral(clause->literals[otherPointer])) {
+                    printf("Push %i on unit queue\n", clause->literals[otherPointer]);
                     unitQueue.push(clause->literals[otherPointer]);
                 } else {
-                    printf("here enter thee into backtrack");
+                    printf("INIT BACKTRACK!\n");
                     backtrack();
                 }
             }

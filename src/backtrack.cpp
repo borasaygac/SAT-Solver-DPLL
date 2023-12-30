@@ -11,7 +11,7 @@ bool backtrack() {
     int toUnassign = assig.top(); 
     variables[toUnassign].setValue(FREE);
     assig.pop();
-    printf("backtrack intro");
+    printf("Removed literal %i from assig stack \n", toUnassign);
   }
 
   if (assig.empty())
@@ -23,7 +23,7 @@ bool backtrack() {
 
   // Most recent branching variable
   int b = assig.top();
-
+  printf("New branch var %i \n", b);
   // Assign negated val
   variables[b].forced = true;
   variables[b].setValue(FREE);
