@@ -65,6 +65,7 @@ void updateWatchedLiterals(int assertedVar) {
                 if (evaluateLiteral(clause.literals[otherPointer])){
                     unitQueue.push(clause.literals[otherPointer]);
                 } else {
+                    printf("here enter thee into backtrack");
                     backtrack();
                 }
             }

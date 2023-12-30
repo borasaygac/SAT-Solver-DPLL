@@ -39,6 +39,7 @@ struct Variable {
     void setValue(Assig _assig) {
         val = _assig;
         _assig == FREE ? numOfUnassigned++ : numOfUnassigned--;
+        printf("%i = number of unassigned \n", numOfUnassigned );
     }
     Assig getValue() {
       return val;
