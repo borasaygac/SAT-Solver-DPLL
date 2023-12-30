@@ -4,7 +4,7 @@ int numOfVars;
 int numOfClauses;
 int numOfUnassigned;
 std::vector<Clause> cnf;
-std::vector<Variable> variables;
+std::vector<Variable> vars;
 std::queue<int> unitQueue;
 std::stack<int> assig;
 int curVar = 1;

@@ -3,9 +3,9 @@
 void chooseLiteral() {
     switch (heuristic) {
         case INC:
-            while (variables[curVar].getValue() != FREE) curVar++;
-            variables[curVar].setValue(TRUE);
-            variables[curVar].forced = false;
+            while (vars[curVar].getValue() != FREE) curVar++;
+            vars[curVar].setValue(TRUE);
+            vars[curVar].forced = false;
             assig.push(curVar);
             break;
         case DLIS:

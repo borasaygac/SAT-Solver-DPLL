@@ -41,7 +41,7 @@ struct Variable {
     void setValue(Assig _assig) {
         val = _assig;
         _assig == FREE ? numOfUnassigned++ : numOfUnassigned--;
-        printf("%i = number of unassigned \n", numOfUnassigned );
+        printf("num of unassigned: %i \n", numOfUnassigned );
     }
     Assig getValue() {
       return val;
@@ -64,7 +64,7 @@ extern int curVar;
 extern std::vector<Clause> cnf;
 
 // list of variables (1-indexed)
-extern std::vector<Variable> variables;
+extern std::vector<Variable> vars;
 
 // queue storing unit literals
 extern std::queue<int> unitQueue;

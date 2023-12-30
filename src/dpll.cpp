@@ -7,7 +7,7 @@ bool dpll() {
 
         chooseLiteral();
 
-        std::cout << "Current Var :" << curVar << " and current value " << variables[curVar].getValue() << '\n';
+        std::cout << "Current Var :" << curVar << " and current value " << vars[curVar].getValue() << '\n';
 
         std::cout << "queue size= " << unitQueue.size() << '\n';
     }
@@ -21,12 +21,12 @@ void unitPropagate() {
         unitLiteral = unitQueue.front();
         std::cout << "current queue elm= " << unitLiteral << "\n";
         unitQueue.pop();
-        variables[std::abs(unitLiteral)].forced = true;
-        (unitLiteral > 0) ? variables[std::abs(unitLiteral)].setValue(TRUE)
-                          : variables[std::abs(unitLiteral)].setValue(FALSE);
+        vars[std::abs(unitLiteral)].forced = true;
+        (unitLiteral > 0) ? vars[std::abs(unitLiteral)].setValue(TRUE)
+                          : vars[std::abs(unitLiteral)].setValue(FALSE);
         assig.push(std::abs(unitLiteral));
         std::cout << "UP variable " << std::abs(unitLiteral) << " set to "
-                  << variables[std::abs(unitLiteral)].getValue() << "\n";
+                  << vars[std::abs(unitLiteral)].getValue() << "\n";
 
         updateWatchedLiterals(std::abs(unitLiteral));
     }
@@ -37,12 +37,12 @@ void updateWatchedLiterals(int assertedVar) {
 
     std::cout << "UPDATING FOR " << assertedVar << "!\n";
     std::set<int> watched;
-    if (variables[assertedVar].getValue() == TRUE) {
-        watched = variables[assertedVar].neg_watched;
+    if (vars[assertedVar].getValue() == TRUE) {
+        watched = vars[assertedVar].neg_watched;
     }
 
     else {
-        watched = variables[assertedVar].pos_watched;
+        watched = vars[assertedVar].pos_watched;
     }
 
     std::set<int>::iterator clauseIndex;
@@ -59,13 +59,13 @@ void updateWatchedLiterals(int assertedVar) {
             // assign as the new pointer a literal that evaluates to true and is not the other watched literal
             if (evaluateLiteral(clause->literals[i]) && i != otherPointer) {
                 *(pointerToMove) = i;
-                // TODO: Remove watched link from Variable => Set data structure
 
+                // Remove the current link from assertedVar to the clause
                 watched.erase(clauseIndex);
 
                 clause->literals[*pointerToMove] > 0
-                    ? variables[std::abs(clause->literals[*pointerToMove])].pos_watched.insert(*clauseIndex)
-                    : variables[std::abs(clause->literals[*pointerToMove])].neg_watched.insert(*clauseIndex);
+                    ? vars[std::abs(clause->literals[*pointerToMove])].pos_watched.insert(*clauseIndex)
+                    : vars[std::abs(clause->literals[*pointerToMove])].neg_watched.insert(*clauseIndex);
 
                 break;
             }
@@ -77,7 +77,8 @@ void updateWatchedLiterals(int assertedVar) {
                     unitQueue.push(clause->literals[otherPointer]);
                 } else {
                     printf("INIT BACKTRACK!\n");
-                    backtrack();
+                    printf("(w1, assig): (%i, %i), (w2, assig): (%i, %i), size: %i \n", clause->literals[*pointerToMove], evaluateLiteral(clause->literals[*pointerToMove]), clause->literals[otherPointer], evaluateLiteral(clause->literals[otherPointer]), clause->literals.size());
+                    if(!backtrack())  numOfUnassigned = 0; // make DPLL stop and return UNSAT 
                 }
             }
         }
@@ -85,11 +86,11 @@ void updateWatchedLiterals(int assertedVar) {
 }
 
 bool evaluateLiteral(int literal) {
-    if (variables[std::abs(literal)].getValue() == FREE) return true;
+    if (vars[std::abs(literal)].getValue() == FREE) return true;
 
-    if (variables[std::abs(literal)].getValue() == TRUE && literal > 0) return true;
+    if (vars[std::abs(literal)].getValue() == TRUE && literal > 0) return true;
 
-    if (variables[std::abs(literal)].getValue() == FALSE && literal < 0) return true;
+    if (vars[std::abs(literal)].getValue() == FALSE && literal < 0) return true;
 
     return false;
 }
