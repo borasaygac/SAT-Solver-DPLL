@@ -1,8 +1,8 @@
 #include "../include/cnf.hpp"
 
-bool dpll() {
+void* dpll(void* arg) {
     // TODO: We should implement the more optimised appproach of checking the satisfaction of every clause
-    while (numOfUnassigned > 0) {
+    while (true) {
         unitPropagate();
 
         chooseLiteral();
@@ -11,8 +11,6 @@ bool dpll() {
 
         std::cout << "queue size= " << unitQueue.size() << '\n';
     }
-
-    return true;
 }
 
 void unitPropagate() {
@@ -21,12 +19,12 @@ void unitPropagate() {
         unitLiteral = unitQueue.front();
         std::cout << "current queue elm= " << unitLiteral << "\n";
         unitQueue.pop();
+
         vars[std::abs(unitLiteral)].forced = true;
-        (unitLiteral > 0) ? vars[std::abs(unitLiteral)].setValue(TRUE)
-                          : vars[std::abs(unitLiteral)].setValue(FALSE);
+        (unitLiteral > 0) ? vars[std::abs(unitLiteral)].setValue(TRUE) : vars[std::abs(unitLiteral)].setValue(FALSE);
         assig.push(std::abs(unitLiteral));
-        std::cout << "UP variable " << std::abs(unitLiteral) << " set to "
-                  << vars[std::abs(unitLiteral)].getValue() << "\n";
+        std::cout << "UP variable " << std::abs(unitLiteral) << " set to " << vars[std::abs(unitLiteral)].getValue()
+                  << "\n";
 
         updateWatchedLiterals(std::abs(unitLiteral));
     }
@@ -48,10 +46,10 @@ void updateWatchedLiterals(int assertedVar) {
     std::set<int>::iterator clauseIndex;
     for (clauseIndex = watched.begin(); clauseIndex != watched.end(); ++clauseIndex) {
         // TODO: We need to make reference?
-        Clause *clause = &cnf[*clauseIndex];
+        Clause* clause = &cnf[*clauseIndex];
         clause->sat = true;
 
-        int *pointerToMove = std::abs(clause->literals[clause->w1]) == assertedVar ? &clause->w1 : &clause->w2;
+        int* pointerToMove = std::abs(clause->literals[clause->w1]) == assertedVar ? &clause->w1 : &clause->w2;
 
         int otherPointer = clause->w1 + clause->w2 - *pointerToMove;
 
@@ -77,8 +75,11 @@ void updateWatchedLiterals(int assertedVar) {
                     unitQueue.push(clause->literals[otherPointer]);
                 } else {
                     printf("INIT BACKTRACK!\n");
-                    printf("(w1, assig): (%i, %i), (w2, assig): (%i, %i), size: %i \n", clause->literals[*pointerToMove], evaluateLiteral(clause->literals[*pointerToMove]), clause->literals[otherPointer], evaluateLiteral(clause->literals[otherPointer]), clause->literals.size());
-                    if(!backtrack())  numOfUnassigned = 0; // make DPLL stop and return UNSAT 
+                    printf("(w1, assig): (%i, %i), (w2, assig): (%i, %i), size: %i \n",
+                           clause->literals[*pointerToMove], evaluateLiteral(clause->literals[*pointerToMove]),
+                           clause->literals[otherPointer], evaluateLiteral(clause->literals[otherPointer]),
+                           clause->literals.size());
+                    backtrack();  // signal UNSAT
                 }
             }
         }

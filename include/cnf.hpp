@@ -10,7 +10,6 @@
 #include <unordered_map>
 #include <vector>
 
-
 #ifndef MYHEADER_HPP
 #define MYHEADER_HPP
 
@@ -72,19 +71,21 @@ extern std::stack<int> assig;
 
 void parseDIMACS(std::string filename);
 
-bool dpll();
+void* dpll(void* arg);
 
-bool printModel();
+void unitPropagate();
+
+// chooses literals according to the used heuristic
+void chooseLiteral();
+
+// updates the watched literals after a new assignment is made
+void updateWatchedLiterals(int literal);
+
+// handles conficts and signals UNSAT
+void backtrack();
 
 // evaluates the literal under its current assignment
 bool evaluateLiteral(int literal);
 
-void chooseLiteral();
-
-// updates the clauses after a new assignment is made
-void updateWatchedLiterals(int literal);
-
-void unitPropagate();
-
-bool backtrack();
+void printModel(int res);
 #endif

@@ -6,7 +6,7 @@
 
 #include "../include/cnf.hpp"
 
-bool backtrack() {
+void backtrack() {
     while (!assig.empty() && vars[assig.top()].forced) {  // until the last branching variable.
         int toUnassign = assig.top();
         vars[toUnassign].setValue(FREE);
@@ -18,7 +18,7 @@ bool backtrack() {
     while (!unitQueue.empty()) unitQueue.pop();
 
     if (assig.empty()) {
-        return false;
+        pthread_exit((void *)1);
     }  // UNSAT
 
     // alternatively: unitQueue = std::queue<int>();
@@ -33,5 +33,4 @@ bool backtrack() {
     printf("New branch var %i, OLD: %i, NEW: %i \n", b, oldval, vars[b].getValue());
     curVar = b;
     updateWatchedLiterals(b);
-    return true;
 }

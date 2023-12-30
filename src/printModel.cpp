@@ -1,6 +1,6 @@
 #include "../include/cnf.hpp"
 
-bool printModel() {
+void printModel(int res) {
     int count = 0;
     for (int i = 1; i <= numOfClauses; i++) {
         if (evaluateLiteral(cnf[i].literals[cnf[i].w1]) || evaluateLiteral(cnf[i].literals[cnf[i].w2])) {
@@ -31,5 +31,4 @@ bool printModel() {
     if (vars[numOfVars].getValue() == FALSE) val = -numOfVars;
     std::cout << val;
     std::cout << "]";
-    return false;
 }

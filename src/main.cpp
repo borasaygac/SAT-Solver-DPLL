@@ -25,9 +25,18 @@ int main(int argc, char* argv[]) {
 
     parseDIMACS(filename);
 
+    pthread_t thread;
 
-    dpll();
-    printModel();
+    if (pthread_create(&thread, NULL, dpll, NULL)) {
+        std::cerr << "Error: Unable to create thread." << std::endl;
+        return -1;
+    }
+
+    // Wait for the child thread to finish
+    void* res;
+    pthread_join(thread, &res);
+
+    printModel((intptr_t)res);
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
