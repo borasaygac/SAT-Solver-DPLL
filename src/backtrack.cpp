@@ -25,7 +25,8 @@ bool backtrack() {
   int b = assig.top();
 
   // Assign negated val
-
+  variables[b].forced = true;
+  variables[b].setValue(FREE);
   variables[b].setValue(Assig(int(2 - std::pow(2.0, variables[b].getValue()))));
 
   curVar = b;
