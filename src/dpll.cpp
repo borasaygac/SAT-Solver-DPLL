@@ -32,18 +32,24 @@ void unitPropagate() {
     }
 }
 
-
 void updateWatchedLiterals(int assertedVar) {
     // watched literals have to point to unassigned or to true evaluating variables
 
     std::cout << "UPDATING FOR " << assertedVar << "!\n";
+    std::vector<int> watched;
+    if (variables[assertedVar].getValue() == TRUE) {
+        watched = variables[assertedVar].neg_watched;
+    }
 
-    for (int i = 0, size = variables[assertedVar].neg_watched.size(); i < size; i++) {
-        int clauseIndex = variables[assertedVar].neg_watched[i];
+    else {
+        watched = variables[assertedVar].pos_watched;
+    }
+
+    for (int i = 0, size = watched.size(); i < size; i++) {
+        int clauseIndex = watched[i];
 
         // TODO: We need to make reference?
         Clause clause = cnf[clauseIndex];
-
         int *pointerToMove = std::abs(clause.literals[clause.w1]) == assertedVar ? &clause.w1 : &clause.w2;
 
         int otherPointer = clause.w1 + clause.w2 - *pointerToMove;
@@ -62,7 +68,7 @@ void updateWatchedLiterals(int assertedVar) {
 
             // Search for a distinct new pointer unsuccessful, try UP on otherPointer else backtrack
             if (i + 1 == size) {
-                if (evaluateLiteral(clause.literals[otherPointer])){
+                if (evaluateLiteral(clause.literals[otherPointer])) {
                     unitQueue.push(clause.literals[otherPointer]);
                 } else {
                     printf("here enter thee into backtrack");
