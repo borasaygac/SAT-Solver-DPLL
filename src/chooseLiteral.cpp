@@ -15,5 +15,5 @@ void chooseLiteral() {
         case JW:
             break;
     }
-    updateCNF(curVar);
+    updateWatchedLiterals(curVar);
 }

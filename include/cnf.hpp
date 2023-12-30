@@ -38,7 +38,7 @@ struct Variable {
     int neg_occ;  // number of clauses var appears as neg literal
     void setValue(Assig _assig) {
         val = _assig;
-        _assig != FREE ? numOfUnassigned-- : numOfUnassigned++;
+        _assig == FREE ? numOfUnassigned++ : numOfUnassigned--;
     }
     Assig getValue() {
       return val;
@@ -81,7 +81,7 @@ bool evaluateLiteral(int literal);
 void chooseLiteral();
 
 // updates the clauses after a new assignment is made
-void updateCNF(int literal);
+void updateWatchedLiterals(int literal);
 
 void unitPropagate();
 #endif

@@ -27,12 +27,12 @@ void unitPropagate() {
         std::cout << "UP variable " << std::abs(unitLiteral) << " set to "
                   << variables[std::abs(unitLiteral)].getValue() << "\n";
 
-        updateCNF(std::abs(unitLiteral));
+        updateWatchedLiterals(std::abs(unitLiteral));
     }
 }
 
 
-void updateCNF(int assertedVar) {
+void updateWatchedLiterals(int assertedVar) {
     // watched literals have to point to unassigned or to true evaluating variables
 
     std::cout << "UPDATING FOR " << assertedVar << "!\n";
