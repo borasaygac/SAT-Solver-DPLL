@@ -33,7 +33,7 @@ struct Variable {
    public:
     std::vector<int> pos_watched;  // All clauses where var appears as pos watched literal
     std::vector<int> neg_watched;  // All clauses where var appears as neg watched literal
-    bool forced;
+    bool forced = false;
     int pos_occ;  // number of clauses var appears as pos literal
     int neg_occ;  // number of clauses var appears as neg literal
     void setValue(Assig _assig) {
