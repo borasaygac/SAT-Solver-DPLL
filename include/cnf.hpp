@@ -66,6 +66,9 @@ extern std::vector<Variable> variables;
 // queue storing unit literals
 extern std::queue<int> unitQueue;
 
+// 
+extern std::stack<int> assig; 
+
 // stack of variables with assigned values
 extern std::stack<int> assig;
 
@@ -84,4 +87,6 @@ void chooseLiteral();
 void updateCNF(int literal);
 
 void unitPropagate();
+
+bool backtrack();
 #endif

@@ -6,6 +6,7 @@ int numOfUnassigned;
 std::vector<Clause> cnf;
 std::vector<Variable> variables;
 std::queue<int> unitQueue;
+std::stack<int> assig;
 int curVar = 1;
 Heuristics heuristic = INC;
 
