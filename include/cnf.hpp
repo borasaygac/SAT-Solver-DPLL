@@ -3,12 +3,12 @@
 #include <fstream>
 #include <iostream>
 #include <queue>
+#include <set>
 #include <sstream>
 #include <stack>
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include <set>
 
 
 #ifndef MYHEADER_HPP
@@ -41,11 +41,9 @@ struct Variable {
     void setValue(Assig _assig) {
         val = _assig;
         _assig == FREE ? numOfUnassigned++ : numOfUnassigned--;
-        printf("num of unassigned: %i \n", numOfUnassigned );
+        printf("num of unassigned: %i \n", numOfUnassigned);
     }
-    Assig getValue() {
-      return val;
-    }
+    Assig getValue() { return val; }
 };
 
 struct Clause {

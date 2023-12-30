@@ -13,13 +13,14 @@ bool backtrack() {
         assig.pop();
         printf("Removed literal %i from assig stack \n", toUnassign);
     }
+    
+    // clear unit queue
+    while (!unitQueue.empty()) unitQueue.pop();
 
     if (assig.empty()) {
         return false;
     }  // UNSAT
-    
-    // clear unit queue
-    while (!unitQueue.empty()) unitQueue.pop();
+
     // alternatively: unitQueue = std::queue<int>();
     if (unitQueue.empty()) printf("EMPTY!\n");
     // Most recent branching variable
