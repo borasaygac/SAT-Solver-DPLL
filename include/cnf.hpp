@@ -1,13 +1,13 @@
+#include <stdio.h>
+
+#include <fstream>
+#include <iostream>
 #include <queue>
+#include <sstream>
 #include <stack>
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <stdio.h>
-
 
 #ifndef MYHEADER_HPP
 #define MYHEADER_HPP
