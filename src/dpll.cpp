@@ -21,9 +21,10 @@ void unitPropagate() {
         unitLiteral = unitQueue.front();
         std::cout << "current queue elm= " << unitLiteral << "\n";
         unitQueue.pop();
-        variables[unitLiteral].forced = true;
+        variables[std::abs(unitLiteral)].forced = true;
         (unitLiteral > 0) ? variables[std::abs(unitLiteral)].setValue(TRUE)
                           : variables[std::abs(unitLiteral)].setValue(FALSE);
+        assig.push(std::abs(unitLiteral));
         std::cout << "UP variable " << std::abs(unitLiteral) << " set to "
                   << variables[std::abs(unitLiteral)].getValue() << "\n";
 
@@ -61,11 +62,12 @@ void updateWatchedLiterals(int assertedVar) {
 
             // Search for a distinct new pointer unsuccessful, try UP on otherPointer else backtrack
             if (i + 1 == size) {
-                if (evaluateLiteral(clause.literals[otherPointer]))
+                if (evaluateLiteral(clause.literals[otherPointer])){
                     unitQueue.push(clause.literals[otherPointer]);
-                else
-                    // backtrack()
-                    ;
+                    assig.push(clause.literals[otherPointer]);
+                } else {
+                    backtrack();
+                }
             }
         }
     }

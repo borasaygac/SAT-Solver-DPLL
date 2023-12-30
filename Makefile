@@ -9,7 +9,7 @@ BINDIR = .
 
 # Source files
 SOURCES = $(wildcard $(SRCDIR)/*.cpp)
-SELECTED_SOURCES =  $(wildcard $(SRCDIR)/main.cpp) $(wildcard $(SRCDIR)/dpll.cpp) $(wildcard $(SRCDIR)/printModel.cpp) $(wildcard $(SRCDIR)/chooseLiteral.cpp) $(wildcard $(SRCDIR)/parseDIMACS.cpp)
+SELECTED_SOURCES =  $(wildcard $(SRCDIR)/main.cpp) $(wildcard $(SRCDIR)/dpll.cpp) $(wildcard $(SRCDIR)/printModel.cpp) $(wildcard $(SRCDIR)/chooseLiteral.cpp) $(wildcard $(SRCDIR)/parseDIMACS.cpp) $(wildcard $(SRCDIR)/backtrack.cpp)
 OBJ = $(SRC:.cpp=.o)
 EXECUTABLE = main
 
