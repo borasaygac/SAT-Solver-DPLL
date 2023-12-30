@@ -5,6 +5,7 @@ void chooseLiteral() {
         case INC:
             while (variables[curVar].getValue() != FREE) curVar++;
             variables[curVar].setValue(TRUE);
+            assig.push(curVar);
             break;
         case DLIS:
             break;

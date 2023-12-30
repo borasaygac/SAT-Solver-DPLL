@@ -24,7 +24,7 @@ void unitPropagate() {
         variables[std::abs(unitLiteral)].forced = true;
         (unitLiteral > 0) ? variables[std::abs(unitLiteral)].setValue(TRUE)
                           : variables[std::abs(unitLiteral)].setValue(FALSE);
-        assig.push(unitLiteral);
+        assig.push(std::abs(unitLiteral));
         std::cout << "UP variable " << std::abs(unitLiteral) << " set to "
                   << variables[std::abs(unitLiteral)].getValue() << "\n";
 
