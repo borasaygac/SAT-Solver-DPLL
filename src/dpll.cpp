@@ -64,7 +64,6 @@ void updateWatchedLiterals(int assertedVar) {
             if (i + 1 == size) {
                 if (evaluateLiteral(clause.literals[otherPointer])){
                     unitQueue.push(clause.literals[otherPointer]);
-                    assig.push(clause.literals[otherPointer]);
                 } else {
                     backtrack();
                 }
