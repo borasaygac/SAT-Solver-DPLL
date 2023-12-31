@@ -15,7 +15,7 @@ void backtrack() {
     }
 
     // clear unit queue
-    while (!unitQueue.empty()) unitQueue.pop();
+    unitQueue = std::queue<int>();
 
     if (assig.empty()) {
         pthread_exit((void *)1);
