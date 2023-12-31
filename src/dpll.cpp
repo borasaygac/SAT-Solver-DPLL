@@ -5,15 +5,15 @@ void* dpll(void* arg) {
     while (true) {
         unitPropagate();
         if (unitQueue.empty() && numOfUnassigned < 1) {
-            std::cout << "VORBEII!! \n";
+            // std::cout << "VORBEII!! \n";
 
             pthread_exit(0);
         }
         chooseLiteral();
 
-        std::cout << "Current Var :" << curVar << " and current value " << vars[curVar].getValue() << '\n';
+        // std::cout << "Current Var :" << curVar << " and current value " << vars[curVar].getValue() << '\n';
 
-        std::cout << "queue size= " << unitQueue.size() << '\n';
+        // std::cout << "queue size= " << unitQueue.size() << '\n';
     }
 }
 
@@ -38,12 +38,13 @@ void updateWatchedLiterals(int assertedVar) {
     // watched literals have to point to unassigned or to true evaluating variables
 
     std::cout << "UPDATING FOR " << assertedVar << "!\n";
-    std::set<int> clausesToUpdate;
+    std::set<int>* clausesToUpdate;
 
-    clausesToUpdate = (vars[assertedVar].getValue() == TRUE) ? vars[assertedVar].neg_watched : vars[assertedVar].pos_watched;
-    std::cout << "UPDATE CLAUSES SIZE: " << clausesToUpdate.size() << "!\n";
+    clausesToUpdate = (vars[assertedVar].getValue() == TRUE) ? &vars[assertedVar].neg_watched : &vars[assertedVar].pos_watched;
+    // std::cout << "UPDATE CLAUSES SIZE: " << clausesToUpdate->size() << "!\n";
     std::set<int>::iterator clauseIndex;
-    for (clauseIndex = clausesToUpdate.begin(); clauseIndex != clausesToUpdate.end(); ++clauseIndex) {
+    for (clauseIndex = clausesToUpdate->begin(); !clausesToUpdate->empty() && clauseIndex != clausesToUpdate->end();
+         ++clauseIndex) {
         Clause* clause = &cnf[*clauseIndex];
         printf("clauseIndex %i: ", *clauseIndex);
         for (int i = 0; i < clause->literals.size(); i++) {
@@ -64,10 +65,23 @@ void updateWatchedLiterals(int assertedVar) {
                 *(pointerToMove) = i;
 
                 // Remove the reference from assertedVar to the clause
-                std::cout << "REMOVING  " << *clauseIndex << "from " << assertedVar << "!\n";
+                std::cout << "REMOVING clause " << *clauseIndex << " from " << assertedVar << "!\n";
 
-                clausesToUpdate.erase(*clauseIndex);
+                std::cout << "Set elements before: ";
+                for (const auto& element : *clausesToUpdate) {
+                    std::cout << element << " ";
+                }
+                std::cout << std::endl;
 
+                clausesToUpdate->erase(*clauseIndex);
+
+                std::cout << "Set elements after: ";
+                for (const auto& element : *clausesToUpdate) {
+                    std::cout << element << " ";
+                }
+                std::cout << std::endl;
+
+                std::cout << "Adding clause " << *clauseIndex << " to " << std::abs(clause->literals[*pointerToMove]) << "!\n";
                 // Add a reference from new found watched literal to the clause
                 clause->literals[*pointerToMove] > 0
                     ? vars[std::abs(clause->literals[*pointerToMove])].pos_watched.insert(*clauseIndex)
