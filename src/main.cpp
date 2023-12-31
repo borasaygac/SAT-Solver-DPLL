@@ -13,13 +13,21 @@ std::vector<Variable> vars;
 std::queue<int> unitQueue;
 std::stack<int> assig;
 int curVar = 1;
+
 Heuristics heuristic = INC;
 
 int main(int argc, char* argv[]) {
+    std::ofstream outputFile("output.txt"); // Open a file stream for writing
+    
+
+    if (outputFile.is_open()) {
+        // Redirecting std::cout to write to the file
+        std::streambuf *coutBuffer = std::cout.rdbuf();
+        std::cout.rdbuf(outputFile.rdbuf());}
     // measure CPU time...
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
-    std::string filename = "DIMACS/test" + std::to_string(std::stoi(argv[1])) + ".cnf";
+    std::string filename = "inputs/test/sat/" + std::string(argv[1]) + ".cnf";
 
     if (argc > 2) heuristic = Heuristics(atoi(argv[2]));
 

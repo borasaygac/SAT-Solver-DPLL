@@ -37,6 +37,7 @@ struct Variable {
     bool forced = false;
     int pos_occ;  // number of clauses var appears as pos literal
     int neg_occ;  // number of clauses var appears as neg literal
+    bool enqueued = false;
     void setValue(Assig _assig) {
         
         if (_assig != FREE && val == FREE)

@@ -7,7 +7,7 @@ void chooseLiteral() {
             vars[curVar].setValue(TRUE);
             vars[curVar].forced = false;
             assig.push(curVar);
-            printf("CHOOSE_LIT: %i\n", curVar);
+            std::cout << "CHOOSE_LIT:" << curVar;
             break;
         case DLIS:
             break;

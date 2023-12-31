@@ -1,5 +1,8 @@
 # Group_K_Project_2
 
+Multiple on queue
+Put assig.push and updatewatchedliterals() to setValue() 
+
 Global vars: # vars (n), # clauses (m), _Variable_ and _Clause_ data structure, unit_queue Queue<int>, assig_stack Stack<int>.
 
 **_Clause_**: Representation of a clause

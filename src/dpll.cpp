@@ -23,7 +23,7 @@ void unitPropagate() {
         unitLiteral = unitQueue.front();
         std::cout << "current queue elm= " << unitLiteral << "\n";
         unitQueue.pop();
-
+        vars[std::abs(unitLiteral)].enqueued = false;
         vars[std::abs(unitLiteral)].forced = true;
         (unitLiteral > 0) ? vars[std::abs(unitLiteral)].setValue(TRUE) : vars[std::abs(unitLiteral)].setValue(FALSE);
         std::cout << "UP variable " << std::abs(unitLiteral) << " set to " << vars[std::abs(unitLiteral)].getValue() << "\n";
@@ -43,14 +43,14 @@ void updateWatchedLiterals(int assertedVar) {
     clausesToUpdate = (vars[assertedVar].getValue() == TRUE) ? &vars[assertedVar].neg_watched : &vars[assertedVar].pos_watched;
     // std::cout << "UPDATE CLAUSES SIZE: " << clausesToUpdate->size() << "!\n";
     std::set<int>::iterator clauseIndex;
-    for (clauseIndex = clausesToUpdate->begin(); !clausesToUpdate->empty() && clauseIndex != clausesToUpdate->end();
-         ++clauseIndex) {
+    std::set<int> copy = *clausesToUpdate;
+    for (clauseIndex = copy.begin(); clauseIndex != copy.end(); ++clauseIndex) {
         Clause* clause = &cnf[*clauseIndex];
-        printf("clauseIndex %i: ", *clauseIndex);
+        std::cout << "clauseIndex " << *clauseIndex << ": ";
         for (int i = 0; i < clause->literals.size(); i++) {
-            printf("%i, ", clause->literals[i]);
+            std::cout << clause->literals[i] << " ";
         }
-        printf("\n ");
+        std::cout << "\n ";
         int* pointerToMove = std::abs(clause->literals[clause->w1]) == assertedVar ? &clause->w1 : &clause->w2;
 
         std::cout << "POINTERTOMOVE " << *pointerToMove << "!\n";
@@ -91,16 +91,20 @@ void updateWatchedLiterals(int assertedVar) {
             }
             // Search for a distinct new pointer unsuccessful, try UP on otherPointer else backtrack
             if (i + 1 == clause->literals.size()) {
-                if (vars[std::abs(clause->literals[otherPointer])].getValue() == FREE) {
-                    printf("Push %i on unit queue\n", clause->literals[otherPointer]);
+                if (vars[std::abs(clause->literals[otherPointer])].getValue() == FREE &&
+                    !vars[std::abs(clause->literals[otherPointer])].enqueued) {
+                    std::cout << "Push " << clause->literals[otherPointer] << " on unit queue\n";
+                    vars[std::abs(clause->literals[otherPointer])].enqueued = true;
                     unitQueue.push(clause->literals[otherPointer]);
                 } else {
                     if (!evaluateLiteral(clause->literals[otherPointer])) {
-                        printf("INIT BACKTRACK!\n");
-                        printf("(w1, assig): (%i, %i), (w2, assig): (%i, %i), size: %i \n", clause->literals[*pointerToMove],
-                               evaluateLiteral(clause->literals[*pointerToMove]), clause->literals[otherPointer],
-                               evaluateLiteral(clause->literals[otherPointer]), clause->literals.size());
+                        std::cout << "INIT BACKTRACK!\n";
+                        std::cout << "(w1, assig): (" << clause->literals[*pointerToMove]
+                                  << evaluateLiteral(clause->literals[*pointerToMove]) << ") (w2, assig): ("
+                                  << clause->literals[otherPointer] << evaluateLiteral(clause->literals[otherPointer])
+                                  << "), size: " << clause->literals.size() << "\n";
                         backtrack();
+                        return;
                     }
                 }
             }
