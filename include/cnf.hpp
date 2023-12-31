@@ -38,8 +38,13 @@ struct Variable {
     int pos_occ;  // number of clauses var appears as pos literal
     int neg_occ;  // number of clauses var appears as neg literal
     void setValue(Assig _assig) {
+        
+        if (_assig != FREE && val == FREE)
+            numOfUnassigned--;
+        else {
+            if (_assig == FREE) numOfUnassigned++;
+        }
         val = _assig;
-        _assig == FREE ? numOfUnassigned++ : numOfUnassigned--;
         printf("num of unassigned: %i \n", numOfUnassigned);
     }
     Assig getValue() { return val; }

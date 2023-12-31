@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
 
-    std::cout << "\nCPU time used: " << duration.count() << " seconds" << std::endl;
+    std::cout << "\nCPU time used: " << duration.count() << " seconds\n" << std::endl;
 
     return 0;
 }

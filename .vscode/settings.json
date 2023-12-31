@@ -84,5 +84,5 @@
         "xloctime": "cpp",
         "xtree": "cpp"
     },
-    "clang-format.style": "{ BasedOnStyle: Google, IndentWidth: 4, TabWidth: 4, UseTab: Never, ColumnLimit: 120 }"
+    "clang-format.style": "{ BasedOnStyle: Google, IndentWidth: 4, TabWidth: 4, UseTab: Never, ColumnLimit: 130 }"
 }

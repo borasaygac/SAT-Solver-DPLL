@@ -27,6 +27,7 @@ void parseDIMACS(std::string filename) {
         numOfUnassigned = numOfVars;
         std::cout << "Number of Variables: " << numOfVars << std::endl;
         std::cout << "Number of Clauses: " << numOfClauses << std::endl;
+        std::cout << "Number of Clauses: " << numOfUnassigned << std::endl;
 
         // parse rest
         vars.resize(numOfVars + 1);  // vars in DIMACS are 1-indexed

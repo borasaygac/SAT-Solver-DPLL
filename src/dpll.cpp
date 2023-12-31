@@ -4,7 +4,11 @@ void* dpll(void* arg) {
     // TODO: We should implement the more optimised appproach of checking the satisfaction of every clause
     while (true) {
         unitPropagate();
+        if (unitQueue.empty() && numOfUnassigned < 1) {
+            std::cout << "VORBEII!! \n";
 
+            pthread_exit(0);
+        }
         chooseLiteral();
 
         std::cout << "Current Var :" << curVar << " and current value " << vars[curVar].getValue() << '\n';
@@ -22,9 +26,9 @@ void unitPropagate() {
 
         vars[std::abs(unitLiteral)].forced = true;
         (unitLiteral > 0) ? vars[std::abs(unitLiteral)].setValue(TRUE) : vars[std::abs(unitLiteral)].setValue(FALSE);
+        std::cout << "UP variable " << std::abs(unitLiteral) << " set to " << vars[std::abs(unitLiteral)].getValue() << "\n";
+
         assig.push(std::abs(unitLiteral));
-        std::cout << "UP variable " << std::abs(unitLiteral) << " set to " << vars[std::abs(unitLiteral)].getValue()
-                  << "\n";
 
         updateWatchedLiterals(std::abs(unitLiteral));
     }
@@ -34,56 +38,63 @@ void updateWatchedLiterals(int assertedVar) {
     // watched literals have to point to unassigned or to true evaluating variables
 
     std::cout << "UPDATING FOR " << assertedVar << "!\n";
-    std::set<int> watched;
-    if (vars[assertedVar].getValue() == TRUE) {
-        watched = vars[assertedVar].neg_watched;
-    }
+    std::set<int> clausesToUpdate;
 
-    else {
-        watched = vars[assertedVar].pos_watched;
-    }
-
+    clausesToUpdate = (vars[assertedVar].getValue() == TRUE) ? vars[assertedVar].neg_watched : vars[assertedVar].pos_watched;
+    std::cout << "UPDATE CLAUSES SIZE: " << clausesToUpdate.size() << "!\n";
     std::set<int>::iterator clauseIndex;
-    for (clauseIndex = watched.begin(); clauseIndex != watched.end(); ++clauseIndex) {
-        // TODO: We need to make reference?
+    for (clauseIndex = clausesToUpdate.begin(); clauseIndex != clausesToUpdate.end(); ++clauseIndex) {
         Clause* clause = &cnf[*clauseIndex];
-        clause->sat = true;
-
+        printf("clauseIndex %i: ", *clauseIndex);
+        for (int i = 0; i < clause->literals.size(); i++) {
+            printf("%i, ", clause->literals[i]);
+        }
+        printf("\n ");
         int* pointerToMove = std::abs(clause->literals[clause->w1]) == assertedVar ? &clause->w1 : &clause->w2;
+
+        std::cout << "POINTERTOMOVE " << *pointerToMove << "!\n";
 
         int otherPointer = clause->w1 + clause->w2 - *pointerToMove;
 
+        std::cout << "OTHERPOINTER  " << otherPointer << "!\n";
+
         for (int i = 0; i < clause->literals.size(); i++) {
             // assign as the new pointer a literal that evaluates to true and is not the other watched literal
-            if (evaluateLiteral(clause->literals[i]) && i != otherPointer) {
+            if (i != otherPointer && evaluateLiteral(clause->literals[i])) {
                 *(pointerToMove) = i;
 
-                // Remove the current link from assertedVar to the clause
-                watched.erase(clauseIndex);
+                // Remove the reference from assertedVar to the clause
+                std::cout << "REMOVING  " << *clauseIndex << "from " << assertedVar << "!\n";
 
+                clausesToUpdate.erase(*clauseIndex);
+
+                // Add a reference from new found watched literal to the clause
                 clause->literals[*pointerToMove] > 0
                     ? vars[std::abs(clause->literals[*pointerToMove])].pos_watched.insert(*clauseIndex)
                     : vars[std::abs(clause->literals[*pointerToMove])].neg_watched.insert(*clauseIndex);
 
                 break;
             }
-
             // Search for a distinct new pointer unsuccessful, try UP on otherPointer else backtrack
             if (i + 1 == clause->literals.size()) {
-                if (evaluateLiteral(clause->literals[otherPointer])) {
+                if (vars[std::abs(clause->literals[otherPointer])].getValue() == FREE) {
                     printf("Push %i on unit queue\n", clause->literals[otherPointer]);
                     unitQueue.push(clause->literals[otherPointer]);
                 } else {
-                    printf("INIT BACKTRACK!\n");
-                    printf("(w1, assig): (%i, %i), (w2, assig): (%i, %i), size: %i \n",
-                           clause->literals[*pointerToMove], evaluateLiteral(clause->literals[*pointerToMove]),
-                           clause->literals[otherPointer], evaluateLiteral(clause->literals[otherPointer]),
-                           clause->literals.size());
-                    backtrack();  // signal UNSAT
+                    if (!evaluateLiteral(clause->literals[otherPointer])) {
+                        printf("INIT BACKTRACK!\n");
+                        printf("(w1, assig): (%i, %i), (w2, assig): (%i, %i), size: %i \n", clause->literals[*pointerToMove],
+                               evaluateLiteral(clause->literals[*pointerToMove]), clause->literals[otherPointer],
+                               evaluateLiteral(clause->literals[otherPointer]), clause->literals.size());
+                        backtrack();
+                    }
                 }
             }
         }
+        std::cout << "AFTER ALGO:POINTERTOMOVE " << *pointerToMove << "!\n";
     }
+    std::cout << "\nFINISHED FOR " << assertedVar << "!\n\n ";
+    // if (unitQueue.empty() && numOfUnassigned < 1) pthread_exit(0);
 }
 
 bool evaluateLiteral(int literal) {

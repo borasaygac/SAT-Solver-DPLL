@@ -7,6 +7,7 @@ void chooseLiteral() {
             vars[curVar].setValue(TRUE);
             vars[curVar].forced = false;
             assig.push(curVar);
+            printf("CHOOSE_LIT: %i\n", curVar);
             break;
         case DLIS:
             break;
