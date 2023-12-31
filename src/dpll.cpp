@@ -1,6 +1,6 @@
 #include "../include/cnf.hpp"
 
-void* dpll(void* arg) {
+void dpll() {
     // TODO: We should implement the more optimised appproach of checking the satisfaction of every clause
     while (true) {
         unitPropagate();

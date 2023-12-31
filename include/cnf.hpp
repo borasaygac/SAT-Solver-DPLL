@@ -76,7 +76,7 @@ extern std::stack<int> assig;
 
 void parseDIMACS(std::string filename);
 
-void* dpll(void* arg);
+void dpll();
 
 void unitPropagate();
 
