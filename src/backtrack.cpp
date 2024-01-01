@@ -12,13 +12,13 @@ void backtrack() {
         vars[toUnassign].setValue(FREE);
         vars[toUnassign].forced = false;
         assig.pop();
-        std::cout << "Removed literal " << toUnassign << " from assig stack \n";
+        // std::cout << "Removed literal " << toUnassign << " from assig stack \n";
     }
 
     // clear unit queue
     while (!unitQueue.empty())
     {   
-        std::cout << "Element to be popped from queue: " << unitQueue.front() << "\n";
+        // std::cout << "Element to be popped from queue: " << unitQueue.front() << "\n";
         vars[std::abs(unitQueue.front())].enqueued = false;
         unitQueue.pop();
     }
@@ -35,7 +35,7 @@ void backtrack() {
     // Assign negated val
     vars[b].forced = true;
     vars[b].setValue(Assig(int(2 - std::pow(2.0, vars[b].getValue()))));
-    std::cout << "New branch var" << b << ", OLD: " << oldval << ", NEW: " << vars[b].getValue();
+    // std::cout << "New branch var" << b << ", OLD: " << oldval << ", NEW: " << vars[b].getValue();
     curVar = b;
     updateWatchedLiterals(b);
 }
