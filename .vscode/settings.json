@@ -83,7 +83,8 @@
         "xlocmon": "cpp",
         "xloctime": "cpp",
         "xtree": "cpp",
-        "codecvt": "cpp"
+        "codecvt": "cpp",
+        "variant": "cpp"
     },
     "clang-format.style": "{ BasedOnStyle: Google, IndentWidth: 4, TabWidth: 4, UseTab: Never, ColumnLimit: 130 }"
 }
