@@ -10,8 +10,8 @@ void backtrack() {
     while (!assig.empty() && vars[assig.top()].forced) {  // until the last branching variable.
         int toUnassign = assig.top();
         vars[toUnassign].setValue(FREE);
+        vars[toUnassign].forced = false;
         assig.pop();
-        vars[assig.top()].forced = false;
         std::cout << "Removed literal " << toUnassign << " from assig stack \n";
     }
 
