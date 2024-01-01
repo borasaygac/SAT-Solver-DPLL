@@ -92,3 +92,13 @@ void updateWatchedLiterals(int assertedVar) {
     // std::cout << "\nFINISHED FOR " << assertedVar << "!\n\n ";
     // if (unitQueue.empty() && numOfUnassigned < 1) pthread_exit(0);
 }
+
+bool evaluateLiteral(int literal) {
+    if (vars[std::abs(literal)].getValue() == FREE) return true;
+
+    if (vars[std::abs(literal)].getValue() == TRUE && literal > 0) return true;
+
+    if (vars[std::abs(literal)].getValue() == FALSE && literal < 0) return true;
+
+    return false;
+}

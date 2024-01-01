@@ -41,30 +41,21 @@ void unitPropagate() {
 void chooseLiteral() {
     switch (heuristic) {
         case INC:
-            while (vars[curVar].getValue() != FREE) curVar++;
-            vars[curVar].setValue(TRUE);
-            vars[curVar].forced = false;
-            assig.push(curVar);
             // std::cout << "CHOOSE_LIT:" << curVar;
+            chooseINC();
             break;
         case DLIS:
+            chooseDLIS();
             break;
         case DLCS:
+            chooseDLCS();
             break;
         case MOM:
+            chooseMOM();
             break;
         case JW:
+            chooseJW();
             break;
     }
     updateWatchedLiterals(curVar);
-}
-
-bool evaluateLiteral(int literal) {
-    if (vars[std::abs(literal)].getValue() == FREE) return true;
-
-    if (vars[std::abs(literal)].getValue() == TRUE && literal > 0) return true;
-
-    if (vars[std::abs(literal)].getValue() == FALSE && literal < 0) return true;
-
-    return false;
 }

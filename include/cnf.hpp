@@ -98,6 +98,16 @@ void unitPropagate();
 // chooses literals according to the used heuristic
 void chooseLiteral();
 
+void chooseINC();
+
+void chooseDLIS();
+
+void chooseDLCS();
+
+void chooseMOM();
+
+void chooseJW();
+
 // updates the watched literals after a new assignment is made
 void updateWatchedLiterals(int literal);
 
