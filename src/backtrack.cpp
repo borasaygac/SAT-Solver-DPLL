@@ -16,6 +16,13 @@ void backtrack() {
     }
 
     // clear unit queue
+    while (!unitQueue.empty())
+    {   
+        std::cout << "Element to be popped from queue: " << unitQueue.front() << "\n";
+        vars[std::abs(unitQueue.front())].enqueued = false;
+        unitQueue.pop();
+    }
+    
     unitQueue = std::queue<int>();
 
     if (assig.empty()) {
