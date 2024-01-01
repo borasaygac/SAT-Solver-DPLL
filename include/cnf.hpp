@@ -39,14 +39,22 @@ struct Variable {
     int neg_occ;  // number of clauses var appears as neg literal
     bool enqueued = false;
     void setValue(Assig _assig) {
-        
+        // int assertedLit = unitProp ? curProp : curVar;
         if (_assig != FREE && val == FREE)
             numOfUnassigned--;
         else {
             if (_assig == FREE) numOfUnassigned++;
+
+            // else
+            //     vars[assertedLit].forced = true;
         }
         val = _assig;
         // printf("num of unassigned: %i \n", numOfUnassigned);
+
+        // vars[assertedLit].enqueued = false;
+        // vars[assertedLit].forced = true;
+        // assig.push(assertedLit);
+        // updateWatchedLiterals(assertedLit);
     }
     Assig getValue() { return val; }
 };
@@ -62,6 +70,9 @@ extern Heuristics heuristic;
 
 // the currently processed variable
 extern int curVar;
+
+// the currently processed unit literal
+extern int curProp;
 
 // list of clauses (1-indexed)
 extern std::vector<Clause> cnf;

@@ -11,6 +11,7 @@ void backtrack() {
         int toUnassign = assig.top();
         vars[toUnassign].setValue(FREE);
         assig.pop();
+        vars[assig.top()].forced = false;
         std::cout << "Removed literal " << toUnassign << " from assig stack \n";
     }
 
@@ -20,8 +21,6 @@ void backtrack() {
     if (assig.empty()) {
         pthread_exit((void *)1);
     }  // UNSAT
-
-    // alternatively: unitQueue = std::queue<int>();
 
     // Most recent branching variable
     int b = assig.top();

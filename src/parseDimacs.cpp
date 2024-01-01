@@ -51,8 +51,13 @@ void parseDIMACS(std::string filename) {
             }
 
             if (!clause.literals.empty()) {
-                // if unit clause, push to unit queue
-                if (clause.literals.size() == 1 && !vars[clause.literals[0]].enqueued) unitQueue.push(clause.literals[0]);
+                // if unit clause, push to unit queue 
+                
+                if (clause.literals.size() == 1 && !vars[std::abs(clause.literals[0])].enqueued) {
+                    unitQueue.push(clause.literals[0]);
+                    vars[std::abs(clause.literals[0])].enqueued = true;
+                   
+                }
 
                 // else link the init watched literals to their respective entry in variables
                 else {

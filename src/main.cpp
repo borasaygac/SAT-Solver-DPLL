@@ -13,17 +13,18 @@ std::vector<Variable> vars;
 std::queue<int> unitQueue;
 std::stack<int> assig;
 int curVar = 1;
+int curProp;
 
 Heuristics heuristic = INC;
 
 int main(int argc, char* argv[]) {
-    std::ofstream outputFile("output.txt"); // Open a file stream for writing
-    
+    std::ofstream outputFile("output.txt");  // Open a file stream for writing
 
     if (outputFile.is_open()) {
         // Redirecting std::cout to write to the file
-        std::streambuf *coutBuffer = std::cout.rdbuf();
-        std::cout.rdbuf(outputFile.rdbuf());}
+        std::streambuf* coutBuffer = std::cout.rdbuf();
+        std::cout.rdbuf(outputFile.rdbuf());
+    }
     // measure CPU time...
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
