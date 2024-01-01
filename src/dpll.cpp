@@ -63,6 +63,7 @@ void updateWatchedLiterals(int assertedVar) {
 
         std::cout << "OTHERPOINTER  " << otherPointer << "!\n";
 
+        
         for (int i = 0; i < clause->literals.size(); i++) {
             // assign as the new pointer a literal that evaluates to true and is not the other watched literal
             if (i != otherPointer && evaluateLiteral(clause->literals[i])) {
@@ -91,6 +92,12 @@ void updateWatchedLiterals(int assertedVar) {
                     ? vars[std::abs(clause->literals[*pointerToMove])].pos_watched.insert(*clauseIndex)
                     : vars[std::abs(clause->literals[*pointerToMove])].neg_watched.insert(*clauseIndex);
 
+                /* if ((!evaluateLiteral((clause->literals[otherPointer])) || vars[std::abs(clause->literals[otherPointer])].getValue() != FREE) &&
+                    !vars[std::abs(clause->literals[*pointerToMove])].enqueued && vars[std::abs(clause->literals[*pointerToMove])].getValue() == FREE) {
+                        unitQueue.push(clause->literals[*pointerToMove]);
+                        std::cout << "Push " << clause->literals[*pointerToMove] << " on unit queue\n";
+                    } */
+                    
                 break;
             }
             // Search for a distinct new pointer unsuccessful, try UP on otherPointer else backtrack
