@@ -10,7 +10,11 @@ void* dpll(void* arg) {
             pthread_exit(0);
         }
         chooseLiteral();
+        if (unitQueue.empty() && numOfUnassigned < 1) {
+            // std::cout << "VORBEII!! \n";
 
+            pthread_exit(0);
+        }
         // std::cout << "Current Var :" << curVar << " and current value " << vars[curVar].getValue() << '\n';
 
         // std::cout << "queue size= " << unitQueue.size() << '\n';
@@ -99,9 +103,9 @@ void updateWatchedLiterals(int assertedVar) {
                 } else {
                     if (!evaluateLiteral(clause->literals[otherPointer])) {
                         std::cout << "INIT BACKTRACK!\n";
-                        std::cout << "(w1, assig): (" << clause->literals[*pointerToMove]
+                        std::cout << "(w1, assig): (" << clause->literals[*pointerToMove] << " "
                                   << evaluateLiteral(clause->literals[*pointerToMove]) << ") (w2, assig): ("
-                                  << clause->literals[otherPointer] << evaluateLiteral(clause->literals[otherPointer])
+                                  << clause->literals[otherPointer] << " " << evaluateLiteral(clause->literals[otherPointer])
                                   << "), size: " << clause->literals.size() << "\n";
                         backtrack();
                         return;
@@ -109,6 +113,11 @@ void updateWatchedLiterals(int assertedVar) {
                 }
             }
         }
+        // if ((evaluateLiteral(clause->literals[clause->w1]) && vars[std::abs(clause->literals[clause->w1])].getValue() != FREE) ||
+        //     (evaluateLiteral(clause->literals[clause->w2]) && vars[std::abs(clause->literals[clause->w2])].getValue() != FREE))
+        //     satClauses.insert(*clauseIndex);
+        // else
+        //     satClauses.erase(*clauseIndex);
         std::cout << "AFTER ALGO:POINTERTOMOVE " << *pointerToMove << "!\n";
     }
     std::cout << "\nFINISHED FOR " << assertedVar << "!\n\n ";

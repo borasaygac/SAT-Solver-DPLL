@@ -80,6 +80,9 @@ extern std::vector<Clause> cnf;
 // list of variables (1-indexed)
 extern std::vector<Variable> vars;
 
+// set of unsatisfied clauses
+extern std::set<int> satClauses;
+
 // queue storing unit literals
 extern std::queue<int> unitQueue;
 
