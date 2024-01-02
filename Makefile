@@ -28,11 +28,6 @@ $(EXECUTABLE): $(SOURCES)
 clean:
 	del main.exe
 
-clean2: 
-	del main2.exe
-
 run: $(EXECUTABLE) 
 	$(EXECUTABLE) $(arg)
 
-run2: $(EXECUTABLE2) 
-	$(EXECUTABLE2) $(arg)
