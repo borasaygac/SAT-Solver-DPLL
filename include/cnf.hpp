@@ -118,4 +118,5 @@ void backtrack();
 bool evaluateLiteral(int literal);
 
 void printModel(int res);
+
 #endif

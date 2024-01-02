@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "../include/cnf.hpp"
+#include "../include/fileNames.hpp"
 
 int numOfVars;
 int numOfClauses;
@@ -15,7 +16,6 @@ std::queue<int> unitQueue;
 std::stack<int> assig;
 int curVar = 1;
 int curProp;
-
 Heuristics heuristic = INC;
 
 int main(int argc, char* argv[]) {
@@ -29,9 +29,9 @@ int main(int argc, char* argv[]) {
     // measure CPU time...
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
-    std::string filename = "test/" + std::string(argv[1]) + ".cnf";
+    std::string filename = "test/" + fileNamesTest[std::stoi(argv[1])];
 
-    if (argc > 2) heuristic = Heuristics(atoi(argv[2]));
+    if (argc > 2) heuristic = Heuristics(std::stoi(argv[2]));
 
     parseDIMACS(filename);
 
