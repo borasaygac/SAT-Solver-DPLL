@@ -29,11 +29,25 @@ int main(int argc, char* argv[]) {
     // measure CPU time...
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
-    std::string filename = "test/" + fileNamesTest[std::stoi(argv[1])];
+    std::string path = argv[1];
 
-    if (argc > 2) heuristic = Heuristics(std::stoi(argv[2]));
+    std::string index;
+    
+    for (int i = 1; i < path.length(); i++) {
+        index += path[i];
+    }
 
-    parseDIMACS(filename);
+    std::string fileName;
+
+    if (path[0] == 't') fileName = "test/" + fileNamesTest[std::stoi(index)];
+
+    if (path[0] == 'c') fileName = "comp/" + fileNamesComp[std::stoi(index)];
+
+    // if (argc > 2) heuristic = Heuristics(std::stoi(argv[2]));
+
+    parseDIMACS(fileName);
+
+    std::cout << fileName << std::endl;
 
     pthread_t thread;
 
