@@ -29,9 +29,20 @@ int main(int argc, char* argv[]) {
     // measure CPU time...
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
-    std::string filename = "test/" + fileNamesTest[std::stoi(argv[1])];
+    std::string testOrComp = (argv[1]);
+    std::cout << testOrComp << "\n";
 
-    if (argc > 2) heuristic = Heuristics(std::stoi(argv[2]));
+    std::string filename;
+
+    if (testOrComp == "test"){
+        filename = testOrComp + "/" + fileNamesTest[std::stoi(argv[2])];
+    } else {
+        filename = testOrComp + "/" + fileNamesComp[std::stoi(argv[2])];
+    }
+    std::cout << filename << "\n";
+
+
+    if (argc > 3) heuristic = Heuristics(std::stoi(argv[3]));
 
     parseDIMACS(filename);
 
