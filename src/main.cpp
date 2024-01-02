@@ -32,19 +32,36 @@ int main(int argc, char* argv[]) {
     std::string testOrComp = (argv[1]);
     std::cout << testOrComp << "\n";
 
-    std::string filename;
+    std::string fileName;
 
     if (testOrComp == "test"){
-        filename = testOrComp + "/" + fileNamesTest[std::stoi(argv[2])];
+        fileName = testOrComp + "/" + fileNamesTest[std::stoi(argv[2])];
     } else {
-        filename = testOrComp + "/" + fileNamesComp[std::stoi(argv[2])];
+        fileName = testOrComp + "/" + fileNamesComp[std::stoi(argv[2])];
     }
-    std::cout << filename << "\n";
+    std::cout << fileName << "\n";
 
 
     if (argc > 3) heuristic = Heuristics(std::stoi(argv[3]));
+    // std::string path = argv[1];
 
-    parseDIMACS(filename);
+    // std::string index;
+    
+    // for (int i = 1; i < path.length(); i++) {
+    //     index += path[i];
+    // }
+
+    // std::string fileName;
+
+    // if (path[0] == 't') fileName = "test/" + fileNamesTest[std::stoi(index)];
+
+    // if (path[0] == 'c') fileName = "comp/" + fileNamesComp[std::stoi(index)];
+
+    // if (argc > 2) heuristic = Heuristics(std::stoi(argv[2]));
+
+    parseDIMACS(fileName);
+
+    std::cout << fileName << std::endl;
 
     pthread_t thread;
 
