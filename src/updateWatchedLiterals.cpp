@@ -71,7 +71,7 @@ void updateWatchedLiterals(int assertedVar) {
                     unitQueue.push(clause->literals[otherPointer]);
                 } else {
                     if (!evaluateLiteral(clause->literals[otherPointer])) {
-                        // std::cout << "INIT BACKTRACK!\n";
+                        std::cout << "INIT BACKTRACK!\n";
                         // std::cout << "(w1, assig): (" << clause->literals[*pointerToMove] << " "
                                 //   << evaluateLiteral(clause->literals[*pointerToMove]) << ") (w2, assig): ("
                                 //   << clause->literals[otherPointer] << " " << evaluateLiteral(clause->literals[otherPointer])

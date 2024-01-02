@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
     // measure CPU time...
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
-    std::string filename = "inputs/unsat/" + std::string(argv[1]) + ".cnf";
+    std::string filename = "inputs/test/unsat/" + std::string(argv[1]) + ".cnf";
 
     if (argc > 2) heuristic = Heuristics(atoi(argv[2]));
 
@@ -41,7 +41,6 @@ int main(int argc, char* argv[]) {
         std::cerr << "Error: Unable to create thread." << std::endl;
         return -1;
     }
-
     // Wait for the child thread to finish
     void* res;
     pthread_join(thread, &res);

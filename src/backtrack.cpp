@@ -22,8 +22,6 @@ void backtrack() {
         vars[std::abs(unitQueue.front())].enqueued = false;
         unitQueue.pop();
     }
-    
-    unitQueue = std::queue<int>();
 
     if (assig.empty()) {
         pthread_exit((void *)1);

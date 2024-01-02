@@ -48,25 +48,31 @@ void parseDIMACS(std::string filename) {
                 (literal > 0) ? vars[std::abs(literal)].pos_occ++ : vars[std::abs(literal)].neg_occ++;
 
                 clause.literals.push_back(literal);
+
+                // std::cout << "Literal: " << literal << std::endl;
             }
 
             if (!clause.literals.empty()) {
-                // if unit clause, push to unit queue 
-                
-                if (clause.literals.size() == 1 && !vars[std::abs(clause.literals[0])].enqueued) {
-                    unitQueue.push(clause.literals[0]);
-                    vars[std::abs(clause.literals[0])].enqueued = true;
-                   
+                // std::cout << "Literal: " << clause.literals[0] << "in if" << std::endl;
+
+                clause.literals[0] > 0 ? vars[std::abs(clause.literals[0])].pos_watched.insert(count)
+                                       : vars[std::abs(clause.literals[0])].neg_watched.insert(count);
+                // if unit clause, push to unit queue
+                if (clause.literals.size() == 1) {
+                    // std::cout << "Literal: " << clause.literals[0] << "in if22" << std::endl;
+                    clause.w2 = 0;
+
+                    if (!vars[std::abs(clause.literals[0])].enqueued) {
+                        unitQueue.push(clause.literals[0]);
+                        vars[std::abs(clause.literals[0])].enqueued = true;
+                    }
                 }
 
-                // else link the init watched literals to their respective entry in variables
-                else {
-                    clause.literals[0] > 0 ? vars[std::abs(clause.literals[0])].pos_watched.insert(count)
-                                           : vars[std::abs(clause.literals[0])].neg_watched.insert(count);
+                // else also link the second watched literal to their respective entry in variables
 
+                if (clause.literals.size() > 1)
                     clause.literals[1] > 0 ? vars[std::abs(clause.literals[1])].pos_watched.insert(count)
                                            : vars[std::abs(clause.literals[1])].neg_watched.insert(count);
-                }
 
                 cnf.push_back(clause);
             }

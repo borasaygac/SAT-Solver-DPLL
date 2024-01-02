@@ -25,12 +25,12 @@ void unitPropagate() {
     int unitLiteral;
     while (!unitQueue.empty()) {
         unitLiteral = unitQueue.front();
-        // std::cout << "current queue elm= " << unitLiteral << "\n";
+        // std::cout << "current queue elm = " << unitLiteral << "\n";
         unitQueue.pop();
         vars[std::abs(unitLiteral)].enqueued = false;
         vars[std::abs(unitLiteral)].forced = true;
         (unitLiteral > 0) ? vars[std::abs(unitLiteral)].setValue(TRUE) : vars[std::abs(unitLiteral)].setValue(FALSE);
-        // std::cout << "UP variable " << std::abs(unitLiteral) << " set to " << vars[std::abs(unitLiteral)].getValue() << "\n";
+        // std::cout << "UP variable " << unitLiteral << " set to " << vars[std::abs(unitLiteral)].getValue() << "\n";
 
         assig.push(std::abs(unitLiteral));
 
