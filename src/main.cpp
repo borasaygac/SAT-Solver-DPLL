@@ -29,18 +29,6 @@ int main(int argc, char* argv[]) {
     // measure CPU time...
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
-    // std::string testOrComp = (argv[1]);
-
-    // std::string fileName;
-
-    // if (testOrComp == "test"){
-    //     fileName = testOrComp + "/" + fileNamesTest[std::stoi(argv[2])];
-    // } else {
-    //     fileName = testOrComp + "/" + fileNamesComp[std::stoi(argv[2])];
-    // }
-    // std::cout << fileName << "\n";
-
-    // if (argc > 3) heuristic = Heuristics(std::stoi(argv[3]));
     std::string path = argv[1];
 
     std::string index;
@@ -54,6 +42,8 @@ int main(int argc, char* argv[]) {
     if (path[0] == 't') fileName = "test/" + fileNamesTest[std::stoi(index)];
 
     if (path[0] == 'c') fileName = "comp/" + fileNamesComp[std::stoi(index)];
+
+    printf("\nRunning %s\n\n", fileName.c_str());
 
     if (argc > 2) heuristic = Heuristics(std::stoi(argv[2]));
 
