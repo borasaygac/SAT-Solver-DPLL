@@ -29,5 +29,5 @@ clean:
 	del main.exe
 
 run: $(EXECUTABLE) 
-	$(EXECUTABLE) $(loc) $(file) $(heuristic)
+	$(EXECUTABLE) $(arg)
 

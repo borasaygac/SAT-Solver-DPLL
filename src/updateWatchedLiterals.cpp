@@ -7,7 +7,7 @@ void updateWatchedLiterals(int assertedVar) {
     std::set<int>* clausesToUpdate;
 
     clausesToUpdate = (vars[assertedVar].getValue() == TRUE) ? &vars[assertedVar].neg_watched : &vars[assertedVar].pos_watched;
-    std::cout << "UPDATE CLAUSES SIZE: " << clausesToUpdate->size() << "!\n";
+
     std::set<int>::iterator clauseIndex;
     std::set<int> copy = *clausesToUpdate;
     for (clauseIndex = copy.begin(); clauseIndex != copy.end(); ++clauseIndex) {
@@ -90,7 +90,7 @@ void updateWatchedLiterals(int assertedVar) {
          std::cout << "AFTER ALGO:POINTERTOMOVE " << *pointerToMove << "!\n";
     }
      std::cout << "\nFINISHED FOR " << assertedVar << "!\n\n ";
-     if (unitQueue.empty() && numOfUnassigned < 1) pthread_exit(0);
+    //  if (unitQueue.empty() && numOfUnassigned < 1) pthread_exit(0);
 }
 
 bool evaluateLiteral(int literal) {
