@@ -52,9 +52,9 @@ int main(int argc, char* argv[]) {
 
     std::string fileName;
 
-    if (path[0] == 't') fileName = "test/" + fileNamesTest[atoi(index)];
+    if (path[0] == 't') fileName = "test/" + fileNamesTest[std::stoi(index)];
 
-    if (path[0] == 'c') fileName = "comp/" + fileNamesComp[atoi(index)];
+    if (path[0] == 'c') fileName = "comp/" + fileNamesComp[std::stoi(index)];
 
     if (argc > 2) heuristic = Heuristics(std::stoi(argv[2]));
 
