@@ -1,4 +1,5 @@
 # Compiler and flags
+# g++ src/*.cpp  -o main -std=c++11 -Wall -Wno-sign-compare -Wno-format -g -O3 //--Manual run
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall -Wno-sign-compare -Wno-format -g -O3
 
