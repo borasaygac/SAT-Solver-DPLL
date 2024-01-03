@@ -72,6 +72,8 @@ int main(int argc, char* argv[]) {
 
     printModel((intptr_t)res);
 
+    test();
+
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
 
