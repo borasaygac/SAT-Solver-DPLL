@@ -32,20 +32,37 @@ struct Variable {
     Assig val = FREE;
 
    public:
+    // std::set<int> pos_pol;  // = {1,2};  All clauses where var appears as pos watched literal
+    //     std::set<int>
+    //         neg_poll;  // = {3,4} All clauses where var appears as neg watched literal
+    //             //    (1 2 -3) (1 -2 3 4) (-1 2 -4) (-1 3 -4)
+    //             // clause x sat => x is in neg_poll => erase x from neg_poll
+    //             // if neg_pol.empty() => pureLiter => set var to 1
+
+    std::set<int> neg_watched;  // All clauses where var appears as neg watched literal
     std::set<int> pos_watched;  // All clauses where var appears as pos watched literal
     std::set<int> neg_watched;  // All clauses where var appears as neg watched literal
     bool forced = false;
     int pos_occ;  // number of clauses var appears as pos literal
     int neg_occ;  // number of clauses var appears as neg literal
+    bool enqueued = false;
     void setValue(Assig _assig) {
-        
+        // int assertedLit = unitProp ? curProp : curVar;
         if (_assig != FREE && val == FREE)
             numOfUnassigned--;
         else {
             if (_assig == FREE) numOfUnassigned++;
+
+            // else
+            //     vars[assertedLit].forced = true;
         }
         val = _assig;
-        printf("num of unassigned: %i \n", numOfUnassigned);
+        // printf("num of unassigned: %i \n", numOfUnassigned);
+
+        // vars[assertedLit].enqueued = false;
+        // vars[assertedLit].forced = true;
+        // assig.push(assertedLit);
+        // updateWatchedLiterals(assertedLit);
     }
     Assig getValue() { return val; }
 };
@@ -62,11 +79,17 @@ extern Heuristics heuristic;
 // the currently processed variable
 extern int curVar;
 
+// the currently processed unit literal
+extern int curProp;
+
 // list of clauses (1-indexed)
 extern std::vector<Clause> cnf;
 
 // list of variables (1-indexed)
 extern std::vector<Variable> vars;
+
+// set of unsatisfied clauses
+extern std::set<int> satClauses;
 
 // queue storing unit literals
 extern std::queue<int> unitQueue;
@@ -83,6 +106,16 @@ void unitPropagate();
 // chooses literals according to the used heuristic
 void chooseLiteral();
 
+void chooseINC();
+
+void chooseDLIS();
+
+void chooseDLCS();
+
+void chooseMOM();
+
+void chooseJW();
+
 // updates the watched literals after a new assignment is made
 void updateWatchedLiterals(int literal);
 
@@ -93,4 +126,7 @@ void backtrack();
 bool evaluateLiteral(int literal);
 
 void printModel(int res);
+
+void test();
+
 #endif

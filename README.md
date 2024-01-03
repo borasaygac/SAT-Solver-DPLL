@@ -1,4 +1,9 @@
 # Group_K_Project_2
+new way of running = make run loc=test OR comp file= XXX (integer) heuristic = TBD
+
+problem: aim-50-6_0-yes1-4
+
+Put assig.push and updatewatchedliterals() to setValue() 
 
 PROBLEMS: SAME LITERALS ON QUEUE
 

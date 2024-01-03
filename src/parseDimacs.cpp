@@ -38,9 +38,13 @@ void parseDIMACS(std::string filename) {
         Clause dummy;
         cnf.push_back(dummy);  // push dummy clause on cnf[0] to ensure 1-index.
         int count = 1;         // what clause are we processing?
+        Clause clause;
         while (std::getline(file, line)) {
             std::istringstream iss(line);
-            Clause clause;
+            if (line[0] == 0) {
+                continue;
+            }
+
             int literal;
             while (iss >> literal && literal != 0) {
                 // not precise if the literal appears multiple times in the
@@ -48,24 +52,45 @@ void parseDIMACS(std::string filename) {
                 (literal > 0) ? vars[std::abs(literal)].pos_occ++ : vars[std::abs(literal)].neg_occ++;
 
                 clause.literals.push_back(literal);
+
+                // std::cout << "Literal: " << literal << std::endl;
             }
 
-            if (!clause.literals.empty()) {
-                // if unit clause, push to unit queue
-                if (clause.literals.size() == 1) unitQueue.push(clause.literals[0]);
+            if (literal == 0) {
+                if (!clause.literals.empty()) {
+                    // std::cout << "Literal: " << clause.literals[0] << "in if" << std::endl;
 
-                // else link the init watched literals to their respective entry in variables
-                else {
                     clause.literals[0] > 0 ? vars[std::abs(clause.literals[0])].pos_watched.insert(count)
                                            : vars[std::abs(clause.literals[0])].neg_watched.insert(count);
+                    // if unit clause, push to unit queue
+                    if (clause.literals.size() == 1) {
+                        // std::cout << "Literal: " << clause.literals[0] << "in if22" << std::endl;
+                        clause.w2 = 0;
 
-                    clause.literals[1] > 0 ? vars[std::abs(clause.literals[1])].pos_watched.insert(count)
-                                           : vars[std::abs(clause.literals[1])].neg_watched.insert(count);
+                        if (!vars[std::abs(clause.literals[0])].enqueued) {
+                            unitQueue.push(clause.literals[0]);
+                            std::cout << "Pushing " << clause.literals[0] << " on unit queue" << std::endl;
+                            vars[std::abs(clause.literals[0])].enqueued = true;
+                        }
+                    }
+
+                    // else also link the second watched literal to their respective entry in variables
+
+                    if (clause.literals.size() > 1)
+                        clause.literals[1] > 0 ? vars[std::abs(clause.literals[1])].pos_watched.insert(count)
+                                               : vars[std::abs(clause.literals[1])].neg_watched.insert(count);
+
+                    cnf.push_back(clause);
+                    std::cout << "for clause " << count <<":";
+                    for (int i = 0; i < clause.literals.size(); i++) {
+                        std::cout << " " << clause.literals[i];
+                    }
+                    std::cout << "\n";
+
+                    clause = {};
+                    count++;
                 }
-
-                cnf.push_back(clause);
             }
-            count++;
         }
         file.close();
     } else {

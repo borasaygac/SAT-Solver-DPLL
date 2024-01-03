@@ -1,6 +1,7 @@
 # Compiler and flags
+# g++ src/*.cpp  -o main -std=c++11 -Wall -Wno-sign-compare -Wno-format -g -O3 //--Manual run
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Wno-sign-compare -Wno-format -g 
+CXXFLAGS = -std=c++11 -Wall -Wno-sign-compare -Wno-format -g -O3
 
 # Directories
 SRCDIR = src
@@ -28,11 +29,6 @@ $(EXECUTABLE): $(SOURCES)
 clean:
 	del main.exe
 
-clean2: 
-	del main2.exe
-
 run: $(EXECUTABLE) 
 	$(EXECUTABLE) $(arg)
 
-run2: $(EXECUTABLE2) 
-	$(EXECUTABLE2) $(arg)
