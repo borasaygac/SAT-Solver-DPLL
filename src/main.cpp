@@ -1,133 +1,84 @@
-#include <fstream>
+#include <unistd.h>
+
+#include <chrono>
 #include <iostream>
-#include <queue>
-#include <sstream>
-#include <string>
-#include <vector>
 
 #include "../include/cnf.hpp"
+#include "../include/fileNames.hpp"
 
 int numOfVars;
 int numOfClauses;
+int numOfUnassigned;
 std::vector<Clause> cnf;
-std::vector<Variable> variables;
+std::vector<Variable> vars;
+std::set<int> satClauses;
 std::queue<int> unitQueue;
-State state;
-int CurVar = 1;
+std::stack<int> assig;
+int curVar = 1;
+int curProp;
+Heuristics heuristic = INC;
 
-void parseDIMACS(const std::string &filename) {
-  std::ifstream file(filename);
-  std::string line;
+int main(int argc, char* argv[]) {
+    std::ofstream outputFile("output.txt");  // Open a file stream for writing
 
-  if (file.is_open()) {
-    // parse head of DIMACS
-    std::getline(file, line);
+    if (outputFile.is_open()) {
+        // Redirecting std::cout to write to the file
+        std::streambuf* coutBuffer = std::cout.rdbuf();
+        std::cout.rdbuf(outputFile.rdbuf());
+    }
+    // measure CPU time...
+    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
-    // skip comment lines
-    while (line[0] == 'c') {
-      // The line below shows the skipped comments.
-      // std::cout << "Comment: " << line << std::endl;
-      std::getline(file, line);
+    // std::string testOrComp = (argv[1]);
+
+    // std::string fileName;
+
+    // if (testOrComp == "test"){
+    //     fileName = testOrComp + "/" + fileNamesTest[std::stoi(argv[2])];
+    // } else {
+    //     fileName = testOrComp + "/" + fileNamesComp[std::stoi(argv[2])];
+    // }
+    // std::cout << fileName << "\n";
+
+
+    // if (argc > 3) heuristic = Heuristics(std::stoi(argv[3]));
+    std::string path = argv[1];
+
+    std::string index;
+    
+    for (int i = 1; i < path.length(); i++) {
+        index += path[i];
     }
 
-    std::istringstream iss(line);
-    std::string token;
-    std::vector<std::string> tokens;
+    std::string fileName;
 
-    while (iss >> token) {
-      tokens.push_back(token);
+    if (path[0] == 't') fileName = "test/" + fileNamesTest[std::stoi(index)];
+
+    if (path[0] == 'c') fileName = "comp/" + fileNamesComp[std::stoi(index)];
+
+    if (argc > 2) heuristic = Heuristics(std::stoi(argv[2]));
+
+    parseDIMACS(fileName);
+
+    pthread_t thread;
+
+    if (pthread_create(&thread, NULL, dpll, NULL)) {
+        std::cerr << "Error: Unable to create thread." << std::endl;
+        return -1;
     }
-    numOfVars = std::stoi(tokens[2]);
-    numOfClauses = std::stoi(tokens[3]);
-    std::cout << "Number of Variables: " << numOfVars << std::endl;
-    std::cout << "Number of Clauses: " << numOfClauses << std::endl;
+    // Wait for the child thread to finish
+    void* res;
+    pthread_join(thread, &res);
 
-    // parse rest
-    variables.resize(numOfVars + 1); // vars in DIMACS are 1-indexed
-    for (int i = 0; i < numOfVars + 1; i++) {
-      Variable v;
-      variables[i] = v;
-    }
-    Clause dummy;
-    cnf.push_back(dummy); // push dummy clause on cnf[0] to ensure 1-index. 
-    int count = 1; // what clause are we processing?
-    while (std::getline(file, line)) { // Fill pos and neg_occ for clauses
-      std::istringstream iss(line);
-      Clause clause;
-      int literal;
-      while (iss >> literal && literal != 0) {
-        (literal > 0) ? variables[std::abs(literal)].pos_occ.push_back(count)
-                      : variables[std::abs(literal)].neg_occ.push_back(count);
-        clause.literals.push_back(literal);
-      }
-      if (!clause.literals.empty()) {
-        clause.active = clause.literals.size();
-        variables[std::abs(clause.literals[clause.w2])].val == FREE; 
-        while (clause.w2 < clause.literals.size()) {
-          if ((variables[std::abs(clause.literals[clause.w2])].val == TRUE &&
-               clause.literals[clause.w2] > 0) ||
-              (variables[std::abs(clause.literals[clause.w2])].val == FALSE &&
-               clause.literals[clause.w2] < 0))
-            break;
-          if (variables[std::abs(clause.literals[clause.w2])].val == FREE) {
-            clause.literals[clause.w2] > 0
-                ? variables[std::abs(clause.literals[clause.w2])].val = TRUE
-                : variables[std::abs(clause.literals[clause.w2])].val = FALSE;
-            break;
-          }
-          clause.w2++;
-        }
-        while (clause.w1 < clause.literals.size()) {
-          if (((variables[std::abs(clause.literals[clause.w1])].val == TRUE &&
-                clause.literals[clause.w1] > 0) ||
-               (variables[std::abs(clause.literals[clause.w1])].val == FALSE &&
-                clause.literals[clause.w1] < 0)) &&
-              clause.w1 != clause.w2)
-            break;
-          if (variables[std::abs(clause.literals[clause.w1])].val == FREE) {
-            clause.literals[clause.w1] > 0
-                ? variables[std::abs(clause.literals[clause.w1])].val = TRUE
-                : variables[std::abs(clause.literals[clause.w1])].val = FALSE;
-            break;
-          }
-          clause.w1++;
-        }
-        cnf.push_back(clause);
-      }
-      count++;
-    }
-    file.close();
-  } else {
-    printf("Unable to open file");
-  }
-}
+    printModel((intptr_t)res);
 
-int main(int argc, char *argv[]) {
+    test();
 
-  std::string filename =
-      "DIMACS/test" + std::to_string(std::stoi(argv[1])) + ".cnf";
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
 
-  parseDIMACS(filename);
-  std::cout << "Params: vars " << numOfVars << " and clauses " << numOfClauses
-            << "\n";
-  for (const auto &clause : cnf) {
-    std::cout << "Clause: ";
-    for (const auto &literal : clause.literals) {
-      std::cout << literal << " ";
-    }
-    std::cout << std::endl;
-  }
+    printf("\nCPU time used: %.6f seconds\n\n" , duration.count());
+    // std::cout << "\nCPU time used: " << duration.count() << " seconds\n" << std::endl;
 
-  for (int i = 1; i < numOfClauses + 1; ++i) {
-    // std::cout << i << " pos clause: ";
-    // // for (const auto &literal : variables[i].pos_occ) {
-    // //   std::cout << literal << " ";
-    // // }
-    // // std::cout << std::endl;
-    std::cout << i << "th Clause: " << cnf[i].w1 << " " << cnf[i].w2 << "\n";
-  }
-
-  dpll();
-  checkAllClauses();
-  return 0;
+    return 0;
 }

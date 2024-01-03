@@ -1,6 +1,7 @@
 # Compiler and flags
+# g++ src/*.cpp  -o main -std=c++11 -Wall -Wno-sign-compare -Wno-format -g -O3 //--Manual run
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -g
+CXXFLAGS = -std=c++11 -Wall -Wno-sign-compare -Wno-format -g -O3
 
 # Directories
 SRCDIR = src
@@ -8,21 +9,16 @@ INCDIR = include
 BINDIR = .
 
 # Source files
-SOURCES = $(wildcard $(SRCDIR)/main.cpp) $(wildcard $(SRCDIR)/dpll.cpp) $(wildcard $(SRCDIR)/checkAllClauses.cpp)   
-SOURCES2 = $(wildcard $(SRCDIR)/main2.cpp) $(wildcard $(SRCDIR)/cnf2.cpp) $(wildcard $(SRCDIR)/dpll.cpp) $(wildcard $(SRCDIR)/checkAllClauses.cpp) $(wildcard $(SRCDIR)/parseDimacs.cpp) 
-
+SOURCES = $(wildcard $(SRCDIR)/*.cpp)
+SELECTED_SOURCES =  $(wildcard $(SRCDIR)/main.cpp) $(wildcard $(SRCDIR)/dpll.cpp) $(wildcard $(SRCDIR)/printModel.cpp) $(wildcard $(SRCDIR)/chooseLiteral.cpp) $(wildcard $(SRCDIR)/parseDIMACS.cpp) $(wildcard $(SRCDIR)/backtrack.cpp)
 OBJ = $(SRC:.cpp=.o)
 EXECUTABLE = main
-EXECUTABLE2 = main2
 
 # Build target
 all: $(EXECUTABLE)
 
 # Rule to create executable
 $(EXECUTABLE): $(SOURCES)
-	$(CXX) $(CXXFLAGS) $(OBJ) -o $@ $^
-
-$(EXECUTABLE2) : $(SOURCES2)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $@ $^
 	
 %.o: %.cpp
@@ -33,11 +29,6 @@ $(EXECUTABLE2) : $(SOURCES2)
 clean:
 	del main.exe
 
-clean2: 
-	del main2.exe
-
 run: $(EXECUTABLE) 
 	$(EXECUTABLE) $(arg)
 
-run2: $(EXECUTABLE2) 
-	$(EXECUTABLE2) $(arg)

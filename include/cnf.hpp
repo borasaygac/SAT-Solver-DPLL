@@ -1,4 +1,10 @@
+#include <stdio.h>
+
+#include <fstream>
+#include <iostream>
 #include <queue>
+#include <set>
+#include <sstream>
 #include <stack>
 #include <string>
 #include <unordered_map>
@@ -6,13 +12,19 @@
 
 #ifndef MYHEADER_HPP
 #define MYHEADER_HPP
-extern int numOfVars;    // n = num of vars
-extern int numOfClauses; //
 
-enum Assign {
-  FALSE,
-  TRUE,
-  FREE,
+extern int numOfVars;
+extern int numOfClauses;
+// num of not yet assigned variables;
+// return true if equal to 0.
+extern int numOfUnassigned;
+
+enum Heuristics { INC, DLIS, DLCS, MOM, JW };
+
+enum Assig {
+    FALSE,
+    TRUE,
+    FREE,
 };
 
 enum Polarity {
@@ -22,47 +34,105 @@ enum Polarity {
 };
 
 struct Variable {
-  Assign val = FREE;
-  std::vector<int> pos_occ;
-  std::vector<int> neg_occ;
-  bool forced;
-  Polarity polarity;
+   private:
+    Assig val = FREE;
+
+   public:
+    // std::set<int> pos_pol;  // = {1,2};  All clauses where var appears as pos watched literal
+    //     std::set<int>
+    //         neg_poll;  // = {3,4} All clauses where var appears as neg watched literal
+    //             //    (1 2 -3) (1 -2 3 4) (-1 2 -4) (-1 3 -4)
+    //             // clause x sat => x is in neg_poll => erase x from neg_poll
+    //             // if neg_pol.empty() => pureLiter => set var to 1
+
+    std::set<int> neg_watched;  // All clauses where var appears as neg watched literal
+    std::set<int> pos_watched;  // All clauses where var appears as pos watched literal
+    std::set<int> neg_watched;  // All clauses where var appears as neg watched literal
+    bool forced = false;
+    int pos_occ;  // number of clauses var appears as pos literal
+    int neg_occ;  // number of clauses var appears as neg literal
+    bool enqueued = false;
+    void setValue(Assig _assig) {
+        // int assertedLit = unitProp ? curProp : curVar;
+        if (_assig != FREE && val == FREE)
+            numOfUnassigned--;
+        else {
+            if (_assig == FREE) numOfUnassigned++;
+
+            // else
+            //     vars[assertedLit].forced = true;
+        }
+        val = _assig;
+        // printf("num of unassigned: %i \n", numOfUnassigned);
+
+        // vars[assertedLit].enqueued = false;
+        // vars[assertedLit].forced = true;
+        // assig.push(assertedLit);
+        // updateWatchedLiterals(assertedLit);
+    }
+    Assig getValue() { return val; }
 };
 
 struct Clause {
-  int satLiteral = 0;
-  std::vector<int> literals;
-  int active;
-  int w1 = 0;
-  int w2 = 1;
+    std::vector<int> literals;
+    int w1 = 0;
+    int w2 = 1;
+    bool sat = false;
 };
 
-// Queue where unit clauses found in DPLL will be added to.
-extern std::queue<int> unitQueue;
+extern Heuristics heuristic;
 
-// Default indexing value for DPLL if queue is empty
-extern int CurVar;
+// the currently processed variable
+extern int curVar;
 
-enum class State {
-  DEFAULT,
-  BACKTRACK,
-};
+// the currently processed unit literal
+extern int curProp;
 
-extern State state;
-
-// List of clauses (1-indexed)
+// list of clauses (1-indexed)
 extern std::vector<Clause> cnf;
 
-// List of variables (1-indexed)
-extern std::vector<Variable> variables;
-// Stack of variables with assigned values
+// list of variables (1-indexed)
+extern std::vector<Variable> vars;
+
+// set of unsatisfied clauses
+extern std::set<int> satClauses;
+
+// queue storing unit literals
+extern std::queue<int> unitQueue;
+
+// stack of variables with assigned values
 extern std::stack<int> assig;
 
-// DPLL Algorithm Function Call
-bool dpll(int curVar = CurVar);
+void parseDIMACS(std::string filename);
 
-// Check all Clauses for whether they are satisfied
-bool checkAllClauses();
+void* dpll(void* arg);
 
-void unitProp();
+void unitPropagate();
+
+// chooses literals according to the used heuristic
+void chooseLiteral();
+
+void chooseINC();
+
+void chooseDLIS();
+
+void chooseDLCS();
+
+void chooseMOM();
+
+void chooseJW();
+
+// updates the watched literals after a new assignment is made
+void updateWatchedLiterals(int literal);
+
+// handles conficts and signals UNSAT
+void backtrack();
+
+// evaluates the literal under its current assignment
+bool evaluateLiteral(int literal);
+
+void printModel(int res);
+
+void test();
+
 #endif
