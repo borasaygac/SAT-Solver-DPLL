@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
     // if (argc > 3) heuristic = Heuristics(std::stoi(argv[3]));
     std::string path = argv[1];
 
-    char *index;
+    std::string index;
     
     for (int i = 1; i < path.length(); i++) {
         index += path[i];
