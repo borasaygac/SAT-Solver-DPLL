@@ -30,7 +30,6 @@ int main(int argc, char* argv[]) {
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
     std::string testOrComp = (argv[1]);
-    std::cout << testOrComp << "\n";
 
     std::string fileName;
 
@@ -60,8 +59,6 @@ int main(int argc, char* argv[]) {
     // if (argc > 2) heuristic = Heuristics(std::stoi(argv[2]));
 
     parseDIMACS(fileName);
-
-    std::cout << fileName << std::endl;
 
     pthread_t thread;
 

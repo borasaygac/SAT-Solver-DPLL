@@ -3,27 +3,27 @@
 void updateWatchedLiterals(int assertedVar) {
     // watched literals have to point to unassigned or to true evaluating variables
 
-    // std::cout << "UPDATING FOR " << assertedVar << "!\n";
+    std::cout << "UPDATING FOR " << assertedVar << "!\n";
     std::set<int>* clausesToUpdate;
 
     clausesToUpdate = (vars[assertedVar].getValue() == TRUE) ? &vars[assertedVar].neg_watched : &vars[assertedVar].pos_watched;
-    // std::cout << "UPDATE CLAUSES SIZE: " << clausesToUpdate->size() << "!\n";
+    std::cout << "UPDATE CLAUSES SIZE: " << clausesToUpdate->size() << "!\n";
     std::set<int>::iterator clauseIndex;
     std::set<int> copy = *clausesToUpdate;
     for (clauseIndex = copy.begin(); clauseIndex != copy.end(); ++clauseIndex) {
         Clause* clause = &cnf[*clauseIndex];
-        // std::cout << "clauseIndex " << *clauseIndex << ": ";
+        std::cout << "clauseIndex " << *clauseIndex << ": ";
         for (int i = 0; i < clause->literals.size(); i++) {
-            // std::cout << clause->literals[i] << " ";
+             std::cout << clause->literals[i] << " ";
         }
-        // std::cout << "\n ";
+         std::cout << "\n ";
         int* pointerToMove = std::abs(clause->literals[clause->w1]) == assertedVar ? &clause->w1 : &clause->w2;
 
-        // std::cout << "POINTERTOMOVE " << *pointerToMove << "!\n";
+        std::cout << "POINTERTOMOVE " << *pointerToMove << "!\n";
 
         int otherPointer = clause->w1 + clause->w2 - *pointerToMove;
 
-        // std::cout << "OTHERPOINTER  " << otherPointer << "!\n";
+        std::cout << "OTHERPOINTER  " << otherPointer << "!\n";
 
         
         for (int i = 0; i < clause->literals.size(); i++) {
@@ -32,23 +32,23 @@ void updateWatchedLiterals(int assertedVar) {
                 *(pointerToMove) = i;
 
                 // Remove the reference from assertedVar to the clause
-                // std::cout << "REMOVING clause " << *clauseIndex << " from " << assertedVar << "!\n";
+                std::cout << "REMOVING clause " << *clauseIndex << " from " << assertedVar << "!\n";
 
-                // std::cout << "Set elements before: ";
+                std::cout << "Set elements before: ";
                 for (const auto& element : *clausesToUpdate) {
-                    // std::cout << element << " ";
+                     std::cout << element << " ";
                 }
-                // std::cout << std::endl;
+                std::cout << std::endl;
 
                 clausesToUpdate->erase(*clauseIndex);
 
-                // std::cout << "Set elements after: ";
+                 std::cout << "Set elements after: ";
                 for (const auto& element : *clausesToUpdate) {
-                    // std::cout << element << " ";
+                     std::cout << element << " ";
                 }
-                // std::cout << std::endl;
+                 std::cout << std::endl;
 
-                // std::cout << "Adding clause " << *clauseIndex << " to " << std::abs(clause->literals[*pointerToMove]) << "!\n";
+                 std::cout << "Adding clause " << *clauseIndex << " to " << std::abs(clause->literals[*pointerToMove]) << "!\n";
                 // Add a reference from new found watched literal to the clause
                 clause->literals[*pointerToMove] > 0
                     ? vars[std::abs(clause->literals[*pointerToMove])].pos_watched.insert(*clauseIndex)
@@ -66,16 +66,16 @@ void updateWatchedLiterals(int assertedVar) {
             if (i + 1 == clause->literals.size()) {
                 if (vars[std::abs(clause->literals[otherPointer])].getValue() == FREE &&
                     !vars[std::abs(clause->literals[otherPointer])].enqueued) {
-                    // std::cout << "Push " << clause->literals[otherPointer] << " on unit queue\n";
+                    std::cout << "Push " << clause->literals[otherPointer] << " on unit queue\n";
                     vars[std::abs(clause->literals[otherPointer])].enqueued = true;
                     unitQueue.push(clause->literals[otherPointer]);
                 } else {
                     if (!evaluateLiteral(clause->literals[otherPointer])) {
                         std::cout << "INIT BACKTRACK!\n";
-                        // std::cout << "(w1, assig): (" << clause->literals[*pointerToMove] << " "
-                                //   << evaluateLiteral(clause->literals[*pointerToMove]) << ") (w2, assig): ("
-                                //   << clause->literals[otherPointer] << " " << evaluateLiteral(clause->literals[otherPointer])
-                                //   << "), size: " << clause->literals.size() << "\n";
+                         std::cout << "(w1, assig): (" << clause->literals[*pointerToMove] << " "
+                                   << evaluateLiteral(clause->literals[*pointerToMove]) << ") (w2, assig): ("
+                                   << clause->literals[otherPointer] << " " << evaluateLiteral(clause->literals[otherPointer])
+                                   << "), size: " << clause->literals.size() << "\n";
                         backtrack();
                         return;
                     }
@@ -87,10 +87,10 @@ void updateWatchedLiterals(int assertedVar) {
         //     satClauses.insert(*clauseIndex);
         // else
         //     satClauses.erase(*clauseIndex);
-        // std::cout << "AFTER ALGO:POINTERTOMOVE " << *pointerToMove << "!\n";
+         std::cout << "AFTER ALGO:POINTERTOMOVE " << *pointerToMove << "!\n";
     }
-    // std::cout << "\nFINISHED FOR " << assertedVar << "!\n\n ";
-    // if (unitQueue.empty() && numOfUnassigned < 1) pthread_exit(0);
+     std::cout << "\nFINISHED FOR " << assertedVar << "!\n\n ";
+     if (unitQueue.empty() && numOfUnassigned < 1) pthread_exit(0);
 }
 
 bool evaluateLiteral(int literal) {
