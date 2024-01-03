@@ -3,3 +3,4 @@ for ($i = 1; $i -le 33; $i++) {
     & ./main t$i
 }
 # Set-ExecutionPolicy -Scope Process Bypass
+# powershell -ExecutionPolicy Bypass -File ".\script.ps1"
