@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Wno-sign-compare -Wno-format -g 
+CXXFLAGS = -std=c++11 -Wall -Wno-sign-compare -Wno-format -g -O3
 
 # Directories
 SRCDIR = src
