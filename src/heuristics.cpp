@@ -5,6 +5,7 @@ void chooseINC() {
     vars[curVar].setValue(TRUE);
     vars[curVar].forced = false;
     assig.push(curVar);
+    // std::cout << "CHOOSE_LIT:" << curVar << "\n";
 }
 
 void chooseDLIS(){}

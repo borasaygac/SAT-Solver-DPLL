@@ -69,7 +69,7 @@ void parseDIMACS(std::string filename) {
 
                         if (!vars[std::abs(clause.literals[0])].enqueued) {
                             unitQueue.push(clause.literals[0]);
-                            std::cout << "Pushing " << clause.literals[0] << " on unit queue"<< std::endl;
+                            std::cout << "Pushing " << clause.literals[0] << " on unit queue" << std::endl;
                             vars[std::abs(clause.literals[0])].enqueued = true;
                         }
                     }
@@ -81,10 +81,12 @@ void parseDIMACS(std::string filename) {
                                                : vars[std::abs(clause.literals[1])].neg_watched.insert(count);
 
                     cnf.push_back(clause);
+                    std::cout << "for clause " << count <<":";
+                    for (int i = 0; i < clause.literals.size(); i++) {
+                        std::cout << " " << clause.literals[i];
+                    }
+                    std::cout << "\n";
 
-                    /*for (int i = 0; i < clause.literals.size(); i++) {
-                        std::cout << "for clause" << count << " " << clause.literals[i] << std::endl;
-                    }*/
                     clause = {};
                     count++;
                 }

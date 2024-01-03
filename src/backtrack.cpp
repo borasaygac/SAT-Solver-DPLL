@@ -12,7 +12,7 @@ void backtrack() {
         vars[toUnassign].setValue(FREE);
         vars[toUnassign].forced = false;
         assig.pop();
-        // std::cout << "Removed literal " << toUnassign << " from assig stack \n";
+        //  std::cout << "Removed literal " << toUnassign << " from assig stack \n";
     }
 
     // clear unit queue
