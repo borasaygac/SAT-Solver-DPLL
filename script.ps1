@@ -1,6 +1,6 @@
 # Iterate from 1 to 10 and call make run with arg=x
-for ($i = 1; $i -le 33; $i++) {
-    & ./main t$i
+for ($i = 146; $i -le 153; $i++) {
+    & ./main c$i
 }
 # Set-ExecutionPolicy -Scope Process Bypass
 # powershell -ExecutionPolicy Bypass -File ".\script.ps1"
