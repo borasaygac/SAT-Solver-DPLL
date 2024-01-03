@@ -6,7 +6,8 @@ param (
 )
 
 for ($i = $start; $i -le $end; $i++) {
-    & ./main $type$i
+    & ./main $type$i 
+    # Start-Sleep -Milliseconds 500 # Add a half-second (500 milliseconds) delay
 }
 # .\script.ps1 -start 1 -end 10 -type 'c'
 # Set-ExecutionPolicy -Scope Process Bypass
