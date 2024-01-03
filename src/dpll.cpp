@@ -1,17 +1,16 @@
 #include "../include/cnf.hpp"
 
-void dpll() {
-    // TODO: We should implement the more optimised appproach of checking the satisfaction of every clause
+void* dpll(void* arg) {  // TODO: We should implement the more optimised appproach of checking the satisfaction of every clause
     while (true) {
         unitPropagate();
         if (unitQueue.empty() && numOfUnassigned < 1) {
-             std::cout << "VORBEII!! \n";
+            std::cout << "VORBEII!! \n";
 
             pthread_exit(0);
         }
         chooseLiteral();
         if (unitQueue.empty() && numOfUnassigned < 1) {
-             std::cout << "VORBEII!! \n";
+            std::cout << "VORBEII!! \n";
 
             pthread_exit(0);
         }

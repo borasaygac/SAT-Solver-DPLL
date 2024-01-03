@@ -40,12 +40,11 @@ int main(int argc, char* argv[]) {
     // }
     // std::cout << fileName << "\n";
 
-
     // if (argc > 3) heuristic = Heuristics(std::stoi(argv[3]));
     std::string path = argv[1];
 
     std::string index;
-    
+
     for (int i = 1; i < path.length(); i++) {
         index += path[i];
     }
@@ -60,8 +59,7 @@ int main(int argc, char* argv[]) {
 
     parseDIMACS(fileName);
 
-    dpll();
-    // pthread_t thread;
+    pthread_t thread;
 
     if (pthread_create(&thread, NULL, dpll, NULL)) {
         std::cerr << "Error: Unable to create thread." << std::endl;
@@ -78,7 +76,7 @@ int main(int argc, char* argv[]) {
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
 
-    printf("\nCPU time used: %.6f seconds\n\n" , duration.count());
+    printf("\nCPU time used: %.6f seconds\n\n", duration.count());
     // std::cout << "\nCPU time used: " << duration.count() << " seconds\n" << std::endl;
 
     return 0;

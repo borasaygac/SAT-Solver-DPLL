@@ -27,11 +27,7 @@ enum Assig {
     FREE,
 };
 
-enum Polarity {
-  NEG,
-  POS,
-  MIX
-};
+enum Polarity { NEG, POS, MIX };
 
 struct Variable {
    private:
@@ -104,7 +100,7 @@ extern std::stack<int> assig;
 
 void parseDIMACS(std::string filename);
 
-void dpll();
+void* dpll(void* arg);
 
 void unitPropagate();
 
