@@ -114,7 +114,7 @@ void updateWatchedLiterals(int assertedVar) {
             // clause->sat = std::abs(clause->literals[clause->w1]) == assertedVar ? clause->w1 : clause->w2;
 
             //  satClauses.insert(*clauseIndex);
-        // }
+        
 }
 
 bool evaluateLiteral(int literal) {
