@@ -27,6 +27,8 @@ enum Assig {
     FREE,
 };
 
+enum Polarity { NEG, POS, MIX };
+
 struct Variable {
    private:
     Assig val = FREE;
