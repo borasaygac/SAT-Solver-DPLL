@@ -61,16 +61,15 @@ int main(int argc, char* argv[]) {
 
     printModel((intptr_t)res);
 
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
+    
+    printf("\nCPU time used: %.6f seconds\n\n", duration.count());
     // for (auto it = satClauses.begin(); it != satClauses.end(); ++it) {
     //     std::cout << *it << std::endl;  // Perform operations with each element
     // }
+    if ((intptr_t)res == 0) verifyModel();
 
-    test();
-
-    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-    std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
-
-    printf("\nCPU time used: %.6f seconds\n\n", duration.count());
     // std::cout << "\nCPU time used: " << duration.count() << " seconds\n" << std::endl;
 
     return 0;
