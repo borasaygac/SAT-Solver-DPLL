@@ -209,5 +209,6 @@ extern std::string fileNamesTest[] = {
     "031_op5_4.cnf",
     "032_rand4cnf.cnf",
     "033_rand5cnf.cnf",
-    "034_pitfall42222.cnf"
+    "034_pitfall42222.cnf",
+    "035_bridge.cnf"
 };
