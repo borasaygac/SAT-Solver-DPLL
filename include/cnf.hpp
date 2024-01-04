@@ -72,7 +72,7 @@ struct Clause {
     std::vector<int> literals;
     int w1 = 0;
     int w2 = 1;
-    bool sat = false;
+    int sat = -1;
 };
 
 extern Heuristics heuristic;

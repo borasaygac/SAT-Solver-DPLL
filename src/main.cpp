@@ -61,6 +61,10 @@ int main(int argc, char* argv[]) {
 
     printModel((intptr_t)res);
 
+    // for (auto it = satClauses.begin(); it != satClauses.end(); ++it) {
+    //     std::cout << *it << std::endl;  // Perform operations with each element
+    // }
+
     test();
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
