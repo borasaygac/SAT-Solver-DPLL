@@ -9,6 +9,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <unordered_set>
 
 #ifndef MYHEADER_HPP
 #define MYHEADER_HPP
@@ -27,7 +28,7 @@ enum Assig {
     FREE,
 };
 
-enum Polarity { NEG, POS, MIX };
+enum Polarity { NEG, POS, MIX, UNSET };
 
 struct Variable {
    private:
@@ -97,6 +98,12 @@ extern std::queue<int> unitQueue;
 
 // stack of variables with assigned values
 extern std::stack<int> assig;
+
+// set of variables occuring only in negative polarity
+extern std::unordered_set<int> neg_pol;
+
+// set of variables occuring only in positive polarity
+extern std::unordered_set<int> pos_pol;
 
 void parseDIMACS(std::string filename);
 
