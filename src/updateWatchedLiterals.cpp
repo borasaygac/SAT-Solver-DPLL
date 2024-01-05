@@ -102,19 +102,18 @@ void updateWatchedLiterals(int assertedVar) {
         //  std::cout << "AFTER ALGO:POINTERTOMOVE " << *pointerToMove << "!\n";
     }
 
-        // std::set<int> copy2 = *clausesToMarkSatisfied;
-        // for (clauseIndex = copy2.begin(); clauseIndex != copy2.end(); ++clauseIndex) {
-        //     Clause* clause = &cnf[*clauseIndex];
+    // std::set<int> copy2 = *clausesToMarkSatisfied;
+    // for (clauseIndex = copy2.begin(); clauseIndex != copy2.end(); ++clauseIndex) {
+    //     Clause* clause = &cnf[*clauseIndex];
 
-            // clause is already satisfied
-            // if (satClauses.find(*clauseIndex)) {
-            //     break;
-            // }
+    // clause is already satisfied
+    // if (satClauses.find(*clauseIndex)) {
+    //     break;
+    // }
 
-            // clause->sat = std::abs(clause->literals[clause->w1]) == assertedVar ? clause->w1 : clause->w2;
+    // clause->sat = std::abs(clause->literals[clause->w1]) == assertedVar ? clause->w1 : clause->w2;
 
-            //  satClauses.insert(*clauseIndex);
-        
+    //  satClauses.insert(*clauseIndex);
 }
 
 bool evaluateLiteral(int literal) {

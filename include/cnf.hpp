@@ -135,6 +135,6 @@ bool evaluateLiteral(int literal);
 
 void printModel(int res);
 
-void test();
+void verifyModel();
 
 #endif

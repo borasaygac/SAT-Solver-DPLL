@@ -1,6 +1,6 @@
 #include "../include/cnf.hpp"
 
-void test() {
+void verifyModel() {
     for (int i = 1; i <= numOfClauses; i++) {
         bool sat = false;
         for (int literal : cnf[i].literals) {
@@ -10,6 +10,6 @@ void test() {
             printf("Error at %i ", i);
             break;
         }
-        if (i == numOfClauses) printf("SUCCESS");
+        if (i == numOfClauses) printf("MODEL VERIFIED!\n");
     }
 }
