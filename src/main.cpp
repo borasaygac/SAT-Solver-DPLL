@@ -15,6 +15,7 @@ std::set<int> satClauses;
 std::queue<int> unitQueue;
 std::stack<int> assig;
 int curVar = 1;
+int numOfSatClauses = 0; 
 int curProp;
 Heuristics heuristic = INC;
 
@@ -49,6 +50,25 @@ int main(int argc, char* argv[]) {
 
     parseDIMACS(fileName);
 
+    for (int i = 1; i < numOfVars; i++) {
+        std::cout << "VAR: " << i << "\n"<< "FORCED: " << vars[i].enqueued << vars[i].forced << "\n";
+        std::cout << "POS_OCC: ";
+        for (auto it = vars[i].static_pos_occ.begin(); it != vars[i].static_pos_occ.end(); ++it) {
+            std::cout << *it << " ";
+        }
+
+        std::cout << "\n";
+        std::cout << "NEG_OCC: ";
+
+        for (auto it = vars[i].static_neg_occ.begin(); it != vars[i].static_neg_occ.end(); ++it) {
+            std::cout << *it << " ";
+        }
+    }
+
+    for (int i = 1; i <= numOfClauses; i++) {
+        std::cout << "CLAUSE: " << i << " Active:"<<  cnf[i].active;
+    }
+
     pthread_t thread;
 
     if (pthread_create(&thread, NULL, dpll, NULL)) {
@@ -63,7 +83,7 @@ int main(int argc, char* argv[]) {
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
-    
+
     printf("\nCPU time used: %.6f seconds\n\n", duration.count());
     // for (auto it = satClauses.begin(); it != satClauses.end(); ++it) {
     //     std::cout << *it << std::endl;  // Perform operations with each element

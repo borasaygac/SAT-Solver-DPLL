@@ -9,8 +9,10 @@
 void backtrack() {
     while (!assig.empty() && vars[assig.top()].forced) {  // until the last branching variable.
         int toUnassign = assig.top();
-        vars[toUnassign].setValue(FREE);
+        updateBacktrack(toUnassign);
+        vars[toUnassign].val = FREE;
         vars[toUnassign].forced = false;
+
         assig.pop();
         //  std::cout << "Removed literal " << toUnassign << " from assig stack \n";
     }
@@ -28,12 +30,12 @@ void backtrack() {
 
     // Most recent branching variable
     int b = assig.top();
-    int oldval = vars[b].getValue();
+    int oldval = vars[b].val;
     // Assign negated val
     vars[b].forced = true;
-    vars[b].setValue(Assig(int(2 - std::pow(2.0, vars[b].getValue()))));
+    vars[b].val = Assig(int(2 - std::pow(2.0, vars[b].val)));
     // std::cout << "New branch var" << b << ", OLD: " << oldval << ", NEW: " << vars[b].getValue();
     curVar = b;
-    updateWatchedLiterals(b);
+    updateCNF(b);
     unitPropagate();
 }

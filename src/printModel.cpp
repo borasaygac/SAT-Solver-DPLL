@@ -12,16 +12,16 @@ void printModel(int res) {
     printf("[");
     for (int i = 1; i < numOfVars; i++) {
         int val;
-        if (vars[i].getValue() == FREE) val = 0;
-        if (vars[i].getValue() == TRUE) val = i;
-        if (vars[i].getValue() == FALSE) val = -i;
+        if (vars[i].val == FREE) val = 0;
+        if (vars[i].val == TRUE) val = i;
+        if (vars[i].val == FALSE) val = -i;
 
         printf("%i, ", val);
     }
     int val;
-    if (vars[numOfVars].getValue() == FREE) val = 0;
-    if (vars[numOfVars].getValue() == TRUE) val = numOfVars;
-    if (vars[numOfVars].getValue() == FALSE) val = -numOfVars;
+    if (vars[numOfVars].val == FREE) val = 0;
+    if (vars[numOfVars].val == TRUE) val = numOfVars;
+    if (vars[numOfVars].val == FALSE) val = -numOfVars;
     printf("%i", val);
     printf("]\n");
 }

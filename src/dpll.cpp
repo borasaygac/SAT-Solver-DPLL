@@ -3,13 +3,13 @@
 void* dpll(void* arg) {  // TODO: We should implement the more optimised appproach of checking the satisfaction of every clause
     while (true) {
         unitPropagate();
-        if (unitQueue.empty() && numOfUnassigned < 1) {
+        if (unitQueue.empty() && numOfSatClauses == numOfClauses) {
             std::cout << "VORBEII!! \n";
 
             pthread_exit(0);
         }
         chooseLiteral();
-        if (unitQueue.empty() && numOfUnassigned < 1) {
+        if (unitQueue.empty() && numOfSatClauses == numOfClauses) {
             std::cout << "VORBEII!! \n";
 
             pthread_exit(0);
@@ -28,12 +28,12 @@ void unitPropagate() {
         unitQueue.pop();
         vars[std::abs(unitLiteral)].enqueued = false;
         vars[std::abs(unitLiteral)].forced = true;
-        (unitLiteral > 0) ? vars[std::abs(unitLiteral)].setValue(TRUE) : vars[std::abs(unitLiteral)].setValue(FALSE);
+        (unitLiteral > 0) ? vars[std::abs(unitLiteral)].val = TRUE : vars[std::abs(unitLiteral)].val = FALSE;
         //  std::cout << "UP variable " << unitLiteral << " set to " << vars[std::abs(unitLiteral)].getValue() << "\n";
 
         assig.push(std::abs(unitLiteral));
 
-        updateWatchedLiterals(std::abs(unitLiteral));
+        updateCNF(std::abs(unitLiteral));
     }
 }
 
@@ -55,5 +55,5 @@ void chooseLiteral() {
             chooseJW();
             break;
     }
-    updateWatchedLiterals(curVar);
+    updateCNF(curVar);
 }

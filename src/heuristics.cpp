@@ -1,8 +1,8 @@
 #include "../include/cnf.hpp"
 
 void chooseINC() {
-    while (vars[curVar].getValue() != FREE) curVar++;
-    vars[curVar].setValue(TRUE);
+    while (vars[curVar].val != FREE) curVar++;
+    vars[curVar].val = TRUE;
     vars[curVar].forced = false;
     assig.push(curVar);
     // std::cout << "CHOOSE_LIT:" << curVar << "\n";

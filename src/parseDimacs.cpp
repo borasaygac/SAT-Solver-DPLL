@@ -24,7 +24,7 @@ void parseDIMACS(std::string filename) {
         }
         numOfVars = std::stoi(tokens[2]);
         numOfClauses = std::stoi(tokens[3]);
-        numOfUnassigned = numOfVars;
+        // numOfUnassigned = numOfVars;
         std::cout << "Number of Variables: " << numOfVars << std::endl;
         std::cout << "Number of Clauses: " << numOfClauses << std::endl;
         std::cout << "Number of Clauses: " << numOfUnassigned << std::endl;
@@ -49,24 +49,18 @@ void parseDIMACS(std::string filename) {
             while (iss >> literal && literal != 0) {
                 // not precise if the literal appears multiple times in the
                 // clause (unlikely)
-                (literal > 0) ? vars[std::abs(literal)].pos_occ++ : vars[std::abs(literal)].neg_occ++;
-
                 clause.literals.push_back(literal);
-
+                literal > 0 ? vars[std::abs(literal)].static_pos_occ.insert(count) : vars[std::abs(literal)].static_neg_occ.insert(count);
                 // std::cout << "Literal: " << literal << std::endl;
             }
 
             if (literal == 0) {
                 if (!clause.literals.empty()) {
                     // std::cout << "Literal: " << clause.literals[0] << "in if" << std::endl;
-
-                    clause.literals[0] > 0 ? vars[std::abs(clause.literals[0])].pos_watched.insert(count)
-                                           : vars[std::abs(clause.literals[0])].neg_watched.insert(count);
+                    clause.active = clause.literals.size();
                     // if unit clause, push to unit queue
                     if (clause.literals.size() == 1) {
                         // std::cout << "Literal: " << clause.literals[0] << "in if22" << std::endl;
-                        clause.w2 = 0;
-
                         if (!vars[std::abs(clause.literals[0])].enqueued) {
                             unitQueue.push(clause.literals[0]);
                             std::cout << "Pushing " << clause.literals[0] << " on unit queue" << std::endl;
@@ -76,12 +70,8 @@ void parseDIMACS(std::string filename) {
 
                     // else also link the second watched literal to their respective entry in variables
 
-                    if (clause.literals.size() > 1)
-                        clause.literals[1] > 0 ? vars[std::abs(clause.literals[1])].pos_watched.insert(count)
-                                               : vars[std::abs(clause.literals[1])].neg_watched.insert(count);
-
                     cnf.push_back(clause);
-                    std::cout << "for clause " << count <<":";
+                    std::cout << "for clause " << count << ":";
                     for (int i = 0; i < clause.literals.size(); i++) {
                         std::cout << " " << clause.literals[i];
                     }
@@ -96,4 +86,10 @@ void parseDIMACS(std::string filename) {
     } else {
         printf("Unable to open file");
     }
+
+    for(int i=1; i < numOfVars; i++){
+        vars[i].pos_occ = vars[i].static_pos_occ;
+        vars[i].neg_occ = vars[i].static_neg_occ;
+    }
+
 }

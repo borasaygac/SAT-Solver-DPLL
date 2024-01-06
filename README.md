@@ -1,8 +1,7 @@
 # Group_K_Project_2
-new way of running = make run loc=test OR comp file= XXX (integer) heuristic = TBD
-remove dupliates from claues!!!
-migrate set to unordered set....
-problem: aim-50-6_0-yes1-4
+WHILE UNDO IN BACKTRACKING UPDATE CLAUSES
+NUMOFSATCLAUSES DECREMENT
+PUSH FORMER SAT CLAUSES BACK INTO POS_OCC
 
 Put assig.push and updatewatchedliterals() to setValue() 
 
