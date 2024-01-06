@@ -68,6 +68,8 @@ extern std::vector<Variable> vars;
 // set of unsatisfied clauses
 extern std::set<int> satClauses;
 
+extern std::queue<int> pureLitQueue; 
+
 // queue storing unit literals
 extern std::queue<int> unitQueue;
 
@@ -79,6 +81,8 @@ extern std::priority_queue<int> heap;
 void parseDIMACS(std::string filename);
 
 void* dpll(void* arg);
+
+void pureLiteralElimination();
 
 void unitPropagate();
 

@@ -2,6 +2,8 @@
 
 void* dpll(void* arg) {  // TODO: We should implement the more optimised appproach of checking the satisfaction of every clause
     while (true) {
+        pureLiteralElimination();
+
         unitPropagate();
         if (unitQueue.empty() && numOfSatClauses == numOfClauses) {
             std::cout << "VORBEII!! \n";
@@ -17,6 +19,19 @@ void* dpll(void* arg) {  // TODO: We should implement the more optimised appproa
         //  std::cout << "Current Var :" << curVar << " and current value " << vars[curVar].getValue() << '\n';
 
         //  std::cout << "queue size= " << unitQueue.size() << '\n';
+    }
+}
+
+void pureLiteralElimination() {
+    int pureLiteral;
+    while (!pureLitQueue.empty()) {
+        pureLiteral = pureLitQueue.front();
+
+        pureLitQueue.pop();
+        (pureLiteral > 0) ? vars[std::abs(pureLiteral)].val = TRUE : vars[std::abs(pureLiteral)].val = FALSE;
+        assig.push(std::abs(pureLiteral));
+
+        updateCNF(std::abs(pureLiteral));
     }
 }
 

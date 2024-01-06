@@ -14,6 +14,7 @@ std::vector<Variable> vars;
 std::set<int> satClauses;
 std::queue<int> unitQueue;
 std::stack<int> assig;
+std::queue<int> pureLitQueue;
 int curVar = 1;
 int numOfSatClauses = 0; 
 int curProp;
