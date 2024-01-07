@@ -13,6 +13,7 @@ void updateCNF(int assertedVar) {
 
     std::set<int>::iterator clauseIndex;
     std::set<int> copy = *clausesToMarkSatisfied;
+    printf("asserted var %i and value %i\n",assertedVar, vars[assertedVar].val);
 
     // While clauses to mark satisfied are unsatisfied, mark satisfied and
     // erase all references of the literals occuring in the clause, since it can be disregarded
@@ -20,11 +21,12 @@ void updateCNF(int assertedVar) {
         if (cnf[*clauseIndex].sat > 0) continue;
         Clause clause = cnf[*clauseIndex];
         cnf[*clauseIndex].sat = assertedVar;
+        printf("mark clause sat %i\n", *clauseIndex);
         for (int i = 0; i < clause.literals.size(); i++) {
             clause.literals[i] > 0 ? vars[clause.literals[i]].pos_occ.erase(*clauseIndex)
                                    : vars[clause.literals[i]].neg_occ.erase(*clauseIndex);
-            numOfSatClauses++;
         }
+        numOfSatClauses++;
     }
 
     // While clauses to update have more than one literal, decrement act, else also start unitProp
@@ -35,11 +37,12 @@ void updateCNF(int assertedVar) {
         if (cnf[*clauseIndex2].sat > 0) continue;
         Clause clause = cnf[*clauseIndex2];
         clause.active--;
+        printf("decremented clause %i\n and the anctive number %i,\n", *clauseIndex2, clause.active );
         if (clause.active == 1) {
             for (int i = 0; i < clause.literals.size(); i++) {
-                if (vars[clause.literals[i]].val == FREE) {
+                if (vars[std::abs(clause.literals[i])].val == FREE) {
                     unitQueue.push(clause.literals[i]);
-                    vars[clause.literals[i]].enqueued = true;
+                    vars[std::abs(clause.literals[i])].enqueued = true;
                 }
             }
         }

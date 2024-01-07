@@ -26,7 +26,7 @@ void pureLiteralElimination() {
     int pureLiteral;
     while (!pureLitQueue.empty()) {
         pureLiteral = pureLitQueue.front();
-
+        
         pureLitQueue.pop();
         (pureLiteral > 0) ? vars[std::abs(pureLiteral)].val = TRUE : vars[std::abs(pureLiteral)].val = FALSE;
         assig.push(std::abs(pureLiteral));
@@ -39,12 +39,13 @@ void unitPropagate() {
     int unitLiteral;
     while (!unitQueue.empty()) {
         unitLiteral = unitQueue.front();
-        //  std::cout << "current queue elm = " << unitLiteral << "\n";
+        // std::cout << "current queue elm = " << unitLiteral << "\n";
+        //printf("queue elem %i\n",unitLiteral);
         unitQueue.pop();
         vars[std::abs(unitLiteral)].enqueued = false;
         vars[std::abs(unitLiteral)].forced = true;
         (unitLiteral > 0) ? vars[std::abs(unitLiteral)].val = TRUE : vars[std::abs(unitLiteral)].val = FALSE;
-        //  std::cout << "UP variable " << unitLiteral << " set to " << vars[std::abs(unitLiteral)].getValue() << "\n";
+        //std::cout << "UP variable " << unitLiteral << " set to " << vars[std::abs(unitLiteral)].getValue() << "\n";
 
         assig.push(std::abs(unitLiteral));
 

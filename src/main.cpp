@@ -16,7 +16,7 @@ std::queue<int> unitQueue;
 std::stack<int> assig;
 std::queue<int> pureLitQueue;
 int curVar = 1;
-int numOfSatClauses = 0; 
+int numOfSatClauses = 0;
 int curProp;
 Heuristics heuristic = INC;
 
@@ -51,23 +51,26 @@ int main(int argc, char* argv[]) {
 
     parseDIMACS(fileName);
 
-    for (int i = 1; i < numOfVars; i++) {
-        std::cout << "VAR: " << i << "\n"<< "FORCED: " << vars[i].enqueued << vars[i].forced << "\n";
+    for (int i = 1; i <= numOfVars; i++) {
+        std::cout.flush();
+        std::cout << "\n"
+                  << "VAR: " << i << "\n"
+                  << "FORCED: " << vars[i].enqueued << " " << vars[i].forced << "\n";
         std::cout << "POS_OCC: ";
-        for (auto it = vars[i].static_pos_occ.begin(); it != vars[i].static_pos_occ.end(); ++it) {
-            std::cout << *it << " ";
+        for (const auto& element : vars[i].static_pos_occ) {
+            std::cout << element << " ";
         }
 
         std::cout << "\n";
         std::cout << "NEG_OCC: ";
 
-        for (auto it = vars[i].static_neg_occ.begin(); it != vars[i].static_neg_occ.end(); ++it) {
-            std::cout << *it << " ";
+        for (const auto& element : vars[i].static_neg_occ) {
+            std::cout << element << " ";
         }
     }
 
     for (int i = 1; i <= numOfClauses; i++) {
-        std::cout << "CLAUSE: " << i << " Active:"<<  cnf[i].active;
+        std::cout << "CLAUSE: " << i << " Active:" << cnf[i].active << std::endl;
     }
 
     pthread_t thread;
