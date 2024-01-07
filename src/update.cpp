@@ -53,7 +53,7 @@ void updateCNF(int assertedVar) {
 void updateBacktrack(int unassignedVar) {
 
     // clauses where assertedVar evaluates to FALSE
-    std::set<int>* clausesToUpdate;
+    std::set<int>* clausesToIncrement;
 
     // all clauses the unassignedVar appears in (including satisfied clauses) and evaluates to TRUE
     std::set<int>* allOccurences;
@@ -61,7 +61,7 @@ void updateBacktrack(int unassignedVar) {
     // allOccurences without satisfied clauses
     std::set<int>* dynOccurences;
 
-    clausesToUpdate = (vars[unassignedVar].val == TRUE) ? &vars[unassignedVar].neg_occ : &vars[unassignedVar].pos_occ;
+    clausesToIncrement = (vars[unassignedVar].val == TRUE) ? &vars[unassignedVar].neg_occ : &vars[unassignedVar].pos_occ;
 
     allOccurences = (vars[unassignedVar].val == TRUE) ? &vars[unassignedVar].static_pos_occ : &vars[unassignedVar].static_neg_occ;
 
@@ -71,9 +71,9 @@ void updateBacktrack(int unassignedVar) {
     std::set<int> copy = *allOccurences;
 
     // if clause of dynOccurencies is sat by unassignedVar, 
-    // reestablish the previous literal references 
+    // resstore the previous literal references 
     for (clauseIndex = copy.begin(); clauseIndex != copy.end(); ++clauseIndex) {
-        if (!cnf[*clauseIndex].sat == unassignedVar) continue;
+        if (!(cnf[*clauseIndex].sat == unassignedVar)) continue;
 
         Clause clause = cnf[*clauseIndex];
 
@@ -92,7 +92,7 @@ void updateBacktrack(int unassignedVar) {
     }
 
     std::set<int>::iterator clauseIndex2;
-    std::set<int> copy2 = *clausesToUpdate;
+    std::set<int> copy2 = *clausesToIncrement;
 
     for (clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) {
         cnf[*clauseIndex2].active++;
