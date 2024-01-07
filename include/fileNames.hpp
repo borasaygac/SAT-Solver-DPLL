@@ -1,5 +1,5 @@
 #include <string>
-extern std::string fileNamesComp[] = {"dummy",
+std::string fileNamesComp[] = {"dummy",
                                       "001_aim-100-1_6-no-1_u.cnf",
                                       "002_aim-100-1_6-no-2_u.cnf  ",
                                       "003_aim-100-1_6-no-3_u.cnf  ",
@@ -173,7 +173,7 @@ extern std::string fileNamesComp[] = {"dummy",
                                       "171_uf50-08_s.cnf           ",
                                       "172_uf50-09_s.cnf           "};
 
-extern std::string fileNamesTest[] = {
+std::string fileNamesTest[] = {
 
     "dummy",
     "001_count4_2_s.cnf",
