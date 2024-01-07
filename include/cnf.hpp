@@ -33,8 +33,6 @@ enum Polarity { NEG, POS, MIX, UNSET };
 struct Variable {
     Assig val = FREE;
 
-    int index;
-
     std::set<int> static_pos_occ;  // All clauses where var appears as pos watched literal
     std::set<int> static_neg_occ;  // All clauses where var appears as neg watched literal
 

@@ -33,7 +33,6 @@ void parseDIMACS(std::string filename) {
         vars.resize(numOfVars + 1);  // vars in DIMACS are 1-indexed
         for (int i = 0; i < numOfVars + 1; i++) {
             Variable v;
-            v.index = i;
             vars[i] = v;
         }
         Clause dummy;
@@ -96,13 +95,16 @@ void parseDIMACS(std::string filename) {
         vars[i].neg_occ = vars[i].static_neg_occ;
     }
 
-    //Find pure lits and assign them to pure lit queue
-    for (int i = 0; i < numOfVars; i++){
+    // Find pure lits and assign them to pure lit queue
+    // TODO: Change the structure where you check only one occ list. Only one is enough.
+    for (int i = 1; i <= numOfVars; i++) {
         if ((vars[i].static_neg_occ.size() == 0 && vars[i].static_pos_occ.size() > 0) ||
-            ((vars[i].static_pos_occ.size() == 0 && vars[i].static_neg_occ.size() > 0))){
-                vars[i].prioPureLit = true;
-                std::cout << "Var no: " << vars[i].index << " is a pure lit" << "\n" << std::flush;
-                pureLitQueue.push(vars[i].index);
-            }
+            ((vars[i].static_pos_occ.size() == 0 && vars[i].static_neg_occ.size() > 0))) {
+            vars[i].prioPureLit = true;
+            std::cout << "Var no: " << i << " is a pure lit"
+                      << "\n"
+                      << std::flush;
+            pureLitQueue.push(i);
+        }
     }
 }
