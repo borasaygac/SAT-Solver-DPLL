@@ -25,6 +25,11 @@ void backtrack() {
         unitQueue.pop();
     }
 
+    // TODO
+    while (!pureLitQueue.empty()) {
+        pureLitQueue.pop();
+    }
+
     if (assig.empty()) {
         pthread_exit((void *)1);
     }  // UNSAT
