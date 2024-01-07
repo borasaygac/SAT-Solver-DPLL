@@ -8,8 +8,8 @@ void parseDIMACS(std::string filename) {
         // parse head of DIMACS
         std::getline(file, line);
 
-        // skip comment lines
-        while (line[0] == 'c') {
+        // skip comment lines and empty lines
+        while (line[0] == 'c' || line.empty()) {
             // The line below shows the skipped comments.
             // std::cout << "Comment: " << line << std::endl;
             std::getline(file, line);
@@ -33,9 +33,12 @@ void parseDIMACS(std::string filename) {
         vars.resize(numOfVars + 1);  // vars in DIMACS are 1-indexed
         for (int i = 0; i < numOfVars + 1; i++) {
             Variable v;
+            v.index = i;
             vars[i] = v;
         }
         Clause dummy;
+        dummy.literals = {};
+        dummy.active = -1;
         cnf.push_back(dummy);  // push dummy clause on cnf[0] to ensure 1-index.
         int count = 1;         // what clause are we processing?
         Clause clause;
@@ -50,8 +53,9 @@ void parseDIMACS(std::string filename) {
                 // not precise if the literal appears multiple times in the
                 // clause (unlikely)
                 clause.literals.push_back(literal);
-                literal > 0 ? vars[std::abs(literal)].static_pos_occ.insert(count) : vars[std::abs(literal)].static_neg_occ.insert(count);
-                // std::cout << "Literal: " << literal << std::endl;
+                literal > 0 ? vars[std::abs(literal)].static_pos_occ.insert(count)
+                            : vars[std::abs(literal)].static_neg_occ.insert(count);
+                std::cout << "Literal: " << literal << std::endl;
             }
 
             if (literal == 0) {
@@ -87,9 +91,18 @@ void parseDIMACS(std::string filename) {
         printf("Unable to open file");
     }
 
-    for(int i=1; i < numOfVars; i++){
+    for (int i = 1; i <= numOfVars; i++) {
         vars[i].pos_occ = vars[i].static_pos_occ;
         vars[i].neg_occ = vars[i].static_neg_occ;
     }
 
+    //Find pure lits and assign them to pure lit queue
+    for (int i = 0; i < numOfVars; i++){
+        if ((vars[i].static_neg_occ.size() == 0 && vars[i].static_pos_occ.size() > 0) ||
+            ((vars[i].static_pos_occ.size() == 0 && vars[i].static_neg_occ.size() > 0))){
+                vars[i].prioPureLit = true;
+                std::cout << "Var no: " << vars[i].index << " is a pure lit" << "\n" << std::flush;
+                pureLitQueue.push(vars[i].index);
+            }
+    }
 }
