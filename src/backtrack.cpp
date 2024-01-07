@@ -9,6 +9,7 @@
 void backtrack() {
     while (!assig.empty() && vars[assig.top()].forced) {  // until the last branching variable.
         int toUnassign = assig.top();
+        printf("Unassigned %i\n", toUnassign);
         updateBacktrack(toUnassign);
         vars[toUnassign].val = FREE;
         vars[toUnassign].forced = false;

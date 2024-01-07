@@ -13,18 +13,24 @@ void updateCNF(int assertedVar) {
 
     std::set<int>::iterator clauseIndex;
     std::set<int> copy = *clausesToMarkSatisfied;
-    printf("asserted var %i and value %i\n",assertedVar, vars[assertedVar].val);
+    printf("asserted var %i and value %i\n", assertedVar, vars[assertedVar].val);
 
     // While clauses to mark satisfied are unsatisfied, mark satisfied and
     // erase all references of the literals occuring in the clause, since it can be disregarded
     for (clauseIndex = copy.begin(); clauseIndex != copy.end(); ++clauseIndex) {
         if (cnf[*clauseIndex].sat > 0) continue;
-        Clause clause = cnf[*clauseIndex];
-        cnf[*clauseIndex].sat = assertedVar;
+        Clause* clause = &cnf[*clauseIndex];
+        clause->sat = assertedVar;
         printf("mark clause sat %i\n", *clauseIndex);
-        for (int i = 0; i < clause.literals.size(); i++) {
-            clause.literals[i] > 0 ? vars[clause.literals[i]].pos_occ.erase(*clauseIndex)
-                                   : vars[clause.literals[i]].neg_occ.erase(*clauseIndex);
+        for (int i = 0; i < clause->literals.size(); i++) {
+            clause->literals[i] > 0 ? vars[std::abs(clause->literals[i])].pos_occ.erase(*clauseIndex)
+                                    : vars[std::abs(clause->literals[i])].neg_occ.erase(*clauseIndex);
+
+            // printf("SIZE STATIC: %i and DYN: %i", vars[std::abs(clause->literals[i])].static_pos_occ.size(),
+            //        vars[std::abs(clause->literals[i])].pos_occ.size());
+
+            // printf("SIZE STATIC: %i and DYN: %i", vars[std::abs(clause->literals[i])].static_neg_occ.size(),
+            //        vars[std::abs(clause->literals[i])].neg_occ.size());
         }
         numOfSatClauses++;
     }
@@ -35,26 +41,26 @@ void updateCNF(int assertedVar) {
     std::set<int> copy2 = *clausesToUpdate;
     for (clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) {
         if (cnf[*clauseIndex2].sat > 0) continue;
-        Clause clause = cnf[*clauseIndex2];
-        clause.active--;
-        printf("decremented clause %i\n and the anctive number %i,\n", *clauseIndex2, clause.active );
-        if (clause.active == 1) {
-            for (int i = 0; i < clause.literals.size(); i++) {
-                if (vars[std::abs(clause.literals[i])].val == FREE) {
-                    unitQueue.push(clause.literals[i]);
-                    vars[std::abs(clause.literals[i])].enqueued = true;
-                }
-            }
-        }
-        if (clause.active == 0) {
+        Clause* clause = &cnf[*clauseIndex2];
+        clause->active--;
+        printf("decremented clause %i\n and the anctive number %i,\n", *clauseIndex2, clause->active);
+        if (clause->active == 0) {
+            printf("Conflict in clause %i,\n", *clauseIndex2);
             backtrack();
             return;
+        }
+        if (clause->active == 1) {
+            for (int i = 0; i < clause->literals.size(); i++) {
+                if (vars[std::abs(clause->literals[i])].val == FREE) {
+                    unitQueue.push(clause->literals[i]);
+                    vars[std::abs(clause->literals[i])].enqueued = true;
+                }
+            }
         }
     }
 }
 
 void updateBacktrack(int unassignedVar) {
-
     // clauses where assertedVar evaluates to FALSE
     std::set<int>* clausesToIncrement;
 
@@ -73,25 +79,26 @@ void updateBacktrack(int unassignedVar) {
     std::set<int>::iterator clauseIndex;
     std::set<int> copy = *allOccurences;
 
-    // if clause of dynOccurencies is sat by unassignedVar, 
-    // resstore the previous literal references 
+    // if clause of dynOccurencies is sat by unassignedVar,
+    // resstore the previous literal references
     for (clauseIndex = copy.begin(); clauseIndex != copy.end(); ++clauseIndex) {
-        if (!(cnf[*clauseIndex].sat == unassignedVar)) continue;
+        if (cnf[*clauseIndex].sat != unassignedVar) continue;
 
-        Clause clause = cnf[*clauseIndex];
+        Clause* clause = &cnf[*clauseIndex];
 
-        clause.sat = 0;
+        clause->sat = 0;
 
         // Assig: 1 -> true, 2->false, 3->true
         // 1, 2, 3 sat by 1
         // Look if other literal satisfies the clause
         // ?MAYBE OTHER LIT SATSFIES OR MAYBE NOT DUE TO ASSIG ORDER?
 
-        for (int i = 0; i < clause.literals.size(); i++) {
-            clause.literals[i] > 0 ? vars[clause.literals[i]].pos_occ.insert(*clauseIndex)
-                                   : vars[clause.literals[i]].neg_occ.insert(*clauseIndex);
-            numOfSatClauses--;
+        for (int i = 0; i < clause->literals.size(); i++) {
+            clause->literals[i] > 0 ? vars[std::abs(clause->literals[i])].pos_occ.insert(*clauseIndex)
+                                    : vars[std::abs(clause->literals[i])].neg_occ.insert(*clauseIndex);
         }
+        printf("\nRestored clause %i for unassigned %i\n", *clauseIndex, unassignedVar);
+        numOfSatClauses--;
     }
 
     std::set<int>::iterator clauseIndex2;
