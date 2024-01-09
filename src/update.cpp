@@ -26,14 +26,19 @@ void updateCNF(int assertedVar) {
             clause->literals[i] > 0 ? vars[std::abs(clause->literals[i])].pos_occ.erase(*clauseIndex)
                                     : vars[std::abs(clause->literals[i])].neg_occ.erase(*clauseIndex);
 
-            if (vars[std::abs(clause->literals[i])].pos_occ.size() == 0) pureLitQueue.push(clause->literals[i]);
+            // if (vars[std::abs(clause->literals[i])].val == FREE) {
+            //     if (vars[std::abs(clause->literals[i])].pos_occ.size() == 0 &&
+            //         vars[std::abs(clause->literals[i])].neg_occ.size() > 0)
+            //         pureLitQueue.push(clause->literals[i]);
 
-            if (vars[std::abs(clause->literals[i])].neg_occ.size() == 0) pureLitQueue.push(clause->literals[i]);
-
-            // printf("SIZE STATIC: %i and DYN: %i", vars[std::abs(clause->literals[i])].static_pos_occ.size(),
+            //     if (vars[std::abs(clause->literals[i])].neg_occ.size() == 0 &&
+            //         vars[std::abs(clause->literals[i])].pos_occ.size() > 0)
+            //         pureLitQueue.push(clause->literals[i]);
+            // }
+            // printf("SIZE STATIC: %i and DYN: %i\n", vars[std::abs(clause->literals[i])].static_pos_occ.size(),
             //        vars[std::abs(clause->literals[i])].pos_occ.size());
 
-            // printf("SIZE STATIC: %i and DYN: %i", vars[std::abs(clause->literals[i])].static_neg_occ.size(),
+            // printf("SIZE STATIC: %i and DYN: %i\n", vars[std::abs(clause->literals[i])].static_neg_occ.size(),
             //        vars[std::abs(clause->literals[i])].neg_occ.size());
         }
         numOfSatClauses++;
