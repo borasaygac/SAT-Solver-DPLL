@@ -14,6 +14,7 @@ void updateCNF(int assertedVar) {
     std::set<int>::iterator clauseIndex;
     std::set<int> copy = *clausesToMarkSatisfied;
     printf("asserted var %i and value %i\n", assertedVar, vars[assertedVar].val);
+    printf("Is %i branching or forced? Forced: %i \n", assertedVar, vars[assertedVar].forced);
 
     // While clauses to mark satisfied are unsatisfied, mark satisfied and
     // erase all references of the literals occuring in the clause, since it can be disregarded
@@ -60,8 +61,9 @@ void updateCNF(int assertedVar) {
         }
         if (clause->active == 1) {
             for (int i = 0; i < clause->literals.size(); i++) {
-                if (vars[std::abs(clause->literals[i])].val == FREE) {
+                if (vars[std::abs(clause->literals[i])].val == FREE && vars[std::abs(clause->literals[i])].enqueued == false) {
                     unitQueue.push(clause->literals[i]);
+                    printf("pushed elem %i\n", clause->literals[i]);
                     vars[std::abs(clause->literals[i])].enqueued = true;
                 }
             }

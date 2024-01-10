@@ -39,13 +39,13 @@ void unitPropagate() {
     int unitLiteral;
     while (!unitQueue.empty()) {
         unitLiteral = unitQueue.front();
-        // std::cout << "current queue elm = " << unitLiteral << "\n";
-        //printf("queue elem %i\n",unitLiteral);
+        printf("current queue elm = %i\n", unitLiteral);
+        unitQueue.pop();
         vars[std::abs(unitLiteral)].enqueued = false;
         vars[std::abs(unitLiteral)].forced = true;
         (unitLiteral > 0) ? vars[std::abs(unitLiteral)].val = TRUE : vars[std::abs(unitLiteral)].val = FALSE;
-        unitQueue.pop();
-        //std::cout << "UP variable " << unitLiteral << " set to " << vars[std::abs(unitLiteral)].getValue() << "\n";
+        
+        printf("UP variable %i set to %i\n", unitLiteral, vars[std::abs(unitLiteral)].val);
 
         assig.push(std::abs(unitLiteral));
 
