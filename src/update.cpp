@@ -111,13 +111,12 @@ void updateBacktrack(int unassignedVar) {
 
     allOccurences = (vars[unassignedVar].val == TRUE) ? &vars[unassignedVar].static_pos_occ : &vars[unassignedVar].static_neg_occ;
 
-    dynOccurences = (vars[unassignedVar].val == TRUE) ? &vars[unassignedVar].pos_occ : &vars[unassignedVar].neg_occ;
+    // dynOccurences = (vars[unassignedVar].val == TRUE) ? &vars[unassignedVar].pos_occ : &vars[unassignedVar].neg_occ;
 
     std::set<int>::iterator clauseIndex2;
     std::set<int> copy2 = *clausesToIncrement;
 
     for (clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) {
-        if (cnf[*clauseIndex2].active < cnf[*clauseIndex2].literals.size()) {
             /* If the active == size, that means we haven't visited the clause yet and made no operations on it.
             Our current setup, takes all the reverse polarity occurances, regardless of whether we've made any 
             operations on the clause. So either we change the ClausesToIncrement setup to only include the clauses
@@ -125,8 +124,7 @@ void updateBacktrack(int unassignedVar) {
             */
             
         cnf[*clauseIndex2].active++;
-        //std::cout << "active number after increment " << cnf[*clauseIndex2].active << " for clause " << *clauseIndex2 << "\n"; 
-        }
+
     }
 
     std::set<int>::iterator clauseIndex;

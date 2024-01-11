@@ -5,6 +5,10 @@ PUSH FORMER SAT CLAUSES BACK INTO POS_OCC - done yesterday on 6.1.24
 WACTH OUT FOR ALREADY ASSIGNED PURE LITERALS 
 PREPROCCESS FIRST BATCH PURE LITS -- done 6.1.24
 
+20, 27, 28: wtf
+7, 34: kurz
+
+
 Put assig.push and updatewatchedliterals() to setValue() 
 
 PROBLEMS: SAME LITERALS ON QUEUE
