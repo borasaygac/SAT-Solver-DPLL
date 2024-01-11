@@ -1,6 +1,27 @@
 #include "../include/cnf.hpp"
 
 void updateCNF(int assertedVar) {
+
+    verifyModel();
+
+    std::cout << "asserted var " << assertedVar << "\n"; 
+
+    std::cout <<"[";
+    for (int i = 1; i < numOfVars; i++) {
+        int value;
+        if (vars[i].val == FREE) value = 0;
+        if (vars[i].val == TRUE) value = i;
+        if (vars[i].val == FALSE) value = -i;
+
+        std::cout<< value << ", ";
+    }
+    int value;
+    if (vars[numOfVars].val == FREE) value = 0;
+    if (vars[numOfVars].val == TRUE) value = numOfVars;
+    if (vars[numOfVars].val == FALSE) value = -numOfVars;
+    std::cout<< value;
+    std::cout<<"]" <<"\n" ;
+    
     // clauses where assertedVar evaluates to FALSE
     std::set<int>* clausesToUpdate;
 
@@ -13,8 +34,10 @@ void updateCNF(int assertedVar) {
 
     std::set<int>::iterator clauseIndex;
     std::set<int> copy = *clausesToMarkSatisfied;
-    printf("asserted var %i and value %i\n", assertedVar, vars[assertedVar].val);
-    printf("Is %i branching or forced? Forced: %i \n", assertedVar, vars[assertedVar].forced);
+    // printf("asserted var %i and value %i\n", assertedVar, vars[assertedVar].val);
+    // printf("Is %i branching or forced? Forced: %i \n", assertedVar, vars[assertedVar].forced);
+    // std::cout << "asserted var " << assertedVar << " and value" <<  vars[assertedVar].val << "\n";
+    // std::cout << "Is " << assertedVar << " branching or forced?" << "Forced: " << vars[assertedVar].forced << "\n";
 
     // While clauses to mark satisfied are unsatisfied, mark satisfied and
     // erase all references of the literals occuring in the clause, since it can be disregarded
@@ -22,7 +45,8 @@ void updateCNF(int assertedVar) {
         if (cnf[*clauseIndex].sat > 0) continue;
         Clause* clause = &cnf[*clauseIndex];
         clause->sat = assertedVar;
-        printf("mark clause sat %i\n", *clauseIndex);
+        // printf("mark clause sat %i\n", *clauseIndex);
+        //std::cout <<"mark clause sat " << *clauseIndex << "\n";
         for (int i = 0; i < clause->literals.size(); i++) {
             clause->literals[i] > 0 ? vars[std::abs(clause->literals[i])].pos_occ.erase(*clauseIndex)
                                     : vars[std::abs(clause->literals[i])].neg_occ.erase(*clauseIndex);
@@ -43,32 +67,49 @@ void updateCNF(int assertedVar) {
             //        vars[std::abs(clause->literals[i])].neg_occ.size());
         }
         numOfSatClauses++;
+        //std::cout << "Num of sat clauses " << numOfSatClauses << "\n";
+        //std::cout << "and the unit queue size " << unitQueue.size() << "\n";
+        //std::cout << "and the assig stack size " << assig.size() << "\n";
     }
 
     // While clauses to update have more than one literal, decrement act, else also start unitProp
     // or report conflict
     std::set<int>::iterator clauseIndex2;
     std::set<int> copy2 = *clausesToUpdate;
+    //std::cout << "size of clauses to update "<< clausesToUpdate->size() << "\n";
     for (clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) {
         if (cnf[*clauseIndex2].sat > 0) continue;
         Clause* clause = &cnf[*clauseIndex2];
         clause->active--;
-        printf("decremented clause %i\n and the anctive number %i,\n", *clauseIndex2, clause->active);
+        //std::cout << "decremented clause " << *clauseIndex2 << "\nand the active number " << cnf[*clauseIndex2].active << "\n";
+        // printf("decremented clause %i\n and the anctive number %i,\n", *clauseIndex2, clause->active);
         if (clause->active == 0) {
-            printf("Conflict in clause %i,\n", *clauseIndex2);
+            // printf("Conflict in clause %i,\n", *clauseIndex2);
+            //std::cout << "Conflict in clause " << *clauseIndex2 << "\n";
             backtrack();
             return;
         }
-        if (clause->active == 1) {
+        if (cnf[*clauseIndex2].active == 1) {
             for (int i = 0; i < clause->literals.size(); i++) {
                 if (vars[std::abs(clause->literals[i])].val == FREE && vars[std::abs(clause->literals[i])].enqueued == false) {
                     unitQueue.push(clause->literals[i]);
-                    printf("pushed elem %i\n", clause->literals[i]);
+                    // printf("pushed elem %i\n", clause->literals[i]);
+                    std::cout << "pushed elem " << clause->literals[i] << "\n";
                     vars[std::abs(clause->literals[i])].enqueued = true;
                 }
             }
         }
     }
+    printf("[");
+    for (int i = 1; i < numOfClauses; i++) {
+        int value = cnf[i].active;
+
+        std::cout << value << ", ";
+    }
+    int activeval = cnf[numOfClauses].active;
+
+    std::cout << activeval;
+    std::cout << "]\n";
 }
 
 void updateBacktrack(int unassignedVar) {
@@ -86,6 +127,22 @@ void updateBacktrack(int unassignedVar) {
     allOccurences = (vars[unassignedVar].val == TRUE) ? &vars[unassignedVar].static_pos_occ : &vars[unassignedVar].static_neg_occ;
 
     dynOccurences = (vars[unassignedVar].val == TRUE) ? &vars[unassignedVar].pos_occ : &vars[unassignedVar].neg_occ;
+
+    std::set<int>::iterator clauseIndex2;
+    std::set<int> copy2 = *clausesToIncrement;
+
+    for (clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) {
+        if (cnf[*clauseIndex2].active < cnf[*clauseIndex2].literals.size()) {
+            /* If the active == size, that means we haven't visited the clause yet and made no operations on it.
+            Our current setup, takes all the reverse polarity occurances, regardless of whether we've made any 
+            operations on the clause. So either we change the ClausesToIncrement setup to only include the clauses
+            that we've made operations on, or this if loop.
+            */
+            
+        cnf[*clauseIndex2].active++;
+        //std::cout << "active number after increment " << cnf[*clauseIndex2].active << " for clause " << *clauseIndex2 << "\n"; 
+        }
+    }
 
     std::set<int>::iterator clauseIndex;
     std::set<int> copy = *allOccurences;
@@ -108,15 +165,9 @@ void updateBacktrack(int unassignedVar) {
             clause->literals[i] > 0 ? vars[std::abs(clause->literals[i])].pos_occ.insert(*clauseIndex)
                                     : vars[std::abs(clause->literals[i])].neg_occ.insert(*clauseIndex);
         }
-        printf("\nRestored clause %i for unassigned %i\n", *clauseIndex, unassignedVar);
+        //printf("\nRestored clause %i for unassigned %i\n", *clauseIndex, unassignedVar);
+        std::cout << "\nRestored clause" << *clauseIndex << "for unassigned " << unassignedVar << "\n";
         numOfSatClauses--;
-    }
-
-    std::set<int>::iterator clauseIndex2;
-    std::set<int> copy2 = *clausesToIncrement;
-
-    for (clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) {
-        cnf[*clauseIndex2].active++;
     }
 }
 

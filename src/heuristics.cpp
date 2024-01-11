@@ -1,7 +1,12 @@
 #include "../include/cnf.hpp"
 
 void chooseINC() {
-    while (vars[curVar].val != FREE && curVar <= numOfVars) curVar++;
+    int i = 0;
+    while (vars[curVar].val != FREE){
+        curVar++;
+        //std::cout << "Curvar value " << curVar << "\n";
+    } 
+
     vars[curVar].val = TRUE;
     vars[curVar].forced = false;
     assig.push(curVar);

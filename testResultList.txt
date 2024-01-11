@@ -4,3 +4,5 @@
 4- Correct result, correct assignments and run, runtime = 1.6s
 5- Correct result, correct assignments and run, runtime = 0.05s
 6- Correct result, correct assignments and run, runtime = 0.05s
+7- Correct result, correct assignments and run, runtime = around 0.008s. Lead to seeing that our ClausesToIncrement setup is faulty. If need be we can change it or the if loop can stay.
+ 

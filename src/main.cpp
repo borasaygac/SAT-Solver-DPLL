@@ -51,6 +51,8 @@ int main(int argc, char* argv[]) {
 
     parseDIMACS(fileName);
 
+    
+
     for (int i = 1; i <= numOfVars; i++) {
         std::cout.flush();
         std::cout << "\n"

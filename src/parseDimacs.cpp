@@ -105,6 +105,7 @@ void parseDIMACS(std::string filename) {
                       << "\n"
                       << std::flush;
             pureLitQueue.push(i);
+            //TODO FOR LATER: Fix the queue structure
         }
     }
 }
