@@ -1,7 +1,7 @@
 #include "../include/cnf.hpp"
 
 void chooseINC() {
-    while (vars[curVar].val != FREE) curVar++;
+    while (vars[curVar].val != FREE && curVar <= numOfVars) curVar++;
     vars[curVar].val = TRUE;
     vars[curVar].forced = false;
     assig.push(curVar);

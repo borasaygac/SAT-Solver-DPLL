@@ -86,5 +86,24 @@
         "codecvt": "cpp",
         "variant": "cpp"
     },
-    "clang-format.style": "{ BasedOnStyle: Google, IndentWidth: 4, TabWidth: 4, UseTab: Never, ColumnLimit: 130 }"
+    "clang-format.style": "{ BasedOnStyle: Google, IndentWidth: 4, TabWidth: 4, UseTab: Never, ColumnLimit: 130 }",
+    
+    "makefile.configurations": [
+        {
+            "name": "Config",
+            "makefile.makePath": "C:\\Users\\boras\\Desktop\\winlibs-x86_64-posix-seh-gcc-13.2.0-llvm-17.0.5-mingw-w64ucrt-11.0.1-r3\\mingw64\\bin\\mingw32-make",
+            "makefile.makefilePath": "C:\\Users\\boras\\projects\\group_k_project_2\\Makefile",
+            "makeArgs": ["arg=t7"]
+        }
+    ],
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "c:\\Users\\boras\\projects\\group_k_project_2",
+            "binaryPath": "c:\\Users\\boras\\projects\\group_k_project_2\\main",
+            "binaryArgs": []
+        }
+    ],
+    "makefile.buildLog": "",
+    "makefile.loggingLevel": "Debug",
+    "makefile.makePath": "C:\\Users\\boras\\Desktop\\winlibs-x86_64-posix-seh-gcc-13.2.0-llvm-17.0.5-mingw-w64ucrt-11.0.1-r3\\mingw64\\bin\\mingw32-make.exe"
 }

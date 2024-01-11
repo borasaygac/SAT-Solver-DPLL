@@ -1,1 +1,6 @@
-1- Correct result, 0.04 s, Led to finding out that we push the same literal multiple times. Now fixed. 19:24 10.01.24 
+1- Correct result, Led to finding out that we push the same literal multiple times. Now fixed. 19:24 10.01.24 , runtime = around 0.02 s
+2- Correct result, correct assignments and run, runtime = around 0.06 s
+3- Correct result ,correct assignments and run, runtime = 0.13 s
+4- Correct result, correct assignments and run, runtime = 1.6s
+5- Correct result, correct assignments and run, runtime = 0.05s
+6- Correct result, correct assignments and run, runtime = 0.05s
