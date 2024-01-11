@@ -28,7 +28,7 @@ void updateCNF(int assertedVar) {
     // clauses where assertedVar evaluates to TRUE
     std::set<int>* clausesToMarkSatisfied;
 
-    clausesToUpdate = (vars[assertedVar].val == TRUE) ? &vars[assertedVar].neg_occ : &vars[assertedVar].pos_occ;
+    clausesToUpdate = (vars[assertedVar].val == TRUE) ? &vars[assertedVar].static_neg_occ : &vars[assertedVar].static_pos_occ;
 
     clausesToMarkSatisfied = (vars[assertedVar].val == TRUE) ? &vars[assertedVar].pos_occ : &vars[assertedVar].neg_occ;
 
@@ -50,21 +50,6 @@ void updateCNF(int assertedVar) {
         for (int i = 0; i < clause->literals.size(); i++) {
             clause->literals[i] > 0 ? vars[std::abs(clause->literals[i])].pos_occ.erase(*clauseIndex)
                                     : vars[std::abs(clause->literals[i])].neg_occ.erase(*clauseIndex);
-
-            // if (vars[std::abs(clause->literals[i])].val == FREE) {
-            //     if (vars[std::abs(clause->literals[i])].pos_occ.size() == 0 &&
-            //         vars[std::abs(clause->literals[i])].neg_occ.size() > 0)
-            //         pureLitQueue.push(clause->literals[i]);
-
-            //     if (vars[std::abs(clause->literals[i])].neg_occ.size() == 0 &&
-            //         vars[std::abs(clause->literals[i])].pos_occ.size() > 0)
-            //         pureLitQueue.push(clause->literals[i]);
-            // }
-            // printf("SIZE STATIC: %i and DYN: %i\n", vars[std::abs(clause->literals[i])].static_pos_occ.size(),
-            //        vars[std::abs(clause->literals[i])].pos_occ.size());
-
-            // printf("SIZE STATIC: %i and DYN: %i\n", vars[std::abs(clause->literals[i])].static_neg_occ.size(),
-            //        vars[std::abs(clause->literals[i])].neg_occ.size());
         }
         numOfSatClauses++;
         //std::cout << "Num of sat clauses " << numOfSatClauses << "\n";
@@ -78,9 +63,9 @@ void updateCNF(int assertedVar) {
     std::set<int> copy2 = *clausesToUpdate;
     //std::cout << "size of clauses to update "<< clausesToUpdate->size() << "\n";
     for (clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) {
+        cnf[*clauseIndex2].active--;
         if (cnf[*clauseIndex2].sat > 0) continue;
         Clause* clause = &cnf[*clauseIndex2];
-        clause->active--;
         //std::cout << "decremented clause " << *clauseIndex2 << "\nand the active number " << cnf[*clauseIndex2].active << "\n";
         // printf("decremented clause %i\n and the anctive number %i,\n", *clauseIndex2, clause->active);
         if (clause->active == 0) {
@@ -122,7 +107,7 @@ void updateBacktrack(int unassignedVar) {
     // allOccurences without satisfied clauses
     std::set<int>* dynOccurences;
 
-    clausesToIncrement = (vars[unassignedVar].val == TRUE) ? &vars[unassignedVar].neg_occ : &vars[unassignedVar].pos_occ;
+    clausesToIncrement = (vars[unassignedVar].val == TRUE) ? &vars[unassignedVar].static_neg_occ : &vars[unassignedVar].static_pos_occ;
 
     allOccurences = (vars[unassignedVar].val == TRUE) ? &vars[unassignedVar].static_pos_occ : &vars[unassignedVar].static_neg_occ;
 
@@ -180,3 +165,17 @@ bool evaluateLiteral(int literal) {
 
     return false;
 }
+            // if (vars[std::abs(clause->literals[i])].val == FREE) {
+            //     if (vars[std::abs(clause->literals[i])].pos_occ.size() == 0 &&
+            //         vars[std::abs(clause->literals[i])].neg_occ.size() > 0)
+            //         pureLitQueue.push(clause->literals[i]);
+
+            //     if (vars[std::abs(clause->literals[i])].neg_occ.size() == 0 &&
+            //         vars[std::abs(clause->literals[i])].pos_occ.size() > 0)
+            //         pureLitQueue.push(clause->literals[i]);
+            // }
+            // printf("SIZE STATIC: %i and DYN: %i\n", vars[std::abs(clause->literals[i])].static_pos_occ.size(),
+            //        vars[std::abs(clause->literals[i])].pos_occ.size());
+
+            // printf("SIZE STATIC: %i and DYN: %i\n", vars[std::abs(clause->literals[i])].static_neg_occ.size(),
+            //        vars[std::abs(clause->literals[i])].neg_occ.size());
