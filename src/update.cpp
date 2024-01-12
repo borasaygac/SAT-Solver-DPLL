@@ -91,7 +91,7 @@ void updateCNF(int assertedVar) {
             }
         }
     }
-    printf("[");
+    std::cout << "[";
     for (int i = 1; i < numOfClauses; i++) {
         int value = cnf[i].active;
 

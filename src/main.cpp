@@ -25,8 +25,10 @@ int main(int argc, char* argv[]) {
 
     if (outputFile.is_open()) {
         // Redirecting std::cout to write to the file
-        std::streambuf* coutBuffer = std::cout.rdbuf();
-        std::cout.rdbuf(outputFile.rdbuf());
+        // std::streambuf* coutBuffer = std::cout.rdbuf(); // Store original cout buffer. We do not need this since we're writing on the output file all the time.
+        std::cout.rdbuf(outputFile.rdbuf()); // redirect cout to outputFile
+    } else{
+        std::cerr << "Error opening output.txt for writing" << "\n";
     }
     // // measure CPU time...
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
@@ -72,11 +74,11 @@ int main(int argc, char* argv[]) {
     }
 
     for (int i = 1; i <= numOfClauses; i++) {
-        std::cout << "CLAUSE: " << i << " Active:" << cnf[i].active << std::endl;
+        std::cout << "CLAUSE: " << i << " Active:" << cnf[i].active << "\n";
     }
 
     pthread_t thread;
-
+    
     if (pthread_create(&thread, NULL, dpll, NULL)) {
         std::cerr << "Error: Unable to create thread." << std::endl;
         return -1;
