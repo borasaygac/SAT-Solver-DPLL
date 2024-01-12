@@ -25,10 +25,12 @@ int main(int argc, char* argv[]) {
 
     if (outputFile.is_open()) {
         // Redirecting std::cout to write to the file
-        // std::streambuf* coutBuffer = std::cout.rdbuf(); // Store original cout buffer. We do not need this since we're writing on the output file all the time.
-        std::cout.rdbuf(outputFile.rdbuf()); // redirect cout to outputFile
-    } else{
-        std::cerr << "Error opening output.txt for writing" << "\n";
+        // std::streambuf* coutBuffer = std::cout.rdbuf(); // Store original cout buffer. We do not need this since we're writing
+        // on the output file all the time.
+        std::cout.rdbuf(outputFile.rdbuf());  // redirect cout to outputFile
+    } else {
+        std::cerr << "Error opening output.txt for writing"
+                  << "\n";
     }
     // // measure CPU time...
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
@@ -53,12 +55,8 @@ int main(int argc, char* argv[]) {
 
     parseDIMACS(fileName);
 
-    
-
     for (int i = 1; i <= numOfVars; i++) {
-        std::cout.flush();
-        std::cout << "\n"
-                  << "VAR: " << i << "\n"
+        std::cout << "VAR: " << i << "\n"
                   << "FORCED: " << vars[i].enqueued << " " << vars[i].forced << "\n";
         std::cout << "POS_OCC: ";
         for (const auto& element : vars[i].static_pos_occ) {
@@ -71,16 +69,20 @@ int main(int argc, char* argv[]) {
         for (const auto& element : vars[i].static_neg_occ) {
             std::cout << element << " ";
         }
+        std::cout << "\n";
     }
 
+    
     for (int i = 1; i <= numOfClauses; i++) {
         std::cout << "CLAUSE: " << i << " Active:" << cnf[i].active << "\n";
     }
 
     pthread_t thread;
-    
+
     if (pthread_create(&thread, NULL, dpll, NULL)) {
-        std::cerr << "Error: Unable to create thread." << std::endl;
+        std::cerr << "Error: Unable to create thread."
+                  << "\n";
+        std::cout.flush();
         return -1;
     }
     // Wait for the child thread to finish
@@ -97,6 +99,8 @@ int main(int argc, char* argv[]) {
     //     std::cout << *it << std::endl;  // Perform operations with each element
     // }
     if ((intptr_t)res == 0) verifyModel();
+
+    std::cout.flush();
 
     // std::cout << "\nCPU time used: " << duration.count() << " seconds\n" << std::endl;
 

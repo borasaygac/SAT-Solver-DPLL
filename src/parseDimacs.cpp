@@ -25,9 +25,9 @@ void parseDIMACS(std::string filename) {
         numOfVars = std::stoi(tokens[2]);
         numOfClauses = std::stoi(tokens[3]);
         // numOfUnassigned = numOfVars;
-        std::cout << "Number of Variables: " << numOfVars << std::endl;
-        std::cout << "Number of Clauses: " << numOfClauses << std::endl;
-        std::cout << "Number of Clauses: " << numOfUnassigned << std::endl;
+        std::cout << "Number of Variables: " << numOfVars << "\n";
+        std::cout << "Number of Clauses: " << numOfClauses << "\n";
+        std::cout << "Number of Clauses: " << numOfUnassigned << "\n";
 
         // parse rest
         vars.resize(numOfVars + 1);  // vars in DIMACS are 1-indexed
@@ -54,7 +54,7 @@ void parseDIMACS(std::string filename) {
                 clause.literals.push_back(literal);
                 literal > 0 ? vars[std::abs(literal)].static_pos_occ.insert(count)
                             : vars[std::abs(literal)].static_neg_occ.insert(count);
-                std::cout << "Literal: " << literal << std::endl;
+                std::cout << "Literal: " << literal << "\n";
             }
 
             if (literal == 0) {
@@ -66,7 +66,7 @@ void parseDIMACS(std::string filename) {
                         // std::cout << "Literal: " << clause.literals[0] << "in if22" << std::endl;
                         if (!vars[std::abs(clause.literals[0])].enqueued) {
                             unitQueue.push(clause.literals[0]);
-                            std::cout << "Pushing " << clause.literals[0] << " on unit queue" << std::endl;
+                            std::cout << "Pushing " << clause.literals[0] << " on unit queue" << "\n";
                             vars[std::abs(clause.literals[0])].enqueued = true;
                         }
                     }

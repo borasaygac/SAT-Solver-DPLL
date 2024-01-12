@@ -20,10 +20,10 @@ void processFile(std::string& filePath) {
     filePath = filePath.erase(0, 5);
     filePath = filePath.substr(0, filePath.size()-4);
 
-    std::cout << "Running DPLL on file " << filePath << std::endl;
+    std::cout << "Running DPLL on file " << filePath << "\n";
 
     system(("mingw32-make run arg=" + filePath).c_str());
-    std::cout << "-------------------Ran--------------" << std::endl;
+    std::cout << "-------------------Ran--------------" << "\n";
 }
 
 void iterateFiles(const std::string& folderPath) {
