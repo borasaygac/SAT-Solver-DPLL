@@ -48,7 +48,7 @@ void updateCNF(int assertedVar) {
     // erase all references of the literals occuring in the clause, since it can be disregarded
     for (clauseIndex = copy.begin(); clauseIndex != copy.end(); ++clauseIndex) {
         // unneccesary
-        if (cnf[*clauseIndex].sat != 0) continue;
+        // if (cnf[*clauseIndex].sat != 0) continue;
         Clause* clause = &cnf[*clauseIndex];
         clause->sat = assertedVar;
         // printf("mark clause sat %i\n", *clauseIndex);
@@ -57,6 +57,17 @@ void updateCNF(int assertedVar) {
             clause->literals[i] > 0 ? vars[std::abs(clause->literals[i])].pos_occ.erase(*clauseIndex)
                                     : vars[std::abs(clause->literals[i])].neg_occ.erase(*clauseIndex);
         }
+
+        if (vars[std::abs(assertedVar)].val == FREE) {
+            // if (vars[std::abs(assertedVar)].pos_occ.size() * vars[std::abs(assertedVar)].neg_occ.size() == 0 &&
+            //     vars[std::abs(assertedVar)].pos_occ.size() + vars[std::abs(assertedVar)].neg_occ.size() >= 1)
+            //     pureLitQueue.push(assertedVar);
+
+            if ((vars[std::abs(assertedVar)].pos_occ.size() == 0 && vars[std::abs(assertedVar)].neg_occ.size() > 0) ||
+                (vars[std::abs(assertedVar)].neg_occ.size() == 0 && vars[std::abs(assertedVar)].pos_occ.size() > 0))
+                pureLitQueue.push(assertedVar);
+        }
+
         numOfSatClauses++;
         // std::cout << "Num of sat clauses " << numOfSatClauses << "\n";
         // std::cout << "and the unit queue size " << unitQueue.size() << "\n";
@@ -78,14 +89,14 @@ void updateCNF(int assertedVar) {
             // printf("Conflict in clause %i,\n", *clauseIndex2);
             // std::cout << "Conflict in clause " << *clauseIndex2 << "\n";
             backtrackFlag = 1;
-            //return;
+            // return;
         }
         if (cnf[*clauseIndex2].active == 1) {
             for (int i = 0; i < clause->literals.size(); i++) {
                 if (vars[std::abs(clause->literals[i])].val == FREE && !vars[std::abs(clause->literals[i])].enqueued) {
                     unitQueue.push(clause->literals[i]);
                     // printf("pushed elem %i\n", clause->literals[i]);
-                    //std::cout << "pushed elem " << clause->literals[i] << "\n";
+                    // std::cout << "pushed elem " << clause->literals[i] << "\n";
                     vars[std::abs(clause->literals[i])].enqueued = true;
                 }
             }
@@ -161,7 +172,7 @@ void updateBacktrack(int unassignedVar) {
                                     : vars[std::abs(clause->literals[i])].neg_occ.insert(*clauseIndex);
         }
         // printf("\nRestored clause %i for unassigned %i\n", *clauseIndex, unassignedVar);
-        //std::cout << "\nRestored clause" << *clauseIndex << "for unassigned " << unassignedVar << "\n";
+        // std::cout << "\nRestored clause" << *clauseIndex << "for unassigned " << unassignedVar << "\n";
         numOfSatClauses--;
     }
 }

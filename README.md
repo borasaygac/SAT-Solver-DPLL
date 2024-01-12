@@ -8,6 +8,8 @@ PREPROCCESS FIRST BATCH PURE LITS -- done 6.1.24
 20, 27, 28: wtf
 7, 34: kurz
 
+TODO: OPTIMIERUNG (COPY necc, if necc, etc....), PURELIT, HEURISTICS APPROACH, MOVE EXIT, FORCED QUEUE
+
 
 Put assig.push and updatewatchedliterals() to setValue() 
 

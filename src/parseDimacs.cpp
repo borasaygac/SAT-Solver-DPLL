@@ -54,7 +54,7 @@ void parseDIMACS(std::string filename) {
                 clause.literals.push_back(literal);
                 literal > 0 ? vars[std::abs(literal)].static_pos_occ.insert(count)
                             : vars[std::abs(literal)].static_neg_occ.insert(count);
-                std::cout << "Literal: " << literal << "\n";
+                // std::cout << "Literal: " << literal << "\n";
             }
 
             if (literal == 0) {
@@ -66,7 +66,7 @@ void parseDIMACS(std::string filename) {
                         // std::cout << "Literal: " << clause.literals[0] << "in if22" << std::endl;
                         if (!vars[std::abs(clause.literals[0])].enqueued) {
                             unitQueue.push(clause.literals[0]);
-                            std::cout << "Pushing " << clause.literals[0] << " on unit queue" << "\n";
+                            // std::cout << "Pushing " << clause.literals[0] << " on unit queue" << "\n";
                             vars[std::abs(clause.literals[0])].enqueued = true;
                         }
                     }
@@ -74,11 +74,11 @@ void parseDIMACS(std::string filename) {
                     // else also link the second watched literal to their respective entry in variables
 
                     cnf.push_back(clause);
-                    std::cout << "for clause " << count << ":";
+                    // std::cout << "for clause " << count << ":";
                     for (int i = 0; i < clause.literals.size(); i++) {
-                        std::cout << " " << clause.literals[i];
+                        // std::cout << " " << clause.literals[i];
                     }
-                    std::cout << "\n";
+                    // std::cout << "\n";
 
                     clause = {};
                     count++;
@@ -101,9 +101,9 @@ void parseDIMACS(std::string filename) {
         if ((vars[i].static_neg_occ.size() == 0 && vars[i].static_pos_occ.size() > 0) ||
             ((vars[i].static_pos_occ.size() == 0 && vars[i].static_neg_occ.size() > 0))) {
             vars[i].prioPureLit = true;
-            std::cout << "Var no: " << i << " is a pure lit"
-                      << "\n"
-                      << std::flush;
+            // std::cout << "Var no: " << i << " is a pure lit"
+                    //   << "\n"
+                    //   << std::flush;
             pureLitQueue.push(i);
             //TODO FOR LATER: Fix the queue structure
         }

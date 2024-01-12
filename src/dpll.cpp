@@ -26,7 +26,7 @@ void pureLiteralElimination() {
     int pureLiteral;
     while (!pureLitQueue.empty()) {
         pureLiteral = pureLitQueue.front();
-        //std::cout << "PURELiT!! " << pureLiteral << "\n";
+        std::cout << "PURELiT!! " << pureLiteral << "\n";
         pureLitQueue.pop();
         (pureLiteral > 0) ? vars[std::abs(pureLiteral)].val = TRUE : vars[std::abs(pureLiteral)].val = FALSE;
         assig.push(std::abs(pureLiteral));
