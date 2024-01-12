@@ -3,7 +3,7 @@
 void updateCNF(int assertedVar) {
     verifyModel();
 
-    std::cout << "asserted var " << assertedVar << "\n";
+    /*std::cout << "asserted var " << assertedVar << "\n";
 
     std::cout << "[";
     for (int i = 1; i < numOfVars; i++) {
@@ -20,7 +20,7 @@ void updateCNF(int assertedVar) {
     if (vars[numOfVars].val == FALSE) value = -numOfVars;
     std::cout << value;
     std::cout << "]"
-              << "\n";
+              << "\n";*/
 
     // clauses where assertedVar evaluates to FALSE
     std::set<int>* clausesToUpdate;
@@ -77,21 +77,21 @@ void updateCNF(int assertedVar) {
         if (clause->active == 0) {
             // printf("Conflict in clause %i,\n", *clauseIndex2);
             // std::cout << "Conflict in clause " << *clauseIndex2 << "\n";
-            backtrack();
-            return;
+            backtrackFlag = 1;
+            //return;
         }
         if (cnf[*clauseIndex2].active == 1) {
             for (int i = 0; i < clause->literals.size(); i++) {
                 if (vars[std::abs(clause->literals[i])].val == FREE && !vars[std::abs(clause->literals[i])].enqueued) {
                     unitQueue.push(clause->literals[i]);
                     // printf("pushed elem %i\n", clause->literals[i]);
-                    std::cout << "pushed elem " << clause->literals[i] << "\n";
+                    //std::cout << "pushed elem " << clause->literals[i] << "\n";
                     vars[std::abs(clause->literals[i])].enqueued = true;
                 }
             }
         }
     }
-    std::cout << "[";
+    /*std::cout << "[";
     for (int i = 1; i < numOfClauses; i++) {
         int value = cnf[i].active;
 
@@ -100,7 +100,10 @@ void updateCNF(int assertedVar) {
     int activeval = cnf[numOfClauses].active;
 
     std::cout << activeval;
-    std::cout << "]\n";
+    std::cout << "]\n";*/
+    if (backtrackFlag == 1) {
+        backtrack();
+    }
 }
 
 void updateBacktrack(int unassignedVar) {
@@ -158,7 +161,7 @@ void updateBacktrack(int unassignedVar) {
                                     : vars[std::abs(clause->literals[i])].neg_occ.insert(*clauseIndex);
         }
         // printf("\nRestored clause %i for unassigned %i\n", *clauseIndex, unassignedVar);
-        std::cout << "\nRestored clause" << *clauseIndex << "for unassigned " << unassignedVar << "\n";
+        //std::cout << "\nRestored clause" << *clauseIndex << "for unassigned " << unassignedVar << "\n";
         numOfSatClauses--;
     }
 }

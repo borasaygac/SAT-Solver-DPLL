@@ -60,6 +60,9 @@ extern int numOfSatClauses;
 // the currently processed unit literal
 extern int curProp;
 
+// flag to determine whether to backtrack or not
+extern int backtrackFlag;
+
 // list of clauses (1-indexed)
 extern std::vector<Clause> cnf;
 

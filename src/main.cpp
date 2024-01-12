@@ -18,6 +18,7 @@ std::queue<int> pureLitQueue;
 int curVar = 1;
 int numOfSatClauses = 0;
 int curProp;
+int backtrackFlag = 0;
 Heuristics heuristic = INC;
 
 int main(int argc, char* argv[]) {
