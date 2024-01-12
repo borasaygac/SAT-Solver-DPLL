@@ -1,7 +1,7 @@
 #include "../include/cnf.hpp"
 
 void updateCNF(int assertedVar) {
-    verifyModel();
+    // verifyModel();
 
     /*std::cout << "asserted var " << assertedVar << "\n";
 

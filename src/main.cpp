@@ -22,17 +22,17 @@ int backtrackFlag = 0;
 Heuristics heuristic = INC;
 
 int main(int argc, char* argv[]) {
-    std::ofstream outputFile("output.txt");  // Open a file stream for writing
+    // std::ofstream outputFile("output.txt");  // Open a file stream for writing
 
-    if (outputFile.is_open()) {
+    // if (outputFile.is_open()) {
         // Redirecting std::cout to write to the file
         // std::streambuf* coutBuffer = std::cout.rdbuf(); // Store original cout buffer. We do not need this since we're writing
         // on the output file all the time.
-        std::cout.rdbuf(outputFile.rdbuf());  // redirect cout to outputFile
-    } else {
-        std::cerr << "Error opening output.txt for writing"
-                  << "\n";
-    }
+        // std::cout.rdbuf(outputFile.rdbuf());  // redirect cout to outputFile
+    // } else {
+    //     std::cerr << "Error opening output.txt for writing"
+    //               << "\n";
+    // }
     // // measure CPU time...
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
