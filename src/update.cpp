@@ -1,27 +1,27 @@
 #include "../include/cnf.hpp"
 
 void updateCNF(int assertedVar) {
-
     verifyModel();
 
-    std::cout << "asserted var " << assertedVar << "\n"; 
+    std::cout << "asserted var " << assertedVar << "\n";
 
-    std::cout <<"[";
+    std::cout << "[";
     for (int i = 1; i < numOfVars; i++) {
         int value;
         if (vars[i].val == FREE) value = 0;
         if (vars[i].val == TRUE) value = i;
         if (vars[i].val == FALSE) value = -i;
 
-        std::cout<< value << ", ";
+        std::cout << value << ", ";
     }
     int value;
     if (vars[numOfVars].val == FREE) value = 0;
     if (vars[numOfVars].val == TRUE) value = numOfVars;
     if (vars[numOfVars].val == FALSE) value = -numOfVars;
-    std::cout<< value;
-    std::cout<<"]" <<"\n" ;
-    
+    std::cout << value;
+    std::cout << "]"
+              << "\n";
+
     // clauses where assertedVar evaluates to FALSE
     std::set<int>* clausesToUpdate;
 
@@ -30,7 +30,12 @@ void updateCNF(int assertedVar) {
 
     clausesToUpdate = (vars[assertedVar].val == TRUE) ? &vars[assertedVar].static_neg_occ : &vars[assertedVar].static_pos_occ;
 
-    clausesToMarkSatisfied = (vars[assertedVar].val == TRUE) ? &vars[assertedVar].pos_occ : &vars[assertedVar].neg_occ;
+    if (vars[assertedVar].val == TRUE) {
+        clausesToMarkSatisfied = &vars[assertedVar].pos_occ;
+    } else {
+        clausesToMarkSatisfied = &vars[assertedVar].neg_occ;
+        assertedVar = -assertedVar;
+    }
 
     std::set<int>::iterator clauseIndex;
     std::set<int> copy = *clausesToMarkSatisfied;
@@ -46,31 +51,31 @@ void updateCNF(int assertedVar) {
         Clause* clause = &cnf[*clauseIndex];
         clause->sat = assertedVar;
         // printf("mark clause sat %i\n", *clauseIndex);
-        //std::cout <<"mark clause sat " << *clauseIndex << "\n";
+        // std::cout <<"mark clause sat " << *clauseIndex << "\n";
         for (int i = 0; i < clause->literals.size(); i++) {
             clause->literals[i] > 0 ? vars[std::abs(clause->literals[i])].pos_occ.erase(*clauseIndex)
                                     : vars[std::abs(clause->literals[i])].neg_occ.erase(*clauseIndex);
         }
         numOfSatClauses++;
-        //std::cout << "Num of sat clauses " << numOfSatClauses << "\n";
-        //std::cout << "and the unit queue size " << unitQueue.size() << "\n";
-        //std::cout << "and the assig stack size " << assig.size() << "\n";
+        // std::cout << "Num of sat clauses " << numOfSatClauses << "\n";
+        // std::cout << "and the unit queue size " << unitQueue.size() << "\n";
+        // std::cout << "and the assig stack size " << assig.size() << "\n";
     }
 
     // While clauses to update have more than one literal, decrement act, else also start unitProp
     // or report conflict
     std::set<int>::iterator clauseIndex2;
     std::set<int> copy2 = *clausesToUpdate;
-    //std::cout << "size of clauses to update "<< clausesToUpdate->size() << "\n";
+    // std::cout << "size of clauses to update "<< clausesToUpdate->size() << "\n";
     for (clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) {
         cnf[*clauseIndex2].active--;
         if (cnf[*clauseIndex2].sat > 0) continue;
         Clause* clause = &cnf[*clauseIndex2];
-        //std::cout << "decremented clause " << *clauseIndex2 << "\nand the active number " << cnf[*clauseIndex2].active << "\n";
-        // printf("decremented clause %i\n and the anctive number %i,\n", *clauseIndex2, clause->active);
+        // std::cout << "decremented clause " << *clauseIndex2 << "\nand the active number " << cnf[*clauseIndex2].active << "\n";
+        //  printf("decremented clause %i\n and the anctive number %i,\n", *clauseIndex2, clause->active);
         if (clause->active == 0) {
             // printf("Conflict in clause %i,\n", *clauseIndex2);
-            //std::cout << "Conflict in clause " << *clauseIndex2 << "\n";
+            // std::cout << "Conflict in clause " << *clauseIndex2 << "\n";
             backtrack();
             return;
         }
@@ -107,24 +112,27 @@ void updateBacktrack(int unassignedVar) {
     // allOccurences without satisfied clauses
     std::set<int>* dynOccurences;
 
-    clausesToIncrement = (vars[unassignedVar].val == TRUE) ? &vars[unassignedVar].static_neg_occ : &vars[unassignedVar].static_pos_occ;
-
     allOccurences = (vars[unassignedVar].val == TRUE) ? &vars[unassignedVar].static_pos_occ : &vars[unassignedVar].static_neg_occ;
 
+    if (vars[unassignedVar].val == TRUE) {
+        clausesToIncrement = &vars[unassignedVar].static_neg_occ;
+    } else {
+        clausesToIncrement = &vars[unassignedVar].static_pos_occ;
+        unassignedVar = -unassignedVar;
+    }
     // dynOccurences = (vars[unassignedVar].val == TRUE) ? &vars[unassignedVar].pos_occ : &vars[unassignedVar].neg_occ;
 
     std::set<int>::iterator clauseIndex2;
     std::set<int> copy2 = *clausesToIncrement;
 
     for (clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) {
-            /* If the active == size, that means we haven't visited the clause yet and made no operations on it.
-            Our current setup, takes all the reverse polarity occurances, regardless of whether we've made any 
-            operations on the clause. So either we change the ClausesToIncrement setup to only include the clauses
-            that we've made operations on, or this if loop.
-            */
-            
-        cnf[*clauseIndex2].active++;
+        /* If the active == size, that means we haven't visited the clause yet and made no operations on it.
+        Our current setup, takes all the reverse polarity occurances, regardless of whether we've made any
+        operations on the clause. So either we change the ClausesToIncrement setup to only include the clauses
+        that we've made operations on, or this if loop.
+        */
 
+        cnf[*clauseIndex2].active++;
     }
 
     std::set<int>::iterator clauseIndex;
@@ -148,7 +156,7 @@ void updateBacktrack(int unassignedVar) {
             clause->literals[i] > 0 ? vars[std::abs(clause->literals[i])].pos_occ.insert(*clauseIndex)
                                     : vars[std::abs(clause->literals[i])].neg_occ.insert(*clauseIndex);
         }
-        //printf("\nRestored clause %i for unassigned %i\n", *clauseIndex, unassignedVar);
+        // printf("\nRestored clause %i for unassigned %i\n", *clauseIndex, unassignedVar);
         std::cout << "\nRestored clause" << *clauseIndex << "for unassigned " << unassignedVar << "\n";
         numOfSatClauses--;
     }
@@ -163,17 +171,17 @@ bool evaluateLiteral(int literal) {
 
     return false;
 }
-            // if (vars[std::abs(clause->literals[i])].val == FREE) {
-            //     if (vars[std::abs(clause->literals[i])].pos_occ.size() == 0 &&
-            //         vars[std::abs(clause->literals[i])].neg_occ.size() > 0)
-            //         pureLitQueue.push(clause->literals[i]);
+// if (vars[std::abs(clause->literals[i])].val == FREE) {
+//     if (vars[std::abs(clause->literals[i])].pos_occ.size() == 0 &&
+//         vars[std::abs(clause->literals[i])].neg_occ.size() > 0)
+//         pureLitQueue.push(clause->literals[i]);
 
-            //     if (vars[std::abs(clause->literals[i])].neg_occ.size() == 0 &&
-            //         vars[std::abs(clause->literals[i])].pos_occ.size() > 0)
-            //         pureLitQueue.push(clause->literals[i]);
-            // }
-            // printf("SIZE STATIC: %i and DYN: %i\n", vars[std::abs(clause->literals[i])].static_pos_occ.size(),
-            //        vars[std::abs(clause->literals[i])].pos_occ.size());
+//     if (vars[std::abs(clause->literals[i])].neg_occ.size() == 0 &&
+//         vars[std::abs(clause->literals[i])].pos_occ.size() > 0)
+//         pureLitQueue.push(clause->literals[i]);
+// }
+// printf("SIZE STATIC: %i and DYN: %i\n", vars[std::abs(clause->literals[i])].static_pos_occ.size(),
+//        vars[std::abs(clause->literals[i])].pos_occ.size());
 
-            // printf("SIZE STATIC: %i and DYN: %i\n", vars[std::abs(clause->literals[i])].static_neg_occ.size(),
-            //        vars[std::abs(clause->literals[i])].neg_occ.size());
+// printf("SIZE STATIC: %i and DYN: %i\n", vars[std::abs(clause->literals[i])].static_neg_occ.size(),
+//        vars[std::abs(clause->literals[i])].neg_occ.size());
