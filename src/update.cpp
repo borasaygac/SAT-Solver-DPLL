@@ -47,7 +47,8 @@ void updateCNF(int assertedVar) {
     // While clauses to mark satisfied are unsatisfied, mark satisfied and
     // erase all references of the literals occuring in the clause, since it can be disregarded
     for (clauseIndex = copy.begin(); clauseIndex != copy.end(); ++clauseIndex) {
-        if (cnf[*clauseIndex].sat > 0) continue;
+        // unneccesary
+        if (cnf[*clauseIndex].sat != 0) continue;
         Clause* clause = &cnf[*clauseIndex];
         clause->sat = assertedVar;
         // printf("mark clause sat %i\n", *clauseIndex);
@@ -69,7 +70,7 @@ void updateCNF(int assertedVar) {
     // std::cout << "size of clauses to update "<< clausesToUpdate->size() << "\n";
     for (clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) {
         cnf[*clauseIndex2].active--;
-        if (cnf[*clauseIndex2].sat > 0) continue;
+        if (cnf[*clauseIndex2].sat != 0) continue;
         Clause* clause = &cnf[*clauseIndex2];
         // std::cout << "decremented clause " << *clauseIndex2 << "\nand the active number " << cnf[*clauseIndex2].active << "\n";
         //  printf("decremented clause %i\n and the anctive number %i,\n", *clauseIndex2, clause->active);
@@ -81,7 +82,7 @@ void updateCNF(int assertedVar) {
         }
         if (cnf[*clauseIndex2].active == 1) {
             for (int i = 0; i < clause->literals.size(); i++) {
-                if (vars[std::abs(clause->literals[i])].val == FREE && vars[std::abs(clause->literals[i])].enqueued == false) {
+                if (vars[std::abs(clause->literals[i])].val == FREE && !vars[std::abs(clause->literals[i])].enqueued) {
                     unitQueue.push(clause->literals[i]);
                     // printf("pushed elem %i\n", clause->literals[i]);
                     std::cout << "pushed elem " << clause->literals[i] << "\n";
@@ -139,7 +140,7 @@ void updateBacktrack(int unassignedVar) {
     std::set<int> copy = *allOccurences;
 
     // if clause of dynOccurencies is sat by unassignedVar,
-    // resstore the previous literal references
+    // restore the previous literal references
     for (clauseIndex = copy.begin(); clauseIndex != copy.end(); ++clauseIndex) {
         if (cnf[*clauseIndex].sat != unassignedVar) continue;
 
