@@ -35,19 +35,19 @@ void backtrack() {
     }
 
     if (assig.empty()) {
-        //std::cout << "Unsat condition reached" << "\n";
+        // UNSAT
         pthread_exit((void *)1);
-    }  // UNSAT
+    }  
 
     // Most recent branching variable
     int b = assig.top();
-    int oldval = vars[b].val;
     updateBacktrack(b);
-    // Assign negated val
     vars[b].forced = true;
+    
+    // Assign negated val
     vars[b].val = Assig(int(2 - std::pow(2.0, vars[b].val)));
     //std::cout << "New branch var" << b << ", OLD: " << oldval << ", NEW: " << vars[b].val << "\n";
     curVar = b;
     updateCNF(b);
-    unitPropagate();
+    propagate();
 }

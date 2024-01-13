@@ -98,7 +98,7 @@ void* dpll(void* arg);
 
 void pureLiteralElimination();
 
-void unitPropagate();
+void propagate();
 
 // chooses literals according to the used heuristic
 extern void (*chooseLiteral)();

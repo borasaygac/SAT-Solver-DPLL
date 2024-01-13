@@ -41,7 +41,7 @@ void updateCNF(int assertedVar) {
     std::set<int> copy = *clausesToMarkSatisfied;
     // printf("asserted var %i and value %i\n", assertedVar, vars[assertedVar].val);
     // printf("Is %i branching or forced? Forced: %i \n", assertedVar, vars[assertedVar].forced);
-    //std::cout << "asserted var " << assertedVar << " and value" << vars[assertedVar].val << "\n";
+    // std::cout << "asserted var " << assertedVar << " and value" << vars[assertedVar].val << "\n";
     // std::cout << "Is " << assertedVar << " branching or forced?" << "Forced: " << vars[assertedVar].forced << "\n";
 
     // While clauses to mark satisfied are unsatisfied, mark satisfied and
@@ -121,6 +121,12 @@ void updateCNF(int assertedVar) {
     std::cout << "]\n";*/
     if (backtrackFlag == 1) {
         backtrack();
+    }
+
+    if (unitQueue.empty() && numOfSatClauses == numOfClauses) {
+        std::cout << "VORBEII!! \n";
+
+        pthread_exit(0);
     }
 }
 

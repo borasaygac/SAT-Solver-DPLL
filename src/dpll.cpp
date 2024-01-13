@@ -1,21 +1,12 @@
 #include "../include/cnf.hpp"
 
-void* dpll(void* arg) {  // TODO: We should implement the more optimised appproach of checking the satisfaction of every clause
+void* dpll(void* arg) {
     while (true) {
         pureLiteralElimination();
 
-        unitPropagate();
-        if (unitQueue.empty() && numOfSatClauses == numOfClauses) {
-            std::cout << "VORBEII!! \n";
+        propagate();
 
-            pthread_exit(0);
-        }
         chooseLiteral();
-        if (unitQueue.empty() && numOfSatClauses == numOfClauses) {
-            std::cout << "VORBEII!! \n";
-
-            pthread_exit(0);
-        }
         //  std::cout << "Current Var :" << curVar << " and current value " << vars[curVar].getValue() << '\n';
 
         //  std::cout << "queue size= " << unitQueue.size() << '\n';
@@ -37,7 +28,7 @@ void pureLiteralElimination() {
     }
 }
 
-void unitPropagate() {
+void propagate() {
     int unitLiteral;
     while (!unitQueue.empty()) {
         unitLiteral = unitQueue.front();
