@@ -1,3 +1,4 @@
+#include <math.h>
 #include <stdio.h>
 
 #include <fstream>
@@ -42,6 +43,10 @@ struct Variable {
     bool forced = false;
     bool enqueued = false;
     bool prioPureLit = false;
+
+    int minCount = 0;  // For MOM
+    int posCount = 0;
+    int negCount = 0;
 };
 
 struct Clause {
@@ -77,7 +82,7 @@ extern std::vector<Variable> vars;
 // set of unsatisfied clauses
 extern std::set<int> satClauses;
 
-extern std::queue<int> pureLitQueue; 
+extern std::queue<int> pureLitQueue;
 
 // queue storing unit literals
 extern std::queue<int> unitQueue;
@@ -105,6 +110,13 @@ void chooseDLIS();
 void chooseDLCS();
 
 /*-------------------------------------------------------------------------*/
+auto customMOMComparator = [](int left, int right) {
+    return ((vars[left].posCount + vars[left].negCount)*pow(2,2) + (vars[left].negCount*vars[left].posCount)) < 
+    ((vars[right].posCount + vars[right].negCount)*pow(2,2) + (vars[right].negCount*vars[right].posCount));  // TODO: add comments
+};
+
+extern std::set<int, decltype(customMOMComparator)> maxHeap(customMOMComparator);
+
 void chooseMOM();
 
 void chooseJW();
