@@ -72,7 +72,9 @@ void parseDIMACS(std::string filename) {
                     }
 
                     // else also link the second watched literal to their respective entry in variables
-
+                    if (clause.literals.size() < minimalWidth) {
+                        minimalWidth = clause.literals.size();
+                    }
                     cnf.push_back(clause);
                     // std::cout << "for clause " << count << ":";
                     for (int i = 0; i < clause.literals.size(); i++) {
@@ -93,6 +95,18 @@ void parseDIMACS(std::string filename) {
     for (int i = 1; i <= numOfVars; i++) {
         vars[i].pos_occ = vars[i].static_pos_occ;
         vars[i].neg_occ = vars[i].static_neg_occ;
+    }
+    if (heuristic == Heuristics::MOM){
+        std::set<int> minimalClauses;
+        for (int i = 1; i <= numOfClauses; i++) {
+            if (cnf[i].active == minimalWidth){
+                minimalClauses.insert(i);
+            }
+        }
+        std::cout <<" minimal width " << minimalWidth << "\n";
+        for (auto it = minimalClauses.begin(); it != minimalClauses.end();++it){
+            std::cout << "minimal width clauses indexes are " << *it << "\n";
+        }
     }
 
     // Find pure lits and assign them to pure lit queue

@@ -24,23 +24,63 @@ void chooseINC() {
 void chooseDLIS() {
     int max = 0;
     int index = 0;
+    bool pol = false;
 
-    for (int i = 1; i <= numOfVars; i++){
-        int totalOcc = vars[i].neg_occ.size() + vars[i].pos_occ.size();
-        if (totalOcc > max && vars[i].val == FREE) {
-            max = totalOcc;
-            index = i;
-        } 
+    for (int i = 1; i <= numOfVars; i++) {
+        if (vars[i].val != FREE) continue;
+
+        int indPosSum = vars[i].pos_occ.size();
+        int indNegSum = vars[i].neg_occ.size();
+
+        max = (indPosSum > indNegSum) ? indPosSum : indNegSum;
+        index = i;
+        pol = (indPosSum > indNegSum);
     }
 
     curVar = index;
-    vars[curVar].val = TRUE;
+    vars[curVar].val = (pol) ? TRUE : FALSE;
     vars[curVar].forced = false;
     assig.push(curVar);
 }
 
-void chooseDLCS() {}
+void chooseDLCS() {
+    int max = 0;
+    int index = 0;
 
-void chooseMOM() {}
+    for (int i = 1; i <= numOfVars; i++) {
+        if (vars[i].val != FREE) continue;
+        
+        int totalOcc = vars[i].neg_occ.size() + vars[i].pos_occ.size();
+        if (totalOcc > max) {
+            max = totalOcc;
+            index = i;
+        }
+    }
+
+    curVar = index;
+    if (vars[curVar].pos_occ.size() > vars[curVar].neg_occ.size()) {
+        vars[curVar].val = TRUE;
+    } else {
+        vars[curVar].val = FALSE;
+    }
+    //std::cout << "CHOOSE_LIT:" << curVar << "\n";
+    vars[curVar].forced = false;
+    assig.push(curVar);
+}
+/*---------------------------------END OF DLCS-------------------------------*/
+void chooseMOM() {
+    std::vector<double> MOMScore (numOfClauses, 0.0);
+    int param;
+
+     for (const auto clause : minimalClauses) {
+        for (int i = 0; i < cnf[clause].literals.size(); i++) {
+            
+        }
+     }
+} 
+
+void MOMUpdate() {
+
+}
 
 void chooseJW() {}

@@ -19,7 +19,10 @@ int curVar = 1;
 int numOfSatClauses = 0;
 int curProp;
 int backtrackFlag = 0;
+int minimalWidth = 100;
+std::set<int> minimalClauses;
 Heuristics heuristic = INC;
+
 
 int main(int argc, char* argv[]) {
     // std::ofstream outputFile("output.txt");  // Open a file stream for writing

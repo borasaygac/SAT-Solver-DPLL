@@ -63,6 +63,11 @@ extern int curProp;
 // flag to determine whether to backtrack or not
 extern int backtrackFlag;
 
+// int for minimal clause width
+extern int minimalWidth;
+
+extern std::set<int> minimalClauses;
+
 // list of clauses (1-indexed)
 extern std::vector<Clause> cnf;
 
@@ -99,6 +104,7 @@ void chooseDLIS();
 
 void chooseDLCS();
 
+/*-------------------------------------------------------------------------*/
 void chooseMOM();
 
 void chooseJW();
