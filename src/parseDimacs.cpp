@@ -96,38 +96,4 @@ void parseDIMACS(std::string filename) {
         vars[i].pos_occ = vars[i].static_pos_occ;
         vars[i].neg_occ = vars[i].static_neg_occ;
     }
-    if (heuristic == Heuristics::MOM){
-        std::set<int> minimalClauses;
-        for (int i = 1; i <= numOfClauses; i++) {
-            if (cnf[i].active == minimalWidth){
-                minimalClauses.insert(i);
-            }
-        }
-        std::cout <<" minimal width " << minimalWidth << "\n";
-        for (auto it = minimalClauses.begin(); it != minimalClauses.end();++it){
-            std::cout << "minimal width clauses indexes are " << *it << "\n";
-        }
-    }
-
-    // Find pure lits and assign them to pure lit queue
-    // TODO: Change the structure where you check only one occ list. Only one is enough.
-    for (int i = 1; i <= numOfVars; i++) {
-        if (vars[i].static_neg_occ.size() == 0 && vars[i].static_pos_occ.size() > 0) {
-            vars[i].prioPureLit = true;
-            // std::cout << "Var no: " << i << " is a pure lit"
-            //   << "\n"
-            //   << std::flush;
-            vars[std::abs(i)].enqueued = true;
-            pureLitQueue.push(i);
-        }
-        if (vars[i].static_pos_occ.size() == 0 && vars[i].static_neg_occ.size() > 0) {
-            vars[i].prioPureLit = true;
-            // std::cout << "Var no: " << i << " is a pure lit"
-            //   << "\n"
-            //   << std::flush;
-            vars[std::abs(i)].enqueued = true;
-            pureLitQueue.push(-i);
-            // TODO FOR LATER: Fix the queue structure
-        }
-    }
 }

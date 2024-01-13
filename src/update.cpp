@@ -95,7 +95,7 @@ void updateCNF(int assertedVar) {
         if (clause->active == 0) {
             // printf("Conflict in clause %i,\n", *clauseIndex2);
             // std::cout << "Conflict in clause " << *clauseIndex2 << "\n";
-            backtrackFlag = 1;
+            backtrackFlag = true;
             // return;
         }
         if (cnf[*clauseIndex2].active == 1) {
@@ -119,7 +119,7 @@ void updateCNF(int assertedVar) {
 
     std::cout << activeval;
     std::cout << "]\n";*/
-    if (backtrackFlag == 1) {
+    if (backtrackFlag) {
         backtrack();
     }
 
@@ -190,26 +190,4 @@ void updateBacktrack(int unassignedVar) {
     }
 }
 
-bool evaluateLiteral(int literal) {
-    if (vars[std::abs(literal)].val == FREE) return true;
-
-    if (vars[std::abs(literal)].val == TRUE && literal > 0) return true;
-
-    if (vars[std::abs(literal)].val == FALSE && literal < 0) return true;
-
-    return false;
-}
-// if (vars[std::abs(clause->literals[i])].val == FREE) {
-//     if (vars[std::abs(clause->literals[i])].pos_occ.size() == 0 &&
-//         vars[std::abs(clause->literals[i])].neg_occ.size() > 0)
-//         pureLitQueue.push(clause->literals[i]);
-
-//     if (vars[std::abs(clause->literals[i])].neg_occ.size() == 0 &&
-//         vars[std::abs(clause->literals[i])].pos_occ.size() > 0)
-//         pureLitQueue.push(clause->literals[i]);
-// }
-// printf("SIZE STATIC: %i and DYN: %i\n", vars[std::abs(clause->literals[i])].static_pos_occ.size(),
-//        vars[std::abs(clause->literals[i])].pos_occ.size());
-
-// printf("SIZE STATIC: %i and DYN: %i\n", vars[std::abs(clause->literals[i])].static_neg_occ.size(),
-//        vars[std::abs(clause->literals[i])].neg_occ.size());
+bool evaluateLiteral(int literal) { return vars[std::abs(literal)].val == FREE || !(vars[std::abs(literal)].val ^ (literal > 0)); }

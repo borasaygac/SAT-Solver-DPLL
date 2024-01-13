@@ -18,26 +18,16 @@ std::queue<int> pureLitQueue;
 int curVar = 1;
 int numOfSatClauses = 0;
 int curProp;
-int backtrackFlag = 0;
-int minimalWidth = 100;
+bool backtrackFlag = 0;
+int minimalWidth = 10000;
 std::set<int> minimalClauses;
 Heuristics heuristic = INC;
+void (*heuristicPointers[5])() = {chooseINC, chooseDLIS, chooseDLCS, chooseMOM, chooseJW};
 void (*chooseLiteral)() = nullptr;
 
 
 int main(int argc, char* argv[]) {
-    // std::ofstream outputFile("output.txt");  // Open a file stream for writing
 
-    // if (outputFile.is_open()) {
-        // Redirecting std::cout to write to the file
-        // std::streambuf* coutBuffer = std::cout.rdbuf(); // Store original cout buffer. We do not need this since we're writing
-        // on the output file all the time.
-        // std::cout.rdbuf(outputFile.rdbuf());  // redirect cout to outputFile
-    // } else {
-    //     std::cerr << "Error opening output.txt for writing"
-    //               << "\n";
-    // }
-    // // measure CPU time...
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
     std::string path = argv[1];
@@ -58,43 +48,24 @@ int main(int argc, char* argv[]) {
 
     if (argc > 2) heuristic = Heuristics(std::stoi(argv[2]));
 
-    void (*heuristicPointers[5])() = {chooseINC, chooseDLIS, chooseDLCS, chooseMOM, chooseJW};
     chooseLiteral = heuristicPointers[heuristic];
 
     parseDIMACS(fileName);
 
-    // for (int i = 1; i <= numOfVars; i++) {
-    //     std::cout << "VAR: " << i << "\n"
-    //               << "FORCED: " << vars[i].enqueued << " " << vars[i].forced << "\n";
-    //     std::cout << "POS_OCC: ";
-    //     for (const auto& element : vars[i].static_pos_occ) {
-    //         std::cout << element << " ";
-    //     }
-
-    //     std::cout << "\n";
-    //     std::cout << "NEG_OCC: ";
-
-    //     for (const auto& element : vars[i].static_neg_occ) {
-    //         std::cout << element << " ";
-    //     }
-    //     std::cout << "\n";
-    // }
-
-    
-    // for (int i = 1; i <= numOfClauses; i++) {
-    //     std::cout << "CLAUSE: " << i << " Active:" << cnf[i].active << "\n";
-    // }
+    preprocess();
 
     pthread_t thread;
-
+    
+    void* res;
+    
     if (pthread_create(&thread, NULL, dpll, NULL)) {
         std::cerr << "Error: Unable to create thread."
                   << "\n";
         std::cout.flush();
         return -1;
     }
-    // Wait for the child thread to finish
-    void* res;
+    
+    // Wait for dpll to finish  
     pthread_join(thread, &res);
 
     printModel((intptr_t)res);
@@ -103,14 +74,10 @@ int main(int argc, char* argv[]) {
     std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
 
     printf("\nCPU time used: %.6f seconds\n\n", duration.count());
-    // for (auto it = satClauses.begin(); it != satClauses.end(); ++it) {
-    //     std::cout << *it << std::endl;  // Perform operations with each element
-    // }
+
     if ((intptr_t)res == 0) verifyModel();
 
     std::cout.flush();
-
-    // std::cout << "\nCPU time used: " << duration.count() << " seconds\n" << std::endl;
 
     return 0;
 }

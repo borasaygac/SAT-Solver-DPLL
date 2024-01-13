@@ -66,12 +66,14 @@ extern int numOfSatClauses;
 extern int curProp;
 
 // flag to determine whether to backtrack or not
-extern int backtrackFlag;
+extern bool backtrackFlag;
 
 // int for minimal clause width
 extern int minimalWidth;
 
 extern std::set<int> minimalClauses;
+
+extern void (*heuristicPointers[5])();
 
 // list of clauses (1-indexed)
 extern std::vector<Clause> cnf;
@@ -94,13 +96,17 @@ extern std::priority_queue<int> heap;
 
 void parseDIMACS(std::string filename);
 
+// processes pure and unit literals before dpll starts
+// sets architecture for chosen heuristic
+void preprocess();
+
 void* dpll(void* arg);
 
 void pureLiteralElimination();
 
 void propagate();
 
-// chooses literals according to the used heuristic
+// chooses next branching var according to the selected heuristic
 extern void (*chooseLiteral)();
 
 void chooseINC();
@@ -121,9 +127,10 @@ void chooseMOM();
 
 void chooseJW();
 
-// updates the watched literals after a new assignment is made
+// updates the CNF after a new assignment is made
 void updateCNF(int assertedVar);
 
+// updates the CNF after succ unassignment in backtrack()
 void updateBacktrack(int unassignedVar);
 
 // handles conficts and signals UNSAT
