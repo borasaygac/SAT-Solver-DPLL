@@ -56,16 +56,24 @@ void updateCNF(int assertedVar) {
         for (int i = 0; i < clause->literals.size(); i++) {
             clause->literals[i] > 0 ? vars[std::abs(clause->literals[i])].pos_occ.erase(*clauseIndex)
                                     : vars[std::abs(clause->literals[i])].neg_occ.erase(*clauseIndex);
-        }
 
-        if (vars[std::abs(assertedVar)].val == FREE) {
-            // if (vars[std::abs(assertedVar)].pos_occ.size() * vars[std::abs(assertedVar)].neg_occ.size() == 0 &&
-            //     vars[std::abs(assertedVar)].pos_occ.size() + vars[std::abs(assertedVar)].neg_occ.size() >= 1)
-            //     pureLitQueue.push(assertedVar);
+            if (vars[std::abs(clause->literals[i])].val == FREE && !vars[std::abs(clause->literals[i])].enqueued) {
+                // // if (vars[std::abs(assertedVar)].pos_occ.size() * vars[std::abs(assertedVar)].neg_occ.size() == 0 &&
+                // //     vars[std::abs(assertedVar)].pos_occ.size() + vars[std::abs(assertedVar)].neg_occ.size() >= 1)
+                // //     pureLitQueue.push(assertedVar);
 
-            if ((vars[std::abs(assertedVar)].pos_occ.size() == 0 && vars[std::abs(assertedVar)].neg_occ.size() > 0) ||
-                (vars[std::abs(assertedVar)].neg_occ.size() == 0 && vars[std::abs(assertedVar)].pos_occ.size() > 0))
-                pureLitQueue.push(assertedVar);
+                // if (vars[std::abs(clause->literals[i])].pos_occ.size() == 0 &&
+                //     vars[std::abs(clause->literals[i])].neg_occ.size() > 0) {
+                //     printf("SI %i", -std::abs(clause->literals[i]));
+                //     pureLitQueue.push(-std::abs(clause->literals[i]));
+                //     vars[std::abs(clause->literals[i])].enqueued = true;
+                // }
+                // if (vars[std::abs(clause->literals[i])].neg_occ.size() == 0 &&
+                //     vars[std::abs(clause->literals[i])].pos_occ.size() > 0) {
+                //     pureLitQueue.push(std::abs(clause->literals[i]));
+                //     vars[std::abs(clause->literals[i])].enqueued = true;
+                // }
+            }
         }
 
         numOfSatClauses++;

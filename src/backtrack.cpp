@@ -30,6 +30,7 @@ void backtrack() {
 
     // TODO
     while (!pureLitQueue.empty()) {
+        vars[std::abs(pureLitQueue.front())].enqueued = false;
         pureLitQueue.pop();
     }
 
