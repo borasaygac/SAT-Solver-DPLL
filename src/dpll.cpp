@@ -57,24 +57,3 @@ void unitPropagate() {
         updateCNF(std::abs(unitLiteral));
     }
 }
-
-void chooseLiteral() {
-    switch (heuristic) {
-        case INC:
-            chooseINC();
-            break;
-        case DLIS:
-            chooseDLIS();
-            break;
-        case DLCS:
-            chooseDLCS();
-            break;
-        case MOM:
-            chooseMOM();
-            break;
-        case JW:
-            chooseJW();
-            break;
-    }
-    updateCNF(curVar);
-}

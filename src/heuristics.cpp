@@ -16,12 +16,15 @@ void chooseINC() {
     vars[curVar].val = TRUE;
     vars[curVar].forced = false;
     assig.push(curVar);
+    updateCNF(curVar);
     // std::cout << "CHOOSE_LIT:" << curVar << "\n";
 }
 /*--------------------END FOR CHOOSE INC-----------------------*/
 
 // Custom utility function that helps keep the DLISOccurance set ordered
 void chooseDLIS() {
+    printf("HI %i", 1);
+
     int max = 0;
     int index = 0;
     bool pol = false;
@@ -44,6 +47,8 @@ void chooseDLIS() {
 }
 
 void chooseDLCS() {
+    printf("HI %i", 2);
+
     int max = 0;
     int index = 0;
 
@@ -70,24 +75,24 @@ void chooseDLCS() {
 /*---------------------------------END OF DLCS-------------------------------*/
 
 void chooseMOM() {
-    std::vector<double> MOMScore(numOfClauses, 0.0);
-    int param;
+    printf("HI %i", 3);
 
-    for (const auto clause : minimalClauses) {
-        for (int i = 0; i < cnf[clause].literals.size(); i++) {
-            auto it = maxHeap.find(std::abs(cnf[clause].literals[i]));
-            (cnf[clause].literals[i] > 0) ? vars[*it].posCount++ : vars[*it].negCount++;
-            if (it != maxHeap.end()) maxHeap.erase(std::abs(cnf[clause].literals[i]));
-            maxHeap.insert(std::abs(cnf[clause].literals[i]));
-        }
-    }
+    // std::vector<double> MOMScore(numOfClauses, 0.0);
+    // int param;
 
-    curVar = *(maxHeap.begin());
-    vars[curVar].posCount > vars[curVar].negCount ? vars[curVar].val = TRUE : vars[curVar].val = FALSE;
-    vars[curVar].forced = false;
-    assig.push(curVar);
+    // for (const auto clause : minimalClauses) {
+    //     for (int i = 0; i < cnf[clause].literals.size(); i++) {
+    //         auto it = maxHeap.find(std::abs(cnf[clause].literals[i]));
+    //         (cnf[clause].literals[i] > 0) ? vars[*it].posCount++ : vars[*it].negCount++;
+    //         if (it != maxHeap.end()) maxHeap.erase(std::abs(cnf[clause].literals[i]));
+    //         maxHeap.insert(std::abs(cnf[clause].literals[i]));
+    //     }
+    // }
+
+    // curVar = *(maxHeap.begin());
+    // vars[curVar].posCount > vars[curVar].negCount ? vars[curVar].val = TRUE : vars[curVar].val = FALSE;
+    // vars[curVar].forced = false;
+    // assig.push(curVar);
 }
 
-void MOMUpdate() {}
-
-void chooseJW() {}
+void chooseJW() { printf("HI %i", 4); }

@@ -101,7 +101,7 @@ void pureLiteralElimination();
 void unitPropagate();
 
 // chooses literals according to the used heuristic
-void chooseLiteral();
+extern void (*chooseLiteral)();
 
 void chooseINC();
 
@@ -110,12 +110,12 @@ void chooseDLIS();
 void chooseDLCS();
 
 /*-------------------------------------------------------------------------*/
-auto customMOMComparator = [](int left, int right) {
-    return ((vars[left].posCount + vars[left].negCount)*pow(2,2) + (vars[left].negCount*vars[left].posCount)) < 
-    ((vars[right].posCount + vars[right].negCount)*pow(2,2) + (vars[right].negCount*vars[right].posCount));  // TODO: add comments
-};
+// auto customMOMComparator = [](int left, int right) {
+//     return ((vars[left].posCount + vars[left].negCount)*pow(2,2) + (vars[left].negCount*vars[left].posCount)) < 
+//     ((vars[right].posCount + vars[right].negCount)*pow(2,2) + (vars[right].negCount*vars[right].posCount));  // TODO: add comments
+// };
 
-extern std::set<int, decltype(customMOMComparator)> maxHeap(customMOMComparator);
+// extern std::set<int, decltype(customMOMComparator)> maxHeap(customMOMComparator);
 
 void chooseMOM();
 

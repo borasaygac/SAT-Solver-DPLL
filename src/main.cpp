@@ -22,6 +22,7 @@ int backtrackFlag = 0;
 int minimalWidth = 100;
 std::set<int> minimalClauses;
 Heuristics heuristic = INC;
+void (*chooseLiteral)() = nullptr;
 
 
 int main(int argc, char* argv[]) {
@@ -56,6 +57,9 @@ int main(int argc, char* argv[]) {
     printf("\nRunning %s\n\n", fileName.c_str());
 
     if (argc > 2) heuristic = Heuristics(std::stoi(argv[2]));
+
+    void (*heuristicPointers[5])() = {chooseINC, chooseDLIS, chooseDLCS, chooseMOM, chooseJW};
+    chooseLiteral = heuristicPointers[heuristic];
 
     parseDIMACS(fileName);
 
