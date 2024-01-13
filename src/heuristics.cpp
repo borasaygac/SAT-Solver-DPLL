@@ -1,22 +1,46 @@
+#include <algorithm>
+#include <iostream>
+#include <set>
+#include <utility>
+#include <vector>
+
 #include "../include/cnf.hpp"
 
 void chooseINC() {
     int i = 0;
-    while (vars[curVar].val != FREE){
+    while (vars[curVar].val != FREE) {
         curVar++;
-        //std::cout << "Curvar value " << curVar << "\n";
-    } 
+        // std::cout << "Curvar value " << curVar << "\n";
+    }
 
     vars[curVar].val = TRUE;
     vars[curVar].forced = false;
     assig.push(curVar);
     // std::cout << "CHOOSE_LIT:" << curVar << "\n";
 }
+/*--------------------END FOR CHOOSE INC-----------------------*/
 
-void chooseDLIS(){}
+// Custom utility function that helps keep the DLISOccurance set ordered
+void chooseDLIS() {
+    int max = 0;
+    int index = 0;
 
-void chooseDLCS(){}
+    for (int i = 1; i <= numOfVars; i++){
+        int totalOcc = vars[i].neg_occ.size() + vars[i].pos_occ.size();
+        if (totalOcc > max && vars[i].val == FREE) {
+            max = totalOcc;
+            index = i;
+        } 
+    }
 
-void chooseMOM(){}
+    curVar = index;
+    vars[curVar].val = TRUE;
+    vars[curVar].forced = false;
+    assig.push(curVar);
+}
 
-void chooseJW(){}
+void chooseDLCS() {}
+
+void chooseMOM() {}
+
+void chooseJW() {}
