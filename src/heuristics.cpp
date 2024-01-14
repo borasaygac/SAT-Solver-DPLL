@@ -85,4 +85,43 @@ void chooseMOM() {
     // assig.push(curVar);
 }
 
-void chooseJW() { printf("HI %i", 4); }
+/*-----------------------------------------END OF MOM------------------------------------------------------*/
+
+void chooseJW() { 
+
+    double max = 0;
+    int index = 0;
+    bool pol = false;
+
+    for (int i = 1; i <= numOfVars; i++) {
+        if (vars[i].val != FREE) continue;
+        double posSUM = 0;
+        double negSUM = 0;
+        for (int j = 0; j < vars[i].pos_occ.size(); j++){
+            posSUM += pow(2,-clauses[j].active);
+        }
+        for (int j = 0; j < vars[i].neg_occ.size(); j++){
+            negSUM += pow(2,-clauses[j].active);
+        }
+        int cur = negSUM; // by default negSum
+        bool poltmp = false; 
+
+        if (posSUM > negSUM){
+            cur = posSUM;
+            pol = true;
+        } 
+
+        if (cur > max){
+            max = cur;
+            index = i;
+            pol = poltmp;
+        }
+    }
+
+    curVar = index;
+    vars[curVar].val = pol ? TRUE : FALSE;
+    vars[curVar].forced = false;
+    //std::cout << "chosen var " << curVar << "\n"; 
+    assig.push(curVar);
+    update(curVar);
+ }
