@@ -60,17 +60,17 @@ void updateMOM(int assertedVar) {
             if (vars[std::abs(clause->literals[i])].val == FREE && !vars[std::abs(clause->literals[i])].enqueued) {
                 // // if (vars[std::abs(assertedVar)].pos_occ.size() * vars[std::abs(assertedVar)].neg_occ.size() == 0 &&
                 // //     vars[std::abs(assertedVar)].pos_occ.size() + vars[std::abs(assertedVar)].neg_occ.size() >= 1)
-                // //     pureLitQueue.push(assertedVar);
+                // //     toPropagate.push(assertedVar);
 
                 // if (vars[std::abs(clause->literals[i])].pos_occ.size() == 0 &&
                 //     vars[std::abs(clause->literals[i])].neg_occ.size() > 0) {
                 //     printf("SI %i", -std::abs(clause->literals[i]));
-                //     pureLitQueue.push(-std::abs(clause->literals[i]));
+                //     toPropagate.push(-std::abs(clause->literals[i]));
                 //     vars[std::abs(clause->literals[i])].enqueued = true;
                 // }
                 // if (vars[std::abs(clause->literals[i])].neg_occ.size() == 0 &&
                 //     vars[std::abs(clause->literals[i])].pos_occ.size() > 0) {
-                //     pureLitQueue.push(std::abs(clause->literals[i]));
+                //     toPropagate.push(std::abs(clause->literals[i]));
                 //     vars[std::abs(clause->literals[i])].enqueued = true;
                 // }
             }
@@ -108,7 +108,7 @@ void updateMOM(int assertedVar) {
         if (clauses[*clauseIndex2].active == 1) {
             for (int i = 0; i < clause->literals.size(); i++) {
                 if (vars[std::abs(clause->literals[i])].val == FREE && !vars[std::abs(clause->literals[i])].enqueued) {
-                    unitQueue.push(clause->literals[i]);
+                    toPropagate.push(clause->literals[i]);
                     // printf("pushed elem %i\n", clause->literals[i]);
                     // std::cout << "pushed elem " << clause->literals[i] << "\n";
                     vars[std::abs(clause->literals[i])].enqueued = true;
@@ -131,7 +131,7 @@ void updateMOM(int assertedVar) {
         backtrack();
     }
 
-    if (unitQueue.empty() && numOfSatClauses == numOfClauses) pthread_exit(0);
+    if (toPropagate.empty() && numOfSatClauses == numOfClauses) pthread_exit(0);
 }
 
 void updateBacktrackMOM(int unassignedVar) {

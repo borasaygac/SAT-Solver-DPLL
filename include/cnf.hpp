@@ -94,6 +94,8 @@ extern std::queue<int> pureLitQueue;
 // queue storing unit literals
 extern std::queue<int> unitQueue;
 
+extern std::queue<int> toPropagate;
+
 // stack of variables with assigned values
 extern std::stack<int> assig;
 

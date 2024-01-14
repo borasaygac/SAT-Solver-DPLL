@@ -63,7 +63,7 @@ void parseDIMACS(std::string filename) {
                     if (clause.literals.size() == 1) {
                         // std::cout << "Literal: " << clause.literals[0] << "in if22" << std::endl;
                         if (!vars[std::abs(clause.literals[0])].enqueued) {
-                            unitQueue.push(clause.literals[0]);
+                            toPropagate.push(clause.literals[0]);
                             // std::cout << "Pushing " << clause.literals[0] << " on unit queue" << "\n";
                             vars[std::abs(clause.literals[0])].enqueued = true;
                         }

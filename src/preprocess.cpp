@@ -19,14 +19,14 @@ void preprocess() {
             //   << "\n"
             //   << std::flush;
             vars[std::abs(i)].enqueued = true;
-            pureLitQueue.push(i);
+            toPropagate.push(i);
         }
         if (vars[i].static_pos_occ.size() == 0 && vars[i].static_neg_occ.size() > 0) {
             // std::cout << "Var no: " << i << " is a pure lit"
             //   << "\n"
             //   << std::flush;
             vars[std::abs(i)].enqueued = true;
-            pureLitQueue.push(-i);
+            toPropagate.push(-i);
             // TODO FOR LATER: Fix the queue structure
         }
     }

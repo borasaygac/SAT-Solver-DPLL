@@ -33,6 +33,7 @@ int numOfMinClauses = 0;
 int lastValidWidth = 0;
 std::queue<int> lastValidMinimalClauses;
 int mcc = 0;
+std::queue<int> toPropagate;
 
 int main(int argc, char* argv[]) {
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();

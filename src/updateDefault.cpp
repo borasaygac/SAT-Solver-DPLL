@@ -72,7 +72,7 @@ void updateDef(int assertedVar) {
                         printf("\n");
                     }
                     printf("PURELIT FOUND: %i\n", -std::abs(clause->literals[i]));
-                    pureLitQueue.push(-std::abs(clause->literals[i]));
+                    toPropagate.push(-std::abs(clause->literals[i]));
                     vars[std::abs(clause->literals[i])].enqueued = true;
                 }
                 if (vars[std::abs(clause->literals[i])].neg_occ.size() == 0 &&
@@ -85,7 +85,7 @@ void updateDef(int assertedVar) {
                         printf("\n");
                     }
                     printf("PURELIT FOUND: %i\n", std::abs(clause->literals[i]));
-                    pureLitQueue.push(std::abs(clause->literals[i]));
+                    toPropagate.push(std::abs(clause->literals[i]));
                     vars[std::abs(clause->literals[i])].enqueued = true;
                 }
             }
@@ -117,7 +117,7 @@ void updateDef(int assertedVar) {
         if (clauses[*clauseIndex2].active == 1) {
             for (int i = 0; i < clause->literals.size(); i++) {
                 if (vars[std::abs(clause->literals[i])].val == FREE && !vars[std::abs(clause->literals[i])].enqueued) {
-                    unitQueue.push(clause->literals[i]);
+                    toPropagate.push(clause->literals[i]);
                     printf("UNIT FOUND: %i\n", clause->literals[i]);
 
                     vars[std::abs(clause->literals[i])].enqueued = true;
@@ -139,7 +139,7 @@ void updateDef(int assertedVar) {
         backtrack();
     }
 
-    if (unitQueue.empty() && numOfSatClauses == numOfClauses) pthread_exit(0);
+    if (toPropagate.empty() && numOfSatClauses == numOfClauses) pthread_exit(0);
 }
 
 void updateBacktrackDef(int unassignedVar) {

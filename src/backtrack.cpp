@@ -23,16 +23,10 @@ void backtrack() {
     }
 
     // clear unit queue
-    while (!unitQueue.empty()) {
+    while (!toPropagate.empty()) {
         // std::cout << "Element to be popped from queue: " << unitQueue.front() << "\n";
-        vars[std::abs(unitQueue.front())].enqueued = false;
-        unitQueue.pop();
-    }
-
-    // TODO
-    while (!pureLitQueue.empty()) {
-        vars[std::abs(pureLitQueue.front())].enqueued = false;
-        pureLitQueue.pop();
+        vars[std::abs(toPropagate.front())].enqueued = false;
+        toPropagate.pop();
     }
 
     if (assig.empty()) {
@@ -50,7 +44,6 @@ void backtrack() {
     //std::cout << "New branch var" << b << ", OLD: " << oldval << ", NEW: " << vars[b].val << "\n";
     curVar = b;
     update(b);
-    pureLiteralElimination();
     propagate();
     
 }
