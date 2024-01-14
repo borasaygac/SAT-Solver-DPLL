@@ -4,7 +4,7 @@ void printModel(int res) {
     if (res == 1) {
         printf("\033[31mUNSAT: No model!\n\n[");
         for (int i = 1; i <= numOfVars; i++) {
-            int value;
+            int value = 0;
             if (vars[i].val == FREE) value = 0;
             if (vars[i].val == TRUE) value = i;
             if (vars[i].val == FALSE) value = -i;
@@ -17,7 +17,7 @@ void printModel(int res) {
         std::cout << "\033[1;32mSAT!";
         printf(" Model:\n\n[");
         for (int i = 1; i <= numOfVars; i++) {
-            int value;
+            int value = 0;
             if (vars[i].val == FREE) value = -i;
             if (vars[i].val == TRUE) value = i;
             if (vars[i].val == FALSE) value = -i;

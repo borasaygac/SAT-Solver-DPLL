@@ -7,6 +7,7 @@
 #include "../include/cnf.hpp"
 
 void chooseINC() {
+    dc++;
     while (vars[curVar].val != FREE) {
         curVar++;
         // std::cout << "Curvar value " << curVar << "\n";
@@ -15,12 +16,12 @@ void chooseINC() {
     vars[curVar].val = TRUE;
     vars[curVar].forced = false;
     assig.push(curVar);
-    //std::cout << "CHOOSE_LIT:" << curVar << "\n";
+    // std::cout << "CHOOSE_LIT:" << curVar << "\n";
     update(curVar);
-    
 }
 
 void chooseDLIS() {
+    dc++;
     int max = 0;
     int index = 0;
 
@@ -42,6 +43,7 @@ void chooseDLIS() {
 }
 
 void chooseDLCS() {
+    dc++;
     int max = 0;
     int index = 0;
 
@@ -63,6 +65,7 @@ void chooseDLCS() {
 }
 
 void chooseMOM() {
+    dc++;
     int max = 0;
     int index = 0;
     bool pol = false;
@@ -94,7 +97,7 @@ void chooseMOM() {
     vars[curVar].localMinClauses = minClauses;
     vars[curVar].localMinWidth = minWidth;
     curVar = index;
-    vars[curVar].val = vars[curVar].posMOM ? TRUE : FALSE;
+    vars[curVar].val = pol ? TRUE : FALSE;
     vars[curVar].forced = false;
     // std::cout << "chosen var " << curVar << "and max score " << max <<"\n";
     assig.push(curVar);
@@ -119,6 +122,7 @@ void chooseMOM() {
 }
 
 void chooseJW() {
+    dc++;
     double max = 0;
     int index = 0;
     bool pol = false;
