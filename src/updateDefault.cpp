@@ -118,27 +118,18 @@ void updateDef(int assertedVar) {
             for (int i = 0; i < clause->literals.size(); i++) {
                 if (vars[std::abs(clause->literals[i])].val == FREE && !vars[std::abs(clause->literals[i])].enqueued) {
                     toPropagate.push(clause->literals[i]);
-                    //printf("UNIT FOUND: %i\n", clause->literals[i]);
+                    // printf("UNIT FOUND: %i\n", clause->literals[i]);
 
                     vars[std::abs(clause->literals[i])].enqueued = true;
                 }
             }
         }
     }
-    /*std::cout << "[";
-    for (int i = 1; i < numOfClauses; i++) {
-        int value = clauses[i].active;
-
-        std::cout << value << ", ";
-    }
-    int activeval = clauses[numOfClauses].active;
-
-    std::cout << activeval;
-    std::cout << "]\n";*/
     if (backtrackFlag) {
         backtrack();
     }
 
+    // All clauses are sat and there are no more pure/unit literals threatenings that? => SAT!
     if (toPropagate.empty() && numOfSatClauses == numOfClauses) pthread_exit(0);
 }
 
@@ -148,9 +139,6 @@ void updateBacktrackDef(int unassignedVar) {
 
     // all clauses the unassignedVar appears in (including satisfied clauses) and evaluates to TRUE
     std::set<int>* allOccurences;
-
-    // allOccurences without satisfied clauses
-    // std::set<int>* dynOccurences;
 
     allOccurences = (vars[unassignedVar].val == TRUE) ? &vars[unassignedVar].static_pos_occ : &vars[unassignedVar].static_neg_occ;
 
@@ -165,15 +153,7 @@ void updateBacktrackDef(int unassignedVar) {
     std::set<int>::iterator clauseIndex2;
     std::set<int> copy2 = *clausesToIncrement;
 
-    for (clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) {
-        /* If the active == size, that means we haven't visited the clause yet and made no operations on it.
-        Our current setup, takes all the reverse polarity occurances, regardless of whether we've made any
-        operations on the clause. So either we change the ClausesToIncrement setup to only include the clauses
-        that we've made operations on, or this if loop.
-        */
-
-        clauses[*clauseIndex2].active++;
-    }
+    for (clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) clauses[*clauseIndex2].active++;
 
     std::set<int>::iterator clauseIndex;
     std::set<int> copy = *allOccurences;

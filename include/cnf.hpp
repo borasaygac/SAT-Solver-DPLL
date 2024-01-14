@@ -104,13 +104,11 @@ extern std::queue<int> minClauses;
 void parseDIMACS(std::string filename);
 
 // processes pure and unit literals before dpll starts
-// sets architecture for chosen heuristic
 void preprocess();
 
 void* dpll(void* arg);
 
-void pureLiteralElimination();
-
+// asserts pure and unit literals
 void propagate();
 
 // chooses next branching var according to the selected heuristic
@@ -139,7 +137,8 @@ void chooseMOM();
 
 void chooseJW();
 
-// updates the CNF after a new assignment is made
+// updates the CNF after a new assignment is made;
+// exits dpll if valid assig is found
 void updateDef(int assertedVar);
 
 // updates the CNF after succ unassignment in backtrack()

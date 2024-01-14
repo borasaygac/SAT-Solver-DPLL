@@ -3,7 +3,6 @@
 void* dpll(void* arg) {
     while (true) {
         propagate();
-
         chooseLiteral();
     }
 }
