@@ -2,9 +2,9 @@
 
 void printModel(int res) {
     if (res == 1) {
-        printf("\nUNSAT: No model!\n");
+        printf("\033[31mUNSAT: No model!\n[");
     } else {
-        std::cout << "SAT!"
+        std::cout << "\033[1;32mSAT!"
                   << "\n";
         printf("Model: [");
     }
@@ -22,5 +22,5 @@ void printModel(int res) {
     if (vars[numOfVars].val == TRUE) value = numOfVars;
     if (vars[numOfVars].val == FALSE) value = -numOfVars;
     printf("%i", value);
-    printf("]\n");
+    printf("]\033[0m\n");
 }

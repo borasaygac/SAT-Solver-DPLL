@@ -13,6 +13,6 @@ void verifyModel() {
             std::cout<< "Error at " << i << "\n";
             break;
         }
-        if (i == numOfClauses) printf("\033[32mMODEL VERIFIED!\033[0m\n");
+        if (i == numOfClauses) printf("\n\033[32mMODEL VERIFIED!\033[0m\n");
     }
 }

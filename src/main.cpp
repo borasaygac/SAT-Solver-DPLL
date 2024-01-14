@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
     if (path[0] == 'c') fileName = "comp/" + fileNamesComp[std::stoi(index)];
 
 
-    printf("\nRunning \033[38;5;208m%s \033[1;31m%s\033[0m\n\n", fileName.c_str(), heuristicToString.c_str());
+    printf("\nRunning \033[34m%s \033[38;5;208m%s\033[0m\n\n", fileName.c_str(), heuristicToString.c_str());
 
     chooseLiteral = heuristicPointers[heuristic];
 
@@ -74,10 +74,10 @@ int main(int argc, char* argv[]) {
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
-
-    printf("\n\033[1;32mCPU time used: %.6f seconds\033[0m\n\n", duration.count());
-
+    
     if ((intptr_t)res == 0) verifyModel();
+
+    printf("\nCPU time used: %.6f seconds\033[0m\n\n", duration.count());
 
     std::cout.flush();
 
