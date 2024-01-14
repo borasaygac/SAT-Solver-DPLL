@@ -1,19 +1,8 @@
 # Group_K_Project_2
-WHILE UNDO IN BACKTRACKING UPDATE CLAUSES --Done yesterday on 6.1.24
-NUMOFSATCLAUSES DECREMENT - done on 6.1.24
-PUSH FORMER SAT CLAUSES BACK INTO POS_OCC - done yesterday on 6.1.24
-WACTH OUT FOR ALREADY ASSIGNED PURE LITERALS 
-PREPROCCESS FIRST BATCH PURE LITS -- done 6.1.24
-
-20, 27, 28: wtf -- Fixed
-7, 34: kurz -- Fixed
+C15 takes 57 second with DLCS -- on the border
 
 TODO: OPTIMIERUNG (COPY necc, if necc, etc....), PURELIT, HEURISTICS APPROACH, FORCED QUEUE, REMOVE DUPLICATES PER CLAUSE
 
-
-Put assig.push and updatewatchedliterals() to setValue() 
-
-PROBLEMS: SAME LITERALS ON QUEUE
 
 Global vars: # vars (n), # clauses (m), _Variable_ and _Clause_ data structure, unit_queue Queue<int>, assig_stack Stack<int>.
 
