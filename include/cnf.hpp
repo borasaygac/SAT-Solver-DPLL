@@ -65,6 +65,8 @@ extern int numOfSatClauses;
 // the currently processed unit literal
 extern int curProp;
 
+extern int dc;
+
 extern int btc;
 
 extern int mcc;

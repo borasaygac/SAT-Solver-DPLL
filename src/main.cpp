@@ -26,8 +26,9 @@ void (*heuristicPointers[5])() = {chooseINC, chooseDLIS, chooseDLCS, chooseMOM, 
 void (*chooseLiteral)() = chooseINC;
 void (*update)(int assertedVar) = updateDef;
 void (*updateBacktrack)(int unassignedVar) = updateBacktrackDef;
-int btc = 0;
+int dc = 0;
 int clc = 0;
+int btc = 0;
 int numOfMinClauses = 0;
 int lastValidWidth = 0;
 int mcc = 0;
@@ -90,7 +91,7 @@ int main(int argc, char* argv[]) {
 
     if ((intptr_t)res == 0) verifyModel();
 
-    printf("\nCPU time used: %.6f seconds\n", duration.count());
+    printf("\nCPU time used: %.6f seconds\n\nChosen: %i, Backtrack: %i\n", duration.count(), dc, btc);
 
     printf("\n-------------------------------------\n\n", duration.count());
 

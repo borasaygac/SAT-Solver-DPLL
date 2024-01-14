@@ -7,8 +7,8 @@
 #include "../include/cnf.hpp"
 
 void backtrack() {
-    btc++;
     backtrackFlag = 0;
+    btc++;
     //std::cout << "Intro backtrack\n";
     while (!assig.empty() && vars[assig.top()].forced) {  // until the last branching variable.
         int toUnassign = assig.top();

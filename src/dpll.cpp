@@ -5,8 +5,9 @@ void* dpll(void* arg) {
         pureLiteralElimination();
 
         propagate();
-
+        dc++;
         chooseLiteral();
+
         //  std::cout << "Current Var :" << curVar << " and current value " << vars[curVar].getValue() << '\n';
 
         //  std::cout << "queue size= " << unitQueue.size() << '\n';

@@ -95,19 +95,19 @@ void chooseJW() {
 
     for (int i = 1; i <= numOfVars; i++) {
         if (vars[i].val != FREE) continue;
-        double posSUM = 0;
-        double negSUM = 0;
+        double pos = 0;
+        double neg = 0;
         for (int j = 0; j < vars[i].pos_occ.size(); j++){
-            posSUM += pow(2,-clauses[j].active);
+            pos += pow(2,-clauses[j].active);
         }
         for (int j = 0; j < vars[i].neg_occ.size(); j++){
-            negSUM += pow(2,-clauses[j].active);
+            neg += pow(2,-clauses[j].active);
         }
-        int cur = negSUM; // by default negSum
+        double cur = neg;
         bool poltmp = false; 
 
-        if (posSUM > negSUM){
-            cur = posSUM;
+        if (pos > neg){
+            cur = pos;
             pol = true;
         } 
 
@@ -121,7 +121,7 @@ void chooseJW() {
     curVar = index;
     vars[curVar].val = pol ? TRUE : FALSE;
     vars[curVar].forced = false;
-    //std::cout << "chosen var " << curVar << "\n"; 
+    // std::cout << "chosen var " << curVar << "and max score " << max <<"\n"; 
     assig.push(curVar);
     update(curVar);
  }
