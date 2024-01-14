@@ -36,7 +36,7 @@ void parseDIMACS(std::string filename) {
         Clause dummy;
         dummy.literals = {};
         dummy.active = -1;
-        cnf.push_back(dummy);  // push dummy clause on cnf[0] to ensure 1-index.
+        clauses.push_back(dummy);  // push dummy clause on cnf[0] to ensure 1-index.
         int count = 1;         // what clause are we processing?
         Clause clause;
         while (std::getline(file, line)) {
@@ -70,10 +70,10 @@ void parseDIMACS(std::string filename) {
                     }
 
                     // else also link the second watched literal to their respective entry in variables
-                    if (clause.literals.size() < minimalWidth) {
-                        minimalWidth = clause.literals.size();
+                    if (clause.literals.size() < minWidth) {
+                        minWidth = clause.literals.size();
                     }
-                    cnf.push_back(clause);
+                    clauses.push_back(clause);
                     // std::cout << "for clause " << count << ":";
                     for (int i = 0; i < clause.literals.size(); i++) {
                         // std::cout << " " << clause.literals[i];

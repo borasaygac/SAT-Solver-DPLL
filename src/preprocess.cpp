@@ -4,10 +4,12 @@
 void preprocess() {
     if (heuristic == Heuristics::MOM) {
         for (int i = 1; i <= numOfClauses; i++) {
-            if (cnf[i].active == minimalWidth) {
+            if (clauses[i].active == minWidth) {
                 minimalClauses.insert(i);
             }
+            minWidth = std::min(minWidth, clauses[i].active);
         }
+        lastValidWidth = minWidth;
     }
 
     // Find pure lits and assign them to pure lit queue

@@ -7,6 +7,7 @@
 #include "../include/cnf.hpp"
 
 void backtrack() {
+    btc++;
     backtrackFlag = 0;
     //std::cout << "Intro backtrack\n";
     while (!assig.empty() && vars[assig.top()].forced) {  // until the last branching variable.
@@ -48,6 +49,6 @@ void backtrack() {
     vars[b].val = Assig(int(2 - std::pow(2.0, vars[b].val)));
     //std::cout << "New branch var" << b << ", OLD: " << oldval << ", NEW: " << vars[b].val << "\n";
     curVar = b;
-    updateCNF(b);
+    update(b);
     propagate();
 }

@@ -7,7 +7,6 @@
 #include "../include/cnf.hpp"
 
 void chooseINC() {
-    int i = 0;
     while (vars[curVar].val != FREE) {
         curVar++;
         // std::cout << "Curvar value " << curVar << "\n";
@@ -16,7 +15,7 @@ void chooseINC() {
     vars[curVar].val = TRUE;
     vars[curVar].forced = false;
     assig.push(curVar);
-    updateCNF(curVar);
+    update(curVar);
     // std::cout << "CHOOSE_LIT:" << curVar << "\n";
 }
 /*--------------------END FOR CHOOSE INC-----------------------*/
@@ -40,7 +39,7 @@ void chooseDLIS() {
     vars[curVar].val = vars[curVar].pos_occ.size() > vars[curVar].neg_occ.size() ? TRUE : FALSE;
     vars[curVar].forced = false;
     assig.push(curVar);
-    updateCNF(curVar);
+    update(curVar);
 }
 
 void chooseDLCS() {
@@ -61,13 +60,13 @@ void chooseDLCS() {
     vars[curVar].val = vars[curVar].pos_occ.size() > vars[curVar].neg_occ.size() ? TRUE : FALSE;
     vars[curVar].forced = false;
     assig.push(curVar);
-    updateCNF(curVar);
+    update(curVar);
 }
 /*---------------------------------END OF DLCS-------------------------------*/
 
 void chooseMOM() {
-    printf("HI %i", 3);
-
+    lastValidWidth = minWidth;
+    chooseINC();
     // std::vector<double> MOMScore(numOfClauses, 0.0);
     // int param;
 

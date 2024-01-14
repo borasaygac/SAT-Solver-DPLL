@@ -24,7 +24,7 @@ void pureLiteralElimination() {
         vars[std::abs(pureLiteral)].forced = true;
         assig.push(std::abs(pureLiteral));
 
-        updateCNF(std::abs(pureLiteral));
+        update(std::abs(pureLiteral));
     }
 }
 
@@ -45,6 +45,6 @@ void propagate() {
 
         assig.push(std::abs(unitLiteral));
 
-        updateCNF(std::abs(unitLiteral));
+        update(std::abs(unitLiteral));
     }
 }

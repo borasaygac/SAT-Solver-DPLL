@@ -9,7 +9,7 @@
 int numOfVars;
 int numOfClauses;
 int numOfUnassigned;
-std::vector<Clause> cnf;
+std::vector<Clause> clauses;
 std::vector<Variable> vars;
 std::set<int> satClauses;
 std::queue<int> unitQueue;
@@ -19,11 +19,18 @@ int curVar = 1;
 int numOfSatClauses = 0;
 int curProp;
 bool backtrackFlag = 0;
-int minimalWidth = 10000;
+int minWidth = 10000;
 std::set<int> minimalClauses;
 Heuristics heuristic = INC;
 void (*heuristicPointers[5])() = {chooseINC, chooseDLIS, chooseDLCS, chooseMOM, chooseJW};
-void (*chooseLiteral)() = nullptr;
+void (*chooseLiteral)() = chooseINC;
+void (*update)(int assertedVar) = updateDef;
+void (*updateBacktrack)(int unassignedVar) = updateBacktrackDef;
+int btc = 0;
+int clc = 0;
+int numOfMinClauses = 0;
+int lastValidWidth = 0;
+int mcc = 0;
 
 int main(int argc, char* argv[]) {
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
@@ -39,7 +46,7 @@ int main(int argc, char* argv[]) {
 
     std::string fileName;
 
-    char* heurAsStrings[] = {"INC", "DLIS", "DLCS", "MOM", "JW"};
+    std::string heurAsStrings[] = {"INC", "DLIS", "DLCS", "MOM", "JW"};
 
     std::string heuristicToString = heurAsStrings[heuristic];
 
@@ -47,10 +54,15 @@ int main(int argc, char* argv[]) {
 
     if (path[0] == 'c') fileName = "comp/" + fileNamesComp[std::stoi(index)];
 
-
     printf("\nRunning \033[34m%s \033[38;5;208m%s\033[0m\n\n", fileName.c_str(), heuristicToString.c_str());
 
     chooseLiteral = heuristicPointers[heuristic];
+
+    // if heuristic is MOM, assign the corresponding update methods
+    if (heuristic == MOM) {
+        update = updateMOM;
+        updateBacktrack = updateBacktrackMOM;
+    }
 
     parseDIMACS(fileName);
 
@@ -60,6 +72,7 @@ int main(int argc, char* argv[]) {
 
     void* res;
 
+    // start dpll
     if (pthread_create(&thread, NULL, dpll, NULL)) {
         std::cerr << "Error: Unable to create thread."
                   << "\n";
@@ -67,14 +80,14 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
-    // Wait for dpll to finish
+    // wait for dpll to finish
     pthread_join(thread, &res);
 
     printModel((intptr_t)res);
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
-    
+
     if ((intptr_t)res == 0) verifyModel();
 
     printf("\nCPU time used: %.6f seconds\n", duration.count());

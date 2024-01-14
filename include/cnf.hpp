@@ -65,18 +65,26 @@ extern int numOfSatClauses;
 // the currently processed unit literal
 extern int curProp;
 
+extern int btc;
+
+extern int mcc;
+
+extern int lastValidWidth;
+
+extern int numOfMinClauses;
+
 // flag to determine whether to backtrack or not
 extern bool backtrackFlag;
 
 // int for minimal clause width
-extern int minimalWidth;
+extern int minWidth;
 
 extern std::set<int> minimalClauses;
 
 extern void (*heuristicPointers[5])();
 
 // list of clauses (1-indexed)
-extern std::vector<Clause> cnf;
+extern std::vector<Clause> clauses;
 
 // list of variables (1-indexed)
 extern std::vector<Variable> vars;
@@ -109,6 +117,10 @@ void propagate();
 // chooses next branching var according to the selected heuristic
 extern void (*chooseLiteral)();
 
+extern void (*update)(int assertedVar);
+
+extern void (*updateBacktrack)(int unassignedVar);
+
 void chooseINC();
 
 void chooseDLIS();
@@ -117,8 +129,9 @@ void chooseDLCS();
 
 /*-------------------------------------------------------------------------*/
 // auto customMOMComparator = [](int left, int right) {
-//     return ((vars[left].posCount + vars[left].negCount)*pow(2,2) + (vars[left].negCount*vars[left].posCount)) < 
-//     ((vars[right].posCount + vars[right].negCount)*pow(2,2) + (vars[right].negCount*vars[right].posCount));  // TODO: add comments
+//     return ((vars[left].posCount + vars[left].negCount)*pow(2,2) + (vars[left].negCount*vars[left].posCount)) <
+//     ((vars[right].posCount + vars[right].negCount)*pow(2,2) + (vars[right].negCount*vars[right].posCount));  // TODO: add
+//     comments
 // };
 
 // extern std::set<int, decltype(customMOMComparator)> maxHeap(customMOMComparator);
@@ -128,13 +141,17 @@ void chooseMOM();
 void chooseJW();
 
 // updates the CNF after a new assignment is made
-void updateCNF(int assertedVar);
+void updateDef(int assertedVar);
 
 // updates the CNF after succ unassignment in backtrack()
-void updateBacktrack(int unassignedVar);
+void updateBacktrackDef(int unassignedVar);
 
 // handles conficts and signals UNSAT
 void backtrack();
+
+void updateMOM(int assertedVar);
+
+void updateBacktrackMOM(int unassignedVar);
 
 // evaluates the literal under its current assignment
 bool evaluateLiteral(int literal);

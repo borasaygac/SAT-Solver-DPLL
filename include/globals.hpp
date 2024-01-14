@@ -80,7 +80,7 @@ extern int curVar;
 extern int curProp;
 
 // list of clauses (1-indexed)
-extern std::vector<Clause> cnf;
+extern std::vector<Clause> clauses;
 
 // list of variables (1-indexed)
 extern std::vector<Variable> vars;

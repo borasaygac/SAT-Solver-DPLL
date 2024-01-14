@@ -1,6 +1,6 @@
 #include "../include/cnf.hpp"
 
-void updateCNF(int assertedVar) {
+void updateDef(int assertedVar) {
     // verifyModel();
 
     /*std::cout << "asserted var " << assertedVar << "\n";
@@ -48,8 +48,8 @@ void updateCNF(int assertedVar) {
     // erase all references of the literals occuring in the clause, since it can be disregarded
     for (clauseIndex = copy.begin(); clauseIndex != copy.end(); ++clauseIndex) {
         // unneccesary
-        // if (cnf[*clauseIndex].sat != 0) continue;
-        Clause* clause = &cnf[*clauseIndex];
+        // if (clauses[*clauseIndex].sat != 0) continue;
+        Clause* clause = &clauses[*clauseIndex];
         clause->sat = assertedVar;
         // printf("mark clause sat %i\n", *clauseIndex);
         // std::cout <<"mark clause sat " << *clauseIndex << "\n";
@@ -87,10 +87,10 @@ void updateCNF(int assertedVar) {
     std::set<int> copy2 = *clausesToUpdate;
     // std::cout << "size of clauses to update "<< clausesToUpdate->size() << "\n";
     for (clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) {
-        cnf[*clauseIndex2].active--;
-        if (cnf[*clauseIndex2].sat != 0) continue;
-        Clause* clause = &cnf[*clauseIndex2];
-        // std::cout << "decremented clause " << *clauseIndex2 << "\nand the active number " << cnf[*clauseIndex2].active << "\n";
+        clauses[*clauseIndex2].active--;
+        if (clauses[*clauseIndex2].sat != 0) continue;
+        Clause* clause = &clauses[*clauseIndex2];
+        // std::cout << "decremented clause " << *clauseIndex2 << "\nand the active number " << clauses[*clauseIndex2].active << "\n";
         //  printf("decremented clause %i\n and the anctive number %i,\n", *clauseIndex2, clause->active);
         if (clause->active == 0) {
             // printf("Conflict in clause %i,\n", *clauseIndex2);
@@ -98,7 +98,7 @@ void updateCNF(int assertedVar) {
             backtrackFlag = true;
             // return;
         }
-        if (cnf[*clauseIndex2].active == 1) {
+        if (clauses[*clauseIndex2].active == 1) {
             for (int i = 0; i < clause->literals.size(); i++) {
                 if (vars[std::abs(clause->literals[i])].val == FREE && !vars[std::abs(clause->literals[i])].enqueued) {
                     unitQueue.push(clause->literals[i]);
@@ -111,11 +111,11 @@ void updateCNF(int assertedVar) {
     }
     /*std::cout << "[";
     for (int i = 1; i < numOfClauses; i++) {
-        int value = cnf[i].active;
+        int value = clauses[i].active;
 
         std::cout << value << ", ";
     }
-    int activeval = cnf[numOfClauses].active;
+    int activeval = clauses[numOfClauses].active;
 
     std::cout << activeval;
     std::cout << "]\n";*/
@@ -126,7 +126,7 @@ void updateCNF(int assertedVar) {
     if (unitQueue.empty() && numOfSatClauses == numOfClauses) pthread_exit(0);
 }
 
-void updateBacktrack(int unassignedVar) {
+void updateBacktrackDef(int unassignedVar) {
     // clauses where assertedVar evaluates to FALSE
     std::set<int>* clausesToIncrement;
 
@@ -156,7 +156,7 @@ void updateBacktrack(int unassignedVar) {
         that we've made operations on, or this if loop.
         */
 
-        cnf[*clauseIndex2].active++;
+        clauses[*clauseIndex2].active++;
     }
 
     std::set<int>::iterator clauseIndex;
@@ -165,9 +165,9 @@ void updateBacktrack(int unassignedVar) {
     // if clause of dynOccurencies is sat by unassignedVar,
     // restore the previous literal references
     for (clauseIndex = copy.begin(); clauseIndex != copy.end(); ++clauseIndex) {
-        if (cnf[*clauseIndex].sat != unassignedVar) continue;
+        if (clauses[*clauseIndex].sat != unassignedVar) continue;
 
-        Clause* clause = &cnf[*clauseIndex];
+        Clause* clause = &clauses[*clauseIndex];
 
         clause->sat = 0;
 
@@ -184,8 +184,4 @@ void updateBacktrack(int unassignedVar) {
         // std::cout << "\nRestored clause" << *clauseIndex << "for unassigned " << unassignedVar << "\n";
         numOfSatClauses--;
     }
-}
-
-bool evaluateLiteral(int literal) {
-    return vars[std::abs(literal)].val == FREE || !(vars[std::abs(literal)].val ^ (literal > 0));
 }

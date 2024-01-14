@@ -23,4 +23,6 @@ void printModel(int res) {
     if (vars[numOfVars].val == FALSE) value = -numOfVars;
     printf("%i", value);
     printf("]\033[0m\n");
+    //printf("backtr: %i, choose: %i", btc, numOfMinClauses);
+
 }

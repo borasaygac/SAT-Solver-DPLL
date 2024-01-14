@@ -3,9 +3,9 @@
 void verifyModel() {
     for (int i = 1; i <= numOfClauses; i++) {
         bool sat = false;
-        //std::cout << "Clause "<< i << " active no " << cnf[i].active;
+        //std::cout << "Clause "<< i << " active no " << clauses[i].active;
 
-        for (int literal : cnf[i].literals) {
+        for (int literal : clauses[i].literals) {
             if (evaluateLiteral(literal)) sat = true;
         }
         if (!sat) {
@@ -15,4 +15,8 @@ void verifyModel() {
         }
         if (i == numOfClauses) printf("\n\033[32mMODEL VERIFIED!\033[0m\n");
     }
+}
+
+bool evaluateLiteral(int literal) {
+    return vars[std::abs(literal)].val == FREE || !(vars[std::abs(literal)].val ^ (literal > 0));
 }
