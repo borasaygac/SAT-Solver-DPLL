@@ -77,7 +77,9 @@ int main(int argc, char* argv[]) {
     
     if ((intptr_t)res == 0) verifyModel();
 
-    printf("\nCPU time used: %.6f seconds\033[0m\n\n", duration.count());
+    printf("\nCPU time used: %.6f seconds\n", duration.count());
+
+    printf("\n-------------------------------------\n\n", duration.count());
 
     std::cout.flush();
 
