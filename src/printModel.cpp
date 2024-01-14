@@ -8,19 +8,14 @@ void printModel(int res) {
         printf(" Model:\n\n[");
     }
 
-    for (int i = 1; i < numOfVars; i++) {
+    for (int i = 1; i <= numOfVars; i++) {
         int value;
-        if (vars[i].val == FREE) value = 0;
+        if (vars[i].val == FREE) value = -i;
         if (vars[i].val == TRUE) value = i;
         if (vars[i].val == FALSE) value = -i;
 
-        printf("%i, ", value);
+        printf("%i", value);
+        (i < numOfVars) ? printf(", ", value): printf("]\033[0m\n");
         if (i % 20 == 0) printf("\n");
     }
-    int value;
-    if (vars[numOfVars].val == FREE) value = 0;
-    if (vars[numOfVars].val == TRUE) value = numOfVars;
-    if (vars[numOfVars].val == FALSE) value = -numOfVars;
-    printf("%i]\033[0m\n", value);
-
 }

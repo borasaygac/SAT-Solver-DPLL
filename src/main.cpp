@@ -91,7 +91,7 @@ int main(int argc, char* argv[]) {
 
     if ((intptr_t)res == 0) verifyModel();
 
-    printf("\nCPU time used: %.6f seconds\n\nChosen: %i, Backtrack: %i\n", duration.count(), dc, btc);
+    printf("\nCPU time used: %.6f seconds\n\nChoose: %i, Backtrack: %i\n", duration.count(), dc, btc);
 
     printf("\n-------------------------------------\n\n", duration.count());
 
