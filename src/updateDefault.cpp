@@ -3,24 +3,24 @@
 void updateDef(int assertedVar) {
     // verifyModel();
 
-    /*std::cout << "asserted var " << assertedVar << "\n";
+    // std::cout << "asserted var " << assertedVar << "\n";
 
-    std::cout << "[";
-    for (int i = 1; i < numOfVars; i++) {
-        int value;
-        if (vars[i].val == FREE) value = 0;
-        if (vars[i].val == TRUE) value = i;
-        if (vars[i].val == FALSE) value = -i;
+    // std::cout << "[";
+    // for (int i = 1; i < numOfVars; i++) {
+    //     int value;
+    //     if (vars[i].val == FREE) value = 0;
+    //     if (vars[i].val == TRUE) value = i;
+    //     if (vars[i].val == FALSE) value = -i;
 
-        std::cout << value << ", ";
-    }
-    int value;
-    if (vars[numOfVars].val == FREE) value = 0;
-    if (vars[numOfVars].val == TRUE) value = numOfVars;
-    if (vars[numOfVars].val == FALSE) value = -numOfVars;
-    std::cout << value;
-    std::cout << "]"
-              << "\n";*/
+    //     std::cout << value << ", ";
+    // }
+    // int value;
+    // if (vars[numOfVars].val == FREE) value = 0;
+    // if (vars[numOfVars].val == TRUE) value = numOfVars;
+    // if (vars[numOfVars].val == FALSE) value = -numOfVars;
+    // std::cout << value;
+    // std::cout << "]"
+    //           << "\n";
 
     // clauses where assertedVar evaluates to FALSE
     std::set<int>* clausesToUpdate;
@@ -62,17 +62,32 @@ void updateDef(int assertedVar) {
                 // //     vars[std::abs(assertedVar)].pos_occ.size() + vars[std::abs(assertedVar)].neg_occ.size() >= 1)
                 // //     pureLitQueue.push(assertedVar);
 
-                // if (vars[std::abs(clause->literals[i])].pos_occ.size() == 0 &&
-                //     vars[std::abs(clause->literals[i])].neg_occ.size() > 0) {
-                //     printf("SI %i", -std::abs(clause->literals[i]));
-                //     pureLitQueue.push(-std::abs(clause->literals[i]));
-                //     vars[std::abs(clause->literals[i])].enqueued = true;
-                // }
-                // if (vars[std::abs(clause->literals[i])].neg_occ.size() == 0 &&
-                //     vars[std::abs(clause->literals[i])].pos_occ.size() > 0) {
-                //     pureLitQueue.push(std::abs(clause->literals[i]));
-                //     vars[std::abs(clause->literals[i])].enqueued = true;
-                // }
+                if (vars[std::abs(clause->literals[i])].pos_occ.size() == 0 &&
+                    vars[std::abs(clause->literals[i])].neg_occ.size() > 0) {
+                    for (int i = 1; i <= numOfClauses; i++) {
+                        if (clauses[i].sat != 0) continue;
+                        for (int j = 0; j < clauses[i].literals.size(); j++) {
+                            if (evaluateLiteral(clauses[i].literals[j])) printf("%i ", clauses[i].literals[j]);
+                        }
+                        printf("\n");
+                    }
+                    printf("PURELIT FOUND: %i\n", -std::abs(clause->literals[i]));
+                    pureLitQueue.push(-std::abs(clause->literals[i]));
+                    vars[std::abs(clause->literals[i])].enqueued = true;
+                }
+                if (vars[std::abs(clause->literals[i])].neg_occ.size() == 0 &&
+                    vars[std::abs(clause->literals[i])].pos_occ.size() > 0) {
+                    for (int i = 1; i <= numOfClauses; i++) {
+                        if (clauses[i].sat != 0) continue;
+                        for (int j = 0; j < clauses[i].literals.size(); j++) {
+                            if (evaluateLiteral(clauses[i].literals[j])) printf("%i ", clauses[i].literals[j]);
+                        }
+                        printf("\n");
+                    }
+                    printf("PURELIT FOUND: %i\n", std::abs(clause->literals[i]));
+                    pureLitQueue.push(std::abs(clause->literals[i]));
+                    vars[std::abs(clause->literals[i])].enqueued = true;
+                }
             }
         }
         numOfSatClauses++;
@@ -90,7 +105,8 @@ void updateDef(int assertedVar) {
         clauses[*clauseIndex2].active--;
         if (clauses[*clauseIndex2].sat != 0) continue;
         Clause* clause = &clauses[*clauseIndex2];
-        // std::cout << "decremented clause " << *clauseIndex2 << "\nand the active number " << clauses[*clauseIndex2].active << "\n";
+        // std::cout << "decremented clause " << *clauseIndex2 << "\nand the active number " << clauses[*clauseIndex2].active <<
+        // "\n";
         //  printf("decremented clause %i\n and the anctive number %i,\n", *clauseIndex2, clause->active);
         if (clause->active == 0) {
             // printf("Conflict in clause %i,\n", *clauseIndex2);
@@ -102,8 +118,8 @@ void updateDef(int assertedVar) {
             for (int i = 0; i < clause->literals.size(); i++) {
                 if (vars[std::abs(clause->literals[i])].val == FREE && !vars[std::abs(clause->literals[i])].enqueued) {
                     unitQueue.push(clause->literals[i]);
-                    // printf("pushed elem %i\n", clause->literals[i]);
-                    // std::cout << "pushed elem " << clause->literals[i] << "\n";
+                    printf("UNIT FOUND: %i\n", clause->literals[i]);
+
                     vars[std::abs(clause->literals[i])].enqueued = true;
                 }
             }
