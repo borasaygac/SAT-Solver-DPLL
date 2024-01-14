@@ -2,11 +2,10 @@
 
 void printModel(int res) {
     if (res == 1) {
-        printf("\033[31mUNSAT: No model!\n[");
+        printf("\033[31mUNSAT: No model!\n\n[");
     } else {
-        std::cout << "\033[1;32mSAT!"
-                  << "\n";
-        printf("Model: [");
+        std::cout << "\033[1;32mSAT!";
+        printf(" Model:\n\n[");
     }
 
     for (int i = 1; i < numOfVars; i++) {
@@ -16,6 +15,7 @@ void printModel(int res) {
         if (vars[i].val == FALSE) value = -i;
 
         printf("%i, ", value);
+        if (i % 20 == 0) printf("\n");
     }
     int value;
     if (vars[numOfVars].val == FREE) value = 0;
