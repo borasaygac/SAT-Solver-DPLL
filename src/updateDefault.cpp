@@ -64,27 +64,27 @@ void updateDef(int assertedVar) {
 
                 if (vars[std::abs(clause->literals[i])].pos_occ.size() == 0 &&
                     vars[std::abs(clause->literals[i])].neg_occ.size() > 0) {
-                    for (int i = 1; i <= numOfClauses; i++) {
-                        if (clauses[i].sat != 0) continue;
-                        for (int j = 0; j < clauses[i].literals.size(); j++) {
-                            if (evaluateLiteral(clauses[i].literals[j])) printf("%i ", clauses[i].literals[j]);
-                        }
-                        printf("\n");
-                    }
-                    printf("PURELIT FOUND: %i\n", -std::abs(clause->literals[i]));
+                    // for (int i = 1; i <= numOfClauses; i++) {
+                    //     if (clauses[i].sat != 0) continue;
+                    //     for (int j = 0; j < clauses[i].literals.size(); j++) {
+                    //         if (evaluateLiteral(clauses[i].literals[j])) printf("%i ", clauses[i].literals[j]);
+                    //     }
+                    //     printf("\n");
+                    // }
+                    // printf("PURELIT FOUND: %i\n", -std::abs(clause->literals[i]));
                     toPropagate.push(-std::abs(clause->literals[i]));
                     vars[std::abs(clause->literals[i])].enqueued = true;
                 }
                 if (vars[std::abs(clause->literals[i])].neg_occ.size() == 0 &&
                     vars[std::abs(clause->literals[i])].pos_occ.size() > 0) {
-                    for (int i = 1; i <= numOfClauses; i++) {
-                        if (clauses[i].sat != 0) continue;
-                        for (int j = 0; j < clauses[i].literals.size(); j++) {
-                            if (evaluateLiteral(clauses[i].literals[j])) printf("%i ", clauses[i].literals[j]);
-                        }
-                        printf("\n");
-                    }
-                    printf("PURELIT FOUND: %i\n", std::abs(clause->literals[i]));
+                    // for (int i = 1; i <= numOfClauses; i++) {
+                    //     if (clauses[i].sat != 0) continue;
+                    //     for (int j = 0; j < clauses[i].literals.size(); j++) {
+                    //         if (evaluateLiteral(clauses[i].literals[j])) printf("%i ", clauses[i].literals[j]);
+                    //     }
+                    //     printf("\n");
+                    // }
+                    // printf("PURELIT FOUND: %i\n", std::abs(clause->literals[i]));
                     toPropagate.push(std::abs(clause->literals[i]));
                     vars[std::abs(clause->literals[i])].enqueued = true;
                 }
@@ -118,7 +118,7 @@ void updateDef(int assertedVar) {
             for (int i = 0; i < clause->literals.size(); i++) {
                 if (vars[std::abs(clause->literals[i])].val == FREE && !vars[std::abs(clause->literals[i])].enqueued) {
                     toPropagate.push(clause->literals[i]);
-                    printf("UNIT FOUND: %i\n", clause->literals[i]);
+                    //printf("UNIT FOUND: %i\n", clause->literals[i]);
 
                     vars[std::abs(clause->literals[i])].enqueued = true;
                 }

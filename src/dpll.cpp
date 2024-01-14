@@ -19,7 +19,7 @@ void propagate() {
         // printf("current queue elm = %i\n", prop);
         // std::cout << "current queue elm = " << prop << "\n";
         toPropagate.pop();
-        std::cout << "SET PROP " << prop << "\n";
+        //std::cout << "SET PROP " << prop << "\n";
         // if(vars[std::abs(prop)].prioPureLit){std::cout << "PURELiT!! " << prop << "\n";}
         vars[std::abs(prop)].enqueued = false;
         vars[std::abs(prop)].forced = true;
