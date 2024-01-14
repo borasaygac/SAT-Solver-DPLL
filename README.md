@@ -1,4 +1,6 @@
 # Group_K_Project_2
+Cactus Plot Sat Solver -- https://github.com/alexeyignatiev/mkplot
+
 C15 takes 57 second with DLCS -- on the border
 
 TODO: OPTIMIERUNG (COPY necc, if necc, etc....), PURELIT, HEURISTICS APPROACH, FORCED QUEUE, REMOVE DUPLICATES PER CLAUSE
