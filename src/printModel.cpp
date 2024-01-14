@@ -4,12 +4,11 @@ void printModel(int res) {
     if (res == 1) {
         printf("\nUNSAT: No model!\n");
     } else {
-        std::cout << "All clauses satisfied!"
+        std::cout << "SAT!"
                   << "\n";
-        printf("Model: ");
+        printf("Model: [");
     }
 
-    printf("[");
     for (int i = 1; i < numOfVars; i++) {
         int value;
         if (vars[i].val == FREE) value = 0;

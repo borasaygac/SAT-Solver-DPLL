@@ -23,54 +23,45 @@ void chooseINC() {
 
 // Custom utility function that helps keep the DLISOccurance set ordered
 void chooseDLIS() {
-    printf("HI %i", 1);
-
-    int max = 0;
-    int index = 0;
-    bool pol = false;
-
-    for (int i = 1; i <= numOfVars; i++) {
-        if (vars[i].val != FREE) continue;
-
-        int indPosSum = vars[i].pos_occ.size();
-        int indNegSum = vars[i].neg_occ.size();
-
-        max = (indPosSum > indNegSum) ? indPosSum : indNegSum;
-        index = i;
-        pol = (indPosSum > indNegSum);
-    }
-
-    curVar = index;
-    vars[curVar].val = (pol) ? TRUE : FALSE;
-    vars[curVar].forced = false;
-    assig.push(curVar);
-}
-
-void chooseDLCS() {
-    printf("HI %i", 2);
-
     int max = 0;
     int index = 0;
 
     for (int i = 1; i <= numOfVars; i++) {
         if (vars[i].val != FREE) continue;
 
-        int totalOcc = vars[i].neg_occ.size() + vars[i].pos_occ.size();
-        if (totalOcc > max) {
-            max = totalOcc;
+        int cur = std::max(vars[i].pos_occ.size(), vars[i].neg_occ.size());
+        if (cur > max) {
+            max = cur;
             index = i;
         }
     }
 
     curVar = index;
-    if (vars[curVar].pos_occ.size() > vars[curVar].neg_occ.size()) {
-        vars[curVar].val = TRUE;
-    } else {
-        vars[curVar].val = FALSE;
-    }
-    // std::cout << "CHOOSE_LIT:" << curVar << "\n";
+    vars[curVar].val = vars[curVar].pos_occ.size() > vars[curVar].neg_occ.size() ? TRUE : FALSE;
     vars[curVar].forced = false;
     assig.push(curVar);
+    updateCNF(curVar);
+}
+
+void chooseDLCS() {
+    int max = 0;
+    int index = 0;
+
+    for (int i = 1; i <= numOfVars; i++) {
+        if (vars[i].val != FREE) continue;
+
+        int combinedSum = vars[i].neg_occ.size() + vars[i].pos_occ.size();
+        if (combinedSum > max) {
+            max = combinedSum;
+            index = i;
+        }
+    }
+
+    curVar = index;
+    vars[curVar].val = vars[curVar].pos_occ.size() > vars[curVar].neg_occ.size() ? TRUE : FALSE;
+    vars[curVar].forced = false;
+    assig.push(curVar);
+    updateCNF(curVar);
 }
 /*---------------------------------END OF DLCS-------------------------------*/
 

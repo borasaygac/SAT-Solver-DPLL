@@ -25,28 +25,30 @@ Heuristics heuristic = INC;
 void (*heuristicPointers[5])() = {chooseINC, chooseDLIS, chooseDLCS, chooseMOM, chooseJW};
 void (*chooseLiteral)() = nullptr;
 
-
 int main(int argc, char* argv[]) {
-
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
     std::string path = argv[1];
 
-    std::string index;
+    if (argc > 2) heuristic = Heuristics(std::stoi(argv[2]));
 
+    std::string index;
     for (int i = 1; i < path.length(); i++) {
         index += path[i];
     }
 
     std::string fileName;
 
+    char* heurAsStrings[] = {"INC", "DLIS", "DLCS", "MOM", "JW"};
+
+    std::string heuristicToString = heurAsStrings[heuristic];
+
     if (path[0] == 't') fileName = "test/" + fileNamesTest[std::stoi(index)];
 
     if (path[0] == 'c') fileName = "comp/" + fileNamesComp[std::stoi(index)];
 
-    printf("\nRunning %s\n\n", fileName.c_str());
 
-    if (argc > 2) heuristic = Heuristics(std::stoi(argv[2]));
+    printf("\nRunning \033[38;5;208m%s \033[1;31m%s\033[0m\n\n", fileName.c_str(), heuristicToString.c_str());
 
     chooseLiteral = heuristicPointers[heuristic];
 
@@ -55,17 +57,17 @@ int main(int argc, char* argv[]) {
     preprocess();
 
     pthread_t thread;
-    
+
     void* res;
-    
+
     if (pthread_create(&thread, NULL, dpll, NULL)) {
         std::cerr << "Error: Unable to create thread."
                   << "\n";
         std::cout.flush();
         return -1;
     }
-    
-    // Wait for dpll to finish  
+
+    // Wait for dpll to finish
     pthread_join(thread, &res);
 
     printModel((intptr_t)res);
@@ -73,7 +75,7 @@ int main(int argc, char* argv[]) {
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
 
-    printf("\nCPU time used: %.6f seconds\n\n", duration.count());
+    printf("\n\033[1;32mCPU time used: %.6f seconds\033[0m\n\n", duration.count());
 
     if ((intptr_t)res == 0) verifyModel();
 

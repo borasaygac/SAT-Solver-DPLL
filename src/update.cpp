@@ -123,11 +123,7 @@ void updateCNF(int assertedVar) {
         backtrack();
     }
 
-    if (unitQueue.empty() && numOfSatClauses == numOfClauses) {
-        std::cout << "VORBEII!! \n";
-
-        pthread_exit(0);
-    }
+    if (unitQueue.empty() && numOfSatClauses == numOfClauses) pthread_exit(0);
 }
 
 void updateBacktrack(int unassignedVar) {
@@ -190,4 +186,6 @@ void updateBacktrack(int unassignedVar) {
     }
 }
 
-bool evaluateLiteral(int literal) { return vars[std::abs(literal)].val == FREE || !(vars[std::abs(literal)].val ^ (literal > 0)); }
+bool evaluateLiteral(int literal) {
+    return vars[std::abs(literal)].val == FREE || !(vars[std::abs(literal)].val ^ (literal > 0));
+}
