@@ -34,19 +34,20 @@ enum Polarity { NEG, POS, MIX, UNSET };
 struct Variable {
     Assig val = FREE;
 
-    std::set<int> static_pos_occ;  // All clauses where var appears as pos watched literal
-    std::set<int> static_neg_occ;  // All clauses where var appears as neg watched literal
+    std::set<int> static_pos_occ;  // All clauses where var appears as pos literal
+    std::set<int> static_neg_occ;  // All clauses where var appears as neg literal
 
-    std::set<int> pos_occ;  // All clauses where var appears as pos watched literal
-    std::set<int> neg_occ;  // All clauses where var appears as neg watched literal
+    std::set<int> pos_occ;  // All clauses where var appears as pos literal
+    std::set<int> neg_occ;  // All clauses where var appears as neg literal
 
     bool forced = false;
     bool enqueued = false;
-    bool prioPureLit = false;
 
-    int minCount = 0;  // For MOM
-    int posCount = 0;
-    int negCount = 0;
+    std::queue<int> localMinClauses;
+    int localMinWidth;
+
+    int posMOM = 0;
+    int negMOM = 0;
 };
 
 struct Clause {
@@ -71,8 +72,6 @@ extern int btc;
 
 extern int mcc;
 
-extern int lastValidWidth;
-
 extern int numOfMinClauses;
 
 // flag to determine whether to backtrack or not
@@ -80,10 +79,6 @@ extern bool backtrackFlag;
 
 // int for minimal clause width
 extern int minWidth;
-
-extern std::set<int> minimalClauses;
-
-extern void (*heuristicPointers[5])();
 
 // list of clauses (1-indexed)
 extern std::vector<Clause> clauses;
@@ -102,7 +97,7 @@ extern std::queue<int> unitQueue;
 // stack of variables with assigned values
 extern std::stack<int> assig;
 
-extern std::priority_queue<int> heap;
+extern std::queue<int> minClauses;
 
 void parseDIMACS(std::string filename);
 

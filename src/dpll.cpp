@@ -15,10 +15,16 @@ void* dpll(void* arg) {
 }
 
 void pureLiteralElimination() {
+
+    // FOUND PURELIT 1 -> QUEUE
+    // FOUND UNIT 2 ->
+
+    // SET PURELIT 1 -> UPDATE -> UNIT 2 -> UPDATE -> NEW PURE LITERALS -> QUEUE -> SET
+
     int pureLiteral;
     while (!pureLitQueue.empty()) {
         pureLiteral = pureLitQueue.front();
-        std::cout << "PURELiT!! " << pureLiteral << "\n";
+        std::cout << "SET PURELIT " << pureLiteral << "\n";
         pureLitQueue.pop();
         vars[std::abs(pureLiteral)].enqueued = false;
         (pureLiteral > 0) ? vars[std::abs(pureLiteral)].val = TRUE : vars[std::abs(pureLiteral)].val = FALSE;
@@ -36,6 +42,7 @@ void propagate() {
         // printf("current queue elm = %i\n", unitLiteral);
         // std::cout << "current queue elm = " << unitLiteral << "\n";
         unitQueue.pop();
+        std::cout << "SET UNIT " << unitLiteral << "\n";
         // if(vars[std::abs(unitLiteral)].prioPureLit){std::cout << "PURELiT!! " << unitLiteral << "\n";}
         vars[std::abs(unitLiteral)].enqueued = false;
         vars[std::abs(unitLiteral)].forced = true;

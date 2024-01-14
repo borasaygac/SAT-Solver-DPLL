@@ -50,5 +50,7 @@ void backtrack() {
     //std::cout << "New branch var" << b << ", OLD: " << oldval << ", NEW: " << vars[b].val << "\n";
     curVar = b;
     update(b);
+    pureLiteralElimination();
     propagate();
+    
 }

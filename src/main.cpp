@@ -20,7 +20,7 @@ int numOfSatClauses = 0;
 int curProp;
 bool backtrackFlag = 0;
 int minWidth = 10000;
-std::set<int> minimalClauses;
+std::queue<int> minClauses;
 Heuristics heuristic = INC;
 void (*heuristicPointers[5])() = {chooseINC, chooseDLIS, chooseDLCS, chooseMOM, chooseJW};
 void (*chooseLiteral)() = chooseINC;
@@ -31,6 +31,7 @@ int clc = 0;
 int btc = 0;
 int numOfMinClauses = 0;
 int lastValidWidth = 0;
+std::queue<int> lastValidMinimalClauses;
 int mcc = 0;
 
 int main(int argc, char* argv[]) {

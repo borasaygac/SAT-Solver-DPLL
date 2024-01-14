@@ -15,12 +15,11 @@ void chooseINC() {
     vars[curVar].val = TRUE;
     vars[curVar].forced = false;
     assig.push(curVar);
+    std::cout << "CHOOSE_LIT:" << curVar << "\n";
     update(curVar);
-    // std::cout << "CHOOSE_LIT:" << curVar << "\n";
+    
 }
-/*--------------------END FOR CHOOSE INC-----------------------*/
 
-// Custom utility function that helps keep the DLISOccurance set ordered
 void chooseDLIS() {
     int max = 0;
     int index = 0;
@@ -62,11 +61,45 @@ void chooseDLCS() {
     assig.push(curVar);
     update(curVar);
 }
-/*---------------------------------END OF DLCS-------------------------------*/
 
 void chooseMOM() {
-    lastValidWidth = minWidth;
-    chooseINC();
+    int max = 0;
+    int index = 0;
+    bool pol = false;
+
+    while (!minClauses.empty()) {
+        int minClause = minClauses.front();
+        if (clauses[minClause].sat != 0) continue;
+        minClauses.pop();
+        for (auto literal : clauses[minClause].literals) {
+            (literal > 0) ? vars[literal].posMOM++ : vars[-literal].negMOM++;
+        }
+    }
+
+    for (int i = 1; i < numOfVars; i++) {
+        if (vars[i].val != FREE || vars[i].posMOM + vars[i].negMOM == 0) continue;
+
+        int MOMscore = (vars[i].posMOM + vars[i].negMOM) * pow(2, 2) + (vars[i].posMOM * vars[i].negMOM);
+
+        if (MOMscore > max) {
+            max = MOMscore;
+            index = i;
+            pol = (vars[i].posMOM >= vars[i].negMOM) ? true : false;
+        }
+
+        vars[i].posMOM = 0;
+        vars[i].negMOM = 0;
+    }
+
+    vars[curVar].localMinClauses = minClauses;
+    vars[curVar].localMinWidth = minWidth;
+    curVar = index;
+    vars[curVar].val = vars[curVar].posMOM ? TRUE : FALSE;
+    vars[curVar].forced = false;
+    // std::cout << "chosen var " << curVar << "and max score " << max <<"\n";
+    assig.push(curVar);
+    update(curVar);
+
     // std::vector<double> MOMScore(numOfClauses, 0.0);
     // int param;
 
@@ -85,10 +118,7 @@ void chooseMOM() {
     // assig.push(curVar);
 }
 
-/*-----------------------------------------END OF MOM------------------------------------------------------*/
-
-void chooseJW() { 
-
+void chooseJW() {
     double max = 0;
     int index = 0;
     bool pol = false;
@@ -97,31 +127,25 @@ void chooseJW() {
         if (vars[i].val != FREE) continue;
         double pos = 0;
         double neg = 0;
-        for (int j = 0; j < vars[i].pos_occ.size(); j++){
-            pos += pow(2,-clauses[j].active);
+        for (int j = 0; j < vars[i].pos_occ.size(); j++) {
+            pos += pow(2, -clauses[j].active);
         }
-        for (int j = 0; j < vars[i].neg_occ.size(); j++){
-            neg += pow(2,-clauses[j].active);
+        for (int j = 0; j < vars[i].neg_occ.size(); j++) {
+            neg += pow(2, -clauses[j].active);
         }
-        double cur = neg;
-        bool poltmp = false; 
+        double cur = (pos >= neg) ? pos : neg;
 
-        if (pos > neg){
-            cur = pos;
-            pol = true;
-        } 
-
-        if (cur > max){
+        if (cur > max) {
             max = cur;
             index = i;
-            pol = poltmp;
+            pol = (pos >= neg) ? true : false;
         }
     }
 
     curVar = index;
     vars[curVar].val = pol ? TRUE : FALSE;
     vars[curVar].forced = false;
-    // std::cout << "chosen var " << curVar << "and max score " << max <<"\n"; 
+    // std::cout << "chosen var " << curVar << "and max score " << max <<"\n";
     assig.push(curVar);
     update(curVar);
- }
+}

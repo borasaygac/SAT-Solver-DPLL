@@ -93,7 +93,7 @@ void updateMOM(int assertedVar) {
             mcc++;
         }
         if(clauses[*clauseIndex2].active == minWidth){
-            numOfMinClauses++;
+            minClauses.push(*clauseIndex2);
         }
         if (clauses[*clauseIndex2].sat != 0) continue;
         Clause* clause = &clauses[*clauseIndex2];
@@ -127,7 +127,6 @@ void updateMOM(int assertedVar) {
     std::cout << activeval;
     std::cout << "]\n";*/
     if (backtrackFlag) {
-        minWidth = lastValidWidth;
         // numOfMinClauses = 0;
         backtrack();
     }

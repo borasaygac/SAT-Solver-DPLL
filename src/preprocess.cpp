@@ -5,18 +5,16 @@ void preprocess() {
     if (heuristic == Heuristics::MOM) {
         for (int i = 1; i <= numOfClauses; i++) {
             if (clauses[i].active == minWidth) {
-                minimalClauses.insert(i);
+                minClauses.push(i);
             }
             minWidth = std::min(minWidth, clauses[i].active);
         }
-        lastValidWidth = minWidth;
     }
 
     // Find pure lits and assign them to pure lit queue
     // TODO: Change the structure where you check only one occ list. Only one is enough.
     for (int i = 1; i <= numOfVars; i++) {
         if (vars[i].static_neg_occ.size() == 0 && vars[i].static_pos_occ.size() > 0) {
-            vars[i].prioPureLit = true;
             // std::cout << "Var no: " << i << " is a pure lit"
             //   << "\n"
             //   << std::flush;
@@ -24,7 +22,6 @@ void preprocess() {
             pureLitQueue.push(i);
         }
         if (vars[i].static_pos_occ.size() == 0 && vars[i].static_neg_occ.size() > 0) {
-            vars[i].prioPureLit = true;
             // std::cout << "Var no: " << i << " is a pure lit"
             //   << "\n"
             //   << std::flush;
