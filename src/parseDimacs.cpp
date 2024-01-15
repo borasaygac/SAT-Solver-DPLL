@@ -37,7 +37,7 @@ void parseDIMACS(std::string filename) {
         dummy.literals = {};
         dummy.active = -1;
         clauses.push_back(dummy);  // push dummy clause on cnf[0] to ensure 1-index.
-        int count = 1;         // what clause are we processing?
+        int count = 1;             // what clause are we processing?
         Clause clause;
         while (std::getline(file, line)) {
             std::istringstream iss(line);
@@ -70,9 +70,6 @@ void parseDIMACS(std::string filename) {
                     }
 
                     // else also link the second watched literal to their respective entry in variables
-                    if (clause.literals.size() < minWidth) {
-                        minWidth = clause.literals.size();
-                    }
                     clauses.push_back(clause);
                     // std::cout << "for clause " << count << ":";
                     for (int i = 0; i < clause.literals.size(); i++) {
@@ -93,5 +90,17 @@ void parseDIMACS(std::string filename) {
     for (int i = 1; i <= numOfVars; i++) {
         vars[i].pos_occ = vars[i].static_pos_occ;
         vars[i].neg_occ = vars[i].static_neg_occ;
+    }
+
+    // push pure literals to prop queue
+    for (int i = 1; i <= numOfVars; i++) {
+        if (vars[i].static_neg_occ.size() == 0 && vars[i].static_pos_occ.size() > 0) {
+            vars[std::abs(i)].enqueued = true;
+            toPropagate.push(i);
+        }
+        if (vars[i].static_pos_occ.size() == 0 && vars[i].static_neg_occ.size() > 0) {
+            vars[std::abs(i)].enqueued = true;
+            toPropagate.push(-i);
+        }
     }
 }

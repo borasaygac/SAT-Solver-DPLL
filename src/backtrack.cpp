@@ -7,7 +7,7 @@
 #include "../include/cnf.hpp"
 
 void backtrack() {
-    backtrackFlag = 0;
+    backtrackFlag = false;
     btc++;
     //std::cout << "Intro backtrack\n";
     while (!assig.empty() && vars[assig.top()].forced) {  // until the last branching variable.

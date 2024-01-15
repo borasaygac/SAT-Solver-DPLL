@@ -8,31 +8,20 @@
 
 int numOfVars;
 int numOfClauses;
-int numOfUnassigned;
 std::vector<Clause> clauses;
 std::vector<Variable> vars;
-std::set<int> satClauses;
-std::queue<int> unitQueue;
 std::stack<int> assig;
-std::queue<int> pureLitQueue;
 int curVar = 1;
 int numOfSatClauses = 0;
 int curProp;
 bool backtrackFlag = 0;
-int minWidth = 10000;
-std::queue<int> minClauses;
 Heuristics heuristic = INC;
 void (*heuristicPointers[4])() = {chooseINC, chooseDLIS, chooseDLCS, chooseJW};
 void (*decide)() = chooseINC;
 void (*update)(int assertedVar) = updateDef;
 void (*updateBacktrack)(int unassignedVar) = updateBacktrackDef;
 int dc = 0;
-int clc = 0;
 int btc = 0;
-int numOfMinClauses = 0;
-int lastValidWidth = 0;
-std::queue<int> lastValidMinimalClauses;
-int mcc = 0;
 std::queue<int> toPropagate;
 bool finished = false;
 
@@ -57,7 +46,7 @@ int main(int argc, char* argv[]) {
 
     std::string fileName;
 
-    std::string heurAsStrings[] = {"INC", "DLIS", "DLCS", "JW", "MOM"};
+    std::string heurAsStrings[] = {"INC", "DLIS", "DLCS", "JW"};
 
     std::string heuristicToString = heurAsStrings[heuristic];
 
@@ -70,8 +59,6 @@ int main(int argc, char* argv[]) {
     decide = heuristicPointers[heuristic];
 
     parseDIMACS(fileName);
-
-    preprocess();
 
     pthread_t thread;
 
