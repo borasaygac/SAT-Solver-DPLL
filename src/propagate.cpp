@@ -9,15 +9,16 @@ void propagate() {
         toPropagate.pop();
         // std::cout << "SET PROP " << prop << "\n";
         //  if(vars[std::abs(prop)].prioPureLit){std::cout << "PURELiT!! " << prop << "\n";}
-        vars[std::abs(prop)].enqueued = false;
-        vars[std::abs(prop)].forced = true;
-        (prop > 0) ? vars[std::abs(prop)].val = TRUE : vars[std::abs(prop)].val = FALSE;
 
-        // printf("UP variable %i set to %i\n", prop, vars[std::abs(prop)].val);
-        // std::cout << "UP variable " << prop << "set to " << vars[std::abs(prop)].val << "\n";
+        int absProp = std::abs(prop);
 
-        assig.push(std::abs(prop));
+        (prop > 0) ? vars[absProp].val = TRUE : vars[absProp].val = FALSE;
+        vars[absProp].enqueued = false;
+        vars[absProp].forced = true;
+        // printf("UP variable %i set to %i\n", prop, vars[absProp].val);
+        // std::cout << "UP variable " << prop << "set to " << vars[absProp].val << "\n";
+        assig.push(absProp);
 
-        update(std::abs(prop));
+        update(absProp);
     }
 }

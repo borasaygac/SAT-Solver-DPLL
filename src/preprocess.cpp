@@ -12,7 +12,6 @@ void preprocess() {
     }
 
     // Find pure lits and assign them to pure lit queue
-    // TODO: Change the structure where you check only one occ list. Only one is enough.
     for (int i = 1; i <= numOfVars; i++) {
         if (vars[i].static_neg_occ.size() == 0 && vars[i].static_pos_occ.size() > 0) {
             // std::cout << "Var no: " << i << " is a pure lit"

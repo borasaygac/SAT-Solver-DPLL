@@ -22,7 +22,7 @@ void backtrack() {
         //  std::cout << "Removed literal " << toUnassign << " from assig stack \n";
     }
 
-    // clear unit queue
+    // clear queue of unit and pure literals
     while (!toPropagate.empty()) {
         // std::cout << "Element to be popped from queue: " << unitQueue.front() << "\n";
         vars[std::abs(toPropagate.front())].enqueued = false;

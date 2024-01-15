@@ -22,8 +22,8 @@ bool backtrackFlag = 0;
 int minWidth = 10000;
 std::queue<int> minClauses;
 Heuristics heuristic = INC;
-void (*heuristicPointers[5])() = {chooseINC, chooseDLIS, chooseDLCS, chooseJW, chooseMOM};
-void (*chooseLiteral)() = chooseINC;
+void (*heuristicPointers[4])() = {chooseINC, chooseDLIS, chooseDLCS, chooseJW};
+void (*decide)() = chooseINC;
 void (*update)(int assertedVar) = updateDef;
 void (*updateBacktrack)(int unassignedVar) = updateBacktrackDef;
 int dc = 0;
@@ -67,13 +67,7 @@ int main(int argc, char* argv[]) {
 
     printf("\nRunning \033[34m%s \033[38;5;208m%s\033[0m\n\n", fileName.c_str(), heuristicToString.c_str());
 
-    chooseLiteral = heuristicPointers[heuristic];
-
-    // if heuristic is MOM, assign the corresponding update methods
-    if (heuristic == MOM) {
-        update = updateMOM;
-        updateBacktrack = updateBacktrackMOM;
-    }
+    decide = heuristicPointers[heuristic];
 
     parseDIMACS(fileName);
 

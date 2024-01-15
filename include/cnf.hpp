@@ -114,7 +114,7 @@ void* dpll(void* arg);
 void propagate();
 
 // chooses next branching var according to the selected heuristic
-extern void (*chooseLiteral)();
+extern void (*decide)();
 
 extern void (*update)(int assertedVar);
 
@@ -135,8 +135,6 @@ void chooseDLCS();
 
 // extern std::set<int, decltype(customMOMComparator)> maxHeap(customMOMComparator);
 
-void chooseMOM();
-
 void chooseJW();
 
 // updates the CNF after a new assignment is made;
@@ -148,10 +146,6 @@ void updateBacktrackDef(int unassignedVar);
 
 // handles conficts and signals UNSAT
 void backtrack();
-
-void updateMOM(int assertedVar);
-
-void updateBacktrackMOM(int unassignedVar);
 
 // evaluates the literal under its current assignment
 bool evaluateLiteral(int literal);
