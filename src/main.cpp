@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
         return -1;
     }
     // set the timeout, 10 min = 600 sec by default
-    auto timeout = std::chrono::seconds(30);
+    auto timeout = std::chrono::seconds(600);
     std::chrono::steady_clock::time_point endDPLL = startDPLL + timeout;
 
     while (std::chrono::steady_clock::now() < endDPLL) {
