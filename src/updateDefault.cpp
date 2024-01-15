@@ -1,6 +1,7 @@
 #include "../include/cnf.hpp"
 
 void updateDef(int assertedVar) {
+    pthread_testcancel();
     // verifyModel();
 
     // std::cout << "asserted var " << assertedVar << "\n";
@@ -62,32 +63,32 @@ void updateDef(int assertedVar) {
                 // //     vars[std::abs(assertedVar)].pos_occ.size() + vars[std::abs(assertedVar)].neg_occ.size() >= 1)
                 // //     pureLitQueue.push(assertedVar);
 
-                // if (vars[std::abs(clause->literals[i])].pos_occ.size() == 0 &&
-                //     vars[std::abs(clause->literals[i])].neg_occ.size() > 0) {
-                //     // for (int i = 1; i <= numOfClauses; i++) {
-                //     //     if (clauses[i].sat != 0) continue;
-                //     //     for (int j = 0; j < clauses[i].literals.size(); j++) {
-                //     //         if (evaluateLiteral(clauses[i].literals[j])) printf("%i ", clauses[i].literals[j]);
-                //     //     }
-                //     //     printf("\n");
-                //     // }
-                //     // printf("PURELIT FOUND: %i\n", -std::abs(clause->literals[i]));
-                //     toPropagate.push(-std::abs(clause->literals[i]));
-                //     vars[std::abs(clause->literals[i])].enqueued = true;
-                // }
-                // if (vars[std::abs(clause->literals[i])].neg_occ.size() == 0 &&
-                //     vars[std::abs(clause->literals[i])].pos_occ.size() > 0) {
-                //     // for (int i = 1; i <= numOfClauses; i++) {
-                //     //     if (clauses[i].sat != 0) continue;
-                //     //     for (int j = 0; j < clauses[i].literals.size(); j++) {
-                //     //         if (evaluateLiteral(clauses[i].literals[j])) printf("%i ", clauses[i].literals[j]);
-                //     //     }
-                //     //     printf("\n");
-                //     // }
-                //     // printf("PURELIT FOUND: %i\n", std::abs(clause->literals[i]));
-                //     toPropagate.push(std::abs(clause->literals[i]));
-                //     vars[std::abs(clause->literals[i])].enqueued = true;
-                // }
+                if (vars[std::abs(clause->literals[i])].pos_occ.size() == 0 &&
+                    vars[std::abs(clause->literals[i])].neg_occ.size() > 0) {
+                    // for (int i = 1; i <= numOfClauses; i++) {
+                    //     if (clauses[i].sat != 0) continue;
+                    //     for (int j = 0; j < clauses[i].literals.size(); j++) {
+                    //         if (evaluateLiteral(clauses[i].literals[j])) printf("%i ", clauses[i].literals[j]);
+                    //     }
+                    //     printf("\n");
+                    // }
+                    // printf("PURELIT FOUND: %i\n", -std::abs(clause->literals[i]));
+                    toPropagate.push(-std::abs(clause->literals[i]));
+                    vars[std::abs(clause->literals[i])].enqueued = true;
+                }
+                if (vars[std::abs(clause->literals[i])].neg_occ.size() == 0 &&
+                    vars[std::abs(clause->literals[i])].pos_occ.size() > 0) {
+                    // for (int i = 1; i <= numOfClauses; i++) {
+                    //     if (clauses[i].sat != 0) continue;
+                    //     for (int j = 0; j < clauses[i].literals.size(); j++) {
+                    //         if (evaluateLiteral(clauses[i].literals[j])) printf("%i ", clauses[i].literals[j]);
+                    //     }
+                    //     printf("\n");
+                    // }
+                    // printf("PURELIT FOUND: %i\n", std::abs(clause->literals[i]));
+                    toPropagate.push(std::abs(clause->literals[i]));
+                    vars[std::abs(clause->literals[i])].enqueued = true;
+                }
             }
         }
         numOfSatClauses++;
@@ -130,7 +131,10 @@ void updateDef(int assertedVar) {
     }
 
     // All clauses are sat and there are no more pure/unit literals threatenings that? => SAT!
-    if (toPropagate.empty() && numOfSatClauses == numOfClauses) pthread_exit(0);
+    if (toPropagate.empty() && numOfSatClauses == numOfClauses) {
+        finished = true;
+        pthread_exit(0);
+    }
 }
 
 void updateBacktrackDef(int unassignedVar) {

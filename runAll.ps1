@@ -4,20 +4,13 @@ param (
     [int]$end
 )
 
-# $Host.UI.RawUI.ForegroundColor = [System.ConsoleColor]::White
+for ($test = $start; $test -le $end; $test++) {
 
-for ($i = $start; $i -le $end; $i++) {
-    & ./main $type$i 0
-    Start-Sleep -Milliseconds 1000
+    for ($heur = 0; $heur -le 3; $heur++) {
+        & ./main $type$test $heur
+    }
+    Write-Host "-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
 
-    & ./main $type$i 1
-    Start-Sleep -Milliseconds 1000
-
-    & ./main $type$i 2
-    Start-Sleep -Milliseconds 1000
-
-    & ./main $type$i 4
-    Start-Sleep -Milliseconds 1000
 }
 
 # .\runAll.ps1 -type 'c' -start 1 -end 10

@@ -22,7 +22,7 @@ bool backtrackFlag = 0;
 int minWidth = 10000;
 std::queue<int> minClauses;
 Heuristics heuristic = INC;
-void (*heuristicPointers[5])() = {chooseINC, chooseDLIS, chooseDLCS, chooseMOM, chooseJW};
+void (*heuristicPointers[5])() = {chooseINC, chooseDLIS, chooseDLCS, chooseJW, chooseMOM};
 void (*chooseLiteral)() = chooseINC;
 void (*update)(int assertedVar) = updateDef;
 void (*updateBacktrack)(int unassignedVar) = updateBacktrackDef;
@@ -34,6 +34,7 @@ int lastValidWidth = 0;
 std::queue<int> lastValidMinimalClauses;
 int mcc = 0;
 std::queue<int> toPropagate;
+bool finished = false;
 
 int main(int argc, char* argv[]) {
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
@@ -49,7 +50,7 @@ int main(int argc, char* argv[]) {
 
     std::string fileName;
 
-    std::string heurAsStrings[] = {"INC", "DLIS", "DLCS", "MOM", "JW"};
+    std::string heurAsStrings[] = {"INC", "DLIS", "DLCS", "JW", "MOM"};
 
     std::string heuristicToString = heurAsStrings[heuristic];
 
@@ -73,8 +74,9 @@ int main(int argc, char* argv[]) {
 
     pthread_t thread;
 
-    void* res;
+    void* res = (void*)-1;
 
+    std::chrono::steady_clock::time_point startDPLL = std::chrono::steady_clock::now();
     // start dpll
     if (pthread_create(&thread, NULL, dpll, NULL)) {
         std::cerr << "Error: Unable to create thread."
@@ -82,12 +84,22 @@ int main(int argc, char* argv[]) {
         std::cout.flush();
         return -1;
     }
+    // set the timeout, 10 min = 600 sec by default
+    auto timeout = std::chrono::seconds(30);
+    std::chrono::steady_clock::time_point endDPLL = startDPLL + timeout;
 
-    // wait for dpll to finish
-    pthread_join(thread, &res);
+    while (std::chrono::steady_clock::now() < endDPLL) {
+        sleep(1);
+        if (finished) break;
+    }
+    if (!finished) {
+        printf("TIMEOUT of %i SECONDS REACHED!\n", timeout);
+        pthread_cancel(thread);
+    } else {  // wait for dpll to finish
+        pthread_join(thread, &res);
 
-    printModel((intptr_t)res);
-
+        printModel((intptr_t)res);
+    }
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
 

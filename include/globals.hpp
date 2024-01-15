@@ -15,7 +15,7 @@ extern int numOfClauses;
 // return true if equal to 0.
 extern int numOfUnassigned;
 
-enum Heuristics { INC, DLIS, DLCS, MOM, JW };
+enum Heuristics { INC, DLIS, DLCS, JW, MOM };
 
 enum Assig {
     FALSE,

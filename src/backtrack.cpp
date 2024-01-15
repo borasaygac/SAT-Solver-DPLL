@@ -31,6 +31,7 @@ void backtrack() {
 
     if (assig.empty()) {
         // UNSAT
+        finished = true;
         pthread_exit((void *)1);
     }  
 
