@@ -37,6 +37,13 @@ std::queue<int> toPropagate;
 bool finished = false;
 
 int main(int argc, char* argv[]) {
+
+    FILE* outfile = freopen("results.txt", "a", stdout);
+
+    if (!outfile){
+        perror("Error opening file");
+        return 1;
+    }
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
     std::string path = argv[1];
@@ -110,6 +117,8 @@ int main(int argc, char* argv[]) {
     printf("\n-------------------------------------\n\n", duration.count());
 
     std::cout.flush();
+
+    fclose(outfile);
 
     return 0;
 }
