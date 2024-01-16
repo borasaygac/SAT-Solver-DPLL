@@ -1,4 +1,7 @@
 # Group_K_Project_2
+python mkplot.py --legend prog_alias -t 200 -b png --xmax=5  --save-to C:/Users/boras/projects/group_k_project_2/cactustest.png C:/Users/boras/projects/group_k_project_2/plotFiles/testInstances.json
+-- mkplot run befehl
+
 Cactus Plot Sat Solver -- https://github.com/alexeyignatiev/mkplot
 
 C15 takes 57 second with DLCS -- on the border
