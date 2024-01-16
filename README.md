@@ -1,4 +1,27 @@
 # Group_K_Project_2
+Files in which we timeout for all heuristics:
+- 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 
+- 35, 36, 37, 38, 39, 40, 42, 43, 44, 77
+- 78, 79, 
+
+Intersting results: 
+- Normal order => DLCS < DLIS < JW < INC => So INC is normally the slowest
+- Usually JW solves some seconds after DLIS, DLCS by far the fastest, and INC the slowest
+- 41 aim 200 SAT-> only with INC 
+- For big aim problems, if INC can solve it than JW is slower than INC
+- 48 aim 200 sat -> INC 29, DLIS 16, DLCS 22, JW 25 -> Instance where DLIS is fastest
+- 56 aim 50 SAT -> DLCS solves with 22 choose and 21 backtrack, inc with 9k choose, and 9k backtrack (64 aim is similar)
+- 61 aim 50 SAT -> JW solves with 43 choose and 37 backtrack, dlcs 2k each, dlis 3k each, inc 500 each
+- 62 aim 50 SAT -> INC solves with 157 choose, 150 backtrack, dlis 280 each, dlcs 750 each, JW 370 each
+- 66 aim 50 SAT -> inc solves with 2 choices no backtrack, DLIS 130 each, DLCS 130 each, JW 130 each.
+- 68 aim 50 SAT -> DLIS and JW with 9 choose and 2 backtrack, Inc with 190 each, dlcs 40 each
+- 70 aim 50 SAT -> DLIS with 7 choose no backtrack, DLCS 7 choose 1 backtrack, time diff = 1.016492 , 1.001649 => DLCS faster regardless 
+- 81 ii16c1 SAT -> only dlcs solves and that with a whooping 1.044 secs
+
+
+
+
+
 Cactus Plot Sat Solver -- https://github.com/alexeyignatiev/mkplot
 
 C15 takes 57 second with DLCS -- on the border
