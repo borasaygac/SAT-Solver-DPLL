@@ -64,63 +64,6 @@ void chooseDLCS() {
     update(curVar);
 }
 
-void chooseMOM() {
-    dc++;
-    int max = 0;
-    int index = 0;
-    bool pol = false;
-
-    while (!minClauses.empty()) {
-        int minClause = minClauses.front();
-        if (clauses[minClause].sat != 0) continue;
-        minClauses.pop();
-        for (auto literal : clauses[minClause].literals) {
-            (literal > 0) ? vars[literal].posMOM++ : vars[-literal].negMOM++;
-        }
-    }
-
-    for (int i = 1; i < numOfVars; i++) {
-        if (vars[i].val != FREE || vars[i].posMOM + vars[i].negMOM == 0) continue;
-
-        int MOMscore = (vars[i].posMOM + vars[i].negMOM) * pow(2, 2) + (vars[i].posMOM * vars[i].negMOM);
-
-        if (MOMscore > max) {
-            max = MOMscore;
-            index = i;
-            pol = (vars[i].posMOM >= vars[i].negMOM) ? true : false;
-        }
-
-        vars[i].posMOM = 0;
-        vars[i].negMOM = 0;
-    }
-
-    vars[curVar].localMinClauses = minClauses;
-    vars[curVar].localMinWidth = minWidth;
-    curVar = index;
-    vars[curVar].val = pol ? TRUE : FALSE;
-    vars[curVar].forced = false;
-    // std::cout << "chosen var " << curVar << "and max score " << max <<"\n";
-    assig.push(curVar);
-    update(curVar);
-
-    // std::vector<double> MOMScore(numOfClauses, 0.0);
-    // int param;
-
-    // for (const auto clause : minimalClauses) {
-    //     for (int i = 0; i < cnf[clause].literals.size(); i++) {
-    //         auto it = maxHeap.find(std::abs(cnf[clause].literals[i]));
-    //         (cnf[clause].literals[i] > 0) ? vars[*it].posCount++ : vars[*it].negCount++;
-    //         if (it != maxHeap.end()) maxHeap.erase(std::abs(cnf[clause].literals[i]));
-    //         maxHeap.insert(std::abs(cnf[clause].literals[i]));
-    //     }
-    // }
-
-    // curVar = *(maxHeap.begin());
-    // vars[curVar].posCount > vars[curVar].negCount ? vars[curVar].val = TRUE : vars[curVar].val = FALSE;
-    // vars[curVar].forced = false;
-    // assig.push(curVar);
-}
-
 void chooseJW() {
     dc++;
     double max = 0;
@@ -153,3 +96,60 @@ void chooseJW() {
     assig.push(curVar);
     update(curVar);
 }
+
+// void chooseMOM() {
+//     dc++;
+//     int max = 0;
+//     int index = 0;
+//     bool pol = false;
+
+//     while (!minClauses.empty()) {
+//         int minClause = minClauses.front();
+//         if (clauses[minClause].sat != 0) continue;
+//         minClauses.pop();
+//         for (auto literal : clauses[minClause].literals) {
+//             (literal > 0) ? vars[literal].posMOM++ : vars[-literal].negMOM++;
+//         }
+//     }
+
+//     for (int i = 1; i < numOfVars; i++) {
+//         if (vars[i].val != FREE || vars[i].posMOM + vars[i].negMOM == 0) continue;
+
+//         int MOMscore = (vars[i].posMOM + vars[i].negMOM) * pow(2, 2) + (vars[i].posMOM * vars[i].negMOM);
+
+//         if (MOMscore > max) {
+//             max = MOMscore;
+//             index = i;
+//             pol = (vars[i].posMOM >= vars[i].negMOM) ? true : false;
+//         }
+
+//         vars[i].posMOM = 0;
+//         vars[i].negMOM = 0;
+//     }
+
+//     vars[curVar].localMinClauses = minClauses;
+//     vars[curVar].localMinWidth = minWidth;
+//     curVar = index;
+//     vars[curVar].val = pol ? TRUE : FALSE;
+//     vars[curVar].forced = false;
+//     // std::cout << "chosen var " << curVar << "and max score " << max <<"\n";
+//     assig.push(curVar);
+//     update(curVar);
+
+//     // std::vector<double> MOMScore(numOfClauses, 0.0);
+//     // int param;
+
+//     // for (const auto clause : minimalClauses) {
+//     //     for (int i = 0; i < cnf[clause].literals.size(); i++) {
+//     //         auto it = maxHeap.find(std::abs(cnf[clause].literals[i]));
+//     //         (cnf[clause].literals[i] > 0) ? vars[*it].posCount++ : vars[*it].negCount++;
+//     //         if (it != maxHeap.end()) maxHeap.erase(std::abs(cnf[clause].literals[i]));
+//     //         maxHeap.insert(std::abs(cnf[clause].literals[i]));
+//     //     }
+//     // }
+
+//     // curVar = *(maxHeap.begin());
+//     // vars[curVar].posCount > vars[curVar].negCount ? vars[curVar].val = TRUE : vars[curVar].val = FALSE;
+//     // vars[curVar].forced = false;
+//     // assig.push(curVar);
+// }
