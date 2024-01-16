@@ -28,3 +28,34 @@ void printModel(int res) {
         }
     }
 }
+
+
+void writeModelToFile(int res, const std::string& fileName) {
+    std::ofstream outFile(fileName);
+
+    if (!outFile.is_open()) {
+        std::cerr << "Error opening file: " << fileName << std::endl;
+        return;
+    }
+
+    if (res == 1) {
+        outFile << "-s UNSATISFIABLE: No model";
+    } else {
+        outFile << "-s SATISFIABLE!";
+        outFile << "\n\n";
+        outFile << "v- ";
+        for (int i = 1; i <= numOfVars; i++) {
+            int value = 0;
+            if (vars[i].val == FREE) value = -i;
+            if (vars[i].val == TRUE) value = i;
+            if (vars[i].val == FALSE) value = -i;
+
+            outFile << value;
+
+            (i < numOfVars) ? outFile << ", " : outFile << "\n";
+            if (i % 20 == 0) outFile << "\nv- ";
+        }
+    }
+
+    outFile.close();
+}

@@ -113,4 +113,7 @@ void printModel(int res);
 
 void verifyModel();
 
+//Back up Print funtion
+void writeModelToFile(int res, const std::string& fileName);
+
 #endif

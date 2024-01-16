@@ -84,7 +84,9 @@ int main(int argc, char* argv[]) {
     } else {  // wait for dpll to finish
         pthread_join(thread, &res);
 
-        printModel((intptr_t)res);
+        //DIMACS type print
+        writeModelToFile((intptr_t)res, "solution.txt");
+        //printModel((intptr_t)res);
     }
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
