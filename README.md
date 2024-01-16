@@ -2,7 +2,7 @@
 Files in which we timeout for all heuristics:
 - 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 
 - 35, 36, 37, 38, 39, 40, 42, 43, 44, 77
-- 78, 79, 138, 139, 
+- 78, 79, 138, 139, 140
 
 Intersting results: 
 - Normal order => DLCS < DLIS < JW < INC => So INC is normally the slowest
@@ -27,6 +27,7 @@ Intersting results:
 - 120 par16-2-c SAT -> DLCS back, (turning into british history tbh), DLCS 11 secs, the rest above 20
 - 121 par16- SAT -> JW beats all with 7 secs, inc 9, dlis 37, dlcs 36
 - 122 par163-c SAT -> Jw 1 sec, the rest over 20
+- Current stop -> 139
 
 
 
