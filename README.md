@@ -2,7 +2,7 @@
 Files in which we timeout for all heuristics:
 - 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 
 - 35, 36, 37, 38, 39, 40, 42, 43, 44, 77
-- 78, 79, 
+- 78, 79, 138, 139, 
 
 Intersting results: 
 - Normal order => DLCS < DLIS < JW < INC => So INC is normally the slowest
@@ -23,6 +23,11 @@ Intersting results:
 - 101 ii31e3 SAT -> DLIS with just 3 choose no backtrack, JW the same
 - 106 ii8a3 SAT -> INC leaves the others in its dust -> 1 Sec < 106 < 93 < 115
 - 111 ii8b4 SAT -> DLCS TIMES OUT (woah!) Inc with a sec, the king (DLCS) is dead, long live the king (INC) -- DLCS resurrects a couple cases later
+- 117 ii8e2 SAT -> INC still on top but DLCS coming back
+- 120 par16-2-c SAT -> DLCS back, (turning into british history tbh), DLCS 11 secs, the rest above 20
+- 121 par16- SAT -> JW beats all with 7 secs, inc 9, dlis 37, dlcs 36
+- 122 par163-c SAT -> Jw 1 sec, the rest over 20
+
 
 
 
