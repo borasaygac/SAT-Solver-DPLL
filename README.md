@@ -17,6 +17,13 @@ Intersting results:
 - 68 aim 50 SAT -> DLIS and JW with 9 choose and 2 backtrack, Inc with 190 each, dlcs 40 each
 - 70 aim 50 SAT -> DLIS with 7 choose no backtrack, DLCS 7 choose 1 backtrack, time diff = 1.016492 , 1.001649 => DLCS faster regardless 
 - 81 ii16c1 SAT -> only dlcs solves and that with a whooping 1.044 secs
+- 84 ii16d2 SAT -> DLIS and JW with 40 choose 4 backtrack
+- 87 ii32a1 SAT -> DLIS and JW with 5 choose 3 backtrack
+- For big ii16 and 32s jw and DLIS seem to perform similarly
+- 101 ii31e3 SAT -> DLIS with just 3 choose no backtrack, JW the same
+- 106 ii8a3 SAT -> INC leaves the others in its dust -> 1 Sec < 106 < 93 < 115
+- 111 ii8b4 SAT -> DLCS TIMES OUT (woah!) Inc with a sec, the king (DLCS) is dead, long live the king (INC) -- DLCS resurrects a couple cases later
+
 
 
 
