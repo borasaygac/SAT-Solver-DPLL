@@ -5,7 +5,7 @@ python mkplot.py --legend prog_alias -t 200 -b png --xmax=5  --save-to C:/Users/
 Files in which we timeout for all heuristics:
 - 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 
 - 35, 36, 37, 38, 39, 40, 42, 43, 44, 77
-- 78, 79, 138, 139, 140
+- 78, 79, 138, 139, 140, 141, 
 
 Intersting results: 
 - Normal order => DLCS < DLIS < JW < INC => So INC is normally the slowest
