@@ -88,10 +88,6 @@ void propagate();
 // chooses next branching var according to the selected heuristic
 extern void (*decide)();
 
-extern void (*update)(int assertedVar);
-
-extern void (*updateBacktrack)(int unassignedVar);
-
 void chooseINC();
 
 void chooseDLIS();
@@ -102,10 +98,10 @@ void chooseJW();
 
 // updates the CNF after a new assignment is made;
 // exits dpll if valid assig is found
-void updateDef(int assertedVar);
+void update(int assertedVar);
 
 // updates the CNF after unassignment in backtrack()
-void updateBacktrackDef(int unassignedVar);
+void updateBacktrack(int unassignedVar);
 
 // handles conficts and signals UNSAT
 void backtrack();

@@ -1,6 +1,6 @@
 #include "../include/cnf.hpp"
 
-void updateDef(int assertedVar) {
+void update(int assertedVar) {
     pthread_testcancel();
     // clauses where assertedVar evaluates to FALSE
     std::set<int>* clausesToUpdate;
@@ -80,7 +80,7 @@ void updateDef(int assertedVar) {
     }
 }
 
-void updateBacktrackDef(int unassignedVar) {
+void updateBacktrack(int unassignedVar) {
     // clauses where assertedVar evaluates to FALSE
     std::set<int>* clausesToIncrement;
 
@@ -104,7 +104,7 @@ void updateBacktrackDef(int unassignedVar) {
     std::set<int>::iterator clauseIndex;
     std::set<int> copy = *allOccurences;
 
-    // restore the previously deleted literal references
+    // restore the previously deleted clauses and its var references
     for (clauseIndex = copy.begin(); clauseIndex != copy.end(); ++clauseIndex) {
         if (clauses[*clauseIndex].sat != unassignedVar) continue;
 

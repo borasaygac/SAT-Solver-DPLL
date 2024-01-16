@@ -18,8 +18,6 @@ bool backtrackFlag = 0;
 Heuristics heuristic = INC;
 void (*heuristicPointers[4])() = {chooseINC, chooseDLIS, chooseDLCS, chooseJW};
 void (*decide)() = chooseINC;
-void (*update)(int assertedVar) = updateDef;
-void (*updateBacktrack)(int unassignedVar) = updateBacktrackDef;
 int dc = 0;
 int btc = 0;
 std::queue<int> toPropagate;
