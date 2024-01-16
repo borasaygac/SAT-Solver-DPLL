@@ -2,10 +2,22 @@
 python mkplot.py --legend prog_alias -t 200 -b png --xmax=5  --save-to C:/Users/boras/projects/group_k_project_2/cactustest.png C:/Users/boras/projects/group_k_project_2/plotFiles/testInstances.json
 -- mkplot run befehl
 
-Files in which we timeout for all heuristics:
-- 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 
-- 35, 36, 37, 38, 39, 40, 42, 43, 44, 77
-- 78, 79, 138, 139, 140, 141, 
+INC:
+ (1, 2, 3, 4, 9, 10, 11, 12, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,38,39, 40, 42, 43, 44, 77, 78, 79, 80, 81, 82, 83, 84, 87, 89, 90, 91, 95, 96, 97, 98, 101, 102, 103, 138, 139, 140, 141, 146, 147, 148, 150)
+
+ DLIS:
+ (9, 10, 11, 12, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 77, 78, 79, 81, 85, 113, 117, 138, 139, 140, 141, 151)
+
+ DLCS:
+ ( 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
+  35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 77
+  78, 79, 111, 112, 113, 115, 117, 150 ,151, 138, 139, 140, 141)    
+
+ JW:
+ (
+
+ )
+
 
 Intersting results: 
 - Normal order => DLCS < DLIS < JW < INC => So INC is normally the slowest
