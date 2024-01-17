@@ -20,8 +20,7 @@ Examples:
 
 ## Results
 
-We plotted our runtimes by sorting them in increasing order and displaying them with `mkplot`.  
-For plots with higher timeout, see under `cactus/`.
+We plotted our runtimes by sorting them in increasing order and displaying them with `mkplot`. For plots with higher timeout, see under `cactus/`.
 
 ![Alt text](cactus/cactusPlot60secs.png/?raw=true "Optional Title")
 
