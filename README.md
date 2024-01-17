@@ -24,8 +24,7 @@ Examples:
 
 ## Results
 
-Testing was done on a R
-We plotted our runtimes by sorting them in increasing order and displaying them with `mkplot`. For plots with higher timeout, see folder `cactus/`.
+We plotted our runtimes by sorting them in increasing order using `mkplot`. For plots with higher timeout, see folder `cactus/`.
 
 ![Alt text](cactus/cactusPlot60secs.png/?raw=true "Optional Title")
 
