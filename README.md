@@ -7,7 +7,14 @@ To build the project enter `make`. To run the solver on a test file enter `./mai
 
 Optionally, to build and run immediately, enter `make run arg=[testfile] [heur]`.
 
-If compiled, you can run a chosen set of test or comp files at once with either all heuristics `.\runAll.ps1 -type [dir] -start [int] -end [int]` or a chosen heuristic `.\run.ps1 -type [dir] -start [int] -end [int] -heur [int]`
+If compiled, you can run a chosen set of test or comp files at once with either all heuristics `.\runAll.ps1 -type [char] -start [int] -end [int]` or a chosen heuristic `.\run.ps1 -type [char] -start [int] -end [int] -heur [int]`.
+
+Examples: 
+```
+.\runAll.ps1 -type 'c' -start 1 -end 50
+.\run.ps1 -type 't' -start 1 -end 30 -heur 1
+```
+
 
 
 
