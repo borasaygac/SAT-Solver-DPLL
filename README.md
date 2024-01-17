@@ -24,11 +24,21 @@ Examples:
 
 ## Results
 
+Testing was done on a R
 We plotted our runtimes by sorting them in increasing order and displaying them with `mkplot`. For plots with higher timeout, see folder `cactus/`.
 
 ![Alt text](cactus/cactusPlot60secs.png/?raw=true "Optional Title")
 
+**Test Environment Specifications:
 
+- **Hardware:**
+  - Processor: Intel Core i7-8700K @ 3.70GHz (6 cores, 12 threads)
+  - Memory: 32GB DDR4 RAM
+  - Storage: 1TB NVMe SSD
+
+- **Software:**
+  - Operating System: Ubuntu 20.04 LTS
+  - Compiler: GCC 9.3.0
 
 </div>
 
