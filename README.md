@@ -7,7 +7,7 @@ This project implements the DPLL algorithm enhanced with Unit Propagation (UP) a
 The solver offers four heuristic options: INC->0, DLIS->1, DLCS->2, JW->3. Both satisfiable and unsatisfiable competition files have been consolidated into a designated comp folder, identifiable by their affix (u = unsat, s = sat).
 
 ## Build + Run
-To build the project enter `make`. To run the solver on a test file enter `./main [testfile] [heur]`. 
+To build the project enter `make`. To run the solver on a test file enter `./main [testfile] [heur]`. We differntiate between the simpler testfiles (test->t) and the harder competition testfile (comp->c).
 
 Optionally, to build and run immediately, enter `make run arg=[testfile] [heur]`.
 
