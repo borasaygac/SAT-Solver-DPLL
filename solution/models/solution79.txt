@@ -1,0 +1,10 @@
+Running comp/079_ii16b1_s.cnf DLCS
+
+Number of Variables: 1728
+Number of Clauses: 24792
+
+TIMEOUT of 100 SECONDS REACHED!
+
+CPU time used: 100.226926 seconds
+
+Choose: 547249, Backtrack: 547148

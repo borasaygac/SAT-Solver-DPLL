@@ -1,0 +1,10 @@
+Running comp/012_aim-100-2_0-no-4_u.cnf JW
+
+Number of Variables: 100
+Number of Clauses: 200
+
+TIMEOUT of 100 SECONDS REACHED!
+
+CPU time used: 100.552999 seconds
+
+Choose: 1653344, Backtrack: 1657331

@@ -1,0 +1,2216 @@
+
+Running [34mtest/001_count4_2_s.cnf [38;5;208mJW[0m
+
+Number of Variables: 6
+Number of Clauses: 16
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.013559 seconds
+
+Choose: 3, Backtrack: 0
+
+-------------------------------------
+
+
+Running [34mcomp/001_aim-100-1_6-no-1_u.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 160
+
+
+CPU time used: 6.034466 seconds
+
+Choose: 220283, Backtrack: 220284
+
+-------------------------------------
+
+
+Running [34mcomp/002_aim-100-1_6-no-2_u.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 160
+
+
+CPU time used: 3.023280 seconds
+
+Choose: 102863, Backtrack: 102864
+
+-------------------------------------
+
+
+Running [34mcomp/003_aim-100-1_6-no-3_u.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 160
+
+
+CPU time used: 12.078021 seconds
+
+Choose: 549184, Backtrack: 549185
+
+-------------------------------------
+
+
+Running [34mcomp/004_aim-100-1_6-no-4_u.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 160
+
+
+CPU time used: 9.061346 seconds
+
+Choose: 342179, Backtrack: 342180
+
+-------------------------------------
+
+
+Running [34mcomp/005_aim-100-1_6-yes1-1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 160
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.009624 seconds
+
+Choose: 27368, Backtrack: 27360
+
+-------------------------------------
+
+
+Running [34mcomp/005_aim-100-1_6-yes1-1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 160
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.012285 seconds
+
+Choose: 27368, Backtrack: 27360
+
+-------------------------------------
+
+
+Running [34mcomp/004_aim-100-1_6-no-4_u.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 160
+
+
+CPU time used: 10.081161 seconds
+
+Choose: 342179, Backtrack: 342180
+
+-------------------------------------
+
+
+Running [34mcomp/005_aim-100-1_6-yes1-1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 160
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.016096 seconds
+
+Choose: 27368, Backtrack: 27360
+
+-------------------------------------
+
+
+Running [34mcomp/006_aim-100-1_6-yes1-2_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 160
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.013824 seconds
+
+Choose: 31247, Backtrack: 31243
+
+-------------------------------------
+
+
+Running [34mcomp/007_aim-100-1_6-yes1-3_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 160
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 2.017051 seconds
+
+Choose: 69600, Backtrack: 69590
+
+-------------------------------------
+
+
+Running [34mcomp/008_aim-100-1_6-yes1-4_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 160
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.004453 seconds
+
+Choose: 41369, Backtrack: 41360
+
+-------------------------------------
+
+
+Running [34mcomp/013_aim-100-2_0-yes1-1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 200
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 3.039471 seconds
+
+Choose: 82256, Backtrack: 82243
+
+-------------------------------------
+
+
+Running [34mcomp/014_aim-100-2_0-yes1-2_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 200
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 21.103841 seconds
+
+Choose: 668468, Backtrack: 668461
+
+-------------------------------------
+
+
+Running [34mcomp/013_aim-100-2_0-yes1-1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 200
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 3.022453 seconds
+
+Choose: 82256, Backtrack: 82243
+
+-------------------------------------
+
+
+Running [34mcomp/014_aim-100-2_0-yes1-2_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 200
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 20.125773 seconds
+
+Choose: 668468, Backtrack: 668461
+
+-------------------------------------
+
+
+Running [34mcomp/015_aim-100-2_0-yes1-3_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 200
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 46.358274 seconds
+
+Choose: 1754202, Backtrack: 1754189
+
+-------------------------------------
+
+
+Running [34mcomp/016_aim-100-2_0-yes1-4_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 200
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 7.055759 seconds
+
+Choose: 201881, Backtrack: 201870
+
+-------------------------------------
+
+
+Running [34mcomp/017_aim-100-3_4-yes1-1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 340
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.003631 seconds
+
+Choose: 5503, Backtrack: 5496
+
+-------------------------------------
+
+
+Running [34mcomp/018_aim-100-3_4-yes1-2_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 340
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.015337 seconds
+
+Choose: 6578, Backtrack: 6571
+
+-------------------------------------
+
+
+Running [34mcomp/019_aim-100-3_4-yes1-3_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 340
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.011192 seconds
+
+Choose: 7489, Backtrack: 7482
+
+-------------------------------------
+
+
+Running [34mcomp/020_aim-100-3_4-yes1-4_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 340
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.012527 seconds
+
+Choose: 11725, Backtrack: 11719
+
+-------------------------------------
+
+
+Running [34mcomp/021_aim-100-6_0-yes1-1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 600
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.011834 seconds
+
+Choose: 139, Backtrack: 132
+
+-------------------------------------
+
+
+Running [34mcomp/022_aim-100-6_0-yes1-2_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 600
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.011736 seconds
+
+Choose: 1441, Backtrack: 1435
+
+-------------------------------------
+
+
+Running [34mcomp/023_aim-100-6_0-yes1-3_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 600
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.021330 seconds
+
+Choose: 549, Backtrack: 543
+
+-------------------------------------
+
+
+Running [34mcomp/024_aim-100-6_0-yes1-4_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 100
+Number of Clauses: 600
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.016069 seconds
+
+Choose: 231, Backtrack: 223
+
+-------------------------------------
+
+
+Running [34mcomp/045_aim-200-6_0-yes1-1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 200
+Number of Clauses: 1200
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 8.036936 seconds
+
+Choose: 38958, Backtrack: 38948
+
+-------------------------------------
+
+
+Running [34mcomp/046_aim-200-6_0-yes1-2_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 200
+Number of Clauses: 1200
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 5.034429 seconds
+
+Choose: 20933, Backtrack: 20924
+
+-------------------------------------
+
+
+Running [34mcomp/047_aim-200-6_0-yes1-3_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 200
+Number of Clauses: 1200
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 17.082775 seconds
+
+Choose: 80446, Backtrack: 80437
+
+-------------------------------------
+
+
+Running [34mcomp/048_aim-200-6_0-yes1-4_s.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 200
+Number of Clauses: 1200
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 16.159316 seconds
+
+Choose: 79553, Backtrack: 79539
+
+-------------------------------------
+
+
+Running [34mcomp/049_aim-50-1_6-no-1_u.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 80
+
+
+CPU time used: 1.022200 seconds
+
+Choose: 361, Backtrack: 362
+
+-------------------------------------
+
+
+Running [34mcomp/050_aim-50-1_6-no-2_u.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 80
+
+
+CPU time used: 1.010680 seconds
+
+Choose: 1275, Backtrack: 1276
+
+-------------------------------------
+
+
+Running [34mcomp/051_aim-50-1_6-no-3_u.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 80
+
+
+CPU time used: 1.015865 seconds
+
+Choose: 2439, Backtrack: 2440
+
+-------------------------------------
+
+
+Running [34mcomp/052_aim-50-1_6-no-4_u.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 80
+
+
+CPU time used: 1.022569 seconds
+
+Choose: 666, Backtrack: 667
+
+-------------------------------------
+
+
+Running [34mcomp/053_aim-50-1_6-yes1-1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 80
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.011441 seconds
+
+Choose: 274, Backtrack: 265
+
+-------------------------------------
+
+
+Running [34mcomp/054_aim-50-1_6-yes1-2_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 80
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.012938 seconds
+
+Choose: 384, Backtrack: 380
+
+-------------------------------------
+
+
+Running [34mcomp/055_aim-50-1_6-yes1-3_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 80
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.031060 seconds
+
+Choose: 761, Backtrack: 756
+
+-------------------------------------
+
+
+Running [34mcomp/056_aim-50-1_6-yes1-4_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 80
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.005121 seconds
+
+Choose: 22, Backtrack: 21
+
+-------------------------------------
+
+
+Running [34mcomp/057_aim-50-2_0-no-1_u.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 100
+
+
+CPU time used: 1.018154 seconds
+
+Choose: 6197, Backtrack: 6198
+
+-------------------------------------
+
+
+Running [34mcomp/058_aim-50-2_0-no-2_u.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 100
+
+
+CPU time used: 1.024481 seconds
+
+Choose: 4466, Backtrack: 4467
+
+-------------------------------------
+
+
+Running [34mcomp/059_aim-50-2_0-no-3_u.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 100
+
+
+CPU time used: 1.011479 seconds
+
+Choose: 4782, Backtrack: 4783
+
+-------------------------------------
+
+
+Running [34mcomp/060_aim-50-2_0-no-4_u.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 100
+
+
+CPU time used: 1.026073 seconds
+
+Choose: 3712, Backtrack: 3713
+
+-------------------------------------
+
+
+Running [34mcomp/061_aim-50-2_0-yes1-1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 100
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.012205 seconds
+
+Choose: 2081, Backtrack: 2076
+
+-------------------------------------
+
+
+Running [34mcomp/062_aim-50-2_0-yes1-2_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 100
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.024514 seconds
+
+Choose: 747, Backtrack: 740
+
+-------------------------------------
+
+
+Running [34mcomp/063_aim-50-2_0-yes1-3_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 100
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.014300 seconds
+
+Choose: 1032, Backtrack: 1025
+
+-------------------------------------
+
+
+Running [34mcomp/064_aim-50-2_0-yes1-4_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 100
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.022954 seconds
+
+Choose: 59, Backtrack: 51
+
+-------------------------------------
+
+
+Running [34mcomp/064_aim-50-2_0-yes1-4_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 100
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.009502 seconds
+
+Choose: 59, Backtrack: 51
+
+-------------------------------------
+
+
+Running [34mcomp/063_aim-50-2_0-yes1-3_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 100
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.013340 seconds
+
+Choose: 1032, Backtrack: 1025
+
+-------------------------------------
+
+
+Running [34mcomp/065_aim-50-3_4-yes1-1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 170
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.024251 seconds
+
+Choose: 204, Backtrack: 202
+
+-------------------------------------
+
+
+Running [34mcomp/066_aim-50-3_4-yes1-2_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 170
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.022396 seconds
+
+Choose: 90, Backtrack: 86
+
+-------------------------------------
+
+
+Running [34mcomp/067_aim-50-3_4-yes1-3_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 170
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.020890 seconds
+
+Choose: 135, Backtrack: 133
+
+-------------------------------------
+
+
+Running [34mcomp/068_aim-50-3_4-yes1-4_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 170
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.023372 seconds
+
+Choose: 39, Backtrack: 33
+
+-------------------------------------
+
+
+Running [34mcomp/069_aim-50-6_0-yes1-1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 300
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.016374 seconds
+
+Choose: 25, Backtrack: 22
+
+-------------------------------------
+
+
+Running [34mcomp/070_aim-50-6_0-yes1-2_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 300
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.021493 seconds
+
+Choose: 7, Backtrack: 1
+
+-------------------------------------
+
+
+Running [34mcomp/071_aim-50-6_0-yes1-3_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 300
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.013920 seconds
+
+Choose: 27, Backtrack: 22
+
+-------------------------------------
+
+
+Running [34mcomp/072_aim-50-6_0-yes1-4_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 300
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.017821 seconds
+
+Choose: 40, Backtrack: 38
+
+-------------------------------------
+
+
+Running [34mcomp/073_hole6_u.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 42
+Number of Clauses: 133
+
+
+CPU time used: 1.022954 seconds
+
+Choose: 719, Backtrack: 720
+
+-------------------------------------
+
+
+Running [34mcomp/074_hole7_u.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 56
+Number of Clauses: 204
+
+
+CPU time used: 1.016023 seconds
+
+Choose: 5039, Backtrack: 5040
+
+-------------------------------------
+
+
+Running [34mcomp/075_hole8_u.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 72
+Number of Clauses: 297
+
+
+CPU time used: 1.016272 seconds
+
+Choose: 40319, Backtrack: 40320
+
+-------------------------------------
+
+
+Running [34mcomp/076_hole9_u.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 90
+Number of Clauses: 415
+
+
+CPU time used: 9.124316 seconds
+
+Choose: 362879, Backtrack: 362880
+
+-------------------------------------
+
+
+Running [34mcomp/080_ii16b2_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 1076
+Number of Clauses: 16121
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 74.856217 seconds
+
+Choose: 29173, Backtrack: 29162
+
+-------------------------------------
+
+
+Running [34mcomp/081_ii16c1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 1580
+Number of Clauses: 16467
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.058393 seconds
+
+Choose: 382, Backtrack: 338
+
+-------------------------------------
+
+
+Running [34mcomp/082_ii16c2_s.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 924
+Number of Clauses: 13803
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.058033 seconds
+
+Choose: 250, Backtrack: 234
+
+-------------------------------------
+
+
+Running [34mcomp/083_ii16d1_s.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 1230
+Number of Clauses: 15901
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.050983 seconds
+
+Choose: 692, Backtrack: 560
+
+-------------------------------------
+
+
+Running [34mcomp/084_ii16d2_s.cnf [38;5;208mJW[0m
+
+Number of Variables: 836
+Number of Clauses: 12461
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.055505 seconds
+
+Choose: 40, Backtrack: 4
+
+-------------------------------------
+
+
+Running [34mcomp/085_ii16e1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 1245
+Number of Clauses: 14766
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 5.135639 seconds
+
+Choose: 3690, Backtrack: 3655
+
+-------------------------------------
+
+
+Running [34mcomp/086_ii16e2_s.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 532
+Number of Clauses: 7825
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.050131 seconds
+
+Choose: 283, Backtrack: 280
+
+-------------------------------------
+
+
+Running [34mcomp/087_ii32a1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 459
+Number of Clauses: 9212
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.037377 seconds
+
+Choose: 12, Backtrack: 10
+
+-------------------------------------
+
+
+Running [34mcomp/088_ii32b1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 228
+Number of Clauses: 1374
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.022715 seconds
+
+Choose: 47, Backtrack: 41
+
+-------------------------------------
+
+
+Running [34mcomp/089_ii32b2_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 261
+Number of Clauses: 2558
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.021945 seconds
+
+Choose: 335, Backtrack: 332
+
+-------------------------------------
+
+
+Running [34mcomp/090_ii32b3_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 348
+Number of Clauses: 5734
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.037221 seconds
+
+Choose: 40, Backtrack: 38
+
+-------------------------------------
+
+
+Running [34mcomp/091_ii32b4_s.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 381
+Number of Clauses: 6918
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.052898 seconds
+
+Choose: 10, Backtrack: 8
+
+-------------------------------------
+
+
+Running [34mcomp/092_ii32c1_s.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 225
+Number of Clauses: 1280
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.023639 seconds
+
+Choose: 11, Backtrack: 0
+
+-------------------------------------
+
+
+Running [34mcomp/091_ii32b4_s.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 381
+Number of Clauses: 6918
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.027119 seconds
+
+Choose: 10, Backtrack: 8
+
+-------------------------------------
+
+
+Running [34mcomp/092_ii32c1_s.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 225
+Number of Clauses: 1280
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.006482 seconds
+
+Choose: 11, Backtrack: 0
+
+-------------------------------------
+
+
+Running [34mcomp/093_ii32c2_s.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 249
+Number of Clauses: 2182
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.023402 seconds
+
+Choose: 16, Backtrack: 0
+
+-------------------------------------
+
+
+Running [34mcomp/094_ii32c3_s.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 279
+Number of Clauses: 3272
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.038588 seconds
+
+Choose: 9, Backtrack: 0
+
+-------------------------------------
+
+
+Running [34mcomp/095_ii32c4_s.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 759
+Number of Clauses: 20862
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.089093 seconds
+
+Choose: 9, Backtrack: 4
+
+-------------------------------------
+
+
+Running [34mcomp/096_ii32d1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 332
+Number of Clauses: 2703
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.025067 seconds
+
+Choose: 26, Backtrack: 5
+
+-------------------------------------
+
+
+Running [34mcomp/097_ii32d2_s.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 404
+Number of Clauses: 5153
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.026875 seconds
+
+Choose: 271, Backtrack: 260
+
+-------------------------------------
+
+
+Running [34mcomp/098_ii32d3_s.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 824
+Number of Clauses: 19478
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.079452 seconds
+
+Choose: 8, Backtrack: 2
+
+-------------------------------------
+
+
+Running [34mcomp/099_ii32e1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 222
+Number of Clauses: 1186
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.019245 seconds
+
+Choose: 6, Backtrack: 2
+
+-------------------------------------
+
+
+Running [34mcomp/100_ii32e2_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 267
+Number of Clauses: 2746
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.023628 seconds
+
+Choose: 14, Backtrack: 8
+
+-------------------------------------
+
+
+Running [34mcomp/101_ii32e3_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 330
+Number of Clauses: 5020
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.050049 seconds
+
+Choose: 17, Backtrack: 12
+
+-------------------------------------
+
+
+Running [34mcomp/102_ii32e4_s.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 387
+Number of Clauses: 7106
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.050141 seconds
+
+Choose: 4, Backtrack: 0
+
+-------------------------------------
+
+
+Running [34mcomp/103_ii32e5_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 522
+Number of Clauses: 11636
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.049104 seconds
+
+Choose: 18, Backtrack: 16
+
+-------------------------------------
+
+
+Running [34mcomp/104_ii8a1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 66
+Number of Clauses: 186
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.021392 seconds
+
+Choose: 6, Backtrack: 0
+
+-------------------------------------
+
+
+Running [34mcomp/105_ii8a2_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 180
+Number of Clauses: 800
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 8.051515 seconds
+
+Choose: 122562, Backtrack: 122517
+
+-------------------------------------
+
+
+Running [34mcomp/106_ii8a3_s.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 264
+Number of Clauses: 1552
+
+
+Running [34mcomp/106_ii8a3_s.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 264
+Number of Clauses: 1552
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 87.724419 seconds
+
+Choose: 878694, Backtrack: 878647
+
+-------------------------------------
+
+
+Running [34mcomp/107_ii8a4_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 396
+Number of Clauses: 2798
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.027664 seconds
+
+Choose: 14, Backtrack: 4
+
+-------------------------------------
+
+
+Running [34mcomp/108_ii8b1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 336
+Number of Clauses: 2068
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.020789 seconds
+
+Choose: 260, Backtrack: 219
+
+-------------------------------------
+
+
+Running [34mcomp/109_ii8b2_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 576
+Number of Clauses: 4088
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.028874 seconds
+
+Choose: 60, Backtrack: 6
+
+-------------------------------------
+
+
+Running [34mcomp/110_ii8b3_s.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 816
+Number of Clauses: 6108
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.036551 seconds
+
+Choose: 54, Backtrack: 0
+
+-------------------------------------
+
+
+Running [34mcomp/111_ii8b4_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 1068
+Number of Clauses: 8214
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.033774 seconds
+
+Choose: 60, Backtrack: 10
+
+-------------------------------------
+
+
+Running [34mcomp/112_ii8c1_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 510
+Number of Clauses: 3065
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.027900 seconds
+
+Choose: 12, Backtrack: 1
+
+-------------------------------------
+
+
+Running [34mcomp/113_ii8c2_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 950
+Number of Clauses: 6689
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.029829 seconds
+
+Choose: 108, Backtrack: 11
+
+-------------------------------------
+
+
+Running [34mcomp/114_ii8d1_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 530
+Number of Clauses: 3207
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.034479 seconds
+
+Choose: 110, Backtrack: 20
+
+-------------------------------------
+
+
+Running [34mcomp/115_ii8d2_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 930
+Number of Clauses: 6547
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.040171 seconds
+
+Choose: 99, Backtrack: 23
+
+-------------------------------------
+
+
+Running [34mcomp/116_ii8e1_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 520
+Number of Clauses: 3136
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.015683 seconds
+
+Choose: 120, Backtrack: 11
+
+-------------------------------------
+
+
+Running [34mcomp/117_ii8e2_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 870
+Number of Clauses: 6121
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.033006 seconds
+
+Choose: 120, Backtrack: 11
+
+-------------------------------------
+
+
+Running [34mcomp/118_par16-1-c_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 317
+Number of Clauses: 1264
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 4.044204 seconds
+
+Choose: 9729, Backtrack: 9720
+
+-------------------------------------
+
+
+Running [34mcomp/119_par16-1_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 1015
+Number of Clauses: 3310
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 6.067796 seconds
+
+Choose: 9890, Backtrack: 9881
+
+-------------------------------------
+
+
+Running [34mcomp/120_par16-2-c_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 349
+Number of Clauses: 1392
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 11.070419 seconds
+
+Choose: 19336, Backtrack: 19332
+
+-------------------------------------
+
+
+Running [34mcomp/121_par16-2_s.cnf [38;5;208mJW[0m
+
+Number of Variables: 1015
+Number of Clauses: 3374
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 7.065530 seconds
+
+Choose: 7324, Backtrack: 7312
+
+-------------------------------------
+
+
+Running [34mcomp/122_par16-3-c_s.cnf [38;5;208mJW[0m
+
+Number of Variables: 334
+Number of Clauses: 1332
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.017439 seconds
+
+Choose: 1389, Backtrack: 1378
+
+-------------------------------------
+
+
+Running [34mcomp/123_par16-3_s.cnf [38;5;208mJW[0m
+
+Number of Variables: 1015
+Number of Clauses: 3344
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 3.023086 seconds
+
+Choose: 3157, Backtrack: 3146
+
+-------------------------------------
+
+
+Running [34mcomp/124_par16-4-c_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 324
+Number of Clauses: 1292
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 4.045141 seconds
+
+Choose: 9249, Backtrack: 9236
+
+-------------------------------------
+
+
+Running [34mcomp/125_par16-4_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 1015
+Number of Clauses: 3324
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 8.048875 seconds
+
+Choose: 20385, Backtrack: 20382
+
+-------------------------------------
+
+
+Running [34mcomp/126_par16-5-c_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 341
+Number of Clauses: 1360
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 6.041178 seconds
+
+Choose: 14218, Backtrack: 14209
+
+-------------------------------------
+
+
+Running [34mcomp/127_par16-5_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 1015
+Number of Clauses: 3358
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 4.031689 seconds
+
+Choose: 6641, Backtrack: 6631
+
+-------------------------------------
+
+
+Running [34mcomp/128_par8-1-c_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 64
+Number of Clauses: 254
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.025512 seconds
+
+Choose: 32, Backtrack: 30
+
+-------------------------------------
+
+
+Running [34mcomp/129_par8-1_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 350
+Number of Clauses: 1149
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.024095 seconds
+
+Choose: 14, Backtrack: 11
+
+-------------------------------------
+
+
+Running [34mcomp/130_par8-2-c_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 68
+Number of Clauses: 270
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.020309 seconds
+
+Choose: 125, Backtrack: 122
+
+-------------------------------------
+
+
+Running [34mcomp/131_par8-2_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 350
+Number of Clauses: 1157
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.021355 seconds
+
+Choose: 11, Backtrack: 9
+
+-------------------------------------
+
+
+Running [34mcomp/132_par8-3-c_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 75
+Number of Clauses: 298
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.031973 seconds
+
+Choose: 63, Backtrack: 61
+
+-------------------------------------
+
+
+Running [34mcomp/133_par8-3_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 350
+Number of Clauses: 1171
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.017067 seconds
+
+Choose: 12, Backtrack: 9
+
+-------------------------------------
+
+
+Running [34mcomp/134_par8-4-c_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 67
+Number of Clauses: 266
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.026200 seconds
+
+Choose: 20, Backtrack: 6
+
+-------------------------------------
+
+
+Running [34mcomp/135_par8-4_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 350
+Number of Clauses: 1155
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.021022 seconds
+
+Choose: 52, Backtrack: 50
+
+-------------------------------------
+
+
+Running [34mcomp/136_par8-5-c_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 75
+Number of Clauses: 298
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.014907 seconds
+
+Choose: 22, Backtrack: 7
+
+-------------------------------------
+
+
+Running [34mcomp/137_par8-5_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 350
+Number of Clauses: 1171
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.020433 seconds
+
+Choose: 6, Backtrack: 3
+
+-------------------------------------
+
+
+Running [34mcomp/142_pret60_25_u.cnf [38;5;208mINC[0m
+
+Number of Variables: 60
+Number of Clauses: 160
+
+
+CPU time used: 37.187587 seconds
+
+Choose: 2770943, Backtrack: 2770944
+
+-------------------------------------
+
+
+Running [34mcomp/143_pret60_40_u.cnf [38;5;208mINC[0m
+
+Number of Variables: 60
+Number of Clauses: 160
+
+
+CPU time used: 37.288498 seconds
+
+Choose: 2770943, Backtrack: 2770944
+
+-------------------------------------
+
+
+Running [34mcomp/144_pret60_60_u.cnf [38;5;208mINC[0m
+
+Number of Variables: 60
+Number of Clauses: 160
+
+
+CPU time used: 39.281242 seconds
+
+Choose: 2770943, Backtrack: 2770944
+
+-------------------------------------
+
+
+Running [34mcomp/145_pret60_75_u.cnf [38;5;208mINC[0m
+
+Number of Variables: 60
+Number of Clauses: 160
+
+
+CPU time used: 38.299518 seconds
+
+Choose: 2770943, Backtrack: 2770944
+
+-------------------------------------
+
+
+Running [34mcomp/146_ssa0432-003_u.cnf [38;5;208mDLIS[0m
+
+Number of Variables: 435
+Number of Clauses: 1027
+
+
+CPU time used: 1.027475 seconds
+
+Choose: 3115, Backtrack: 3116
+
+-------------------------------------
+
+
+Running [34mcomp/149_ssa6288-047_u.cnf [38;5;208mINC[0m
+
+Number of Variables: 10410
+Number of Clauses: 34238
+
+
+CPU time used: 1.093403 seconds
+
+Choose: 0, Backtrack: 1
+
+-------------------------------------
+
+
+Running [34mcomp/150_ssa7552-038_s.cnf [38;5;208mJW[0m
+
+Number of Variables: 1501
+Number of Clauses: 3575
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.047015 seconds
+
+Choose: 76, Backtrack: 6
+
+-------------------------------------
+
+
+Running [34mcomp/151_ssa7552-158_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 1363
+Number of Clauses: 3034
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.029478 seconds
+
+Choose: 93, Backtrack: 2
+
+-------------------------------------
+
+
+Running [34mcomp/152_ssa7552-159_s.cnf [38;5;208mINC[0m
+
+Number of Variables: 1363
+Number of Clauses: 3032
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.025199 seconds
+
+Choose: 97, Backtrack: 2
+
+-------------------------------------
+
+
+Running [34mcomp/153_ssa7552-160_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 1391
+Number of Clauses: 3126
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.016162 seconds
+
+Choose: 8268, Backtrack: 8195
+
+-------------------------------------
+
+
+Running [34mcomp/154_uf50-010_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.024284 seconds
+
+Choose: 21, Backtrack: 17
+
+-------------------------------------
+
+
+Running [34mcomp/155_uf50-011_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.020016 seconds
+
+Choose: 32, Backtrack: 28
+
+-------------------------------------
+
+
+Running [34mcomp/156_uf50-012_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.026962 seconds
+
+Choose: 46, Backtrack: 42
+
+-------------------------------------
+
+
+Running [34mcomp/157_uf50-013_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.028119 seconds
+
+Choose: 10, Backtrack: 0
+
+-------------------------------------
+
+
+Running [34mcomp/158_uf50-014_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.016625 seconds
+
+Choose: 11, Backtrack: 0
+
+-------------------------------------
+
+
+Running [34mcomp/159_uf50-015_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.023275 seconds
+
+Choose: 14, Backtrack: 8
+
+-------------------------------------
+
+
+Running [34mcomp/160_uf50-016_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.014059 seconds
+
+Choose: 16, Backtrack: 9
+
+-------------------------------------
+
+
+Running [34mcomp/161_uf50-017_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.020831 seconds
+
+Choose: 27, Backtrack: 24
+
+-------------------------------------
+
+
+Running [34mcomp/162_uf50-018_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.024445 seconds
+
+Choose: 9, Backtrack: 1
+
+-------------------------------------
+
+
+Running [34mcomp/163_uf50-019_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.016607 seconds
+
+Choose: 39, Backtrack: 33
+
+-------------------------------------
+
+
+Running [34mcomp/164_uf50-01_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.025810 seconds
+
+Choose: 23, Backtrack: 14
+
+-------------------------------------
+
+
+Running [34mcomp/165_uf50-02_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.009862 seconds
+
+Choose: 9, Backtrack: 0
+
+-------------------------------------
+
+
+Running [34mcomp/166_uf50-03_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.025613 seconds
+
+Choose: 15, Backtrack: 8
+
+-------------------------------------
+
+
+Running [34mcomp/167_uf50-04_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.018617 seconds
+
+Choose: 31, Backtrack: 26
+
+-------------------------------------
+
+
+Running [34mcomp/168_uf50-05_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.015775 seconds
+
+Choose: 10, Backtrack: 3
+
+-------------------------------------
+
+
+Running [34mcomp/169_uf50-06_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.024847 seconds
+
+Choose: 55, Backtrack: 49
+
+-------------------------------------
+
+
+Running [34mcomp/170_uf50-07_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.017184 seconds
+
+Choose: 17, Backtrack: 7
+
+-------------------------------------
+
+
+Running [34mcomp/171_uf50-08_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.014941 seconds
+
+Choose: 26, Backtrack: 18
+
+-------------------------------------
+
+
+Running [34mcomp/172_uf50-09_s.cnf [38;5;208mDLCS[0m
+
+Number of Variables: 50
+Number of Clauses: 218
+
+
+[32mMODEL VERIFIED![0m
+
+CPU time used: 1.021571 seconds
+
+Choose: 12, Backtrack: 1
+
+-------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
