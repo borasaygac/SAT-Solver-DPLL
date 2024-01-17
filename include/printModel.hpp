@@ -1,1 +1,0 @@
-void printModel(int res);

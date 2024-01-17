@@ -3,8 +3,7 @@
 void verifyModel() {
     for (int i = 1; i <= numOfClauses; i++) {
         bool sat = false;
-        //std::cout << "Clause "<< i << " active no " << clauses[i].active;
-
+        
         for (int literal : clauses[i].literals) {
             if (evaluateLiteral(literal)) sat = true;
         }
