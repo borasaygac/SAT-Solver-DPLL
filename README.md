@@ -7,7 +7,7 @@ This project implements the DPLL algorithm enhanced with Unit Propagation (UP) a
 The solver offers four heuristic options: Incremental (INC=0), Dynamic Largest Individual Sum (DLIS=1), Dynamic Largest Combined Sum (DLCS=2) and Jeroslow-Wang (JW=3). Both satisfiable and unsatisfiable files (previously found under `./test`, `./sat`, `./unsat`) have been consolidated into two designated `./test` and `./comp` folders respectively, identifiable by their affix (_u = unsat, _s = sat).
 
 ## Build + Run
-To build the project enter `make`. To run the solver on a test file enter `./main [testfile] [heur]`. We differentiate between the simpler debug testfiles (previously under ./test) and the harder competition testfiles (comp->c).
+To build the project enter `make`. To run the solver on a test file enter `./main [testfile] [heur]`.
 
 Optionally, to build and run immediately, enter `make run arg=[testfile] [heur]`.
 
