@@ -33,12 +33,7 @@ or a chosen heuristic `.\run.ps1 -type [char] -start [int] -end [int] -heur [int
 We plotted our runtimes by sorting them in increasing order using `mkplot`. For exact runtimes and plots with higher timeout, see folder `./solution/runtime` and `./cactus/` respectively.
 
 **Evaluation**:
-
-- The number of solved instances within on 60 seconds are as follows
-  - INC: 109
-  - DLIS: 124
-  - DLCS: 126
-  - JW: 124
+The number of solved instances within on 60 seconds (INC: 109 DLIS: 124 DLCS: 126 JW: 124) are displayed below:
 
 ![Alt text](cactus/cactusPlot60secs.png/?raw=true "Optional Title")
 
