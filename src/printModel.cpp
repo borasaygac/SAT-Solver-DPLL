@@ -31,7 +31,7 @@ void printModel(int res) {
 
 
 void writeModelToFile(int res, const std::string& fileName) {
-    std::ofstream outFile("solutions/" + fileName);
+    std::ofstream outFile("models/" + fileName);
 
     if (!outFile.is_open()) {
         std::cerr << "Error opening file: " << fileName << std::endl;

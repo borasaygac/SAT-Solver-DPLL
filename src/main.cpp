@@ -24,13 +24,6 @@ std::queue<int> toPropagate;
 bool finished = false;
 
 int main(int argc, char* argv[]) {
-
-    FILE* outfile = freopen("results.txt", "a", stdout);
-
-    if (!outfile){
-        perror("Error opening file");
-        return 1;
-    }
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
     std::string path = argv[1];
@@ -60,7 +53,7 @@ int main(int argc, char* argv[]) {
 
     pthread_t thread;
 
-    void* res = (void*)-1;
+    void* res;
 
     std::chrono::steady_clock::time_point startDPLL = std::chrono::steady_clock::now();
     // start dpll
@@ -70,24 +63,14 @@ int main(int argc, char* argv[]) {
         std::cout.flush();
         return -1;
     }
-    // set the timeout, 10 min = 600 sec by default
-    auto timeout = std::chrono::seconds(600);
-    std::chrono::steady_clock::time_point endDPLL = startDPLL + timeout;
 
-    while (std::chrono::steady_clock::now() < endDPLL) {
-        sleep(1);
-        if (finished) break;
-    }
-    if (!finished) {
-        printf("TIMEOUT of %i SECONDS REACHED!\n", timeout);
-        pthread_cancel(thread);
-    } else {  // wait for dpll to finish
-        pthread_join(thread, &res);
+    // wait for dpll to finish
+    pthread_join(thread, &res);
 
-        //DIMACS type print
-        writeModelToFile((intptr_t)res, "solution.txt");
-        //printModel((intptr_t)res);
-    }
+    // DIMACS type print
+    // writeModelToFile((intptr_t)res, "solution172.txt");
+    printModel((intptr_t)res);
+
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
 
@@ -98,8 +81,6 @@ int main(int argc, char* argv[]) {
     printf("\n-------------------------------------\n\n", duration.count());
 
     std::cout.flush();
-
-    fclose(outfile);
 
     return 0;
 }

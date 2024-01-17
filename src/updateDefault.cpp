@@ -74,10 +74,7 @@ void update(int assertedVar) {
     if (backtrackFlag) backtrack();
 
     // All clauses are sat and there are no more pure/unit literals threatening that? => SAT!
-    if (toPropagate.empty() && numOfSatClauses == numOfClauses) {
-        finished = true;
-        pthread_exit(0);
-    }
+    if (toPropagate.empty() && numOfSatClauses == numOfClauses) pthread_exit(0);
 }
 
 void updateBacktrack(int unassignedVar) {
