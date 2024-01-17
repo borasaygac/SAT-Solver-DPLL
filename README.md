@@ -1,3 +1,5 @@
+<div style="text-align: justify;">
+
 # Group_K_Project_2
 
 This project implements the DPLL algorithm enhanced with Unit Propagation (UP) and Pure Literal Elimination (PLE).   
@@ -28,7 +30,7 @@ We plotted our runtimes by sorting them in increasing order and displaying them 
 
 
 
-
+</div>
 
 
 
