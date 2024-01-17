@@ -111,7 +111,7 @@ void printModel(int res);
 
 void verifyModel();
 
-//Back up Print funtion
+// print dimacs filees
 void writeModelToFile(int res, const std::string& fileName);
 
 #endif
