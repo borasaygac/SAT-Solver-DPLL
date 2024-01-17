@@ -1,11 +1,13 @@
 # Group_K_Project_2
 
-## Build
-To build the project enter `make`. Optionally, to build and run immediately, enter `make run arg=`[testfile] [heur]
+We implemented DPLL with UP and PLE. There are four heuristics available: INC->0, DLIS->1, DLCS->2, JW->3 . We combined both _sat_ and _unsat_ competition files into a _comp_ folder (t = test, c = comp), where they can be recognized by their affix (u = unsat, s = sat).
 
-# Example commands for building
-$ command1
-$ command2
+## Build + Run
+To build the project enter `make`. To run the solver on a test file enter `./main [testfile] [heur]`, i.e. `./main c1 2`. 
+
+Optionally, to build and run immediately, enter `make run arg=[testfile] [heur]`.
+
+If compiled, you can run a chosen set of test or comp files at once with either all heuristics `.\runAll.ps1 -type [dir] -start [int] -end [int]` or a chosen heuristic `.\run.ps1 -type [dir] -start [int] -end [int] -heur [int]`
 
 
 
