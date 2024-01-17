@@ -1,0 +1,10 @@
+Running comp/031_aim-200-1_6-yes1-3_s.cnf DLCS
+
+Number of Variables: 200
+Number of Clauses: 320
+
+TIMEOUT of 100 SECONDS REACHED!
+
+CPU time used: 100.595534 seconds
+
+Choose: 1905574, Backtrack: 1905570
