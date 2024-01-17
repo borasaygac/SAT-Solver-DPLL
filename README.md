@@ -4,7 +4,7 @@
 
 This project implements the DPLL algorithm enhanced with Unit Propagation (UP) and Pure Literal Elimination (PLE).   
   
-The solver offers four heuristic options: INC->0, DLIS->1, DLCS->2, JW->3. Both satisfiable and unsatisfiable competition files have been consolidated into a designated comp folder, identifiable by their affix (u = unsat, s = sat).
+The solver offers four heuristic options: Incremental (INC=0), Dynamic Largest Individual Sum (DLIS=1), Dynamic Largest Combined Sum (DLCS=2) and Jeroslow-Wang (JW=3). Both satisfiable and unsatisfiable competition files have been consolidated into a designated comp folder, identifiable by their affix (u = unsat, s = sat).
 
 ## Build + Run
 To build the project enter `make`. To run the solver on a test file enter `./main [testfile] [heur]`. We differntiate between the simpler testfiles (test->t) and the harder competition testfile (comp->c).
@@ -31,6 +31,14 @@ or a chosen heuristic `.\run.ps1 -type [char] -start [int] -end [int] -heur [int
 ## Results
 
 We plotted our runtimes by sorting them in increasing order using `mkplot`. For exact runtimes and plots with higher timeout, see folder `./solution/runtime` and `./cactus/` respectively.
+
+**Evaluation**:
+
+- The number of solved instances within on 60 seconds are as follows
+  - INC: 109
+  - DLIS: 124
+  - DLCS: 126
+  - JW: 124
 
 ![Alt text](cactus/cactusPlot60secs.png/?raw=true "Optional Title")
 
