@@ -28,7 +28,7 @@ or a chosen heuristic `.\run.ps1 -type [char] -start [int] -end [int] -heur [int
 
 ## Results
 
-We plotted our runtimes by sorting them in increasing order using `mkplot`. For exact runtimes and plots with higher timeout, see folder `./solution/runtime` and `./cactus/` respectively.
+We plotted our runtimes by sorting them in increasing order using `mkplot`. For exact runtimes and plots with higher timeout, see folder `./solution/runtime` and `./cactus` respectively.
 
 The number of solved instances within 60 seconds per heuristic (INC: 109, DLIS: 124, DLCS: 126, JW: 124) and their performance curve can be studied below:
 
