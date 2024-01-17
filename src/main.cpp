@@ -55,7 +55,6 @@ int main(int argc, char* argv[]) {
 
     void* res;
 
-    std::chrono::steady_clock::time_point startDPLL = std::chrono::steady_clock::now();
     // start dpll
     if (pthread_create(&thread, NULL, dpll, NULL)) {
         std::cerr << "Error: Unable to create thread."
