@@ -8,8 +8,7 @@ void verifyModel() {
             if (evaluateLiteral(literal)) sat = true;
         }
         if (!sat) {
-            //printf("Error at %i ", i);
-            std::cout<< "Error at " << i << "\n";
+            printf("Error at %i ", i);
             break;
         }
         if (i == numOfClauses) printf("\n\033[32mMODEL VERIFIED!\033[0m\n");

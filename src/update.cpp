@@ -1,7 +1,6 @@
 #include "../include/cnf.hpp"
 
 void update(int assertedVar) {
-    pthread_testcancel();
     // clauses where assertedVar evaluates to FALSE
     std::set<int>* clausesToUpdate;
 
@@ -50,7 +49,7 @@ void update(int assertedVar) {
     // or conflicts
     std::set<int>::iterator clauseIndex2;
     std::set<int> copy2 = *clausesToUpdate;
-    // std::cout << "size of clauses to update "<< clausesToUpdate->size() << "\n";
+    
     for (clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) {
         clauses[*clauseIndex2].active--;
         if (clauses[*clauseIndex2].sat != 0) continue;
@@ -63,8 +62,6 @@ void update(int assertedVar) {
             for (int i = 0; i < clause->literals.size(); i++) {
                 if (vars[std::abs(clause->literals[i])].val == FREE && !vars[std::abs(clause->literals[i])].enqueued) {
                     toPropagate.push(clause->literals[i]);
-                    // printf("UNIT FOUND: %i\n", clause->literals[i]);
-
                     vars[std::abs(clause->literals[i])].enqueued = true;
                 }
             }

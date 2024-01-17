@@ -8,15 +8,11 @@
 
 void chooseINC() {
     dc++;
-    while (vars[curVar].val != FREE) {
-        curVar++;
-        // std::cout << "Curvar value " << curVar << "\n";
-    }
+    while (vars[curVar].val != FREE) curVar++;
 
     vars[curVar].val = TRUE;
     vars[curVar].forced = false;
     assig.push(curVar);
-    // std::cout << "CHOOSE_LIT:" << curVar << "\n";
     update(curVar);
 }
 
@@ -92,7 +88,6 @@ void chooseJW() {
     curVar = index;
     vars[curVar].val = pol ? TRUE : FALSE;
     vars[curVar].forced = false;
-    // std::cout << "chosen var " << curVar << "and max score " << max <<"\n";
     assig.push(curVar);
     update(curVar);
 }

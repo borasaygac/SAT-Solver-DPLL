@@ -30,5 +30,5 @@ clean:
 	del main.exe
 
 run: $(EXECUTABLE) 
-	$(EXECUTABLE) $(arg) $(heur)
+	$(EXECUTABLE) $(arg) $(heur=0)
 

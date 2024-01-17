@@ -61,8 +61,6 @@ extern int dc;
 // backtrack counter
 extern int btc;
 
-extern bool finished;
-
 // flag to determine whether to backtrack or not
 extern bool backtrackFlag;
 

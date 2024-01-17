@@ -21,7 +21,6 @@ void (*decide)() = chooseINC;
 int dc = 0;
 int btc = 0;
 std::queue<int> toPropagate;
-bool finished = false;
 
 int main(int argc, char* argv[]) {
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
@@ -67,7 +66,7 @@ int main(int argc, char* argv[]) {
     pthread_join(thread, &res);
 
     // DIMACS type print
-    // writeModelToFile((intptr_t)res, "solution172.txt");
+    // writeModelToFile((intptr_t)res, "solution173.txt");
     printModel((intptr_t)res);
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
