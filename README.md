@@ -14,6 +14,7 @@ Optionally, to build and run immediately, enter `make run arg=[testfile] [heur]`
 **Examples:**
 
 `./main c1 2`  
+  
 `make run arg=c1 2`
 
 ## Batch Execution
