@@ -11,9 +11,9 @@ To build the project enter `make`. To run the solver on a test file enter `./mai
 
 **Examples:**
 
-`./main c1 2`  
+`./main c1 2` to run the compiled .exe on the first competition file with DLCS.
   
-`make run arg=c1 2`
+`make run arg=c1 0` to build and run the .exe on the first competition file with INC.
 
 ## Batch Execution
 If compiled, you can run a chosen set of test or comp files at once with either all heuristics `.\runAll.ps1 -type [char] -start [int] -end [int]` 
@@ -22,9 +22,9 @@ or a chosen heuristic `.\run.ps1 -type [char] -start [int] -end [int] -heur [int
 
 **Examples:**  
    
-`.\runAll.ps1 -type 'c' -start 1 -end 50`
+`.\runAll.ps1 -type 'c' -start 1 -end 50` to run the compiled .exe on the first 50 competition files with all heuristics.
     
-`.\run.ps1 -type 't' -start 1 -end 30 -heur 1`
+`.\run.ps1 -type 't' -start 1 -end 30 -heur 1` to run the compiled .exe on the first 30 test files with DLIS.
 
 ## Results
 
