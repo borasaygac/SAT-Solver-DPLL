@@ -1,0 +1,698 @@
+{
+    "stats": {
+        "instance1": {
+            "status": true,
+            "rtime": 18.061888
+        },
+        "instance2": {
+            "status": true,
+            "rtime": 4.722881
+        },
+        "instance3": {
+            "status": true,
+            "rtime": 11.167087
+        },
+        "instance4": {
+            "status": true,
+            "rtime": 13.152424
+        },
+        "instance5": {
+            "status": true,
+            "rtime": 0.346959
+        },
+        "instance6": {
+            "status": true,
+            "rtime": 3.821786
+        },
+        "instance7": {
+            "status": true,
+            "rtime": 8.389319
+        },
+        "instance8": {
+            "status": true,
+            "rtime": 8.996795
+        },
+        "instance9": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance10": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance11": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance12": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance13": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance14": {
+            "status": true,
+            "rtime": 19.733331
+        },
+        "instance15": {
+            "status": true,
+            "rtime": 41.795579
+        },
+        "instance16": {
+            "status": true,
+            "rtime": 47.481069
+        },
+        "instance17": {
+            "status": true,
+            "rtime": 0.320858
+        },
+        "instance18": {
+            "status": true,
+            "rtime": 0.403767
+        },
+        "instance19": {
+            "status": true,
+            "rtime": 0.167594
+        },
+        "instance20": {
+            "status": true,
+            "rtime": 0.235951
+        },
+        "instance21": {
+            "status": true,
+            "rtime": 0.098053
+        },
+        "instance22": {
+            "status": true,
+            "rtime": 0.039594
+        },
+        "instance23": {
+            "status": true,
+            "rtime": 0.014704
+        },
+        "instance24": {
+            "status": true,
+            "rtime": 0.053107
+        },
+        "instance25": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance26": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance27": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance28": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance29": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance30": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance31": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance32": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance33": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance34": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance35": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance36": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance37": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance38": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance39": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance40": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance41": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance42": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance43": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance44": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance45": {
+            "status": true,
+            "rtime": 45.425977
+        },
+        "instance46": {
+            "status": true,
+            "rtime": 37.613729
+        },
+        "instance47": {
+            "status": true,
+            "rtime": 13.814996
+        },
+        "instance48": {
+            "status": true,
+            "rtime": 11.989247
+        },
+        "instance49": {
+            "status": true,
+            "rtime": 0.011794
+        },
+        "instance50": {
+            "status": true,
+            "rtime": 0.030895
+        },
+        "instance51": {
+            "status": true,
+            "rtime": 0.044826
+        },
+        "instance52": {
+            "status": true,
+            "rtime": 0.013698
+        },
+        "instance53": {
+            "status": true,
+            "rtime": 0.013881
+        },
+        "instance54": {
+            "status": true,
+            "rtime": 0.026161
+        },
+        "instance55": {
+            "status": true,
+            "rtime": 0.011134
+        },
+        "instance56": {
+            "status": true,
+            "rtime": 0.00619
+        },
+        "instance57": {
+            "status": true,
+            "rtime": 0.345515
+        },
+        "instance58": {
+            "status": true,
+            "rtime": 0.101962
+        },
+        "instance59": {
+            "status": true,
+            "rtime": 0.158686
+        },
+        "instance60": {
+            "status": true,
+            "rtime": 0.104304
+        },
+        "instance61": {
+            "status": true,
+            "rtime": 0.001056
+        },
+        "instance62": {
+            "status": true,
+            "rtime": 0.006669
+        },
+        "instance63": {
+            "status": true,
+            "rtime": 0.030409
+        },
+        "instance64": {
+            "status": true,
+            "rtime": 0.091538
+        },
+        "instance65": {
+            "status": true,
+            "rtime": 0.01285
+        },
+        "instance66": {
+            "status": true,
+            "rtime": 0.010246
+        },
+        "instance67": {
+            "status": true,
+            "rtime": 0.005982
+        },
+        "instance68": {
+            "status": true,
+            "rtime": 0.000904
+        },
+        "instance69": {
+            "status": true,
+            "rtime": 0.002128
+        },
+        "instance70": {
+            "status": true,
+            "rtime": 0.004126
+        },
+        "instance71": {
+            "status": true,
+            "rtime": 0.00278
+        },
+        "instance72": {
+            "status": true,
+            "rtime": 0.003452
+        },
+        "instance73": {
+            "status": true,
+            "rtime": 0.009861
+        },
+        "instance74": {
+            "status": true,
+            "rtime": 0.064843
+        },
+        "instance75": {
+            "status": true,
+            "rtime": 0.568157
+        },
+        "instance76": {
+            "status": true,
+            "rtime": 5.391976
+        },
+        "instance77": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance78": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance79": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance80": {
+            "status": true,
+            "rtime": 100.023279
+        },
+        "instance81": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance82": {
+            "status": true,
+            "rtime": 0.528783
+        },
+        "instance83": {
+            "status": true,
+            "rtime": 0.173329
+        },
+        "instance84": {
+            "status": true,
+            "rtime": 0.040968
+        },
+        "instance85": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance86": {
+            "status": true,
+            "rtime": 0.525403
+        },
+        "instance87": {
+            "status": true,
+            "rtime": 0.031846
+        },
+        "instance88": {
+            "status": true,
+            "rtime": 0.005727
+        },
+        "instance89": {
+            "status": true,
+            "rtime": 0.011517
+        },
+        "instance90": {
+            "status": true,
+            "rtime": 0.024326
+        },
+        "instance91": {
+            "status": true,
+            "rtime": 0.052353
+        },
+        "instance92": {
+            "status": true,
+            "rtime": 0.005314
+        },
+        "instance93": {
+            "status": true,
+            "rtime": 0.008935
+        },
+        "instance94": {
+            "status": true,
+            "rtime": 0.013095
+        },
+        "instance95": {
+            "status": true,
+            "rtime": 0.163735
+        },
+        "instance96": {
+            "status": true,
+            "rtime": 0.008746
+        },
+        "instance97": {
+            "status": true,
+            "rtime": 0.07569
+        },
+        "instance98": {
+            "status": true,
+            "rtime": 0.067576
+        },
+        "instance99": {
+            "status": true,
+            "rtime": 0.004993
+        },
+        "instance100": {
+            "status": true,
+            "rtime": 0.008651
+        },
+        "instance101": {
+            "status": true,
+            "rtime": 0.017268
+        },
+        "instance102": {
+            "status": true,
+            "rtime": 0.025778
+        },
+        "instance103": {
+            "status": true,
+            "rtime": 0.045442
+        },
+        "instance104": {
+            "status": true,
+            "rtime": 0.001
+        },
+        "instance105": {
+            "status": true,
+            "rtime": 0.70906
+        },
+        "instance106": {
+            "status": true,
+            "rtime": 61.621262
+        },
+        "instance107": {
+            "status": true,
+            "rtime": 0.007616
+        },
+        "instance108": {
+            "status": true,
+            "rtime": 0.005537
+        },
+        "instance109": {
+            "status": true,
+            "rtime": 2.660044
+        },
+        "instance110": {
+            "status": true,
+            "rtime": 0.014506
+        },
+        "instance111": {
+            "status": true,
+            "rtime": 292.05164
+        },
+        "instance112": {
+            "status": true,
+            "rtime": 0.010276
+        },
+        "instance113": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance114": {
+            "status": true,
+            "rtime": 64.968197
+        },
+        "instance115": {
+            "status": true,
+            "rtime": 0.018706
+        },
+        "instance116": {
+            "status": true,
+            "rtime": 0.010436
+        },
+        "instance117": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance118": {
+            "status": true,
+            "rtime": 10.819023
+        },
+        "instance119": {
+            "status": true,
+            "rtime": 15.855263
+        },
+        "instance120": {
+            "status": true,
+            "rtime": 12.450916
+        },
+        "instance121": {
+            "status": true,
+            "rtime": 4.074632
+        },
+        "instance122": {
+            "status": true,
+            "rtime": 0.390631
+        },
+        "instance123": {
+            "status": true,
+            "rtime": 1.321707
+        },
+        "instance124": {
+            "status": true,
+            "rtime": 7.18094
+        },
+        "instance125": {
+            "status": true,
+            "rtime": 6.254984
+        },
+        "instance126": {
+            "status": true,
+            "rtime": 14.853011
+        },
+        "instance127": {
+            "status": true,
+            "rtime": 25.065838
+        },
+        "instance128": {
+            "status": true,
+            "rtime": 0.002126
+        },
+        "instance129": {
+            "status": true,
+            "rtime": 0.005497
+        },
+        "instance130": {
+            "status": true,
+            "rtime": 0.002469
+        },
+        "instance131": {
+            "status": true,
+            "rtime": 0.004236
+        },
+        "instance132": {
+            "status": true,
+            "rtime": 0.002261
+        },
+        "instance133": {
+            "status": true,
+            "rtime": 0.004804
+        },
+        "instance134": {
+            "status": true,
+            "rtime": 0.00312
+        },
+        "instance135": {
+            "status": true,
+            "rtime": 0.005706
+        },
+        "instance136": {
+            "status": true,
+            "rtime": 0.001328
+        },
+        "instance137": {
+            "status": true,
+            "rtime": 0.0041
+        },
+        "instance138": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance139": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance140": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance141": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance142": {
+            "status": true,
+            "rtime": 112.64357
+        },
+        "instance143": {
+            "status": true,
+            "rtime": 112.951228
+        },
+        "instance144": {
+            "status": true,
+            "rtime": 113.767206
+        },
+        "instance145": {
+            "status": true,
+            "rtime": 112.64273
+        },
+        "instance146": {
+            "status": true,
+            "rtime": 0.14845
+        },
+        "instance147": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance148": {
+            "status": false,
+            "rtime": 600.0
+        },
+        "instance149": {
+            "status": true,
+            "rtime": 0.041434
+        },
+        "instance150": {
+            "status": true,
+            "rtime": 0.008316
+        },
+        "instance151": {
+            "status": true,
+            "rtime": 0.583744
+        },
+        "instance152": {
+            "status": true,
+            "rtime": 1.151765
+        },
+        "instance153": {
+            "status": true,
+            "rtime": 0.139814
+        },
+        "instance154": {
+            "status": true,
+            "rtime": 0.002436
+        },
+        "instance155": {
+            "status": true,
+            "rtime": 0.006249
+        },
+        "instance156": {
+            "status": true,
+            "rtime": 0.002972
+        },
+        "instance157": {
+            "status": true,
+            "rtime": 0.001315
+        },
+        "instance158": {
+            "status": true,
+            "rtime": 0.001153
+        },
+        "instance159": {
+            "status": true,
+            "rtime": 0.002524
+        },
+        "instance160": {
+            "status": true,
+            "rtime": 0.003247
+        },
+        "instance161": {
+            "status": true,
+            "rtime": 0.003216
+        },
+        "instance162": {
+            "status": true,
+            "rtime": 0.001727
+        },
+        "instance163": {
+            "status": true,
+            "rtime": 0.004016
+        },
+        "instance164": {
+            "status": true,
+            "rtime": 0.001654
+        },
+        "instance165": {
+            "status": true,
+            "rtime": 0.001641
+        },
+        "instance166": {
+            "status": true,
+            "rtime": 0.003651
+        },
+        "instance167": {
+            "status": true,
+            "rtime": 0.002352
+        },
+        "instance168": {
+            "status": true,
+            "rtime": 0.001282
+        },
+        "instance169": {
+            "status": true,
+            "rtime": 0.003577
+        },
+        "instance170": {
+            "status": true,
+            "rtime": 0.001126
+        },
+        "instance171": {
+            "status": true,
+            "rtime": 0.001457
+        },
+        "instance172": {
+            "status": true,
+            "rtime": 0.001226
+        }
+    },
+    "preamble": {
+        "benchmark": "my-benchmark-set",
+        "prog_args": "-a hello --arg2 world -v",
+        "program": "dpll_solver",
+        "prog_alias": "JW"
+    }
+}
