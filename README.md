@@ -29,7 +29,7 @@ We plotted our runtimes by sorting them in increasing order and displaying them 
 
 ![Alt text](cactus/cactusPlot60secs.png/?raw=true "Optional Title")
 
-**Test Environment Specifications:
+**Test Environment Specifications**:
 
 - **Hardware:**
   - Processor: Intel Core i7-8700K @ 3.70GHz (6 cores, 12 threads)
