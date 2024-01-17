@@ -29,16 +29,15 @@ We plotted our runtimes by sorting them in increasing order and displaying them 
 
 ![Alt text](cactus/cactusPlot60secs.png/?raw=true "Optional Title")
 
-**Test Environment Specifications**:
+**Test Environment Specifications:**
 
 - **Hardware:**
-  - Processor: Intel Core i7-8700K @ 3.70GHz (6 cores, 12 threads)
-  - Memory: 32GB DDR4 RAM
-  - Storage: 1TB NVMe SSD
+  - Processor: AMD Ryzen 7 5700U @ 1.80 GHz
+  - Memory: 16 GB
 
 - **Software:**
-  - Operating System: Ubuntu 20.04 LTS
-  - Compiler: GCC 9.3.0
+  - Operating System: Windows 11 Pro
+  - Compiler: GCC 11.2.0
 
 </div>
 
