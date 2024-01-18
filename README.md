@@ -18,10 +18,10 @@ It is likely that you first have to allow the execution of local scripts by runn
 
 **Examples:**
 
-`./main c1 2` (run the compiled .exe on the first competition file with DLCS)
-  
 `make run arg=c1 0` (build and run the .exe on the first competition file with INC)
 
+`./main c1 2` (run the compiled .exe on the first competition file with DLCS)
+  
 `.\run.ps1 -type 't' -start 1 -end 30 -heur 1` (run the compiled .exe on the first 30 test files with DLIS)
 
 ## Results
