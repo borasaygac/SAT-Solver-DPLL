@@ -1,3 +1,4 @@
+#include <math.h>
 #include <stdio.h>
 
 #include <fstream>
@@ -8,6 +9,7 @@
 #include <stack>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #ifndef MYHEADER_HPP
@@ -15,11 +17,8 @@
 
 extern int numOfVars;
 extern int numOfClauses;
-// num of not yet assigned variables;
-// return true if equal to 0.
-extern int numOfUnassigned;
 
-enum Heuristics { INC, DLIS, DLCS, MOM, JW };
+enum Heuristics { INC, DLIS, DLCS, JW };
 
 enum Assig {
     FALSE,
@@ -27,73 +26,49 @@ enum Assig {
     FREE,
 };
 
-enum Polarity { NEG, POS, MIX };
-
 struct Variable {
-   private:
     Assig val = FREE;
 
-   public:
-    // std::set<int> pos_pol;  // = {1,2};  All clauses where var appears as pos watched literal
-    //     std::set<int>
-    //         neg_poll;  // = {3,4} All clauses where var appears as neg watched literal
-    //             //    (1 2 -3) (1 -2 3 4) (-1 2 -4) (-1 3 -4)
-    //             // clause x sat => x is in neg_poll => erase x from neg_poll
-    //             // if neg_pol.empty() => pureLiter => set var to 1
+    std::set<int> static_pos_occ;  // All clauses where var appears as pos literal
+    std::set<int> static_neg_occ;  // All clauses where var appears as neg literal
 
-    std::set<int> pos_watched;  // All clauses where var appears as pos watched literal
-    std::set<int> neg_watched;  // All clauses where var appears as neg watched literal
+    std::set<int> pos_occ;  // All clauses where var appears as pos literal
+    std::set<int> neg_occ;  // All clauses where var appears as neg literal
+
     bool forced = false;
-    int pos_occ;  // number of clauses var appears as pos literal
-    int neg_occ;  // number of clauses var appears as neg literal
     bool enqueued = false;
-    void setValue(Assig _assig) {
-        // int assertedLit = unitProp ? curProp : curVar;
-        if (_assig != FREE && val == FREE)
-            numOfUnassigned--;
-        else {
-            if (_assig == FREE) numOfUnassigned++;
-
-            // else
-            //     vars[assertedLit].forced = true;
-        }
-        val = _assig;
-        // printf("num of unassigned: %i \n", numOfUnassigned);
-
-        // vars[assertedLit].enqueued = false;
-        // vars[assertedLit].forced = true;
-        // assig.push(assertedLit);
-        // updateWatchedLiterals(assertedLit);
-    }
-    Assig getValue() { return val; }
 };
 
 struct Clause {
     std::vector<int> literals;
-    int w1 = 0;
-    int w2 = 1;
-    bool sat = false;
+    int active;
+    int sat = 0;
 };
 
 extern Heuristics heuristic;
 
-// the currently processed variable
+// the currently set branching variable
 extern int curVar;
 
-// the currently processed unit literal
-extern int curProp;
+extern int numOfSatClauses;
 
-// list of clauses (1-indexed)
-extern std::vector<Clause> cnf;
+// decision counter
+extern int dc;
 
-// list of variables (1-indexed)
+// backtrack counter
+extern int btc;
+
+// flag to determine whether to backtrack or not
+extern bool backtrackFlag;
+
+// vec of clauses (1-indexed)
+extern std::vector<Clause> clauses;
+
+// vec of variables (1-indexed)
 extern std::vector<Variable> vars;
 
-// set of unsatisfied clauses
-extern std::set<int> satClauses;
-
-// queue storing unit literals
-extern std::queue<int> unitQueue;
+// queue storing unit and pure literals to be propagated
+extern std::queue<int> toPropagate;
 
 // stack of variables with assigned values
 extern std::stack<int> assig;
@@ -102,10 +77,11 @@ void parseDIMACS(std::string filename);
 
 void* dpll(void* arg);
 
-void unitPropagate();
+// asserts pure and unit literals
+void propagate();
 
-// chooses literals according to the used heuristic
-void chooseLiteral();
+// chooses next branching var according to the selected heuristic
+extern void (*decide)();
 
 void chooseINC();
 
@@ -113,12 +89,14 @@ void chooseDLIS();
 
 void chooseDLCS();
 
-void chooseMOM();
-
 void chooseJW();
 
-// updates the watched literals after a new assignment is made
-void updateWatchedLiterals(int literal);
+// updates the CNF after a new assignment is made;
+// exits dpll if valid assig is found
+void update(int assertedVar);
+
+// updates the CNF after unassignment in backtrack()
+void updateBacktrack(int unassignedVar);
 
 // handles conficts and signals UNSAT
 void backtrack();
@@ -128,6 +106,9 @@ bool evaluateLiteral(int literal);
 
 void printModel(int res);
 
-void test();
+void verifyModel();
+
+// print dimacs filees
+void writeModelToFile(int res, const std::string& fileName);
 
 #endif

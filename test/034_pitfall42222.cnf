@@ -4,7 +4,7 @@ c copyright: (C) 2012-2022 Massimo Lauria <massimo.lauria@uniroma1.it>
 c url: https://massimolauria.net/cnfgen
 c command line: cnfgen pitfall 4 2 2 2 2
 c
-p cnf 34 84
+p cnf 34 85
 1 2 13 14 0
 -3 -4 13 14 0
 1 -5 13 14 0

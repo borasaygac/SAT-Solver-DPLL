@@ -7,33 +7,37 @@
 #include "../include/cnf.hpp"
 
 void backtrack() {
-    while (!assig.empty() && vars[assig.top()].forced) {  // until the last branching variable.
-        int toUnassign = assig.top();
-        vars[toUnassign].setValue(FREE);
-        vars[toUnassign].forced = false;
-        assig.pop();
-        //  std::cout << "Removed literal " << toUnassign << " from assig stack \n";
-    }
+  backtrackFlag = false;
 
-    // clear unit queue
-    while (!unitQueue.empty())
-    {   
-        // std::cout << "Element to be popped from queue: " << unitQueue.front() << "\n";
-        vars[std::abs(unitQueue.front())].enqueued = false;
-        unitQueue.pop();
-    }
+  // unassign until the last branching variable.
+  while (!assig.empty() && vars[assig.top()].forced) {
+    btc++;
+    int toUnassign = assig.top();
+    updateBacktrack(toUnassign);
+    vars[toUnassign].val = FREE;
+    vars[toUnassign].forced = false;
 
-    if (assig.empty()) {
-        pthread_exit((void *)1);
-    }  // UNSAT
+    assig.pop();
+  }
 
-    // Most recent branching variable
-    int b = assig.top();
-    int oldval = vars[b].getValue();
-    // Assign negated val
-    vars[b].forced = true;
-    vars[b].setValue(Assig(int(2 - std::pow(2.0, vars[b].getValue()))));
-    // std::cout << "New branch var" << b << ", OLD: " << oldval << ", NEW: " << vars[b].getValue();
-    curVar = b;
-    updateWatchedLiterals(b);
+  // clear queue of unit and pure literals
+  while (!toPropagate.empty()) {
+    vars[std::abs(toPropagate.front())].enqueued = false;
+    toPropagate.pop();
+  }
+
+  // UNSAT
+  if (assig.empty())
+    pthread_exit((void *)1);
+
+  // handle most recent branching variable
+  int b = assig.top();
+  updateBacktrack(b);
+  vars[b].forced = true;
+
+  // assign negated val
+  vars[b].val = Assig(int(2 - std::pow(2.0, vars[b].val)));
+  curVar = b;
+  update(b);
+  propagate();
 }
