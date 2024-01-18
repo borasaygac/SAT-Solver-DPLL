@@ -7,7 +7,11 @@ This project implements the DPLL algorithm enhanced with Unit Propagation (UP) a
 The solver offers four heuristic options: Incremental (INC=0), Dynamic Largest Individual Sum (DLIS=1), Dynamic Largest Combined Sum (DLCS=2) and Jeroslow-Wang (JW=3). Both satisfiable and unsatisfiable files (previously found under `./test`, `./sat`, `./unsat`) have been consolidated into two designated `./test` and `./comp` folders respectively, identifiable by their affix (_u = unsat, _s = sat).
 
 ## Build + Run
-To build the project enter `make`. To run the solver on a test file enter `./main [testfile] [heur]`. To build and run immediately, enter `make run arg=[testfile] [heur]`.
+To build the project enter `make`. To run the solver on a test file enter `./main [testfile] [heur]`. To build and run immediately, enter `make run arg=[testfile] [heur]`. 
+
+**Batch execution**
+If compiled, you can run a range of test or comp files at once with a chosen heuristic `.\run.ps1 -type [char] -start [int] -end [int] -heur [int]`. 
+By omitting the `-heur` parameter, you can run all heuristics over the specified range.
 
 **Examples:**
 
@@ -15,15 +19,6 @@ To build the project enter `make`. To run the solver on a test file enter `./mai
   
 `make run arg=c1 0` (build and run the .exe on the first competition file with INC)
 
-## Batch Execution
-If compiled, you can run a chosen set of test or comp files at once with either all heuristics `.\runAll.ps1 -type [char] -start [int] -end [int]` 
-   
-or a chosen heuristic `.\run.ps1 -type [char] -start [int] -end [int] -heur [int]`.
-
-**Examples:**  
-   
-`.\runAll.ps1 -type 'c' -start 1 -end 50` (run the compiled .exe on the first 50 competition files with all heuristics)
-    
 `.\run.ps1 -type 't' -start 1 -end 30 -heur 1` (run the compiled .exe on the first 30 test files with DLIS)
 
 ## Results
