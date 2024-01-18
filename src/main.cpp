@@ -65,8 +65,6 @@ int main(int argc, char* argv[]) {
     // wait for dpll to finish
     pthread_join(thread, &res);
 
-    // DIMACS type print
-    // writeModelToFile((intptr_t)res, "solution173.txt");
     printModel((intptr_t)res);
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
