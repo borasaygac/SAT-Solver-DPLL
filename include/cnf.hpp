@@ -32,8 +32,8 @@ struct Variable {
     std::set<int> static_pos_occ;  // All clauses where var appears as pos literal
     std::set<int> static_neg_occ;  // All clauses where var appears as neg literal
 
-    std::set<int> pos_occ;  // All clauses where var appears as pos literal
-    std::set<int> neg_occ;  // All clauses where var appears as neg literal
+    std::set<int> pos_occ;  // All unsatisfied clauses where var appears as pos literal
+    std::set<int> neg_occ;  // All unsatisfied clauses where var appears as neg literal
 
     bool forced = false;
     bool enqueued = false;
