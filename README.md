@@ -9,7 +9,8 @@ The solver offers four heuristic options: Incremental (INC=0), Dynamic Largest I
 ## Build + Run
 To build the project enter `make`. To run the solver on a test file enter `./main [testfile] [heur]`. To build and run immediately, enter `make run arg=[testfile] [heur]`. 
 
-**Batch execution**  
+**Batch execution**
+
 If compiled, you can run a range of test or comp files at once with a chosen heuristic `.\run.ps1 -type [char] -start [int] -end [int] -heur [int]`. 
 By omitting the `-heur` parameter, you can run all heuristics over the specified range.
 
