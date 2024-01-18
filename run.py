@@ -26,3 +26,5 @@ if __name__ == "__main__":
         sys.exit(1)
 
     param(script_type, start_value, end_value, heur_value)
+
+#  python run.py c 155 172 2
