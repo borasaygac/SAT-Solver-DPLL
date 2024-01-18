@@ -52,9 +52,6 @@ extern int curVar;
 
 extern int numOfSatClauses;
 
-// the currently processed unit literal
-extern int curProp;
-
 // decision counter
 extern int dc;
 
