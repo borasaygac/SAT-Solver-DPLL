@@ -7,35 +7,37 @@
 #include "../include/cnf.hpp"
 
 void backtrack() {
-    backtrackFlag = false;
+  backtrackFlag = false;
+
+  // unassign until the last branching variable.
+  while (!assig.empty() && vars[assig.top()].forced) {
     btc++;
-    // unassign until the last branching variable.
-    while (!assig.empty() && vars[assig.top()].forced) {
-        int toUnassign = assig.top();
-        updateBacktrack(toUnassign);
-        vars[toUnassign].val = FREE;
-        vars[toUnassign].forced = false;
+    int toUnassign = assig.top();
+    updateBacktrack(toUnassign);
+    vars[toUnassign].val = FREE;
+    vars[toUnassign].forced = false;
 
-        assig.pop();
-    }
+    assig.pop();
+  }
 
-    // clear queue of unit and pure literals
-    while (!toPropagate.empty()) {
-        vars[std::abs(toPropagate.front())].enqueued = false;
-        toPropagate.pop();
-    }
+  // clear queue of unit and pure literals
+  while (!toPropagate.empty()) {
+    vars[std::abs(toPropagate.front())].enqueued = false;
+    toPropagate.pop();
+  }
 
-    // UNSAT
-    if (assig.empty()) pthread_exit((void *)1);
+  // UNSAT
+  if (assig.empty())
+    pthread_exit((void *)1);
 
-    // handle most recent branching variable
-    int b = assig.top();
-    updateBacktrack(b);
-    vars[b].forced = true;
+  // handle most recent branching variable
+  int b = assig.top();
+  updateBacktrack(b);
+  vars[b].forced = true;
 
-    // assign negated val
-    vars[b].val = Assig(int(2 - std::pow(2.0, vars[b].val)));
-    curVar = b;
-    update(b);
-    propagate();
+  // assign negated val
+  vars[b].val = Assig(int(2 - std::pow(2.0, vars[b].val)));
+  curVar = b;
+  update(b);
+  propagate();
 }
