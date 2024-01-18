@@ -16,12 +16,11 @@ void update(int assertedVar) {
         assertedVar = -assertedVar;
     }
 
-    std::set<int>::iterator clauseIndex;
     std::set<int> copy = *clausesToMarkSatisfied;
 
     // While clauses to mark satisfied are unsatisfied, mark satisfied and
     // erase all references of the literals occuring in the clause, since it can be disregarded
-    for (clauseIndex = copy.begin(); clauseIndex != copy.end(); ++clauseIndex) {
+    for (auto clauseIndex = copy.begin(); clauseIndex != copy.end(); ++clauseIndex) {
         Clause* clause = &clauses[*clauseIndex];
         clause->sat = assertedVar;
 
@@ -47,10 +46,9 @@ void update(int assertedVar) {
 
     // While clauses to update have more than one literal, decrement act and identify unit literals
     // or conflicts
-    std::set<int>::iterator clauseIndex2;
     std::set<int> copy2 = *clausesToUpdate;
     
-    for (clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) {
+    for (auto clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) {
         clauses[*clauseIndex2].active--;
         if (clauses[*clauseIndex2].sat != 0) continue;
         Clause* clause = &clauses[*clauseIndex2];
@@ -90,16 +88,15 @@ void updateBacktrack(int unassignedVar) {
         unassignedVar = -unassignedVar;
     }
 
-    std::set<int>::iterator clauseIndex2;
     std::set<int> copy2 = *clausesToIncrement;
 
-    for (clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) clauses[*clauseIndex2].active++;
+    for (auto clauseIndex2 = copy2.begin(); clauseIndex2 != copy2.end(); ++clauseIndex2) clauses[*clauseIndex2].active++;
 
-    std::set<int>::iterator clauseIndex;
+
     std::set<int> copy = *allOccurences;
 
     // restore the previously deleted clauses and its var references
-    for (clauseIndex = copy.begin(); clauseIndex != copy.end(); ++clauseIndex) {
+    for (auto clauseIndex = copy.begin(); clauseIndex != copy.end(); ++clauseIndex) {
         if (clauses[*clauseIndex].sat != unassignedVar) continue;
 
         Clause* clause = &clauses[*clauseIndex];
