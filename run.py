@@ -1,11 +1,14 @@
 import subprocess
 import time
+import sys
 
-def param(type, start, end, heur=42):
+
+def param(type, start, end, heur=42, timeout_value=600):
     if heur == 42:
         for test in range(start, end + 1):
             for h in range(4):
-                subprocess.run(['./main', f'{type}{test}', str(h)])
+                print(f'./main {type}{test} {h}')
+                subprocess.run(['./main', f'{type}{test}', f'{h}'])
                 time.sleep(1)
             print("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
     else:
@@ -13,5 +16,13 @@ def param(type, start, end, heur=42):
             subprocess.run(['./main', f'{type}{i}', str(heur)])
             time.sleep(1)
 
-# Example usage:
-param('A', 1, 10, 42)
+if __name__ == "__main__":
+    script_name, script_type, start_value, end_value, heur_value = sys.argv
+
+    try:
+        start_value, end_value, heur_value = map(int, (start_value, end_value, heur_value))
+    except ValueError:
+        print("Error: start, end, heur, and timeout must be integers.")
+        sys.exit(1)
+
+    param(script_type, start_value, end_value, heur_value)
