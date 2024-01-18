@@ -12,7 +12,9 @@ To build the project, enter `make`. To run the solver on a test file, enter `./m
 **Batch execution:**
 
 If compiled, you can run a range of test or comp files at once with a chosen heuristic `.\run.ps1 -type [char] -start [int] -end [int] -heur [int]`. 
-By omitting the `-heur` parameter, you can run all heuristics over the specified range. It is likely that you first have to allow the execution of local scripts by runnning i.e. `Set-ExecutionPolicy -Scope Process Bypass`.
+By omitting the `-heur` parameter, you can run all heuristics over the specified range.
+
+It is likely that you first have to allow the execution of local scripts by runnning i.e. `Set-ExecutionPolicy -Scope Process Bypass`.
 
 **Examples:**
 
