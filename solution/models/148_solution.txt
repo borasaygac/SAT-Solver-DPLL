@@ -1,0 +1,10 @@
+Running comp/148_ssa2670-141_u.cnf DLCS
+
+Number of Variables: 986
+Number of Clauses: 2315
+
+TIMEOUT of 100 SECONDS REACHED!
+
+CPU time used: 100.122003 seconds
+
+Choose: 5757583, Backtrack: 5757561

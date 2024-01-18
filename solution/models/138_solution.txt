@@ -1,0 +1,10 @@
+Running comp/138_pret150_25_u.cnf DLCS
+
+Number of Variables: 150
+Number of Clauses: 400
+
+TIMEOUT of 100 SECONDS REACHED!
+
+CPU time used: 100.473435 seconds
+
+Choose: 5052308, Backtrack: 5052301

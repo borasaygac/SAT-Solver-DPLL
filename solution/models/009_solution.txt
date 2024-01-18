@@ -1,0 +1,10 @@
+Running comp/009_aim-100-2_0-no-1_u.cnf DLIS
+
+Number of Variables: 100
+Number of Clauses: 200
+
+TIMEOUT of 100 SECONDS REACHED!
+
+CPU time used: 100.827987 seconds
+
+Choose: 1999909, Backtrack: 1999983
