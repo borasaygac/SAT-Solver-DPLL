@@ -1,5 +1,13 @@
 <div style="text-align: justify;">
 
+- use watched literals during backtracking with learned clauses differenlty
+
+- Leave preprocessing to the end of implementation
+
+- NIVER: Do NOT delete the two producing resolvents once a resolved clause is added
+
+
+
 # Group_K_Project_2
 
 This project implements the DPLL algorithm enhanced with Unit Propagation (UP) and Pure Literal Elimination (PLE).   
