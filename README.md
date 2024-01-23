@@ -2,7 +2,7 @@
 
 - use watched literals during backtracking with learned clauses differenlty
 
-- Leave preprocessing to the end of implementation
+- Leave preprocessing to the end of implementation, start woth backtracking + Deletion and watched
 
 - Do NOT use BCE
 
