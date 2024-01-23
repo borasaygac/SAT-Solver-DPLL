@@ -4,6 +4,8 @@
 
 - Leave preprocessing to the end of implementation
 
+- Do NOT use BCE
+
 - NIVER: Do NOT delete the two producing resolvents once a resolved clause is added
 
 
