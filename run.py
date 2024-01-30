@@ -3,7 +3,7 @@ import sys
 import time
 
 
-def param(type, start, end, heur=42, timeout_value=6):
+def param(type, start, end, heur=4 timeout_value=600):
     for i in range(start, end + 1):
 
         if heur == 42:
