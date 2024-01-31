@@ -34,6 +34,8 @@ It is likely that you first have to allow the execution of local scripts by runn
   
 `.\run.ps1 -type 't' -start 1 -end 30 -heur 1` (run the compiled .exe on the first 30 test files with DLIS)
 
+`python run.py c 1 30 2` (run the compiled .exe on the first 30 test files with DLCS)
+
 ## Results
 
 We plotted our runtimes by sorting them in increasing order using `mkplot`. For exact runtimes and plots with higher timeout, see folder `./solution/runtime` and `./cactus` respectively.
