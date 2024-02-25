@@ -1,16 +1,4 @@
-<div style="text-align: justify;">
-
-- use watched literals during backtracking with learned clauses differenlty
-
-- Leave preprocessing to the end of implementation, start woth backtracking + Deletion and watched
-
-- Do NOT use BCE
-
-- NIVER: Do NOT delete the two producing resolvents once a resolved clause is added
-
-
-
-# Group_K_Project_2
+# A Sat Solver with DPLL
 
 This project implements the DPLL algorithm enhanced with Unit Propagation (UP) and Pure Literal Elimination (PLE).   
   
